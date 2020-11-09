@@ -1,32 +1,32 @@
-import React from "react";
+import React from 'react';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 // @material-ui/icons
-import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
-import Favorite from "@material-ui/icons/Favorite";
-import Close from "@material-ui/icons/Close";
+import Assignment from '@material-ui/icons/Assignment';
+import Dvr from '@material-ui/icons/Dvr';
+import Favorite from '@material-ui/icons/Favorite';
+import Close from '@material-ui/icons/Close';
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardHeader from "components/Card/CardHeader.js";
-import ReactTable from "components/ReactTable/ReactTable.js";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
+import CardIcon from 'components/Card/CardIcon.js';
+import CardHeader from 'components/Card/CardHeader.js';
+import ReactTable from 'components/ReactTable/ReactTable.js';
 
-import { dataTable } from "variables/general.js";
+import { dataTable } from 'variables/general.js';
 
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { cardTitle } from 'assets/jss/material-dashboard-pro-react.js';
 
 const styles = {
   cardIconTitle: {
     ...cardTitle,
-    marginTop: "15px",
-    marginBottom: "0px"
-  }
+    marginTop: '15px',
+    marginBottom: '0px',
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -49,48 +49,48 @@ export default function ReactTables() {
               round
               simple
               onClick={() => {
-                let obj = data.find(o => o.id === key);
+                let obj = data.find((o) => o.id === key);
                 alert(
                   "You've clicked LIKE button on \n{ \nName: " +
                     obj.name +
-                    ", \nposition: " +
+                    ', \nposition: ' +
                     obj.position +
-                    ", \noffice: " +
+                    ', \noffice: ' +
                     obj.office +
-                    ", \nage: " +
+                    ', \nage: ' +
                     obj.age +
-                    "\n}."
+                    '\n}.'
                 );
               }}
               color="info"
               className="like"
             >
               <Favorite />
-            </Button>{" "}
+            </Button>{' '}
             {/* use this button to add a edit kind of action */}
             <Button
               justIcon
               round
               simple
               onClick={() => {
-                let obj = data.find(o => o.id === key);
+                let obj = data.find((o) => o.id === key);
                 alert(
                   "You've clicked EDIT button on \n{ \nName: " +
                     obj.name +
-                    ", \nposition: " +
+                    ', \nposition: ' +
                     obj.position +
-                    ", \noffice: " +
+                    ', \noffice: ' +
                     obj.office +
-                    ", \nage: " +
+                    ', \nage: ' +
                     obj.age +
-                    "\n}."
+                    '\n}.'
                 );
               }}
               color="warning"
               className="edit"
             >
               <Dvr />
-            </Button>{" "}
+            </Button>{' '}
             {/* use this button to remove the data row */}
             <Button
               justIcon
@@ -113,9 +113,9 @@ export default function ReactTables() {
               className="remove"
             >
               <Close />
-            </Button>{" "}
+            </Button>{' '}
           </div>
-        )
+        ),
       };
     })
   );
@@ -134,25 +134,25 @@ export default function ReactTables() {
             <ReactTable
               columns={[
                 {
-                  Header: "Name",
-                  accessor: "name"
+                  Header: 'Name',
+                  accessor: 'name',
                 },
                 {
-                  Header: "Position",
-                  accessor: "position"
+                  Header: 'Position',
+                  accessor: 'position',
                 },
                 {
-                  Header: "Office",
-                  accessor: "office"
+                  Header: 'Office',
+                  accessor: 'office',
                 },
                 {
-                  Header: "Age",
-                  accessor: "age"
+                  Header: 'Age',
+                  accessor: 'age',
                 },
                 {
-                  Header: "Actions",
-                  accessor: "actions"
-                }
+                  Header: 'Actions',
+                  accessor: 'actions',
+                },
               ]}
               data={data}
             />

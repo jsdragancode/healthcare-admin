@@ -1,22 +1,22 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 // core components
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import Footer from "components/Footer/Footer.js";
+import AuthNavbar from 'components/Navbars/AuthNavbar.js';
+import Footer from 'components/Footer/Footer.js';
 
-import routes from "routes.js";
+import routes from 'routes.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/layouts/authStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/layouts/authStyle.js';
 
-import register from "assets/img/register.jpeg";
-import login from "assets/img/login.jpeg";
-import lock from "assets/img/lock.jpeg";
-import error from "assets/img/clint-mckoy.jpg";
-import pricing from "assets/img/bg-pricing.jpeg";
+import register from 'assets/img/register.jpeg';
+import login from 'assets/img/login.jpeg';
+import lock from 'assets/img/lock.jpeg';
+import error from 'assets/img/clint-mckoy.jpg';
+import pricing from 'assets/img/bg-pricing.jpeg';
 
 const useStyles = makeStyles(styles);
 
@@ -27,16 +27,16 @@ export default function Pages(props) {
   // styles
   const classes = useStyles();
   React.useEffect(() => {
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = 'unset';
     // Specify how to clean up after this effect:
     return function cleanup() {};
   });
-  const getRoutes = routes => {
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/auth") {
+      if (prop.layout === '/auth') {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -50,22 +50,22 @@ export default function Pages(props) {
     });
   };
   const getBgImage = () => {
-    if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
+    if (window.location.pathname.indexOf('/auth/register-page') !== -1) {
       return register;
-    } else if (window.location.pathname.indexOf("/auth/login-page") !== -1) {
+    } else if (window.location.pathname.indexOf('/auth/login-page') !== -1) {
       return login;
-    } else if (window.location.pathname.indexOf("/auth/pricing-page") !== -1) {
+    } else if (window.location.pathname.indexOf('/auth/pricing-page') !== -1) {
       return pricing;
     } else if (
-      window.location.pathname.indexOf("/auth/lock-screen-page") !== -1
+      window.location.pathname.indexOf('/auth/lock-screen-page') !== -1
     ) {
       return lock;
-    } else if (window.location.pathname.indexOf("/auth/error-page") !== -1) {
+    } else if (window.location.pathname.indexOf('/auth/error-page') !== -1) {
       return error;
     }
   };
-  const getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
+  const getActiveRoute = (routes) => {
+    let activeRoute = 'Default Brand Text';
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
@@ -88,7 +88,7 @@ export default function Pages(props) {
       <div className={classes.wrapper} ref={wrapper}>
         <div
           className={classes.fullPage}
-          style={{ backgroundImage: "url(" + getBgImage() + ")" }}
+          style={{ backgroundImage: 'url(' + getBgImage() + ')' }}
         >
           <Switch>
             {getRoutes(routes)}
