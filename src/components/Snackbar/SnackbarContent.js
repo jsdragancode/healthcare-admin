@@ -1,16 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Snack from "@material-ui/core/SnackbarContent";
-import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from '@material-ui/core/styles';
+import Snack from '@material-ui/core/SnackbarContent';
+import IconButton from '@material-ui/core/IconButton';
 
 // @material-ui/icons
-import Close from "@material-ui/icons/Close";
+import Close from '@material-ui/icons/Close';
 
-import styles from "assets/jss/material-dashboard-pro-react/components/snackbarContentStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/components/snackbarContentStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -19,7 +19,7 @@ export default function SnackbarContent(props) {
   const { message, color, close, icon } = props;
   var action = [];
   const messageClasses = cx({
-    [classes.iconMessage]: icon !== undefined
+    [classes.iconMessage]: icon !== undefined,
   });
   if (close !== undefined) {
     action = [
@@ -30,17 +30,17 @@ export default function SnackbarContent(props) {
         color="inherit"
       >
         <Close className={classes.close} />
-      </IconButton>
+      </IconButton>,
     ];
   }
   const iconClasses = cx({
     [classes.icon]: classes.icon,
-    [classes.infoIcon]: color === "info",
-    [classes.successIcon]: color === "success",
-    [classes.warningIcon]: color === "warning",
-    [classes.dangerIcon]: color === "danger",
-    [classes.primaryIcon]: color === "primary",
-    [classes.roseIcon]: color === "rose"
+    [classes.infoIcon]: color === 'info',
+    [classes.successIcon]: color === 'success',
+    [classes.warningIcon]: color === 'warning',
+    [classes.dangerIcon]: color === 'danger',
+    [classes.primaryIcon]: color === 'primary',
+    [classes.roseIcon]: color === 'rose',
   });
   return (
     <Snack
@@ -51,8 +51,8 @@ export default function SnackbarContent(props) {
         </div>
       }
       classes={{
-        root: classes.root + " " + classes[color],
-        message: classes.message
+        root: classes.root + ' ' + classes[color],
+        message: classes.message,
       }}
       action={action}
     />
@@ -60,19 +60,19 @@ export default function SnackbarContent(props) {
 }
 
 SnackbarContent.defaultProps = {
-  color: "info"
+  color: 'info',
 };
 
 SnackbarContent.propTypes = {
   message: PropTypes.node.isRequired,
   color: PropTypes.oneOf([
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "primary",
-    "rose"
+    'info',
+    'success',
+    'warning',
+    'danger',
+    'primary',
+    'rose',
   ]),
   close: PropTypes.bool,
-  icon: PropTypes.object
+  icon: PropTypes.object,
 };

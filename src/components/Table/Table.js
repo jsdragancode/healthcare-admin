@@ -1,16 +1,16 @@
-import React from "react";
-import cx from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
-import styles from "assets/jss/material-dashboard-pro-react/components/tableStyle";
+import styles from 'assets/jss/material-dashboard-pro-react/components/tableStyle';
 
 const useStyles = makeStyles(styles);
 
@@ -28,26 +28,26 @@ export default function CustomTable(props) {
     striped,
     tableShopping,
     customHeadCellClasses,
-    customHeadClassesForCells
+    customHeadClassesForCells,
   } = props;
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
         {tableHead !== undefined ? (
           <TableHead className={classes[tableHeaderColor]}>
-            <TableRow className={classes.tableRow + " " + classes.tableRowHead}>
+            <TableRow className={classes.tableRow + ' ' + classes.tableRowHead}>
               {tableHead.map((prop, key) => {
                 const tableCellClasses =
                   classes.tableHeadCell +
-                  " " +
+                  ' ' +
                   classes.tableCell +
-                  " " +
+                  ' ' +
                   cx({
                     [customHeadCellClasses[
                       customHeadClassesForCells.indexOf(key)
                     ]]: customHeadClassesForCells.indexOf(key) !== -1,
                     [classes.tableShoppingHead]: tableShopping,
-                    [classes.tableHeadFontSize]: !tableShopping
+                    [classes.tableHeadFontSize]: !tableShopping,
                   });
                 return (
                   <TableCell className={tableCellClasses} key={key}>
@@ -60,7 +60,7 @@ export default function CustomTable(props) {
         ) : null}
         <TableBody>
           {tableData.map((prop, key) => {
-            var rowColor = "";
+            var rowColor = '';
             var rowColored = false;
             if (prop.color !== undefined) {
               rowColor = prop.color;
@@ -70,8 +70,8 @@ export default function CustomTable(props) {
             const tableRowClasses = cx({
               [classes.tableRowBody]: true,
               [classes.tableRowHover]: hover,
-              [classes[rowColor + "Row"]]: rowColored,
-              [classes.tableStripedRow]: striped && key % 2 === 0
+              [classes[rowColor + 'Row']]: rowColored,
+              [classes.tableStripedRow]: striped && key % 2 === 0,
             });
             if (prop.total) {
               return (
@@ -81,13 +81,13 @@ export default function CustomTable(props) {
                     colSpan={prop.colspan}
                   />
                   <TableCell
-                    className={classes.tableCell + " " + classes.tableCellTotal}
+                    className={classes.tableCell + ' ' + classes.tableCellTotal}
                   >
                     Total
                   </TableCell>
                   <TableCell
                     className={
-                      classes.tableCell + " " + classes.tableCellAmount
+                      classes.tableCell + ' ' + classes.tableCellAmount
                     }
                   >
                     {prop.amount}
@@ -109,7 +109,7 @@ export default function CustomTable(props) {
                     colSpan={prop.colspan}
                   />
                   <TableCell
-                    className={classes.tableCell + " " + classes.right}
+                    className={classes.tableCell + ' ' + classes.right}
                     colSpan={prop.col.colspan}
                   >
                     {prop.col.text}
@@ -121,17 +121,17 @@ export default function CustomTable(props) {
               <TableRow
                 key={key}
                 hover={hover}
-                className={classes.tableRow + " " + tableRowClasses}
+                className={classes.tableRow + ' ' + tableRowClasses}
               >
                 {prop.map((prop, key) => {
                   const tableCellClasses =
                     classes.tableCell +
-                    " " +
+                    ' ' +
                     cx({
                       [classes[colorsColls[coloredColls.indexOf(key)]]]:
                         coloredColls.indexOf(key) !== -1,
                       [customCellClasses[customClassesForCells.indexOf(key)]]:
-                        customClassesForCells.indexOf(key) !== -1
+                        customClassesForCells.indexOf(key) !== -1,
                     });
                   return (
                     <TableCell className={tableCellClasses} key={key}>
@@ -149,7 +149,7 @@ export default function CustomTable(props) {
 }
 
 CustomTable.defaultProps = {
-  tableHeaderColor: "gray",
+  tableHeaderColor: 'gray',
   hover: false,
   colorsColls: [],
   coloredColls: [],
@@ -157,18 +157,18 @@ CustomTable.defaultProps = {
   customCellClasses: [],
   customClassesForCells: [],
   customHeadCellClasses: [],
-  customHeadClassesForCells: []
+  customHeadClassesForCells: [],
 };
 
 CustomTable.propTypes = {
   tableHeaderColor: PropTypes.oneOf([
-    "warning",
-    "primary",
-    "danger",
-    "success",
-    "info",
-    "rose",
-    "gray"
+    'warning',
+    'primary',
+    'danger',
+    'success',
+    'info',
+    'rose',
+    'gray',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   // Of(PropTypes.arrayOf(PropTypes.node)) || Of(PropTypes.object),
@@ -183,5 +183,5 @@ CustomTable.propTypes = {
   customHeadClassesForCells: PropTypes.arrayOf(PropTypes.number),
   striped: PropTypes.bool,
   // this will cause some changes in font
-  tableShopping: PropTypes.bool
+  tableShopping: PropTypes.bool,
 };

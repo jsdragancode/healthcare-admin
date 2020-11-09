@@ -1,22 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import { makeStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 // @material-ui/icons
-import ExpandMore from "@material-ui/icons/ExpandMore";
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
-import styles from "assets/jss/material-dashboard-pro-react/components/accordionStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/components/accordionStyle.js';
 
 const useStyles = makeStyles(styles);
 
 export default function Accordion(props) {
   const [active, setActive] = React.useState(props.active);
-  const handleChange = panel => (event, expanded) => {
+  const handleChange = (panel) => (event, expanded) => {
     setActive(expanded ? panel : -1);
   };
   const classes = useStyles();
@@ -31,7 +31,7 @@ export default function Accordion(props) {
             key={key}
             classes={{
               root: classes.expansionPanel,
-              expanded: classes.expansionPanelExpanded
+              expanded: classes.expansionPanelExpanded,
             }}
           >
             <ExpansionPanelSummary
@@ -40,7 +40,7 @@ export default function Accordion(props) {
                 root: classes.expansionPanelSummary,
                 expanded: classes.expansionPanelSummaryExpaned,
                 content: classes.expansionPanelSummaryContent,
-                expandIcon: classes.expansionPanelSummaryExpandIcon
+                expandIcon: classes.expansionPanelSummaryExpandIcon,
               }}
             >
               <h4 className={classes.title}>{prop.title}</h4>
@@ -56,7 +56,7 @@ export default function Accordion(props) {
 }
 
 Accordion.defaultProps = {
-  active: -1
+  active: -1,
 };
 
 Accordion.propTypes = {
@@ -65,7 +65,7 @@ Accordion.propTypes = {
   collapses: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      content: PropTypes.node
+      content: PropTypes.node,
     })
-  ).isRequired
+  ).isRequired,
 };

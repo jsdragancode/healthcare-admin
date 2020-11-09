@@ -1,14 +1,14 @@
-import React from "react";
-import cx from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 // core components
-import Badge from "components/Badge/Badge.js";
+import Badge from 'components/Badge/Badge.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/components/timelineStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/components/timelineStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -17,27 +17,27 @@ export default function Timeline(props) {
   const { stories, simple } = props;
   const timelineClass =
     classes.timeline +
-    " " +
+    ' ' +
     cx({
-      [classes.timelineSimple]: simple
+      [classes.timelineSimple]: simple,
     });
   return (
     <ul className={timelineClass}>
       {stories.map((prop, key) => {
         const panelClasses =
           classes.timelinePanel +
-          " " +
+          ' ' +
           cx({
             [classes.timelinePanelInverted]: prop.inverted || simple,
-            [classes.timelineSimplePanel]: simple
+            [classes.timelineSimplePanel]: simple,
           });
         const timelineBadgeClasses =
           classes.timelineBadge +
-          " " +
+          ' ' +
           classes[prop.badgeColor] +
-          " " +
+          ' ' +
           cx({
-            [classes.timelineSimpleBadge]: simple
+            [classes.timelineSimpleBadge]: simple,
           });
         return (
           <li className={classes.item} key={key}>
@@ -70,5 +70,5 @@ export default function Timeline(props) {
 
 Timeline.propTypes = {
   stories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  simple: PropTypes.bool
+  simple: PropTypes.bool,
 };

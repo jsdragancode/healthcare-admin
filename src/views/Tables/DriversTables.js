@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -14,6 +14,7 @@ import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 // core components
+import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
@@ -21,7 +22,7 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
-import ReactTable from '../../components/ReactTable/ReactTable.js';
+import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 
@@ -40,64 +41,117 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function DriversTables() {
-  const [data, setData] = React.useState([]);
-  const [deleteModal, setDeleteModal] = React.useState(false);
-  const [deleteDriverId, setDeleteDriverId] = React.useState(null);
+  const [data, setData] = useState([]);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [deleteDriverId, setDeleteDriverId] = useState(null);
+  const [newFullNameEn, setNewFullNameEn] = useState('');
+  const [newFullNameAr, setNewFullNameAr] = useState('');
+  const [newMobileNumber, setNewMobileNumber] = useState('');
   const classes = useStyles();
 
-  useEffect(() => {
+  const setDriverParam = (full_name_en, full_name_ar, mobile_number) => {
+    setNewFullNameEn(full_name_en);
+    setNewFullNameAr(full_name_ar);
+    setNewMobileNumber(mobile_number);
+  };
+
+  const makeTableRow = (info) => {
+    return {
+      id: info.id,
+      full_name_en: info.full_name_en,
+      full_name_ar: info.full_name_ar,
+      mobile_number: info.mobile_number,
+      actions: (
+        <div className="actions-right">
+          <Button
+            justIcon
+            round
+            simple
+            onClick={() => {
+              setDriverParam(
+                info.full_name_en,
+                info.full_name_ar,
+                info.mobile_number
+              );
+
+              setDeleteDriverId(info.id);
+
+              setEditModal(true);
+            }}
+            color="warning"
+            className="edit"
+          >
+            <Dvr />
+          </Button>
+          <Button
+            justIcon
+            round
+            simple
+            onClick={() => {
+              setDeleteDriverId(info.id);
+              setDeleteModal(true);
+            }}
+            color="danger"
+            className="remove"
+          >
+            <Close />
+          </Button>
+        </div>
+      ),
+    };
+  };
+
+  const getDriver = () => {
     axios.get('/api/drivers/').then((res) => {
       // console.log('get', res.data.drivers);
-
-      setData(
-        res.data.drivers.map((prop) => {
-          return {
-            id: prop.id,
-            full_name_en: prop.full_name_en,
-            full_name_ar: prop.full_name_ar,
-            mobile_number: prop.mobile_number,
-            actions: (
-              <div className="actions-right">
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    let obj = data.find((o) => o.id === prop.id);
-                    console.log(obj);
-                  }}
-                  color="warning"
-                  className="edit"
-                >
-                  <Dvr />
-                </Button>{' '}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    setDeleteDriverId(prop.id);
-                    setDeleteModal(true);
-                  }}
-                  color="danger"
-                  className="remove"
-                >
-                  <Close />
-                </Button>{' '}
-              </div>
-            ),
-          };
-        })
-      );
+      setData(res.data.drivers.map((prop) => makeTableRow(prop)));
     });
-  }, []);
+  };
+
+  useEffect(getDriver, []);
 
   const delteDriver = (deleteId) => {
     axios.delete(`/api/drivers/${deleteId}`).then(() => {
       // console.log('delete', res);
-
       setData(data.filter((prop) => prop.id !== deleteId));
     });
+  };
+
+  const addDriver = () => {
+    axios
+      .post('/api/drivers/', {
+        full_name_en: newFullNameEn,
+        full_name_ar: newFullNameAr,
+        mobile_number: newMobileNumber,
+      })
+      .then((res) => {
+        // console.log('post', res.data.driver);
+        setData([...data, makeTableRow(res.data.driver)]);
+        setDriverParam('', '', '');
+        setAddModal(false);
+      });
+  };
+
+  const updateDriver = () => {
+    axios
+      .patch(`/api/drivers/${deleteDriverId}`, {
+        full_name_en: newFullNameEn,
+        full_name_ar: newFullNameAr,
+        mobile_number: newMobileNumber,
+      })
+      .then((res) => {
+        // console.log('patch', res.data.driver);
+
+        setData(
+          data.map((prop) =>
+            prop.id === deleteDriverId ? makeTableRow(res.data.driver) : prop
+          )
+        );
+        setDriverParam('', '', '');
+        setEditModal(false);
+      });
   };
 
   return (
@@ -112,7 +166,21 @@ export default function DriversTables() {
             <h4 className={classes.cardIconTitle}>Drivers</h4>
           </CardHeader>
           <CardBody>
-            <ReactTable
+            <GridContainer justify="flex-end">
+              <GridItem>
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    setDriverParam('', '', '');
+
+                    setAddModal(true);
+                  }}
+                >
+                  Add New Driver
+                </Button>
+              </GridItem>
+            </GridContainer>
+            <ReactTableBottomPagination
               columns={[
                 {
                   Header: 'Full Name EN',
@@ -142,25 +210,8 @@ export default function DriversTables() {
               TransitionComponent={Transition}
               keepMounted
               onClose={() => setDeleteModal(false)}
-              aria-labelledby="small-modal-slide-title"
               aria-describedby="small-modal-slide-description"
             >
-              <DialogTitle
-                id="small-modal-slide-title"
-                disableTypography
-                className={classes.modalHeader}
-              >
-                <Button
-                  justIcon
-                  className={classes.modalCloseButton}
-                  key="close"
-                  aria-label="Close"
-                  color="transparent"
-                  onClick={() => setDeleteModal(false)}
-                >
-                  <Close className={classes.modalClose} />
-                </Button>
-              </DialogTitle>
               <DialogContent
                 id="small-modal-slide-description"
                 className={classes.modalBody + ' ' + classes.modalSmallBody}
@@ -193,6 +244,144 @@ export default function DriversTables() {
                   }
                 >
                   Yes
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              classes={{
+                root: classes.center + ' ' + classes.modalRoot,
+                paper: classes.modal + ' ' + classes.modalSmall,
+              }}
+              open={addModal}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={() => setDeleteModal(false)}
+              aria-labelledby="add-driver-dialog-title-modal-title"
+              aria-describedby="add-driver-dialog-modal-description"
+            >
+              <DialogTitle
+                id="add-driver-dialog-title-modal-title"
+                disableTypography
+                className={classes.modalHeader}
+              >
+                <h4 className={classes.modalTitle}>Add Driver</h4>
+              </DialogTitle>
+              <DialogContent
+                id="add-driver-dialog-modal-description"
+                className={classes.modalBody + ' ' + classes.modalSmallBody}
+              >
+                <form>
+                  <CustomInput
+                    labelText="Full Name EN"
+                    id="add_full_name_en"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameEn,
+                      onChange: (e) => setNewFullNameEn(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Full Name AR"
+                    id="add_full_name_ar"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameAr,
+                      onChange: (e) => setNewFullNameAr(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Mobile Number"
+                    id="add_mobile_number"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newMobileNumber,
+                      onChange: (e) => setNewMobileNumber(e.target.value),
+                    }}
+                  />
+                </form>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setAddModal(false)}>Cancel</Button>
+                <Button onClick={() => addDriver()} color="primary">
+                  Add
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              classes={{
+                root: classes.center + ' ' + classes.modalRoot,
+                paper: classes.modal + ' ' + classes.modalSmall,
+              }}
+              open={editModal}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={() => setDeleteModal(false)}
+              aria-labelledby="edit-driver-dialog-title-modal-title"
+              aria-describedby="edit-driver-dialog-modal-description"
+            >
+              <DialogTitle
+                id="edit-driver-dialog-title-modal-title"
+                disableTypography
+                className={classes.modalHeader}
+              >
+                <h4 className={classes.modalTitle}>Edit Driver</h4>
+              </DialogTitle>
+              <DialogContent
+                id="edit-driver-dialog-modal-description"
+                className={classes.modalBody + ' ' + classes.modalSmallBody}
+              >
+                <form>
+                  <CustomInput
+                    labelText="Full Name EN"
+                    id="edit_full_name_en"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameEn,
+                      onChange: (e) => setNewFullNameEn(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Full Name AR"
+                    id="edit_full_name_ar"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameAr,
+                      onChange: (e) => setNewFullNameAr(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Mobile Number"
+                    id="edit_mobile_number"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newMobileNumber,
+                      onChange: (e) => setNewMobileNumber(e.target.value),
+                    }}
+                  />
+                </form>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setEditModal(false)}>Cancel</Button>
+                <Button onClick={() => updateDriver()} color="primary">
+                  Update
                 </Button>
               </DialogActions>
             </Dialog>

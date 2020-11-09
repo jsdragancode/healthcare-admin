@@ -1,37 +1,37 @@
-import React from "react";
+import React from 'react';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Icon from "@material-ui/core/Icon";
+import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Icon from '@material-ui/core/Icon';
 
 // @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
-import Face from "@material-ui/icons/Face";
-import Email from "@material-ui/icons/Email";
+import Timeline from '@material-ui/icons/Timeline';
+import Code from '@material-ui/icons/Code';
+import Group from '@material-ui/icons/Group';
+import Face from '@material-ui/icons/Face';
+import Email from '@material-ui/icons/Email';
 // import LockOutline from "@material-ui/icons/LockOutline";
-import Check from "@material-ui/icons/Check";
+import Check from '@material-ui/icons/Check';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import InfoArea from "components/InfoArea/InfoArea.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import CustomInput from 'components/CustomInput/CustomInput.js';
+import InfoArea from 'components/InfoArea/InfoArea.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/views/registerPageStyle";
+import styles from 'assets/jss/material-dashboard-pro-react/views/registerPageStyle';
 
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage() {
   const [checked, setChecked] = React.useState([]);
-  const handleToggle = value => {
+  const handleToggle = (value) => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -91,7 +91,7 @@ export default function RegisterPage() {
                     <CustomInput
                       formControlProps={{
                         fullWidth: true,
-                        className: classes.customFormControlClasses
+                        className: classes.customFormControlClasses,
                       }}
                       inputProps={{
                         startAdornment: (
@@ -102,13 +102,13 @@ export default function RegisterPage() {
                             <Face className={classes.inputAdornmentIcon} />
                           </InputAdornment>
                         ),
-                        placeholder: "First Name..."
+                        placeholder: 'First Name...',
                       }}
                     />
                     <CustomInput
                       formControlProps={{
                         fullWidth: true,
-                        className: classes.customFormControlClasses
+                        className: classes.customFormControlClasses,
                       }}
                       inputProps={{
                         startAdornment: (
@@ -119,13 +119,13 @@ export default function RegisterPage() {
                             <Email className={classes.inputAdornmentIcon} />
                           </InputAdornment>
                         ),
-                        placeholder: "Email..."
+                        placeholder: 'Email...',
                       }}
                     />
                     <CustomInput
                       formControlProps={{
                         fullWidth: true,
-                        className: classes.customFormControlClasses
+                        className: classes.customFormControlClasses,
                       }}
                       inputProps={{
                         startAdornment: (
@@ -138,13 +138,13 @@ export default function RegisterPage() {
                             </Icon>
                           </InputAdornment>
                         ),
-                        placeholder: "Password..."
+                        placeholder: 'Password...',
                       }}
                     />
                     <FormControlLabel
                       classes={{
                         root: classes.checkboxLabelControl,
-                        label: classes.checkboxLabel
+                        label: classes.checkboxLabel,
                       }}
                       control={
                         <Checkbox
@@ -156,13 +156,13 @@ export default function RegisterPage() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       label={
                         <span>
-                          I agree to the{" "}
+                          I agree to the{' '}
                           <a href="#pablo">terms and conditions</a>.
                         </span>
                       }

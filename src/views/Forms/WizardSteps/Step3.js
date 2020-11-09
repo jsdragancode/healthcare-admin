@@ -1,42 +1,42 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 // core components
-import CustomInput from "components/CustomInput/CustomInput.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
+import CustomInput from 'components/CustomInput/CustomInput.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
 
-import customSelectStyle from "assets/jss/material-dashboard-pro-react/customSelectStyle.js";
+import customSelectStyle from 'assets/jss/material-dashboard-pro-react/customSelectStyle.js';
 
 const style = {
   infoText: {
-    fontWeight: "300",
-    margin: "10px 0 30px",
-    textAlign: "center"
+    fontWeight: '300',
+    margin: '10px 0 30px',
+    textAlign: 'center',
   },
-  ...customSelectStyle
+  ...customSelectStyle,
 };
 
 class Step3 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      simpleSelect: "",
+      simpleSelect: '',
       desgin: false,
       code: false,
-      develop: false
+      develop: false,
     };
   }
   sendState() {
     return this.state;
   }
-  handleSimple = event => {
+  handleSimple = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
   isValidated() {
@@ -54,7 +54,7 @@ class Step3 extends React.Component {
             labelText="Street Name"
             id="streetname"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
             }}
           />
         </GridItem>
@@ -63,7 +63,7 @@ class Step3 extends React.Component {
             labelText="Street No."
             id="streetno"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
             }}
           />
         </GridItem>
@@ -72,7 +72,7 @@ class Step3 extends React.Component {
             labelText="City"
             id="city"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
             }}
           />
         </GridItem>
@@ -83,22 +83,22 @@ class Step3 extends React.Component {
             </InputLabel>
             <Select
               MenuProps={{
-                className: classes.selectMenu
+                className: classes.selectMenu,
               }}
               classes={{
-                select: classes.select
+                select: classes.select,
               }}
               value={this.state.simpleSelect}
               onChange={this.handleSimple}
               inputProps={{
-                name: "simpleSelect",
-                id: "simple-select"
+                name: 'simpleSelect',
+                id: 'simple-select',
               }}
             >
               <MenuItem
                 disabled
                 classes={{
-                  root: classes.selectMenuItem
+                  root: classes.selectMenuItem,
                 }}
               >
                 Country
@@ -106,7 +106,7 @@ class Step3 extends React.Component {
               <MenuItem
                 classes={{
                   root: classes.selectMenuItem,
-                  selected: classes.selectMenuItemSelected
+                  selected: classes.selectMenuItemSelected,
                 }}
                 value="2"
               >
@@ -115,7 +115,7 @@ class Step3 extends React.Component {
               <MenuItem
                 classes={{
                   root: classes.selectMenuItem,
-                  selected: classes.selectMenuItemSelected
+                  selected: classes.selectMenuItemSelected,
                 }}
                 value="3"
               >
@@ -130,7 +130,7 @@ class Step3 extends React.Component {
 }
 
 Step3.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
 };
 
 export default withStyles(style)(Step3);

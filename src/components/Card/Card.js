@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 // @material-ui/icons
 
 // core components
-import styles from "assets/jss/material-dashboard-pro-react/components/cardStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/components/cardStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -44,7 +44,7 @@ export default function Card(props) {
     [classes.cardProduct]: product,
     [classes.cardChart]: chart,
     [classes.cardLogin]: login,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardClasses} {...rest}>
@@ -63,15 +63,15 @@ Card.propTypes = {
   pricing: PropTypes.bool,
   testimonial: PropTypes.bool,
   color: PropTypes.oneOf([
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose"
+    'primary',
+    'info',
+    'success',
+    'warning',
+    'danger',
+    'rose',
   ]),
   product: PropTypes.bool,
   chart: PropTypes.bool,
   login: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 };

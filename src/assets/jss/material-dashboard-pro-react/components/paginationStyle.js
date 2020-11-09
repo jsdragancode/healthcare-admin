@@ -6,156 +6,156 @@ import {
   warningColor,
   dangerColor,
   whiteColor,
-  hexToRgb
-} from "assets/jss/material-dashboard-pro-react.js";
+  hexToRgb,
+} from 'assets/jss/material-dashboard-pro-react.js';
 
 const paginationStyle = {
   pagination: {
-    display: "inline-block",
-    paddingLeft: "0",
-    margin: "20px 0",
-    borderRadius: "4px"
+    display: 'inline-block',
+    paddingLeft: '0',
+    margin: '20px 0',
+    borderRadius: '4px',
   },
   paginationItem: {
-    display: "inline"
+    display: 'inline',
   },
   paginationLink: {
-    ":first-of-type": {
-      marginleft: "0"
+    ':first-of-type': {
+      marginleft: '0',
     },
-    letterSpacing: "unset",
-    border: "0",
-    borderRadius: "30px !important",
-    transition: "all .3s",
-    padding: "0px 11px",
-    margin: "0 3px",
-    minWidth: "30px",
-    height: "30px",
-    minHeight: "auto",
-    lineHeight: "30px",
-    fontWeight: "400",
-    fontSize: "12px",
-    textTransform: "uppercase",
-    background: "transparent",
-    position: "relative",
-    float: "left",
-    textDecoration: "none",
-    boxSizing: "border-box",
-    "&,&:hover,&:focus": {
-      color: grayColor[0]
+    letterSpacing: 'unset',
+    border: '0',
+    borderRadius: '30px !important',
+    transition: 'all .3s',
+    padding: '0px 11px',
+    margin: '0 3px',
+    minWidth: '30px',
+    height: '30px',
+    minHeight: 'auto',
+    lineHeight: '30px',
+    fontWeight: '400',
+    fontSize: '12px',
+    textTransform: 'uppercase',
+    background: 'transparent',
+    position: 'relative',
+    float: 'left',
+    textDecoration: 'none',
+    boxSizing: 'border-box',
+    '&,&:hover,&:focus': {
+      color: grayColor[0],
     },
-    "&:hover,&:focus": {
-      zIndex: "3",
+    '&:hover,&:focus': {
+      zIndex: '3',
       backgroundColor: grayColor[8],
-      borderColor: grayColor[5]
+      borderColor: grayColor[5],
     },
-    "&:hover": {
-      cursor: "pointer"
-    }
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   primary: {
-    "&,&:hover,&:focus": {
+    '&,&:hover,&:focus': {
       backgroundColor: primaryColor[0],
       borderColor: primaryColor[0],
       color: whiteColor,
       boxShadow:
-        "0 4px 5px 0 rgba(" +
+        '0 4px 5px 0 rgba(' +
         hexToRgb(primaryColor[0]) +
-        ", 0.14), 0 1px 10px 0 rgba(" +
+        ', 0.14), 0 1px 10px 0 rgba(' +
         hexToRgb(primaryColor[0]) +
-        ", 0.12), 0 2px 4px -1px rgba(" +
+        ', 0.12), 0 2px 4px -1px rgba(' +
         hexToRgb(primaryColor[0]) +
-        ", 0.2)"
+        ', 0.2)',
     },
-    "&:hover,&:focus": {
-      zIndex: "2",
-      cursor: "default"
-    }
+    '&:hover,&:focus': {
+      zIndex: '2',
+      cursor: 'default',
+    },
   },
   info: {
-    "&,&:hover,&:focus": {
+    '&,&:hover,&:focus': {
       backgroundColor: infoColor[0],
       borderColor: infoColor[0],
       color: whiteColor,
       boxShadow:
-        "0 4px 5px 0 rgba(" +
+        '0 4px 5px 0 rgba(' +
         hexToRgb(infoColor[0]) +
-        ", 0.14), 0 1px 10px 0 rgba(" +
+        ', 0.14), 0 1px 10px 0 rgba(' +
         hexToRgb(infoColor[0]) +
-        ", 0.12), 0 2px 4px -1px rgba(" +
+        ', 0.12), 0 2px 4px -1px rgba(' +
         hexToRgb(infoColor[0]) +
-        ", 0.2)"
+        ', 0.2)',
     },
-    "&:hover,&:focus": {
-      zIndex: "2",
-      cursor: "default"
-    }
+    '&:hover,&:focus': {
+      zIndex: '2',
+      cursor: 'default',
+    },
   },
   success: {
-    "&,&:hover,&:focus": {
+    '&,&:hover,&:focus': {
       backgroundColor: successColor[0],
       borderColor: successColor[0],
       color: whiteColor,
       boxShadow:
-        "0 4px 5px 0 rgba(" +
+        '0 4px 5px 0 rgba(' +
         hexToRgb(successColor[0]) +
-        ", 0.14), 0 1px 10px 0 rgba(" +
+        ', 0.14), 0 1px 10px 0 rgba(' +
         hexToRgb(successColor[0]) +
-        ", 0.12), 0 2px 4px -1px rgba(" +
+        ', 0.12), 0 2px 4px -1px rgba(' +
         hexToRgb(successColor[0]) +
-        ", 0.2)"
+        ', 0.2)',
     },
-    "&:hover,&:focus": {
-      zIndex: "2",
-      cursor: "default"
-    }
+    '&:hover,&:focus': {
+      zIndex: '2',
+      cursor: 'default',
+    },
   },
   warning: {
-    "&,&:hover,&:focus": {
+    '&,&:hover,&:focus': {
       backgroundColor: warningColor[0],
       borderColor: warningColor[0],
       color: whiteColor,
       boxShadow:
-        "0 4px 5px 0 rgba(" +
+        '0 4px 5px 0 rgba(' +
         hexToRgb(warningColor[0]) +
-        ", 0.14), 0 1px 10px 0 rgba(" +
+        ', 0.14), 0 1px 10px 0 rgba(' +
         hexToRgb(warningColor[0]) +
-        ", 0.12), 0 2px 4px -1px rgba(" +
+        ', 0.12), 0 2px 4px -1px rgba(' +
         hexToRgb(warningColor[0]) +
-        ", 0.2)"
+        ', 0.2)',
     },
-    "&:hover,&:focus": {
-      zIndex: "2",
-      cursor: "default"
-    }
+    '&:hover,&:focus': {
+      zIndex: '2',
+      cursor: 'default',
+    },
   },
   danger: {
-    "&,&:hover,&:focus": {
+    '&,&:hover,&:focus': {
       backgroundColor: dangerColor[0],
       borderColor: dangerColor[0],
       color: whiteColor,
       boxShadow:
-        "0 4px 5px 0 rgba(" +
+        '0 4px 5px 0 rgba(' +
         hexToRgb(dangerColor[0]) +
-        ", 0.14), 0 1px 10px 0 rgba(" +
+        ', 0.14), 0 1px 10px 0 rgba(' +
         hexToRgb(dangerColor[0]) +
-        ", 0.12), 0 2px 4px -1px rgba(" +
+        ', 0.12), 0 2px 4px -1px rgba(' +
         hexToRgb(dangerColor[0]) +
-        ", 0.2)"
+        ', 0.2)',
     },
-    "&:hover,&:focus": {
-      zIndex: "2",
-      cursor: "default"
-    }
+    '&:hover,&:focus': {
+      zIndex: '2',
+      cursor: 'default',
+    },
   },
   disabled: {
-    "&,&:hover,&:focus": {
+    '&,&:hover,&:focus': {
       color: grayColor[1],
-      cursor: "not-allowed",
+      cursor: 'not-allowed',
       backgroundColor: whiteColor,
-      borderColor: grayColor[5]
-    }
-  }
+      borderColor: grayColor[5],
+    },
+  },
 };
 
 export default paginationStyle;

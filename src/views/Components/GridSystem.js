@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/views/gridSystemStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/views/gridSystemStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -23,21 +23,21 @@ export default function GridSystem() {
       <GridContainer>
         <GridItem xs={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`xs={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`xs={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`xs={4}`}</code>
             </CardBody>
           </Card>
@@ -49,21 +49,21 @@ export default function GridSystem() {
       <GridContainer>
         <GridItem xs={12} sm={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`sm={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`sm={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`sm={4}`}</code>
             </CardBody>
           </Card>
@@ -75,21 +75,21 @@ export default function GridSystem() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={4}`}</code>
             </CardBody>
           </Card>
@@ -101,21 +101,21 @@ export default function GridSystem() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={12} lg={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`lg={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`lg={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`lg={4}`}</code>
             </CardBody>
           </Card>
@@ -127,28 +127,28 @@ export default function GridSystem() {
       <GridContainer>
         <GridItem xs={12} sm={6} md={6} lg={3}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`sm={6} lg={3}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={6} md={6} lg={3}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`sm={6} lg={3}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={6} md={6} lg={3}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`sm={6} lg={3}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={6} md={6} lg={3}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`sm={6} lg={3}`}</code>
             </CardBody>
           </Card>
@@ -164,21 +164,21 @@ export default function GridSystem() {
       >
         <GridItem xs={12} sm={12} md={3}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={3}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={3}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={3}`}</code>
             </CardBody>
           </Card>
@@ -187,14 +187,14 @@ export default function GridSystem() {
       <GridContainer justify="space-between">
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={4}`}</code>
             </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={4}`}</code>
             </CardBody>
           </Card>
@@ -203,7 +203,7 @@ export default function GridSystem() {
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardBody style={{ textAlign: "center" }}>
+            <CardBody style={{ textAlign: 'center' }}>
               <code>{`md={6}`}</code>
             </CardBody>
           </Card>

@@ -3,51 +3,51 @@ import {
   primaryColor,
   dangerColor,
   grayColor,
-  tooltip
-} from "assets/jss/material-dashboard-pro-react.js";
-import customCheckboxRadioSwitch from "assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js";
+  tooltip,
+} from 'assets/jss/material-dashboard-pro-react.js';
+import customCheckboxRadioSwitch from 'assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js';
 
 const tasksStyle = {
   ...customCheckboxRadioSwitch,
   table: {
-    marginBottom: "0"
+    marginBottom: '0',
   },
   tableRow: {
-    position: "relative",
-    borderBottom: "1px solid " + grayColor[5]
+    position: 'relative',
+    borderBottom: '1px solid ' + grayColor[5],
   },
   tableActions: {
-    border: "none",
-    padding: "12px 8px !important",
-    verticalAlign: "middle"
+    border: 'none',
+    padding: '12px 8px !important',
+    verticalAlign: 'middle',
   },
   tableCell: {
     ...defaultFont,
-    padding: "0",
-    verticalAlign: "middle",
-    border: "none",
-    lineHeight: "1.42857143",
-    fontSize: "14px"
+    padding: '0',
+    verticalAlign: 'middle',
+    border: 'none',
+    lineHeight: '1.42857143',
+    fontSize: '14px',
   },
   tableActionButton: {
-    width: "27px",
-    height: "27px",
-    padding: "0"
+    width: '27px',
+    height: '27px',
+    padding: '0',
   },
   tableActionButtonIcon: {
-    width: "17px",
-    height: "17px"
+    width: '17px',
+    height: '17px',
   },
   edit: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     color: primaryColor[0],
-    boxShadow: "none"
+    boxShadow: 'none',
   },
   close: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     color: dangerColor[0],
-    boxShadow: "none"
+    boxShadow: 'none',
   },
-  tooltip
+  tooltip,
 };
 export default tasksStyle;

@@ -1,23 +1,23 @@
-import React from "react";
-import cx from "classnames";
+import React from 'react';
+import cx from 'classnames';
 
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from 'react-router-dom';
 // creates a beautiful scrollbar
-import PerfectScrollbar from "perfect-scrollbar";
-import "perfect-scrollbar/css/perfect-scrollbar.css";
+import PerfectScrollbar from 'perfect-scrollbar';
+import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import AdminNavbar from 'components/Navbars/AdminNavbar.js';
+import Footer from 'components/Footer/Footer.js';
+import Sidebar from 'components/Sidebar/Sidebar.js';
+import FixedPlugin from 'components/FixedPlugin/FixedPlugin.js';
 
-import routes from "routes.js";
+import routes from 'routes.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/layouts/rtlStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/layouts/rtlStyle.js';
 
 var ps;
 
@@ -28,71 +28,71 @@ export default function RTL(props) {
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
-  const [image, setImage] = React.useState(require("assets/img/sidebar-2.jpg"));
-  const [color, setColor] = React.useState("blue");
-  const [bgColor, setBgColor] = React.useState("black");
+  const [image, setImage] = React.useState(require('assets/img/sidebar-2.jpg'));
+  const [color, setColor] = React.useState('blue');
+  const [bgColor, setBgColor] = React.useState('black');
   // const [hasImage, setHasImage] = React.useState(true);
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [logo, setLogo] = React.useState(require("assets/img/logo-white.svg"));
+  const [fixedClasses, setFixedClasses] = React.useState('dropdown');
+  const [logo, setLogo] = React.useState(require('assets/img/logo-white.svg'));
   // styles
   const classes = useStyles();
   const mainPanelClasses =
     classes.mainPanel +
-    " " +
+    ' ' +
     cx({
-      [classes.mainPanelSidebarMini]: miniActive
+      [classes.mainPanelSidebarMini]: miniActive,
     });
   // ref for main panel div
   const mainPanel = React.createRef();
   // effect instead of componentDidMount, componentDidUpdate and componentWillUnmount
   React.useEffect(() => {
-    if (navigator.platform.indexOf("Win") > -1) {
+    if (navigator.platform.indexOf('Win') > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
-        suppressScrollY: false
+        suppressScrollY: false,
       });
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     }
-    window.addEventListener("resize", resizeFunction);
+    window.addEventListener('resize', resizeFunction);
 
     // Specify how to clean up after this effect:
     return function cleanup() {
-      if (navigator.platform.indexOf("Win") > -1) {
+      if (navigator.platform.indexOf('Win') > -1) {
         ps.destroy();
       }
-      window.removeEventListener("resize", resizeFunction);
+      window.removeEventListener('resize', resizeFunction);
     };
   });
   // functions for changeing the states from components
-  const handleImageClick = image => {
+  const handleImageClick = (image) => {
     setImage(image);
   };
-  const handleColorClick = color => {
+  const handleColorClick = (color) => {
     setColor(color);
   };
-  const handleBgColorClick = bgColor => {
+  const handleBgColorClick = (bgColor) => {
     switch (bgColor) {
-      case "white":
-        setLogo(require("assets/img/logo.svg"));
+      case 'white':
+        setLogo(require('assets/img/logo.svg'));
         break;
       default:
-        setLogo(require("assets/img/logo-white.svg"));
+        setLogo(require('assets/img/logo-white.svg'));
         break;
     }
     setBgColor(bgColor);
   };
   const handleFixedClick = () => {
-    if (fixedClasses === "dropdown") {
-      setFixedClasses("dropdown show");
+    if (fixedClasses === 'dropdown') {
+      setFixedClasses('dropdown show');
     } else {
-      setFixedClasses("dropdown");
+      setFixedClasses('dropdown');
     }
   };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
+  const getActiveRoute = (routes) => {
+    let activeRoute = 'Default Brand Text';
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
@@ -109,12 +109,12 @@ export default function RTL(props) {
     }
     return activeRoute;
   };
-  const getRoutes = routes => {
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/rtl") {
+      if (prop.layout === '/rtl') {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -139,7 +139,7 @@ export default function RTL(props) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"توقيت الإبداعية"}
+        logoText={'توقيت الإبداعية'}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

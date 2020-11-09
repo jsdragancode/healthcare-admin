@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 // material-ui components
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
-import styles from "assets/jss/material-dashboard-pro-react/components/buttonStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/components/buttonStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -40,7 +40,7 @@ const RegularButton = React.forwardRef((props, ref) => {
     [classes.block]: block,
     [classes.link]: link,
     [classes.justIcon]: justIcon,
-    [className]: className
+    [className]: className,
   });
   return (
     <Button {...rest} ref={ref} classes={muiClasses} className={btnClasses}>
@@ -51,27 +51,27 @@ const RegularButton = React.forwardRef((props, ref) => {
 
 RegularButton.propTypes = {
   color: PropTypes.oneOf([
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose",
-    "white",
-    "twitter",
-    "facebook",
-    "google",
-    "linkedin",
-    "pinterest",
-    "youtube",
-    "tumblr",
-    "github",
-    "behance",
-    "dribbble",
-    "reddit",
-    "transparent"
+    'primary',
+    'info',
+    'success',
+    'warning',
+    'danger',
+    'rose',
+    'white',
+    'twitter',
+    'facebook',
+    'google',
+    'linkedin',
+    'pinterest',
+    'youtube',
+    'tumblr',
+    'github',
+    'behance',
+    'dribbble',
+    'reddit',
+    'transparent',
   ]),
-  size: PropTypes.oneOf(["sm", "lg"]),
+  size: PropTypes.oneOf(['sm', 'lg']),
   simple: PropTypes.bool,
   round: PropTypes.bool,
   fullWidth: PropTypes.bool,
@@ -81,7 +81,7 @@ RegularButton.propTypes = {
   justIcon: PropTypes.bool,
   className: PropTypes.string,
   muiClasses: PropTypes.object,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default RegularButton;

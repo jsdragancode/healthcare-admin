@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 // material-ui components
-import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import { makeStyles } from '@material-ui/core/styles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 // core components
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
+import CardHeader from 'components/Card/CardHeader.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/components/customTabsStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/components/customTabsStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -26,7 +26,7 @@ export default function CustomTabs(props) {
   const { headerColor, plainTabs, tabs, title, rtlActive } = props;
   const cardTitle = classNames({
     [classes.cardTitle]: true,
-    [classes.cardTitleRTL]: rtlActive
+    [classes.cardTitleRTL]: rtlActive,
   });
   return (
     <Card plain={plainTabs}>
@@ -37,7 +37,7 @@ export default function CustomTabs(props) {
           onChange={props.changeValue ? props.changeValue : handleChange}
           classes={{
             root: classes.tabsRoot,
-            indicator: classes.displayNone
+            indicator: classes.displayNone,
           }}
           variant="scrollable"
           scrollButtons="auto"
@@ -46,7 +46,7 @@ export default function CustomTabs(props) {
             var icon = {};
             if (prop.tabIcon) {
               icon = {
-                icon: <prop.tabIcon />
+                icon: <prop.tabIcon />,
               };
             }
             return (
@@ -54,7 +54,7 @@ export default function CustomTabs(props) {
                 classes={{
                   root: classes.tabRootButton,
                   selected: classes.tabSelected,
-                  wrapper: classes.tabWrapper
+                  wrapper: classes.tabWrapper,
                 }}
                 key={key}
                 label={prop.tabName}
@@ -77,7 +77,7 @@ export default function CustomTabs(props) {
 }
 
 CustomTabs.defaultProps = {
-  value: 0
+  value: 0,
 };
 
 CustomTabs.propTypes = {
@@ -89,21 +89,21 @@ CustomTabs.propTypes = {
   // so you need to create the changing functionality as well
   changeValue: PropTypes.func,
   headerColor: PropTypes.oneOf([
-    "warning",
-    "success",
-    "danger",
-    "info",
-    "primary",
-    "rose"
+    'warning',
+    'success',
+    'danger',
+    'info',
+    'primary',
+    'rose',
   ]),
   title: PropTypes.string,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       tabName: PropTypes.string.isRequired,
       tabIcon: PropTypes.object,
-      tabContent: PropTypes.node.isRequired
+      tabContent: PropTypes.node.isRequired,
     })
   ),
   rtlActive: PropTypes.bool,
-  plainTabs: PropTypes.bool
+  plainTabs: PropTypes.bool,
 };

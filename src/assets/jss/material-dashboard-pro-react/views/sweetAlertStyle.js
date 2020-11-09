@@ -1,24 +1,24 @@
-import { grayColor } from "assets/jss/material-dashboard-pro-react.js";
+import { grayColor } from 'assets/jss/material-dashboard-pro-react.js';
 
-import buttonStyle from "assets/jss/material-dashboard-pro-react/components/buttonStyle.js";
+import buttonStyle from 'assets/jss/material-dashboard-pro-react/components/buttonStyle.js';
 
 const sweetAlertStyle = {
   cardTitle: {
-    marginTop: "0",
-    marginBottom: "3px",
+    marginTop: '0',
+    marginBottom: '3px',
     color: grayColor[2],
-    fontSize: "18px"
+    fontSize: '18px',
   },
   center: {
-    textAlign: "center"
+    textAlign: 'center',
   },
   right: {
-    textAlign: "right"
+    textAlign: 'right',
   },
   left: {
-    textAlign: "left"
+    textAlign: 'left',
   },
-  ...buttonStyle
+  ...buttonStyle,
 };
 
 export default sweetAlertStyle;

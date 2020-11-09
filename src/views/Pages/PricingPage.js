@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
+import { makeStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
 
 // @material-ui/icons
 // import Weekend from "@material-ui/icons/Weekend";
-import Home from "@material-ui/icons/Home";
-import Business from "@material-ui/icons/Business";
-import AccountBalance from "@material-ui/icons/AccountBalance";
+import Home from '@material-ui/icons/Home';
+import Business from '@material-ui/icons/Business';
+import AccountBalance from '@material-ui/icons/AccountBalance';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/views/pricingPageStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/views/pricingPageStyle.js';
 
 const useStyles = makeStyles(styles);
 

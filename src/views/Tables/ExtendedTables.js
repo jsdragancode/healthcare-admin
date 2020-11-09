@@ -1,39 +1,39 @@
-import React from "react";
+import React from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
+import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
 
 // material-ui icons
-import Assignment from "@material-ui/icons/Assignment";
-import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
-import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
-import Remove from "@material-ui/icons/Remove";
-import Add from "@material-ui/icons/Add";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import Assignment from '@material-ui/icons/Assignment';
+import Person from '@material-ui/icons/Person';
+import Edit from '@material-ui/icons/Edit';
+import Close from '@material-ui/icons/Close';
+import Check from '@material-ui/icons/Check';
+import Remove from '@material-ui/icons/Remove';
+import Add from '@material-ui/icons/Add';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Table from "components/Table/Table.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardHeader from "components/Card/CardHeader.js";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Table from 'components/Table/Table.js';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody.js';
+import CardIcon from 'components/Card/CardIcon.js';
+import CardHeader from 'components/Card/CardHeader.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js';
 
-import product1 from "assets/img/product1.jpg";
-import product2 from "assets/img/product2.jpg";
-import product3 from "assets/img/product3.jpg";
+import product1 from 'assets/img/product1.jpg';
+import product2 from 'assets/img/product2.jpg';
+import product3 from 'assets/img/product3.jpg';
 
 const useStyles = makeStyles(styles);
 
 export default function ExtendedTables() {
   const [checked, setChecked] = React.useState([]);
-  const handleToggle = value => {
+  const handleToggle = (value) => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -46,9 +46,9 @@ export default function ExtendedTables() {
   };
   const classes = useStyles();
   const fillButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
+    { color: 'info', icon: Person },
+    { color: 'success', icon: Edit },
+    { color: 'danger', icon: Close },
   ].map((prop, key) => {
     return (
       <Button color={prop.color} className={classes.actionButton} key={key}>
@@ -57,9 +57,9 @@ export default function ExtendedTables() {
     );
   });
   const simpleButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
+    { color: 'info', icon: Person },
+    { color: 'success', icon: Edit },
+    { color: 'danger', icon: Close },
   ].map((prop, key) => {
     return (
       <Button
@@ -73,15 +73,15 @@ export default function ExtendedTables() {
     );
   });
   const roundButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
+    { color: 'info', icon: Person },
+    { color: 'success', icon: Edit },
+    { color: 'danger', icon: Close },
   ].map((prop, key) => {
     return (
       <Button
         round
         color={prop.color}
-        className={classes.actionButton + " " + classes.actionButtonRound}
+        className={classes.actionButton + ' ' + classes.actionButtonRound}
         key={key}
       >
         <prop.icon className={classes.icon} />
@@ -101,47 +101,47 @@ export default function ExtendedTables() {
           <CardBody>
             <Table
               tableHead={[
-                "#",
-                "Name",
-                "Job Position",
-                "Since",
-                "Salary",
-                "Actions"
+                '#',
+                'Name',
+                'Job Position',
+                'Since',
+                'Salary',
+                'Actions',
               ]}
               tableData={[
                 [
-                  "1",
-                  "Andrew Mike",
-                  "Develop",
-                  "2013",
-                  "€ 99,225",
-                  fillButtons
+                  '1',
+                  'Andrew Mike',
+                  'Develop',
+                  '2013',
+                  '€ 99,225',
+                  fillButtons,
                 ],
-                ["2", "John Doe", "Design", "2012", "€ 89,241", roundButtons],
-                ["3", "Alex Mike", "Design", "2010", "€ 92,144", simpleButtons],
+                ['2', 'John Doe', 'Design', '2012', '€ 89,241', roundButtons],
+                ['3', 'Alex Mike', 'Design', '2010', '€ 92,144', simpleButtons],
                 [
-                  "4",
-                  "Mike Monday",
-                  "Marketing",
-                  "2013",
-                  "€ 49,990",
-                  roundButtons
+                  '4',
+                  'Mike Monday',
+                  'Marketing',
+                  '2013',
+                  '€ 49,990',
+                  roundButtons,
                 ],
                 [
-                  "5",
-                  "Paul Dickens",
-                  "Communication",
-                  "2015",
-                  "€ 69,201",
-                  fillButtons
-                ]
+                  '5',
+                  'Paul Dickens',
+                  'Communication',
+                  '2015',
+                  '€ 69,201',
+                  fillButtons,
+                ],
               ]}
               customCellClasses={[classes.center, classes.right, classes.right]}
               customClassesForCells={[0, 4, 5]}
               customHeadCellClasses={[
                 classes.center,
                 classes.right,
-                classes.right
+                classes.right,
               ]}
               customHeadClassesForCells={[0, 4, 5]}
             />
@@ -160,17 +160,17 @@ export default function ExtendedTables() {
             <Table
               striped
               tableHead={[
-                "#",
-                "",
-                "Product Name",
-                "Type",
-                "Qty",
-                "Price",
-                "Amount"
+                '#',
+                '',
+                'Product Name',
+                'Type',
+                'Qty',
+                'Price',
+                'Amount',
               ]}
               tableData={[
                 [
-                  "1",
+                  '1',
                   <Checkbox
                     key="key"
                     className={classes.positionAbsolute}
@@ -180,17 +180,17 @@ export default function ExtendedTables() {
                     icon={<Check className={classes.uncheckedIcon} />}
                     classes={{
                       checked: classes.checked,
-                      root: classes.checkRoot
+                      root: classes.checkRoot,
                     }}
                   />,
-                  "Moleskine Agenda",
-                  "Office",
-                  "25",
-                  "€ 49",
-                  "€ 1,225"
+                  'Moleskine Agenda',
+                  'Office',
+                  '25',
+                  '€ 49',
+                  '€ 1,225',
                 ],
                 [
-                  "2",
+                  '2',
                   <Checkbox
                     key="key"
                     className={classes.positionAbsolute}
@@ -200,17 +200,17 @@ export default function ExtendedTables() {
                     icon={<Check className={classes.uncheckedIcon} />}
                     classes={{
                       checked: classes.checked,
-                      root: classes.checkRoot
+                      root: classes.checkRoot,
                     }}
                   />,
-                  "Stabilo Pen",
-                  "Office",
-                  "30",
-                  "€ 10",
-                  "€ 300"
+                  'Stabilo Pen',
+                  'Office',
+                  '30',
+                  '€ 10',
+                  '€ 300',
                 ],
                 [
-                  "3",
+                  '3',
                   <Checkbox
                     key="key"
                     className={classes.positionAbsolute}
@@ -220,17 +220,17 @@ export default function ExtendedTables() {
                     icon={<Check className={classes.uncheckedIcon} />}
                     classes={{
                       checked: classes.checked,
-                      root: classes.checkRoot
+                      root: classes.checkRoot,
                     }}
                   />,
-                  "A4 Paper Pack",
-                  "Office",
-                  "50",
-                  "€ 10.99",
-                  "€ 109"
+                  'A4 Paper Pack',
+                  'Office',
+                  '50',
+                  '€ 10.99',
+                  '€ 109',
                 ],
                 [
-                  "4",
+                  '4',
                   <Checkbox
                     key="key"
                     className={classes.positionAbsolute}
@@ -240,17 +240,17 @@ export default function ExtendedTables() {
                     icon={<Check className={classes.uncheckedIcon} />}
                     classes={{
                       checked: classes.checked,
-                      root: classes.checkRoot
+                      root: classes.checkRoot,
                     }}
                   />,
-                  "Apple iPad",
-                  "Communication",
-                  "10",
-                  "€ 499.00",
-                  "€ 4,990"
+                  'Apple iPad',
+                  'Communication',
+                  '10',
+                  '€ 499.00',
+                  '€ 4,990',
                 ],
                 [
-                  "5",
+                  '5',
                   <Checkbox
                     key="key"
                     className={classes.positionAbsolute}
@@ -260,23 +260,23 @@ export default function ExtendedTables() {
                     icon={<Check className={classes.uncheckedIcon} />}
                     classes={{
                       checked: classes.checked,
-                      root: classes.checkRoot
+                      root: classes.checkRoot,
                     }}
                   />,
-                  "Apple iPhone",
-                  "Communication",
-                  "10",
-                  "€ 599.00",
-                  "€ 5,999"
+                  'Apple iPhone',
+                  'Communication',
+                  '10',
+                  '€ 599.00',
+                  '€ 5,999',
                 ],
-                { total: true, colspan: "5", amount: "€12,999" }
+                { total: true, colspan: '5', amount: '€12,999' },
               ]}
               customCellClasses={[classes.center, classes.right, classes.right]}
               customClassesForCells={[0, 5, 6]}
               customHeadCellClasses={[
                 classes.center,
                 classes.right,
-                classes.right
+                classes.right,
               ]}
               customHeadClassesForCells={[0, 5, 6]}
             />
@@ -294,14 +294,14 @@ export default function ExtendedTables() {
           <CardBody>
             <Table
               tableHead={[
-                "",
-                "PRODUCT",
-                "COLOR",
-                "SIZE",
-                "PRICE",
-                "QTY",
-                "AMOUNT",
-                ""
+                '',
+                'PRODUCT',
+                'COLOR',
+                'SIZE',
+                'PRICE',
+                'QTY',
+                'AMOUNT',
+                '',
               ]}
               tableData={[
                 [
@@ -317,8 +317,8 @@ export default function ExtendedTables() {
                       by Dolce&amp;Gabbana
                     </small>
                   </span>,
-                  "Red",
-                  "M",
+                  'Red',
+                  'M',
                   <span key="key">
                     <small className={classes.tdNumberSmall}>€</small> 549
                   </span>,
@@ -348,7 +348,7 @@ export default function ExtendedTables() {
                   </span>,
                   <Button simple className={classes.actionButton} key="key">
                     <Close className={classes.icon} />
-                  </Button>
+                  </Button>,
                 ],
                 [
                   <div className={classes.imgContainer} key="key">
@@ -356,13 +356,13 @@ export default function ExtendedTables() {
                   </div>,
                   <span key="key">
                     <a href="#jacket" className={classes.tdNameAnchor}>
-                      Short Pants{" "}
+                      Short Pants{' '}
                     </a>
                     <br />
                     <small className={classes.tdNameSmall}>by Pucci</small>
                   </span>,
-                  "Purple",
-                  "M",
+                  'Purple',
+                  'M',
                   <span key="key">
                     <small className={classes.tdNumberSmall}>€</small> 499
                   </span>,
@@ -392,7 +392,7 @@ export default function ExtendedTables() {
                   </span>,
                   <Button simple className={classes.actionButton} key="key">
                     <Close className={classes.icon} />
-                  </Button>
+                  </Button>,
                 ],
                 [
                   <div className={classes.imgContainer} key="key">
@@ -405,8 +405,8 @@ export default function ExtendedTables() {
                     <br />
                     <small className={classes.tdNameSmall}>by Valentino</small>
                   </span>,
-                  "White",
-                  "XL",
+                  'White',
+                  'XL',
                   <span key="key">
                     <small className={classes.tdNumberSmall}>€</small> 799
                   </span>,
@@ -436,30 +436,30 @@ export default function ExtendedTables() {
                   </span>,
                   <Button simple className={classes.actionButton} key="key">
                     <Close className={classes.icon} />
-                  </Button>
+                  </Button>,
                 ],
                 {
                   total: true,
-                  colspan: "5",
+                  colspan: '5',
                   amount: (
                     <span key="key">
                       <small>€</small>2,346
                     </span>
-                  )
+                  ),
                 },
                 {
                   purchase: true,
-                  colspan: "6",
+                  colspan: '6',
                   col: {
                     colspan: 2,
                     text: (
                       <Button color="info" round>
-                        Complete Purchase{" "}
+                        Complete Purchase{' '}
                         <KeyboardArrowRight className={classes.icon} />
                       </Button>
-                    )
-                  }
-                }
+                    ),
+                  },
+                },
               ]}
               tableShopping
               customHeadCellClasses={[
@@ -468,7 +468,7 @@ export default function ExtendedTables() {
                 classes.description,
                 classes.right,
                 classes.right,
-                classes.right
+                classes.right,
               ]}
               customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
               customCellClasses={[
@@ -476,8 +476,8 @@ export default function ExtendedTables() {
                 classes.customFont,
                 classes.customFont,
                 classes.tdNumber,
-                classes.tdNumber + " " + classes.tdNumberAndButtonGroup,
-                classes.tdNumber
+                classes.tdNumber + ' ' + classes.tdNumberAndButtonGroup,
+                classes.tdNumber,
               ]}
               customClassesForCells={[1, 2, 3, 4, 5, 6]}
             />

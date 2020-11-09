@@ -1,15 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem';
 
-import styles from "assets/jss/material-dashboard-pro-react/components/instructionStyle.js";
+import styles from 'assets/jss/material-dashboard-pro-react/components/instructionStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -18,11 +18,11 @@ export default function Instruction(props) {
   const { title, text, image, className, imageClassName, imageAlt } = props;
   const instructionClasses = cx({
     [classes.instruction]: true,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   const pictureClasses = cx({
     [classes.picture]: true,
-    [imageClassName]: imageClassName !== undefined
+    [imageClassName]: imageClassName !== undefined,
   });
   return (
     <div className={instructionClasses}>
@@ -42,7 +42,7 @@ export default function Instruction(props) {
 }
 
 Instruction.defaultProps = {
-  imageAlt: "..."
+  imageAlt: '...',
 };
 
 Instruction.propTypes = {
@@ -51,5 +51,5 @@ Instruction.propTypes = {
   image: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
   className: PropTypes.string,
-  imageClassName: PropTypes.string
+  imageClassName: PropTypes.string,
 };

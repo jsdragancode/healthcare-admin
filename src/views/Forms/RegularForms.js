@@ -1,45 +1,45 @@
-import React from "react";
+import React from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Radio from "@material-ui/core/Radio";
-import Checkbox from "@material-ui/core/Checkbox";
+import { makeStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Radio from '@material-ui/core/Radio';
+import Checkbox from '@material-ui/core/Checkbox';
 
 // @material-ui/icons
-import MailOutline from "@material-ui/icons/MailOutline";
-import Check from "@material-ui/icons/Check";
-import Clear from "@material-ui/icons/Clear";
-import Contacts from "@material-ui/icons/Contacts";
-import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+import MailOutline from '@material-ui/icons/MailOutline';
+import Check from '@material-ui/icons/Check';
+import Clear from '@material-ui/icons/Clear';
+import Contacts from '@material-ui/icons/Contacts';
+import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardText from "components/Card/CardText.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardBody from "components/Card/CardBody.js";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import CustomInput from 'components/CustomInput/CustomInput.js';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardHeader from 'components/Card/CardHeader.js';
+import CardText from 'components/Card/CardText.js';
+import CardIcon from 'components/Card/CardIcon.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/material-dashboard-pro-react/views/regularFormsStyle";
+import styles from 'assets/jss/material-dashboard-pro-react/views/regularFormsStyle';
 
 const useStyles = makeStyles(styles);
 
 export default function RegularForms() {
   const [checked, setChecked] = React.useState([24, 22]);
-  const [selectedEnabled, setSelectedEnabled] = React.useState("b");
+  const [selectedEnabled, setSelectedEnabled] = React.useState('b');
   const [selectedValue, setSelectedValue] = React.useState(null);
-  const handleChange = event => {
+  const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
-  const handleChangeEnabled = event => {
+  const handleChangeEnabled = (event) => {
     setSelectedEnabled(event.target.value);
   };
-  const handleToggle = value => {
+  const handleToggle = (value) => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -67,21 +67,21 @@ export default function RegularForms() {
                 labelText="Email adress"
                 id="email_adress"
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
                 inputProps={{
-                  type: "email"
+                  type: 'email',
                 }}
               />
               <CustomInput
                 labelText="Password"
                 id="password"
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
                 inputProps={{
-                  type: "password",
-                  autoComplete: "off"
+                  type: 'password',
+                  autoComplete: 'off',
                 }}
               />
               <div className={classes.checkboxAndRadio}>
@@ -94,13 +94,13 @@ export default function RegularForms() {
                       icon={<Check className={classes.uncheckedIcon} />}
                       classes={{
                         checked: classes.checked,
-                        root: classes.checkRoot
+                        root: classes.checkRoot,
                       }}
                     />
                   }
                   classes={{
                     label: classes.label,
-                    root: classes.labelRoot
+                    root: classes.labelRoot,
                   }}
                   label="Subscribe to newsletter"
                 />
@@ -130,10 +130,10 @@ export default function RegularForms() {
                   <CustomInput
                     id="email_adress2"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
-                      type: "email"
+                      type: 'email',
                     }}
                   />
                 </GridItem>
@@ -148,11 +148,11 @@ export default function RegularForms() {
                   <CustomInput
                     id="password2"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
-                      type: "password",
-                      autoComplete: "off"
+                      type: 'password',
+                      autoComplete: 'off',
                     }}
                   />
                 </GridItem>
@@ -171,13 +171,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Remember me"
                     />
@@ -212,10 +212,10 @@ export default function RegularForms() {
                   <CustomInput
                     id="help-text"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
-                      type: "text"
+                      type: 'text',
                     }}
                     helpText="A block of help text that breaks onto a new line."
                   />
@@ -231,11 +231,11 @@ export default function RegularForms() {
                   <CustomInput
                     id="pass"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
-                      type: "password",
-                      autoComplete: "off"
+                      type: 'password',
+                      autoComplete: 'off',
                     }}
                   />
                 </GridItem>
@@ -250,10 +250,10 @@ export default function RegularForms() {
                   <CustomInput
                     id="placeholder"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
-                      placeholder: "placeholder"
+                      placeholder: 'placeholder',
                     }}
                   />
                 </GridItem>
@@ -268,11 +268,11 @@ export default function RegularForms() {
                   <CustomInput
                     id="disabled"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
-                      placeholder: "Disabled",
-                      disabled: true
+                      placeholder: 'Disabled',
+                      disabled: true,
                     }}
                   />
                 </GridItem>
@@ -296,7 +296,7 @@ export default function RegularForms() {
                   <FormLabel
                     className={
                       classes.labelHorizontal +
-                      " " +
+                      ' ' +
                       classes.labelHorizontalRadioCheckbox
                     }
                   >
@@ -307,7 +307,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -322,13 +322,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="First Checkbox"
                     />
@@ -336,7 +336,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -351,13 +351,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Second Checkbox"
                     />
@@ -365,14 +365,14 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
                     <FormControlLabel
                       control={
                         <Radio
-                          checked={selectedValue === "a"}
+                          checked={selectedValue === 'a'}
                           onChange={handleChange}
                           value="a"
                           name="radio button demo"
@@ -389,13 +389,13 @@ export default function RegularForms() {
                           }
                           classes={{
                             checked: classes.radio,
-                            root: classes.radioRoot
+                            root: classes.radioRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="First Radio"
                     />
@@ -403,14 +403,14 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
                     <FormControlLabel
                       control={
                         <Radio
-                          checked={selectedValue === "b"}
+                          checked={selectedValue === 'b'}
                           onChange={handleChange}
                           value="b"
                           name="radio button demo"
@@ -427,13 +427,13 @@ export default function RegularForms() {
                           }
                           classes={{
                             checked: classes.radio,
-                            root: classes.radioRoot
+                            root: classes.radioRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Second Radio"
                     />
@@ -445,7 +445,7 @@ export default function RegularForms() {
                   <FormLabel
                     className={
                       classes.labelHorizontal +
-                      " " +
+                      ' ' +
                       classes.labelHorizontalRadioCheckbox
                     }
                   >
@@ -465,13 +465,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="a"
                     />
@@ -486,13 +486,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="b"
                     />
@@ -507,13 +507,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="c"
                     />
@@ -538,7 +538,7 @@ export default function RegularForms() {
                   <FormLabel
                     className={
                       classes.labelHorizontal +
-                      " " +
+                      ' ' +
                       classes.labelHorizontalRadioCheckbox
                     }
                   >
@@ -549,7 +549,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -564,13 +564,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Unchecked"
                     />
@@ -578,7 +578,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -594,13 +594,13 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Checked"
                     />
@@ -608,7 +608,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -623,14 +623,14 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
                         disabled: classes.disabledCheckboxAndRadio,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Disabled Unchecked"
                     />
@@ -638,7 +638,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -654,14 +654,14 @@ export default function RegularForms() {
                           icon={<Check className={classes.uncheckedIcon} />}
                           classes={{
                             checked: classes.checked,
-                            root: classes.checkRoot
+                            root: classes.checkRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
                         disabled: classes.disabledCheckboxAndRadio,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Disabled Checked"
                     />
@@ -671,14 +671,14 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
                     <FormControlLabel
                       control={
                         <Radio
-                          checked={selectedEnabled === "a"}
+                          checked={selectedEnabled === 'a'}
                           onChange={handleChangeEnabled}
                           value="a"
                           name="radio button enabled"
@@ -695,13 +695,13 @@ export default function RegularForms() {
                           }
                           classes={{
                             checked: classes.radio,
-                            root: classes.radioRoot
+                            root: classes.radioRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="First Radio"
                     />
@@ -709,14 +709,14 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
                     <FormControlLabel
                       control={
                         <Radio
-                          checked={selectedEnabled === "b"}
+                          checked={selectedEnabled === 'b'}
                           onChange={handleChangeEnabled}
                           value="b"
                           name="radio button enabled"
@@ -733,13 +733,13 @@ export default function RegularForms() {
                           }
                           classes={{
                             checked: classes.radio,
-                            root: classes.radioRoot
+                            root: classes.radioRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Second Radio"
                     />
@@ -747,7 +747,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -772,13 +772,13 @@ export default function RegularForms() {
                           classes={{
                             checked: classes.radio,
                             disabled: classes.disabledCheckboxAndRadio,
-                            root: classes.radioRoot
+                            root: classes.radioRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Second Radio"
                     />
@@ -786,7 +786,7 @@ export default function RegularForms() {
                   <div
                     className={
                       classes.checkboxAndRadio +
-                      " " +
+                      ' ' +
                       classes.checkboxAndRadioHorizontal
                     }
                   >
@@ -811,13 +811,13 @@ export default function RegularForms() {
                           classes={{
                             checked: classes.radio,
                             disabled: classes.disabledCheckboxAndRadio,
-                            root: classes.radioRoot
+                            root: classes.radioRoot,
                           }}
                         />
                       }
                       classes={{
                         label: classes.label,
-                        root: classes.labelRoot
+                        root: classes.labelRoot,
                       }}
                       label="Second Radio"
                     />
@@ -835,7 +835,7 @@ export default function RegularForms() {
                     id="success"
                     labelText="Success"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
                       endAdornment: (
@@ -847,7 +847,7 @@ export default function RegularForms() {
                             className={classes.inputAdornmentIconSuccess}
                           />
                         </InputAdornment>
-                      )
+                      ),
                     }}
                     success
                   />
@@ -864,7 +864,7 @@ export default function RegularForms() {
                     id="error"
                     labelText="Error"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
                       endAdornment: (
@@ -874,7 +874,7 @@ export default function RegularForms() {
                         >
                           <Clear className={classes.inputAdornmentIconError} />
                         </InputAdornment>
-                      )
+                      ),
                     }}
                     error
                   />
@@ -892,10 +892,10 @@ export default function RegularForms() {
                       <CustomInput
                         id="md3"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
-                          placeholder: "md={3}"
+                          placeholder: 'md={3}',
                         }}
                       />
                     </GridItem>
@@ -903,10 +903,10 @@ export default function RegularForms() {
                       <CustomInput
                         id="md4"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
-                          placeholder: "md={4}"
+                          placeholder: 'md={4}',
                         }}
                       />
                     </GridItem>
@@ -914,10 +914,10 @@ export default function RegularForms() {
                       <CustomInput
                         id="md5"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
-                          placeholder: "md={5}"
+                          placeholder: 'md={5}',
                         }}
                       />
                     </GridItem>
