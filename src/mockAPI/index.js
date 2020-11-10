@@ -6,6 +6,7 @@ createServer({
     user: Model,
     doctor: Model,
     nurse: Model,
+    van: Model,
   },
   factories: {
     driver: Factory.extend({
@@ -106,6 +107,15 @@ createServer({
         return Math.random() > 0.5 ? 1 : 0;
       },
     }),
+    van: Factory.extend({
+      title(i) {
+        return `van ${i}`;
+      },
+      is_deleted() {
+        // 0 : not-deleted, 1 : deleted
+        return Math.random() > 0.5 ? 1 : 0;
+      },
+    }),
   },
   routes() {
     this.logging = false;
@@ -186,12 +196,37 @@ createServer({
 
       return nurse.update(newAttrs);
     });
+
+    this.get('/vans/', (schema) => {
+      return schema.vans.all();
+    });
+
+    this.post('/vans/', (schema, request) => {
+      let newVan = JSON.parse(request.requestBody);
+
+      return schema.vans.create(newVan);
+    });
+
+    this.delete('/vans/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.vans.find(id).destroy();
+    });
+
+    this.patch('/vans/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let van = schema.vans.find(id);
+
+      return van.update(newAttrs);
+    });
   },
   seeds(server) {
     server.createList('driver', 40);
     server.createList('user', 40);
     server.createList('doctor', 40);
     server.createList('nurse', 40);
+    server.createList('van', 40);
     // server.db.loadData({
     //   drivers: [
     //     {
