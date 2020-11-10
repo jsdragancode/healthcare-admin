@@ -51,7 +51,9 @@ export default function DriversTables() {
   const [newMobileNumber, setNewMobileNumber] = useState('');
   const classes = useStyles();
 
-  const setDriverParam = (full_name_en, full_name_ar, mobile_number) => {
+  const setDriverParam = (info) => {
+    const { full_name_en, full_name_ar, mobile_number } = info;
+
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
     setNewMobileNumber(mobile_number);
@@ -67,14 +69,8 @@ export default function DriversTables() {
             round
             simple
             onClick={() => {
-              setDriverParam(
-                info.full_name_en,
-                info.full_name_ar,
-                info.mobile_number
-              );
-
+              setDriverParam(info);
               setDeleteDriverId(info.id);
-
               setEditModal(true);
             }}
             color="warning"
@@ -126,7 +122,6 @@ export default function DriversTables() {
       .then((res) => {
         // console.log('post', res.data.driver);
         setData([...data, makeTableRow(res.data.driver)]);
-        setDriverParam('', '', '');
         setAddModal(false);
       });
   };
@@ -146,7 +141,6 @@ export default function DriversTables() {
             prop.id === deleteDriverId ? makeTableRow(res.data.driver) : prop
           )
         );
-        setDriverParam('', '', '');
         setEditModal(false);
       });
   };
@@ -168,7 +162,11 @@ export default function DriversTables() {
                 <Button
                   color="primary"
                   onClick={() => {
-                    setDriverParam('', '', '');
+                    setDriverParam({
+                      full_name_en: '',
+                      full_name_ar: '',
+                      mobile_number: '',
+                    });
 
                     setAddModal(true);
                   }}

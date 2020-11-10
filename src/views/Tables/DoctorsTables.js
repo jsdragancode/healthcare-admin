@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-// react component plugin for creating a beautiful datetime dropdown picker
-import Datetime from 'react-datetime';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,18 +9,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-
 // @material-ui/icons
-import Group from '@material-ui/icons/Group';
+import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
-
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -35,12 +25,8 @@ import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
-import customSelectStyle from '../../assets/jss/material-dashboard-pro-react/customSelectStyle.js';
-import customCheckboxRadioSwitch from 'assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js';
 
 const styles = {
-  ...customSelectStyle,
-  ...customCheckboxRadioSwitch,
   cardIconTitle: {
     ...cardTitle,
     marginTop: '15px',
@@ -54,30 +40,49 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function UsersTables() {
+export default function DoctorsTables() {
   const [data, setData] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
-  const [simpleSelect, setSimpleSelect] = useState('');
   const [editModal, setEditModal] = useState(false);
-  const [deleteDriverId, setDeleteDriverId] = useState(null);
+  const [selectedDoctorId, setSelectedDoctorId] = useState(null);
+
   const [newFullNameEn, setNewFullNameEn] = useState('');
   const [newFullNameAr, setNewFullNameAr] = useState('');
+  const [newDetailsEn, setNewDetailsEn] = useState('');
+  const [newDetailsAr, setNewDetailsAr] = useState('');
+  const [newImageUrl, setNewImageUrl] = useState('');
   const [newMobileNumber, setNewMobileNumber] = useState('');
-  const [checkedA, setCheckedA] = React.useState(true);
+  const [newTeamOrderNo, setNewTeamOrderNo] = useState('');
+  const [newIsActive, setNewIsActive] = useState('');
 
   const classes = useStyles();
 
-  const setDriverParam = (full_name_en, full_name_ar, mobile_number) => {
+  const setDoctorParam = (info) => {
+    const {
+      full_name_en,
+      full_name_ar,
+      details_en,
+      details_ar,
+      image_url,
+      mobile_number,
+      team_order_no,
+      is_active,
+    } = info;
+
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
+    setNewDetailsEn(details_en);
+    setNewDetailsAr(details_ar);
+    setNewImageUrl(image_url);
     setNewMobileNumber(mobile_number);
+    setNewTeamOrderNo(team_order_no);
+    setNewIsActive(is_active);
   };
 
   const makeTableRow = (info) => {
     return {
       ...info,
-      address: `${info.default_address_line_1} ${info.default_address_line_2} ${info.default_city}`,
       actions: (
         <div className="actions-right">
           <Button
@@ -85,14 +90,8 @@ export default function UsersTables() {
             round
             simple
             onClick={() => {
-              setDriverParam(
-                info.full_name_en,
-                info.full_name_ar,
-                info.mobile_number
-              );
-
-              setDeleteDriverId(info.id);
-
+              setDoctorParam(info);
+              setSelectedDoctorId(info.id);
               setEditModal(true);
             }}
             color="warning"
@@ -105,7 +104,7 @@ export default function UsersTables() {
             round
             simple
             onClick={() => {
-              setDeleteDriverId(info.id);
+              setSelectedDoctorId(info.id);
               setDeleteModal(true);
             }}
             color="danger"
@@ -118,14 +117,14 @@ export default function UsersTables() {
     };
   };
 
-  const getUser = () => {
-    axios.get('/api/users/').then((res) => {
-      // console.log('get', res.data.users);
-      setData(res.data.users.map((prop) => makeTableRow(prop)));
+  const getDriver = () => {
+    axios.get('/api/doctors/').then((res) => {
+      // console.log('get', res.data.doctors);
+      setData(res.data.doctors.map((prop) => makeTableRow(prop)));
     });
   };
 
-  useEffect(getUser, []);
+  useEffect(getDriver, []);
 
   const delteDriver = (deleteId) => {
     axios.delete(`/api/drivers/${deleteId}`).then(() => {
@@ -134,43 +133,59 @@ export default function UsersTables() {
     });
   };
 
-  const addDriver = () => {
+  const addDoctor = () => {
     axios
-      .post('/api/drivers/', {
+      .post('/api/doctors/', {
         full_name_en: newFullNameEn,
         full_name_ar: newFullNameAr,
+        details_en: newDetailsEn,
+        details_ar: newDetailsAr,
+        image_url: newImageUrl,
         mobile_number: newMobileNumber,
+        team_order_no: newTeamOrderNo,
+        is_active: newIsActive,
       })
       .then((res) => {
-        // console.log('post', res.data.driver);
-        setData([...data, makeTableRow(res.data.driver)]);
-        setDriverParam('', '', '');
+        // console.log('post', res.data.doctor);
+        setData([...data, makeTableRow(res.data.doctor)]);
         setAddModal(false);
       });
   };
 
-  const updateDriver = () => {
+  const updateDoctor = () => {
     axios
-      .patch(`/api/drivers/${deleteDriverId}`, {
+      .patch(`/api/doctors/${selectedDoctorId}`, {
         full_name_en: newFullNameEn,
         full_name_ar: newFullNameAr,
+        details_en: newDetailsEn,
+        details_ar: newDetailsAr,
+        image_url: newImageUrl,
         mobile_number: newMobileNumber,
+        team_order_no: newTeamOrderNo,
+        is_active: newIsActive,
       })
       .then((res) => {
-        // console.log('patch', res.data.driver);
+        // console.log('patch', res.data.doctor);
 
         setData(
           data.map((prop) =>
-            prop.id === deleteDriverId ? makeTableRow(res.data.driver) : prop
+            prop.id === selectedDoctorId ? makeTableRow(res.data.doctor) : prop
           )
         );
-        setDriverParam('', '', '');
+
+        setDoctorParam({
+          full_name_en: '',
+          full_name_ar: '',
+          details_en: '',
+          details_ar: '',
+          image_url: '',
+          mobile_number: '',
+          team_order_no: '',
+          is_active: '',
+        });
+
         setEditModal(false);
       });
-  };
-
-  const handleSimple = (event) => {
-    setSimpleSelect(event.target.value);
   };
 
   return (
@@ -180,9 +195,9 @@ export default function UsersTables() {
         <Card>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
-              <Group />
+              <DriveEta />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Users</h4>
+            <h4 className={classes.cardIconTitle}>Doctors</h4>
           </CardHeader>
           <CardBody>
             <GridContainer justify="flex-end">
@@ -190,48 +205,57 @@ export default function UsersTables() {
                 <Button
                   color="primary"
                   onClick={() => {
-                    setDriverParam('', '', '');
+                    setDoctorParam({
+                      full_name_en: '',
+                      full_name_ar: '',
+                      details_en: '',
+                      details_ar: '',
+                      image_url: '',
+                      mobile_number: '',
+                      team_order_no: '',
+                      is_active: '',
+                    });
 
                     setAddModal(true);
                   }}
                 >
-                  Add User
+                  Add Doctor
                 </Button>
               </GridItem>
             </GridContainer>
             <ReactTableBottomPagination
               columns={[
                 {
-                  Header: 'Full Name',
-                  accessor: 'full_name',
+                  Header: 'Full Name EN',
+                  accessor: 'full_name_en',
                 },
                 {
-                  Header: 'Gender',
-                  accessor: 'gender',
+                  Header: 'Full Name AR',
+                  accessor: 'full_name_ar',
+                },
+                {
+                  Header: 'Details EN',
+                  accessor: 'details_en',
+                },
+                {
+                  Header: 'Details AR',
+                  accessor: 'details_ar',
+                },
+                {
+                  Header: 'Image Url',
+                  accessor: 'image_url',
                 },
                 {
                   Header: 'Mobile Number',
                   accessor: 'mobile_number',
                 },
                 {
-                  Header: 'Location Coordinates',
-                  accessor: 'default_location_coordinates',
+                  Header: 'Team Order No',
+                  accessor: 'team_order_no',
                 },
                 {
-                  Header: 'Address',
-                  accessor: 'address',
-                },
-                {
-                  Header: 'Active',
+                  Header: 'Is Active',
                   accessor: 'is_active',
-                },
-                {
-                  Header: 'Firebase Uid',
-                  accessor: 'firebase_uid',
-                },
-                {
-                  Header: 'Registered On',
-                  accessor: 'registered_on',
                 },
                 {
                   Header: 'Actions',
@@ -255,7 +279,7 @@ export default function UsersTables() {
                 id="small-modal-slide-description"
                 className={classes.modalBody + ' ' + classes.modalSmallBody}
               >
-                <h5>Are you sure you want to delete this driver?</h5>
+                <h5>Are you sure you want to delete this doctor?</h5>
               </DialogContent>
               <DialogActions
                 className={
@@ -272,7 +296,7 @@ export default function UsersTables() {
                 <Button
                   onClick={() => {
                     setDeleteModal(false);
-                    delteDriver(deleteDriverId);
+                    delteDriver(selectedDoctorId);
                   }}
                   color="success"
                   simple
@@ -295,7 +319,6 @@ export default function UsersTables() {
               TransitionComponent={Transition}
               keepMounted
               onClose={() => setDeleteModal(false)}
-              scroll="body"
               aria-labelledby="add-driver-dialog-title-modal-title"
               aria-describedby="add-driver-dialog-modal-description"
             >
@@ -304,7 +327,7 @@ export default function UsersTables() {
                 disableTypography
                 className={classes.modalHeader}
               >
-                <h4 className={classes.modalTitle}>Add User</h4>
+                <h4 className={classes.modalTitle}>Add Doctor</h4>
               </DialogTitle>
               <DialogContent
                 id="add-driver-dialog-modal-description"
@@ -312,56 +335,65 @@ export default function UsersTables() {
               >
                 <form>
                   <CustomInput
-                    labelText="Full Name"
-                    id="add_full_name"
+                    labelText="Full Name EN"
+                    id="add_full_name_en"
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
                       type: 'text',
+                      value: newFullNameEn,
+                      onChange: (e) => setNewFullNameEn(e.target.value),
                     }}
                   />
-                  <FormControl fullWidth className={classes.selectFormControl}>
-                    <InputLabel
-                      htmlFor="simple-select"
-                      className={classes.selectLabel}
-                    >
-                      Gender
-                    </InputLabel>
-                    <Select
-                      MenuProps={{
-                        className: classes.selectMenu,
-                      }}
-                      classes={{
-                        select: classes.select,
-                      }}
-                      value={simpleSelect}
-                      onChange={handleSimple}
-                      inputProps={{
-                        name: 'simpleSelect',
-                        id: 'simple-select',
-                      }}
-                    >
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected,
-                        }}
-                        value="2"
-                      >
-                        Male
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected,
-                        }}
-                        value="3"
-                      >
-                        Female
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
+                  <CustomInput
+                    labelText="Full Name AR"
+                    id="add_full_name_ar"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameAr,
+                      onChange: (e) => setNewFullNameAr(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Details EN"
+                    id="add_details_en"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newDetailsEn,
+                      onChange: (e) => setNewDetailsEn(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Details AR"
+                    id="add_details_ar"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newDetailsAr,
+                      onChange: (e) => setNewDetailsAr(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Image Url"
+                    id="add_image_url"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newImageUrl,
+                      onChange: (e) => setNewImageUrl(e.target.value),
+                    }}
+                  />
                   <CustomInput
                     labelText="Mobile Number"
                     id="add_mobile_number"
@@ -375,85 +407,34 @@ export default function UsersTables() {
                     }}
                   />
                   <CustomInput
-                    labelText="Address Line 1"
-                    id="add_address_line_1"
+                    labelText="Team Order No"
+                    id="add_team_order_no"
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
+                      value: newTeamOrderNo,
+                      onChange: (e) => setNewTeamOrderNo(e.target.value),
                     }}
                   />
                   <CustomInput
-                    labelText="Address Line 2"
-                    id="add_address_line_2"
+                    labelText="Is Active"
+                    id="add_is_active"
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
+                      value: newIsActive,
+                      onChange: (e) => setNewIsActive(e.target.value),
                     }}
                   />
-                  <CustomInput
-                    labelText="City"
-                    id="add_city"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
-                    }}
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={checkedA}
-                        onChange={(event) => setCheckedA(event.target.checked)}
-                        value="checkedA"
-                        classes={{
-                          switchBase: classes.switchBase,
-                          checked: classes.switchChecked,
-                          thumb: classes.switchIcon,
-                          track: classes.switchBar,
-                        }}
-                      />
-                    }
-                    classes={{
-                      label: classes.label,
-                    }}
-                    label="Active"
-                  />
-                  <CustomInput
-                    labelText="Firebase Uid"
-                    id="add_firebase_uid"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
-                    }}
-                  />
-                  <InputLabel className={classes.label}>Date Picker</InputLabel>
-                  <br />
-                  <FormControl fullWidth>
-                    <Datetime
-                      timeFormat={false}
-                      inputProps={{ placeholder: 'Registered On' }}
-                    />
-                  </FormControl>
                 </form>
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                <Button onClick={() => addDriver()} color="primary">
+                <Button onClick={() => addDoctor()} color="primary">
                   Add
                 </Button>
               </DialogActions>
@@ -475,7 +456,7 @@ export default function UsersTables() {
                 disableTypography
                 className={classes.modalHeader}
               >
-                <h4 className={classes.modalTitle}>Edit Driver</h4>
+                <h4 className={classes.modalTitle}>Edit Doctor</h4>
               </DialogTitle>
               <DialogContent
                 id="edit-driver-dialog-modal-description"
@@ -507,6 +488,42 @@ export default function UsersTables() {
                     }}
                   />
                   <CustomInput
+                    labelText="Details EN"
+                    id="edit_details_en"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newDetailsEn,
+                      onChange: (e) => setNewDetailsEn(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Details AR"
+                    id="edit_details_ar"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newDetailsAr,
+                      onChange: (e) => setNewDetailsAr(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Image Url"
+                    id="edit_image_url"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newImageUrl,
+                      onChange: (e) => setNewImageUrl(e.target.value),
+                    }}
+                  />
+                  <CustomInput
                     labelText="Mobile Number"
                     id="edit_mobile_number"
                     formControlProps={{
@@ -518,11 +535,35 @@ export default function UsersTables() {
                       onChange: (e) => setNewMobileNumber(e.target.value),
                     }}
                   />
+                  <CustomInput
+                    labelText="Team Order No"
+                    id="edit_team_order_no"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newTeamOrderNo,
+                      onChange: (e) => setNewTeamOrderNo(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Is Active"
+                    id="edit_is_active"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newIsActive,
+                      onChange: (e) => setNewIsActive(e.target.value),
+                    }}
+                  />
                 </form>
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                <Button onClick={() => updateDriver()} color="primary">
+                <Button onClick={() => updateDoctor()} color="primary">
                   Update
                 </Button>
               </DialogActions>

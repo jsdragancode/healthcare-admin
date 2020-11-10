@@ -30,6 +30,8 @@ import Wizard from 'views/Forms/Wizard.js';
 
 import DriversTables from './views/Tables/DriversTables';
 import UsersTables from './views/Tables/UsersTables';
+import DoctorsTables from './views/Tables/DoctorsTables';
+import NursesTables from './views/Tables/NursesTables';
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
@@ -58,6 +60,22 @@ var dashRoutes = [
     rtlName: 'Users',
     icon: Group,
     component: UsersTables,
+    layout: '/admin',
+  },
+  {
+    path: '/doctors',
+    name: 'Doctors',
+    rtlName: 'Doctors',
+    icon: Group,
+    component: DoctorsTables,
+    layout: '/admin',
+  },
+  {
+    path: '/nurses',
+    name: 'Nurses',
+    rtlName: 'Nurses',
+    icon: Group,
+    component: NursesTables,
     layout: '/admin',
   },
   {
