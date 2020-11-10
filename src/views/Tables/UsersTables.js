@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+// react component plugin for creating a beautiful datetime dropdown picker
+import Datetime from 'react-datetime';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,10 +11,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
 // @material-ui/icons
 import Group from '@material-ui/icons/Group';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -25,8 +35,12 @@ import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
+import customSelectStyle from '../../assets/jss/material-dashboard-pro-react/customSelectStyle.js';
+import customCheckboxRadioSwitch from 'assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js';
 
 const styles = {
+  ...customSelectStyle,
+  ...customCheckboxRadioSwitch,
   cardIconTitle: {
     ...cardTitle,
     marginTop: '15px',
@@ -44,11 +58,14 @@ export default function UsersTables() {
   const [data, setData] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
+  const [simpleSelect, setSimpleSelect] = useState('');
   const [editModal, setEditModal] = useState(false);
   const [deleteDriverId, setDeleteDriverId] = useState(null);
   const [newFullNameEn, setNewFullNameEn] = useState('');
   const [newFullNameAr, setNewFullNameAr] = useState('');
   const [newMobileNumber, setNewMobileNumber] = useState('');
+  const [checkedA, setCheckedA] = React.useState(true);
+
   const classes = useStyles();
 
   const setDriverParam = (full_name_en, full_name_ar, mobile_number) => {
@@ -102,7 +119,7 @@ export default function UsersTables() {
 
   const getUser = () => {
     axios.get('/api/users/').then((res) => {
-      console.log('get', res.data.users);
+      // console.log('get', res.data.users);
       setData(res.data.users.map((prop) => makeTableRow(prop)));
     });
   };
@@ -149,6 +166,10 @@ export default function UsersTables() {
         setDriverParam('', '', '');
         setEditModal(false);
       });
+  };
+
+  const handleSimple = (event) => {
+    setSimpleSelect(event.target.value);
   };
 
   return (
@@ -289,7 +310,7 @@ export default function UsersTables() {
                 disableTypography
                 className={classes.modalHeader}
               >
-                <h4 className={classes.modalTitle}>Add Driver</h4>
+                <h4 className={classes.modalTitle}>Add User</h4>
               </DialogTitle>
               <DialogContent
                 id="add-driver-dialog-modal-description"
@@ -297,29 +318,56 @@ export default function UsersTables() {
               >
                 <form>
                   <CustomInput
-                    labelText="Full Name EN"
-                    id="add_full_name_en"
+                    labelText="Full Name"
+                    id="add_full_name"
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameEn,
-                      onChange: (e) => setNewFullNameEn(e.target.value),
                     }}
                   />
-                  <CustomInput
-                    labelText="Full Name AR"
-                    id="add_full_name_ar"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
-                    }}
-                  />
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Gender
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu,
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      value={simpleSelect}
+                      onChange={handleSimple}
+                      inputProps={{
+                        name: 'simpleSelect',
+                        id: 'simple-select',
+                      }}
+                    >
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="2"
+                      >
+                        Male
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="3"
+                      >
+                        Female
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
                   <CustomInput
                     labelText="Mobile Number"
                     id="add_mobile_number"
@@ -332,6 +380,81 @@ export default function UsersTables() {
                       onChange: (e) => setNewMobileNumber(e.target.value),
                     }}
                   />
+                  <CustomInput
+                    labelText="Address Line 1"
+                    id="add_address_line_1"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameAr,
+                      onChange: (e) => setNewFullNameAr(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Address Line 2"
+                    id="add_address_line_2"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameAr,
+                      onChange: (e) => setNewFullNameAr(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="City"
+                    id="add_city"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameAr,
+                      onChange: (e) => setNewFullNameAr(e.target.value),
+                    }}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={checkedA}
+                        onChange={(event) => setCheckedA(event.target.checked)}
+                        value="checkedA"
+                        classes={{
+                          switchBase: classes.switchBase,
+                          checked: classes.switchChecked,
+                          thumb: classes.switchIcon,
+                          track: classes.switchBar,
+                        }}
+                      />
+                    }
+                    classes={{
+                      label: classes.label,
+                    }}
+                    label="Active"
+                  />
+                  <CustomInput
+                    labelText="Firebase Uid"
+                    id="add_firebase_uid"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: newFullNameAr,
+                      onChange: (e) => setNewFullNameAr(e.target.value),
+                    }}
+                  />
+                  <InputLabel className={classes.label}>Date Picker</InputLabel>
+                  <br />
+                  <FormControl fullWidth>
+                    <Datetime
+                      timeFormat={false}
+                      inputProps={{ placeholder: 'Registered On' }}
+                    />
+                  </FormControl>
                 </form>
               </DialogContent>
               <DialogActions>
