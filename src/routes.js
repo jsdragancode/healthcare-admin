@@ -15,7 +15,6 @@ import Notifications from './views/Components/Notifications.js';
 import Panels from 'views/Components/Panels.js';
 import PricingPage from 'views/Pages/PricingPage.js';
 import RTLSupport from 'views/Pages/RTLSupport.js';
-import DriversTables from './views/Tables/DriversTables.js';
 import ReactTables from './views/Tables/ReactTables.js';
 import RegisterPage from 'views/Pages/RegisterPage.js';
 import RegularForms from 'views/Forms/RegularForms.js';
@@ -29,9 +28,13 @@ import VectorMap from 'views/Maps/VectorMap.js';
 import Widgets from 'views/Widgets/Widgets.js';
 import Wizard from 'views/Forms/Wizard.js';
 
+import DriversTables from './views/Tables/DriversTables';
+import UsersTables from './views/Tables/UsersTables';
+
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
 import DriveEta from '@material-ui/icons/DriveEta';
+import Group from '@material-ui/icons/Group';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRange from '@material-ui/icons/DateRange';
 import GridOn from '@material-ui/icons/GridOn';
@@ -47,6 +50,14 @@ var dashRoutes = [
     rtlName: 'Drivers',
     icon: DriveEta,
     component: DriversTables,
+    layout: '/admin',
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    rtlName: 'Users',
+    icon: Group,
+    component: UsersTables,
     layout: '/admin',
   },
   {

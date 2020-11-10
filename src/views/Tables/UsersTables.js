@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
 // @material-ui/icons
-import DriveEta from '@material-ui/icons/DriveEta';
+import Group from '@material-ui/icons/Group';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 // core components
@@ -40,7 +40,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function DriversTables() {
+export default function UsersTables() {
   const [data, setData] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
@@ -100,14 +100,14 @@ export default function DriversTables() {
     };
   };
 
-  const getDriver = () => {
-    axios.get('/api/drivers/').then((res) => {
-      // console.log('get', res.data.drivers);
-      setData(res.data.drivers.map((prop) => makeTableRow(prop)));
+  const getUser = () => {
+    axios.get('/api/users/').then((res) => {
+      console.log('get', res.data.users);
+      setData(res.data.users.map((prop) => makeTableRow(prop)));
     });
   };
 
-  useEffect(getDriver, []);
+  useEffect(getUser, []);
 
   const delteDriver = (deleteId) => {
     axios.delete(`/api/drivers/${deleteId}`).then(() => {
@@ -158,9 +158,9 @@ export default function DriversTables() {
         <Card>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
-              <DriveEta />
+              <Group />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Drivers</h4>
+            <h4 className={classes.cardIconTitle}>Users</h4>
           </CardHeader>
           <CardBody>
             <GridContainer justify="flex-end">
@@ -173,23 +173,51 @@ export default function DriversTables() {
                     setAddModal(true);
                   }}
                 >
-                  Add Driver
+                  Add User
                 </Button>
               </GridItem>
             </GridContainer>
             <ReactTableBottomPagination
               columns={[
                 {
-                  Header: 'Full Name EN',
-                  accessor: 'full_name_en',
+                  Header: 'Full Name',
+                  accessor: 'full_name',
                 },
                 {
-                  Header: 'Full Name AR',
-                  accessor: 'full_name_ar',
+                  Header: 'Gender',
+                  accessor: 'gender',
                 },
                 {
                   Header: 'Mobile Number',
                   accessor: 'mobile_number',
+                },
+                {
+                  Header: 'Location Coordinates',
+                  accessor: 'default_location_coordinates',
+                },
+                {
+                  Header: 'Address Line 1',
+                  accessor: 'default_address_line_1',
+                },
+                {
+                  Header: 'Address Line 2',
+                  accessor: 'default_address_line_2',
+                },
+                {
+                  Header: 'City',
+                  accessor: 'default_city',
+                },
+                {
+                  Header: 'Active',
+                  accessor: 'is_active',
+                },
+                {
+                  Header: 'Firebase Uid',
+                  accessor: 'firebase_uid',
+                },
+                {
+                  Header: 'Registered On',
+                  accessor: 'registered_on',
                 },
                 {
                   Header: 'Actions',
