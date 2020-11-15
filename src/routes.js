@@ -37,7 +37,11 @@ import TrackVansTables from './views/Tables/TrackVansTables';
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
 import DriveEta from '@material-ui/icons/DriveEta';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 import Group from '@material-ui/icons/Group';
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import AssignmentInd from '@material-ui/icons/AssignmentInd';
+import LocalHospital from '@material-ui/icons/LocalHospital';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -61,7 +65,7 @@ var dashRoutes = [
     path: '/users',
     name: 'Users',
     rtlName: 'Users',
-    icon: Group,
+    icon: RecordVoiceOverIcon,
     component: UsersTables,
     layout: '/admin',
   },
@@ -69,7 +73,7 @@ var dashRoutes = [
     path: '/doctors',
     name: 'Doctors',
     rtlName: 'Doctors',
-    icon: Group,
+    icon: LocalHospital,
     component: DoctorsTables,
     layout: '/admin',
   },
@@ -77,7 +81,7 @@ var dashRoutes = [
     path: '/nurses',
     name: 'Nurses',
     rtlName: 'Nurses',
-    icon: Group,
+    icon: AssignmentInd,
     component: NursesTables,
     layout: '/admin',
   },
