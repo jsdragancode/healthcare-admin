@@ -10,6 +10,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -180,7 +181,7 @@ export default function UsersTables() {
         <Card>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
-              <Group />
+              <RecordVoiceOverIcon />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Users</h4>
           </CardHeader>

@@ -13,6 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+import LocalHospital from '@material-ui/icons/LocalHospital';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -195,7 +196,7 @@ export default function DoctorsTables() {
         <Card>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
-              <DriveEta />
+              <LocalHospital />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Doctors</h4>
           </CardHeader>

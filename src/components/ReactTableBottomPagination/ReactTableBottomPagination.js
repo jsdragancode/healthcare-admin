@@ -82,8 +82,8 @@ function Table({ columns, data }) {
           const rowValue = row.values[id];
           return rowValue !== undefined
             ? String(rowValue)
-                .toLowerCase()
-                .startsWith(String(filterValue).toLowerCase())
+              .toLowerCase()
+              .startsWith(String(filterValue).toLowerCase())
             : true;
         });
       }
@@ -132,7 +132,7 @@ function Table({ columns, data }) {
   // it for this use case
   // const firstPageRows = rows.slice(0, 10);
   let pageSelectData = Array.apply(null, Array(pageOptions.length)).map(
-    function() {}
+    function () { }
   );
   let numberOfRowsData = [5, 10, 20, 25, 50, 100];
   return (
@@ -160,8 +160,8 @@ function Table({ columns, data }) {
                       {headerGroup.headers.length - 1 === key
                         ? null
                         : column.canFilter
-                        ? column.render("Filter")
-                        : null}
+                          ? column.render("Filter")
+                          : null}
                     </div>
                   </th>
                 ))}

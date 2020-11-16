@@ -40,7 +40,7 @@ import DriveEta from '@material-ui/icons/DriveEta';
 import PersonAdd from '@material-ui/icons/PersonAdd';
 import Group from '@material-ui/icons/Group';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
-import AssignmentInd from '@material-ui/icons/AssignmentInd';
+import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 import LocalHospital from '@material-ui/icons/LocalHospital';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 
@@ -81,7 +81,7 @@ var dashRoutes = [
     path: '/nurses',
     name: 'Nurses',
     rtlName: 'Nurses',
-    icon: AssignmentInd,
+    icon: LocalPharmacy,
     component: NursesTables,
     layout: '/admin',
   },

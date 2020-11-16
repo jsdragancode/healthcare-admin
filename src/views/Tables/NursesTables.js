@@ -13,6 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -183,7 +184,7 @@ export default function NursesTables() {
         <Card>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
-              <DriveEta />
+              <LocalPharmacy />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Nurses</h4>
           </CardHeader>

@@ -13,6 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+import AirportShuttle from '@material-ui/icons/AirportShuttle';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -156,7 +157,7 @@ export default function TrackVansTables() {
         <Card>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
-              <DriveEta />
+              <AirportShuttle />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Track Vans</h4>
           </CardHeader>
