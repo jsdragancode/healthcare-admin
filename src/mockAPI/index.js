@@ -227,24 +227,5 @@ createServer({
     server.createList('doctor', 40);
     server.createList('nurse', 40);
     server.createList('van', 40);
-    // server.db.loadData({
-    //   drivers: [
-    //     {
-    //       full_name_en: 'AAA',
-    //       full_name_ar: '111',
-    //       mobile_number: '123',
-    //     },
-    //     {
-    //       full_name_en: 'BBB',
-    //       full_name_ar: '222',
-    //       mobile_number: '456',
-    //     },
-    //     {
-    //       full_name_en: 'CCC',
-    //       full_name_ar: '333',
-    //       mobile_number: '789',
-    //     },
-    //   ],
-    // });
   },
 });
