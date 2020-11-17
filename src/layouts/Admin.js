@@ -32,7 +32,7 @@ export default function Dashboard(props) {
   const [bgColor, setBgColor] = React.useState('black');
   // const [hasImage, setHasImage] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState('dropdown');
-  const [logo, setLogo] = React.useState(require('assets/img/logo-white.svg'));
+  const [logo, setLogo] = React.useState(require('assets/img/serenia_logo.png'));
   // styles
   const classes = useStyles();
   const mainPanelClasses =
@@ -144,7 +144,7 @@ export default function Dashboard(props) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={'Creative Tim'}
+        logoText={'Serenia'}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
@@ -173,13 +173,13 @@ export default function Dashboard(props) {
             </div>
           </div>
         ) : (
-          <div className={classes.map}>
-            <Switch>
-              {getRoutes(routes)}
-              <Redirect from="/admin" to="/admin/dashboard" />
-            </Switch>
-          </div>
-        )}
+            <div className={classes.map}>
+              <Switch>
+                {getRoutes(routes)}
+                <Redirect from="/admin" to="/admin/dashboard" />
+              </Switch>
+            </div>
+          )}
         {getRoute() ? <Footer fluid /> : null}
         <FixedPlugin
           handleImageClick={handleImageClick}

@@ -180,13 +180,13 @@ class Sidebar extends React.Component {
                 typeof prop.icon === "string" ? (
                   <Icon className={itemIcon}>{prop.icon}</Icon>
                 ) : (
-                  <prop.icon className={itemIcon} />
-                )
+                    <prop.icon className={itemIcon} />
+                  )
               ) : (
-                <span className={collapseItemMini}>
-                  {rtlActive ? prop.rtlMini : prop.mini}
-                </span>
-              )}
+                  <span className={collapseItemMini}>
+                    {rtlActive ? prop.rtlMini : prop.mini}
+                  </span>
+                )}
               <ListItemText
                 primary={rtlActive ? prop.rtlName : prop.name}
                 secondary={
@@ -276,13 +276,13 @@ class Sidebar extends React.Component {
               typeof prop.icon === "string" ? (
                 <Icon className={itemIcon}>{prop.icon}</Icon>
               ) : (
-                <prop.icon className={itemIcon} />
-              )
+                  <prop.icon className={itemIcon} />
+                )
             ) : (
-              <span className={collapseItemMini}>
-                {rtlActive ? prop.rtlMini : prop.mini}
-              </span>
-            )}
+                <span className={collapseItemMini}>
+                  {rtlActive ? prop.rtlMini : prop.mini}
+                </span>
+              )}
             <ListItemText
               primary={rtlActive ? prop.rtlName : prop.name}
               disableTypography={true}
@@ -468,15 +468,14 @@ class Sidebar extends React.Component {
     var brand = (
       <div className={logoClasses}>
         <a
-          href="https://www.creative-tim.com?ref=mdpr-sidebar"
-          target="_blank"
+          href="../../../admin/dashboard"
+          // target="_blank"
           className={logoMini}
         >
           <img src={logo} alt="logo" className={classes.img} />
         </a>
         <a
-          href="https://www.creative-tim.com?ref=mdpr-sidebar"
-          target="_blank"
+          href="../../../admin/dashboard"
           className={logoNormal}
         >
           {logoText}
