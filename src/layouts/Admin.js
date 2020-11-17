@@ -74,10 +74,10 @@ export default function Dashboard(props) {
   const handleBgColorClick = (bgColor) => {
     switch (bgColor) {
       case 'white':
-        setLogo(require('assets/img/logo.svg'));
+        setLogo(require('assets/img/serenia_logo.png'));
         break;
       default:
-        setLogo(require('assets/img/logo-white.svg'));
+        setLogo(require('assets/img/serenia_logo.png'));
         break;
     }
     setBgColor(bgColor);

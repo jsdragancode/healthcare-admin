@@ -109,8 +109,8 @@ material-dashboard-pro-react
     │   ├── img
     │   │   ├── faces
     │   │   ├── flags
-    │   │   ├── logo-white.svg
-    │   │   └── logo.svg
+    │   │   ├── serenia_logo.png
+    │   │   └── serenia_logo.png
     │   ├── jss
     │   │   ├── material-dashboard-pro-react
     │   │   │   ├── components
