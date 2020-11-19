@@ -164,6 +164,26 @@ createServer({
       return schema.users.all();
     });
 
+    this.post('/users/', (schema, request) => {
+      let newUser = JSON.parse(request.requestBody);
+
+      return schema.users.create(newUser);
+    });
+
+    this.delete('/users/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.users.find(id).destroy();
+    });
+
+    this.patch('/users/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let user = schema.users.find(id);
+
+      return user.update(newAttrs);
+    });
+
     this.get('/doctors/', (schema) => {
       return schema.doctors.all();
     });

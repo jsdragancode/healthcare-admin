@@ -115,11 +115,6 @@ export default function LabResultTables() {
     };
 
     const addLabResult = () => {
-        console.log("1.", newBookingId);
-        console.log("2.", newFullNameEn);
-        console.log("3.", newFullNameAr);
-        console.log("4.", newResult);
-
         axios
             .post('/api/labresults/', {
                 booking_id: newBookingId,

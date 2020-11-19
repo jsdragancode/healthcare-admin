@@ -69,6 +69,8 @@ export default function UsersTables() {
   const [location, setLocation] = useState('');
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
+  const [city, setCity] = useState('');
+  const [active, setActive] = useState('');
   const [firebaseURL, setFirebaseURL] = useState('');
   const [registeredOn, setRegisteredOn] = useState('');
   const [checkedA, setCheckedA] = React.useState(true);
@@ -78,24 +80,28 @@ export default function UsersTables() {
 
   const setUserParam = (info) => {
     const {
-      full_name_en,
+      full_name,
       full_name_ar,
       gender,
       mobile_number,
       default_location_coordinates,
       default_address_line_1,
       default_address_line_2,
+      default_city,
+      is_active,
       firebase_uid,
       registered_on,
     } = info;
 
-    setNewFullNameEn(full_name_en);
+    setNewFullNameEn(full_name);
     setNewFullNameAr(full_name_ar);
     setNewMobileNumber(mobile_number);
     setGender(gender);
     setLocation(default_location_coordinates);
     setAddress1(default_address_line_1);
     setAddress2(default_address_line_2);
+    setCity(default_city);
+    setActive(is_active);
     setFirebaseURL(firebase_uid);
     setRegisteredOn(registered_on);
   };
@@ -156,35 +162,58 @@ export default function UsersTables() {
 
   const addUser = () => {
     axios
-      .post('/api/drivers/', {
-        full_name_en: newFullNameEn,
-        full_name_ar: newFullNameAr,
+      .post('/api/users/', {
+        full_name: newFullNameEn,
+        gender: gender,
         mobile_number: newMobileNumber,
+        default_location_coordinates: location,
+        default_address_line_1: address1,
+        default_address_line_2: address2,
+        default_city: city,
+        is_active: active,
+        firebase_uid: firebaseURL,
+        registered_on: registeredOn,
       })
       .then((res) => {
-        // console.log('post', res.data.driver);
-        setData([...data, makeTableRow(res.data.driver)]);
-        setUserParam('', '', '');
+        setData([...data, makeTableRow(res.data.user)]);
+        setUserParam({
+          full_name: '',
+          full_name_ar: '',
+          gender: '',
+          mobile_number: '',
+          default_location_coordinates: '',
+          default_address_line_1: '',
+          default_address_line_2: '',
+          default_city: '',
+          is_active: '',
+          firebase_uid: '',
+          registered_on: '',
+        });
         setAddModal(false);
       });
   };
 
   const updateDriver = () => {
     axios
-      .patch(`/api/drivers/${deleteDriverId}`, {
-        full_name_en: newFullNameEn,
-        full_name_ar: newFullNameAr,
+      .patch(`/api/users/${deleteDriverId}`, {
+        full_name: newFullNameEn,
+        gender: gender,
         mobile_number: newMobileNumber,
+        default_location_coordinates: location,
+        default_address_line_1: address1,
+        default_address_line_2: address2,
+        default_city: city,
+        is_active: active,
+        firebase_uid: firebaseURL,
+        registered_on: registeredOn,
       })
       .then((res) => {
-        // console.log('patch', res.data.driver);
-
         setData(
           data.map((prop) =>
-            prop.id === deleteDriverId ? makeTableRow(res.data.driver) : prop
+            prop.id === deleteDriverId ? makeTableRow(res.data.user) : prop
           )
         );
-        setUserParam('', '', '');
+        // setUserParam('', '', '');
         setEditModal(false);
       });
   };
@@ -339,6 +368,8 @@ export default function UsersTables() {
                     }}
                     inputProps={{
                       type: 'text',
+                      value: newFullNameEn,
+                      onChange: (e) => setNewFullNameEn(e.target.value),
                     }}
                   />
                   <FormControl fullWidth className={classes.selectFormControl}>
@@ -395,6 +426,18 @@ export default function UsersTables() {
                     }}
                   />
                   <CustomInput
+                    labelText="Coordinate"
+                    id="add_coordinate"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: location,
+                      onChange: (e) => setLocation(e.target.value),
+                    }}
+                  />
+                  <CustomInput
                     labelText="Address Line 1"
                     id="add_address_line_1"
                     formControlProps={{
@@ -402,8 +445,8 @@ export default function UsersTables() {
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
+                      value: address1,
+                      onChange: (e) => setAddress1(e.target.value),
                     }}
                   />
                   <CustomInput
@@ -414,8 +457,8 @@ export default function UsersTables() {
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
+                      value: address2,
+                      onChange: (e) => setAddress2(e.target.value),
                     }}
                   />
                   <CustomInput
@@ -426,8 +469,8 @@ export default function UsersTables() {
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
+                      value: city,
+                      onChange: (e) => setCity(e.target.value),
                     }}
                   />
                   <FormControlLabel
@@ -457,8 +500,8 @@ export default function UsersTables() {
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
+                      value: firebaseURL,
+                      onChange: (e) => setFirebaseURL(e.target.value),
                     }}
                   />
                   <InputLabel className={classes.label}>Date Picker</InputLabel>
@@ -466,7 +509,7 @@ export default function UsersTables() {
                   <FormControl fullWidth>
                     <Datetime
                       timeFormat={false}
-                      inputProps={{ placeholder: 'Registered On' }}
+                      inputProps={{ placeholder: 'Registered On', onChange: (e) => setRegisteredOn(e.target.value), }}
                     />
                   </FormControl>
                 </form>
@@ -503,8 +546,8 @@ export default function UsersTables() {
               >
                 <form>
                   <CustomInput
-                    labelText="Full Name EN"
-                    id="edit_full_name_en"
+                    labelText="Full Name"
+                    id="edit_full_name"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -515,20 +558,20 @@ export default function UsersTables() {
                     }}
                   />
                   <CustomInput
-                    labelText="Full Name AR"
-                    id="edit_full_name_ar"
+                    labelText="Gender"
+                    id="edit_gender"
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
                       type: 'text',
-                      value: newFullNameAr,
-                      onChange: (e) => setNewFullNameAr(e.target.value),
+                      value: gender,
+                      onChange: (e) => setGender(e.target.value),
                     }}
                   />
                   <CustomInput
-                    labelText="Mobile Number"
-                    id="edit_mobile_number"
+                    labelText="Mobile"
+                    id="edit_mobile"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -536,6 +579,90 @@ export default function UsersTables() {
                       type: 'text',
                       value: newMobileNumber,
                       onChange: (e) => setNewMobileNumber(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Location"
+                    id="edit_location"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: location,
+                      onChange: (e) => setLocation(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Address1"
+                    id="edit_address1"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: address1,
+                      onChange: (e) => setAddress1(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Address2"
+                    id="edit_address2"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: address2,
+                      onChange: (e) => setAddress2(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="City"
+                    id="edit_city"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: city,
+                      onChange: (e) => setCity(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Active"
+                    id="edit_Active"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: active,
+                      onChange: (e) => setActive(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Firebase Uid"
+                    id="edit_firebase_ui"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: firebaseURL,
+                      onChange: (e) => setFirebaseURL(e.target.value),
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Registered On"
+                    id="edit_registered_on"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: registeredOn,
+                      onChange: (e) => setRegisteredOn(e.target.value),
                     }}
                   />
                 </form>
