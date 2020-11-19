@@ -62,17 +62,42 @@ export default function UsersTables() {
   const [simpleSelect, setSimpleSelect] = useState('');
   const [editModal, setEditModal] = useState(false);
   const [deleteDriverId, setDeleteDriverId] = useState(null);
+
   const [newFullNameEn, setNewFullNameEn] = useState('');
-  const [newFullNameAr, setNewFullNameAr] = useState('');
+  const [gender, setGender] = useState('');
   const [newMobileNumber, setNewMobileNumber] = useState('');
+  const [location, setLocation] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [firebaseURL, setFirebaseURL] = useState('');
+  const [registeredOn, setRegisteredOn] = useState('');
   const [checkedA, setCheckedA] = React.useState(true);
+  const [newFullNameAr, setNewFullNameAr] = useState('');
 
   const classes = useStyles();
 
-  const setDriverParam = (full_name_en, full_name_ar, mobile_number) => {
+  const setUserParam = (info) => {
+    const {
+      full_name_en,
+      full_name_ar,
+      gender,
+      mobile_number,
+      default_location_coordinates,
+      default_address_line_1,
+      default_address_line_2,
+      firebase_uid,
+      registered_on,
+    } = info;
+
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
     setNewMobileNumber(mobile_number);
+    setGender(gender);
+    setLocation(default_location_coordinates);
+    setAddress1(default_address_line_1);
+    setAddress2(default_address_line_2);
+    setFirebaseURL(firebase_uid);
+    setRegisteredOn(registered_on);
   };
 
   const makeTableRow = (info) => {
@@ -86,14 +111,8 @@ export default function UsersTables() {
             round
             simple
             onClick={() => {
-              setDriverParam(
-                info.full_name_en,
-                info.full_name_ar,
-                info.mobile_number
-              );
-
+              setUserParam(info);
               setDeleteDriverId(info.id);
-
               setEditModal(true);
             }}
             color="warning"
@@ -128,14 +147,14 @@ export default function UsersTables() {
 
   useEffect(getUser, []);
 
-  const delteDriver = (deleteId) => {
+  const delteUser = (deleteId) => {
     axios.delete(`/api/drivers/${deleteId}`).then(() => {
       // console.log('delete', res);
       setData(data.filter((prop) => prop.id !== deleteId));
     });
   };
 
-  const addDriver = () => {
+  const addUser = () => {
     axios
       .post('/api/drivers/', {
         full_name_en: newFullNameEn,
@@ -145,7 +164,7 @@ export default function UsersTables() {
       .then((res) => {
         // console.log('post', res.data.driver);
         setData([...data, makeTableRow(res.data.driver)]);
-        setDriverParam('', '', '');
+        setUserParam('', '', '');
         setAddModal(false);
       });
   };
@@ -165,7 +184,7 @@ export default function UsersTables() {
             prop.id === deleteDriverId ? makeTableRow(res.data.driver) : prop
           )
         );
-        setDriverParam('', '', '');
+        setUserParam('', '', '');
         setEditModal(false);
       });
   };
@@ -191,7 +210,7 @@ export default function UsersTables() {
                 <Button
                   color="primary"
                   onClick={() => {
-                    setDriverParam('', '', '');
+                    setUserParam('', '', '');
 
                     setAddModal(true);
                   }}
@@ -273,7 +292,7 @@ export default function UsersTables() {
                 <Button
                   onClick={() => {
                     setDeleteModal(false);
-                    delteDriver(deleteDriverId);
+                    delteUser(deleteDriverId);
                   }}
                   color="success"
                   simple
@@ -454,7 +473,7 @@ export default function UsersTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                <Button onClick={() => addDriver()} color="primary">
+                <Button onClick={() => addUser()} color="primary">
                   Add
                 </Button>
               </DialogActions>

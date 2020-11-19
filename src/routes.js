@@ -33,16 +33,16 @@ import UsersTables from './views/Tables/UsersTables';
 import DoctorsTables from './views/Tables/DoctorsTables';
 import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
+import LabResultTables from './views/Tables/LabResultTables';
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
 import DriveEta from '@material-ui/icons/DriveEta';
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import Group from '@material-ui/icons/Group';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 import LocalHospital from '@material-ui/icons/LocalHospital';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
+import Colorize from '@material-ui/icons/Colorize';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRange from '@material-ui/icons/DateRange';
@@ -91,6 +91,14 @@ var dashRoutes = [
     rtlName: 'Track Vans',
     icon: AirportShuttle,
     component: TrackVansTables,
+    layout: '/admin',
+  },
+  {
+    path: '/lab-result',
+    name: 'Lab Results',
+    rtlName: 'نتيجة المختبر',
+    icon: Colorize,
+    component: LabResultTables,
     layout: '/admin',
   },
   {

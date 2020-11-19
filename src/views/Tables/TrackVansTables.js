@@ -10,7 +10,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
 // @material-ui/icons
-import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';

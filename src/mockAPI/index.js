@@ -7,6 +7,7 @@ createServer({
     doctor: Model,
     nurse: Model,
     van: Model,
+    labresult: Model,
   },
   factories: {
     driver: Factory.extend({
@@ -116,6 +117,20 @@ createServer({
         return Math.random() > 0.5 ? 1 : 0;
       },
     }),
+    labresult: Factory.extend({
+      booking_id(i) {
+        return `booking ${i}`;
+      },
+      line_name_en(i) {
+        return `Name ${i}`;
+      },
+      line_name_ar(i) {
+        return `سائق ${i}`;
+      },
+      result(i) {
+        return `result ${i}`;
+      }
+    }),
   },
   routes() {
     this.logging = false;
@@ -220,6 +235,30 @@ createServer({
 
       return van.update(newAttrs);
     });
+
+    this.get('/labresults/', (schema) => {
+      return schema.labresults.all();
+    });
+
+    this.post('/labresults/', (schema, request) => {
+      let newLab = JSON.parse(request.requestBody);
+
+      return schema.labresults.create(newLab);
+    });
+
+    this.delete('/labresults/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.labresults.find(id).destroy();
+    });
+
+    this.patch('/labresults/:id', (schema, request) => {
+      let newLabs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let lab = schema.labresults.find(id);
+
+      return lab.update(newLabs);
+    })
   },
   seeds(server) {
     server.createList('driver', 40);
@@ -227,5 +266,6 @@ createServer({
     server.createList('doctor', 40);
     server.createList('nurse', 40);
     server.createList('van', 40);
+    server.createList('labresult', 40);
   },
 });
