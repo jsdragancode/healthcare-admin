@@ -34,6 +34,7 @@ import DoctorsTables from './views/Tables/DoctorsTables';
 import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
 import LabResultTables from './views/Tables/LabResultTables';
+import FaqTables from './views/Tables/FaqTables';
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
@@ -43,6 +44,7 @@ import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 import LocalHospital from '@material-ui/icons/LocalHospital';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Colorize from '@material-ui/icons/Colorize';
+import Info from '@material-ui/icons/Info';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRange from '@material-ui/icons/DateRange';
@@ -99,6 +101,14 @@ var dashRoutes = [
     rtlName: 'نتيجة المختبر',
     icon: Colorize,
     component: LabResultTables,
+    layout: '/admin',
+  },
+  {
+    path: '/faq',
+    name: 'FAQ',
+    rtlName: 'نتيجة المختبر',
+    icon: Info,
+    component: FaqTables,
     layout: '/admin',
   },
   {

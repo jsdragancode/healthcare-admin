@@ -46,20 +46,26 @@ export default function LabResultTables() {
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
 
-    const [deleteLabResultId, setDeleteLabResultId] = useState(null);
+    const [deleteFaqId, setDeleteFaqId] = useState(null);
+
     const [newBookingId, setNewBookingId] = useState('');
-    const [newFullNameEn, setNewFullNameEn] = useState('');
-    const [newFullNameAr, setNewFullNameAr] = useState('');
-    const [newResult, setNewResult] = useState('');
+
+    const [newQuestionEn, setNewQuestionEn] = useState('');
+    const [newQuestionAr, setNewQuestionAr] = useState('');
+    const [newAnswerEn, setNewAnswerEn] = useState('');
+    const [newAnswerAr, setNewAnswerAr] = useState('');
+    const [newOrderNo, setNewOrderNo] = useState('');
+
 
     const classes = useStyles();
 
-    const setLabParam = (info) => {
-        const { booking_id, line_name_en, line_name_ar, result } = info;
-        setNewBookingId(booking_id);
-        setNewFullNameEn(line_name_en);
-        setNewFullNameAr(line_name_ar);
-        setNewResult(result);
+    const setFaqParam = (info) => {
+        const { question_en, question_ar, answer_en, answer_ar, order_no } = info;
+        setNewQuestionEn(question_en);
+        setNewQuestionAr(question_ar);
+        setNewAnswerEn(answer_en);
+        setNewAnswerAr(answer_ar);
+        setNewOrderNo(order_no);
     };
 
     const makeTableRow = (info) => {
@@ -72,8 +78,8 @@ export default function LabResultTables() {
                         round
                         simple
                         onClick={() => {
-                            setLabParam(info);
-                            setDeleteLabResultId(info.id);
+                            setFaqParam(info);
+                            setDeleteFaqId(info.id);
                             setEditModal(true);
                         }}
                         color="warning"
@@ -86,7 +92,7 @@ export default function LabResultTables() {
                         round
                         simple
                         onClick={() => {
-                            setDeleteLabResultId(info.id);
+                            setDeleteFaqId(info.id);
                             setDeleteModal(true);
                         }}
                         color="danger"
@@ -99,47 +105,48 @@ export default function LabResultTables() {
         };
     };
 
-    const getLabResults = () => {
-        axios.get('/api/labresults/').then((res) => {
-            setData(res.data.labresults.map((prop) => makeTableRow(prop)));
+    const getFaqs = () => {
+        axios.get('/api/faqs/').then((res) => {
+            setData(res.data.faqs.map((prop) => makeTableRow(prop)));
         });
     };
 
-    useEffect(getLabResults, []);
+    useEffect(getFaqs, []);
 
-    const delteLabResults = (deleteId) => {
-        axios.delete(`/api/labresults/${deleteId}`).then(() => {
-            // console.log('delete', res);
+    const delteFaqs = (deleteId) => {
+        axios.delete(`/api/faqs/${deleteId}`).then(() => {
             setData(data.filter((prop) => prop.id !== deleteId));
         });
     };
 
-    const addLabResult = () => {
+    const addFaqs = () => {
         axios
-            .post('/api/labresults/', {
-                booking_id: newBookingId,
-                line_name_en: newFullNameEn,
-                line_name_ar: newFullNameAr,
-                result: newResult,
+            .post('/api/faqs/', {
+                question_en: newQuestionEn,
+                question_ar: newQuestionAr,
+                answer_en: newAnswerEn,
+                answer_ar: newAnswerAr,
+                order_no: newOrderNo,
             })
             .then((res) => {
-                setData([...data, makeTableRow(res.data.labresult)]);
+                setData([...data, makeTableRow(res.data.faq)]);
                 setAddModal(false);
             });
     };
 
-    const updateLabResult = () => {
+    const updateFaqs = () => {
         axios
-            .patch(`/api/labresults/${deleteLabResultId}`, {
-                booking_id: newBookingId,
-                line_name_en: newFullNameEn,
-                line_name_ar: newFullNameAr,
-                result: newResult,
+            .patch(`/api/faqs/${deleteFaqId}`, {
+                question_en: newQuestionEn,
+                question_ar: newQuestionAr,
+                answer_en: newAnswerEn,
+                ranswer_aresult: newAnswerAr,
+                order_no: newOrderNo,
             })
             .then((res) => {
                 setData(
                     data.map((prop) =>
-                        prop.id === deleteLabResultId ? makeTableRow(res.data.labresult) : prop
+                        prop.id === deleteFaqId ? makeTableRow(res.data.faq) : prop
                     )
                 );
                 setEditModal(false);
@@ -155,7 +162,7 @@ export default function LabResultTables() {
                         <CardIcon color="primary">
                             <Colorize />
                         </CardIcon>
-                        <h4 className={classes.cardIconTitle}>Lab Results</h4>
+                        <h4 className={classes.cardIconTitle}>FAQ</h4>
                     </CardHeader>
                     <CardBody>
                         <GridContainer justify="flex-end">
@@ -163,37 +170,42 @@ export default function LabResultTables() {
                                 <Button
                                     color="primary"
                                     onClick={() => {
-                                        setLabParam({
-                                            booking_id: '',
-                                            line_name_en: '',
-                                            line_name_ar: '',
-                                            result: '',
+                                        setFaqParam({
+                                            question_en: '',
+                                            question_ar: '',
+                                            answer_en: '',
+                                            answer_ar: '',
+                                            order_no: '',
                                         });
 
                                         setAddModal(true);
                                     }}
                                 >
-                                    Add Lab Result
-                </Button>
+                                    Add FAQ
+                                </Button>
                             </GridItem>
                         </GridContainer>
                         <ReactTableBottomPagination
                             columns={[
                                 {
-                                    Header: 'Booking ID',
-                                    accessor: 'booking_id',
+                                    Header: 'Question EN',
+                                    accessor: 'question_en',
                                 },
                                 {
-                                    Header: 'Full Name EN',
-                                    accessor: 'line_name_en',
+                                    Header: 'Question AR',
+                                    accessor: 'question_ar',
                                 },
                                 {
-                                    Header: 'Full Name AR',
-                                    accessor: 'line_name_ar',
+                                    Header: 'Answer EN',
+                                    accessor: 'answer_en',
                                 },
                                 {
-                                    Header: 'Result',
-                                    accessor: 'result',
+                                    Header: 'Answer AR',
+                                    accessor: 'answer_ar',
+                                },
+                                {
+                                    Header: 'Order No',
+                                    accessor: 'order_no',
                                 },
                                 {
                                     Header: 'Actions',
@@ -217,7 +229,7 @@ export default function LabResultTables() {
                                 id="small-modal-slide-description"
                                 className={classes.modalBody + ' ' + classes.modalSmallBody}
                             >
-                                <h5>Are you sure you want to delete this lab result?</h5>
+                                <h5>Are you sure you want to delete this faq?</h5>
                             </DialogContent>
                             <DialogActions
                                 className={
@@ -234,7 +246,7 @@ export default function LabResultTables() {
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
-                                        delteLabResults(deleteLabResultId);
+                                        delteFaqs(deleteFaqId);
                                     }}
                                     color="success"
                                     simple
@@ -265,7 +277,7 @@ export default function LabResultTables() {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Add Lab Result</h4>
+                                <h4 className={classes.modalTitle}>Add FAQ</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="add-driver-dialog-modal-description"
@@ -273,58 +285,70 @@ export default function LabResultTables() {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Booking ID"
-                                        id="add_booking_id"
+                                        labelText="Question EN"
+                                        id="add_question_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newBookingId,
-                                            onChange: (e) => setNewBookingId(e.target.value),
+                                            value: newQuestionEn,
+                                            onChange: (e) => setNewQuestionEn(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Full Name EN"
-                                        id="add_full_name_en"
+                                        labelText="Question AR"
+                                        id="add_question_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameEn,
-                                            onChange: (e) => setNewFullNameEn(e.target.value),
+                                            value: newQuestionAr,
+                                            onChange: (e) => setNewQuestionAr(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Full Name AR"
-                                        id="add_full_name_ar"
+                                        labelText="Answer EN"
+                                        id="add_answer_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameAr,
-                                            onChange: (e) => setNewFullNameAr(e.target.value),
+                                            value: newAnswerEn,
+                                            onChange: (e) => setNewAnswerEn(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Result"
-                                        id="add_result"
+                                        labelText="Answer AR"
+                                        id="add_answer_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newResult,
-                                            onChange: (e) => setNewResult(e.target.value),
+                                            value: newAnswerAr,
+                                            onChange: (e) => setNewAnswerAr(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Order No"
+                                        id="add_order_no"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newOrderNo,
+                                            onChange: (e) => setNewOrderNo(e.target.value),
                                         }}
                                     />
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addLabResult()} color="primary">Add</Button>
+                                <Button onClick={() => addFaqs()} color="primary">Add</Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -352,60 +376,70 @@ export default function LabResultTables() {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Booking ID"
-                                        id="edit_booking_id"
+                                        labelText="Question EN"
+                                        id="add_question_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newBookingId,
-                                            onChange: (e) => setNewBookingId(e.target.value),
+                                            value: newQuestionEn,
+                                            onChange: (e) => setNewQuestionEn(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Full Name EN"
-                                        id="edit_full_name_en"
+                                        labelText="Question AR"
+                                        id="add_question_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameEn,
-                                            onChange: (e) => setNewFullNameEn(e.target.value),
+                                            value: newQuestionAr,
+                                            onChange: (e) => setNewQuestionAr(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Full Name AR"
-                                        id="edit_full_name_ar"
+                                        labelText="Answer EN"
+                                        id="add_answer_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameAr,
-                                            onChange: (e) => setNewFullNameAr(e.target.value),
+                                            value: newAnswerEn,
+                                            onChange: (e) => setNewAnswerEn(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Result"
-                                        id="edit_result"
+                                        labelText="Answer AR"
+                                        id="add_answer_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newResult,
-                                            onChange: (e) => setNewResult(e.target.value),
+                                            value: newAnswerAr,
+                                            onChange: (e) => setNewAnswerAr(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Order No"
+                                        id="add_order_no"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newOrderNo,
+                                            onChange: (e) => setNewOrderNo(e.target.value),
                                         }}
                                     />
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateLabResult()} color="primary">
-                                    Update
-                </Button>
+                                <Button onClick={() => updateFaqs()} color="primary">Update</Button>
                             </DialogActions>
                         </Dialog>
                     </CardBody>

@@ -304,7 +304,7 @@ export default function UsersTables() {
                 id="small-modal-slide-description"
                 className={classes.modalBody + ' ' + classes.modalSmallBody}
               >
-                <h5>Are you sure you want to delete this driver?</h5>
+                <h5>Are you sure you want to delete this user?</h5>
               </DialogContent>
               <DialogActions
                 className={
