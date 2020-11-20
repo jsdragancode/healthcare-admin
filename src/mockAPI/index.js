@@ -3,6 +3,7 @@ import { createServer, Model, Factory } from 'miragejs';
 
 createServer({
   models: {
+    booking: Model,
     driver: Model,
     user: Model,
     doctor: Model,
@@ -15,6 +16,72 @@ createServer({
     patient: Model,
   },
   factories: {
+    booking: Factory.extend({
+      user_id(i) {
+        return `user ${i}`;
+      },
+      patient_id(i) {
+        return `patient ${i}`;
+      },
+      start_datetime(i) {
+        let start = new Date(2018, 0, 1);
+        let end = new Date(2019, 0, 1);
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      end_datetime(i) {
+        let start = new Date(2019, 0, 1);
+        let end = new Date(2020, 0, 1);
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      booking_type(i) {
+        return Math.random() > 0.5 ? 1 : 0;
+      },
+      lap_test_id(i) {
+        return `lap test ${i}`;
+      },
+      assigned_driver(i) {
+        return `driver ${i}`;
+      },
+      assigned_van(i) {
+        return `van ${i}`;
+      },
+      assigned_doctor(i) {
+        return `doctor ${i}`;
+      },
+      assigned_nurse(i) {
+        return `nurse ${i}`;
+      },
+      status(i) {
+        return Math.random() > 0.5 ? 1 : 0;
+      },
+      payment_method(i) {
+        return Math.random() > 0.5 ? 1 : 0;
+      },
+      payment_url(i) {
+        return `payment ${i}`;
+      },
+      placed_on(i) {
+        return `place ${i}`;
+      },
+      location_coordinates(i) {
+        return `location ${i}`;
+      },
+      location_address_line_1(i) {
+        return `address_1 ${i}`;
+      },
+      location_address_line_2(i) {
+        return `address_2 ${i}`;
+      },
+      location_city(i) {
+        return `city ${i}`;
+      },
+    }),
     driver: Factory.extend({
       full_name_en(i) {
         return `driver ${i}`;
@@ -274,6 +341,30 @@ createServer({
     this.logging = false;
     this.namespace = 'api';
 
+    this.get('/bookings/', (schema) => {
+      return schema.bookings.all();
+    });
+
+    this.post('/bookings/', (schema, request) => {
+      let newBook = JSON.parse(request.requestBody);
+
+      return schema.bookings.create(newBook);
+    });
+
+    this.delete('/bookings/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.bookings.find(id).destroy();
+    });
+
+    this.patch('/bookings/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let book = schema.bookings.find(id);
+
+      return book.update(newAttrs);
+    });
+
     this.get('/drivers/', (schema) => {
       return schema.drivers.all();
     });
@@ -516,6 +607,7 @@ createServer({
 
   },
   seeds(server) {
+    server.createList('booking', 40);
     server.createList('driver', 40);
     server.createList('user', 40);
     server.createList('doctor', 40);

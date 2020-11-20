@@ -107,7 +107,7 @@ export default function LabResultTables() {
 
     useEffect(getLabResults, []);
 
-    const delteLabResults = (deleteId) => {
+    const deleteLabResults = (deleteId) => {
         axios.delete(`/api/labresults/${deleteId}`).then(() => {
             setData(data.filter((prop) => prop.id !== deleteId));
         });
@@ -233,7 +233,7 @@ export default function LabResultTables() {
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
-                                        delteLabResults(deleteLabResultId);
+                                        deleteLabResults(deleteLabResultId);
                                     }}
                                     color="success"
                                     simple

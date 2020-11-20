@@ -28,6 +28,7 @@ import VectorMap from 'views/Maps/VectorMap.js';
 import Widgets from 'views/Widgets/Widgets.js';
 import Wizard from 'views/Forms/Wizard.js';
 
+import BookingsTables from './views/Tables/BookingsTables';
 import DriversTables from './views/Tables/DriversTables';
 import UsersTables from './views/Tables/UsersTables';
 import DoctorsTables from './views/Tables/DoctorsTables';
@@ -51,6 +52,7 @@ import Info from '@material-ui/icons/Info';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import CreditCard from '@material-ui/icons/CreditCard';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Book from '@material-ui/icons/Book';
 
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -62,6 +64,14 @@ import Timeline from '@material-ui/icons/Timeline';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 
 var dashRoutes = [
+  {
+    path: '/bookings',
+    name: 'Bookings',
+    rtlName: 'الحجوزات',
+    icon: Book,
+    component: BookingsTables,
+    layout: '/admin',
+  },
   {
     path: '/drivers',
     name: 'Drivers',
