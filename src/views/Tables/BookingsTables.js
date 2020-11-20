@@ -66,11 +66,14 @@ export default function BookingsTables() {
     const [newAddress1, setNewAddress1] = useState('');
     const [newAddress2, setNewAddress2] = useState('');
     const [newCity, setNewCity] = useState('');
+    const [newPrice, setNewPrice] = useState('');
+    const [newVat, setNewVat] = useState('');
+    const [newTotalPrice, setNewTotalPrice] = useState('');
 
     const classes = useStyles();
 
     const setBookingsParam = (info) => {
-        const { user_id, patient_id, start_datetime, end_datetime, booking_type, lap_test_id, assigned_driver, assigned_van, assigned_doctor, assigned_nurse, status, payment_method, payment_url, placed_on, location_coordinates, location_address_line_1, location_address_line_2, location_city } = info;
+        const { user_id, patient_id, start_datetime, end_datetime, booking_type, lap_test_id, assigned_driver, assigned_van, assigned_doctor, assigned_nurse, status, payment_method, payment_url, placed_on, location_coordinates, location_address_line_1, location_address_line_2, location_city, price, vat, total_price } = info;
         setNnewUserId(user_id);
         setNewPatientId(patient_id);
         setNewStartDateTime(start_datetime);
@@ -89,6 +92,9 @@ export default function BookingsTables() {
         setNewAddress1(location_address_line_1);
         setNewAddress2(location_address_line_2);
         setNewCity(location_city);
+        setNewPrice(price);
+        setNewVat(vat);
+        setNewTotalPrice(total_price);
     };
 
     const makeTableRow = (info) => {
@@ -165,6 +171,9 @@ export default function BookingsTables() {
                 location_address_line_1: newAddress1,
                 location_address_line_2: newAddress2,
                 location_city: newCity,
+                price: newPrice,
+                vat: newVat,
+                total_price: newTotalPrice,
             })
             .then((res) => {
                 setData([...data, makeTableRow(res.data.booking)]);
@@ -193,6 +202,9 @@ export default function BookingsTables() {
                 location_address_line_1: newAddress1,
                 location_address_line_2: newAddress2,
                 location_city: newCity,
+                price: newPrice,
+                vat: newVat,
+                total_price: newTotalPrice,
             })
             .then((res) => {
                 setData(
@@ -240,6 +252,9 @@ export default function BookingsTables() {
                                             location_address_line_1: '',
                                             location_address_line_2: '',
                                             location_city: '',
+                                            price: '',
+                                            vat: '',
+                                            total_price: '',
                                         });
 
                                         setAddModal(true);
@@ -322,6 +337,18 @@ export default function BookingsTables() {
                                 {
                                     Header: 'City',
                                     accessor: 'location_city',
+                                },
+                                {
+                                    Header: 'Price',
+                                    accessor: 'price',
+                                },
+                                {
+                                    Header: 'Vat',
+                                    accessor: 'vat',
+                                },
+                                {
+                                    Header: 'Total Price',
+                                    accessor: 'total_price',
                                 },
                                 {
                                     Header: 'Actions',
@@ -616,6 +643,42 @@ export default function BookingsTables() {
                                             onChange: (e) => setNewCity(e.target.value),
                                         }}
                                     />
+                                    <CustomInput
+                                        labelText="Price"
+                                        id="add_price"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newPrice,
+                                            onChange: (e) => setNewPrice(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Vat"
+                                        id="add_vat"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newVat,
+                                            onChange: (e) => setNewVat(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Total Price"
+                                        id="add_total_price"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newTotalPrice,
+                                            onChange: (e) => setNewTotalPrice(e.target.value),
+                                        }}
+                                    />
                                 </form>
                             </DialogContent>
                             <DialogActions>
@@ -861,6 +924,42 @@ export default function BookingsTables() {
                                             type: 'text',
                                             value: newCity,
                                             onChange: (e) => setNewCity(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Price"
+                                        id="add_price"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newPrice,
+                                            onChange: (e) => setNewPrice(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Vat"
+                                        id="add_vat"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newVat,
+                                            onChange: (e) => setNewVat(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Total Price"
+                                        id="add_total_price"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newTotalPrice,
+                                            onChange: (e) => setNewTotalPrice(e.target.value),
                                         }}
                                     />
                                 </form>

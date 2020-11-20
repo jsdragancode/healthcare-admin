@@ -81,6 +81,15 @@ createServer({
       location_city(i) {
         return `city ${i}`;
       },
+      price(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      vat(i) {
+        return parseInt(Math.random() * 1000);
+      },
+      total_price(i) {
+        return parseInt(Math.random() * 1000000);
+      },
     }),
     driver: Factory.extend({
       full_name_en(i) {
