@@ -39,6 +39,7 @@ import FaqTables from './views/Tables/FaqTables';
 import ConsultationTables from './views/Tables/ConsultationTables';
 import TransactionTables from './views/Tables/TransactionTables';
 import PatientsTables from './views/Tables/PatientsTables';
+import LocationTrackingTables from './views/Tables/LocationTrackingTables';
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
@@ -150,6 +151,14 @@ var dashRoutes = [
     rtlName: 'عملية تجارية',
     icon: AccountCircle,
     component: PatientsTables,
+    layout: '/admin',
+  },
+  {
+    path: '/location-track',
+    name: 'Location Track',
+    rtlName: 'تتبع الموقع',
+    icon: Place,
+    component: LocationTrackingTables,
     layout: '/admin',
   },
   {

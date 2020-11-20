@@ -14,6 +14,7 @@ createServer({
     consultation: Model,
     transaction: Model,
     patient: Model,
+    location: Model,
   },
   factories: {
     booking: Factory.extend({
@@ -345,6 +346,23 @@ createServer({
         return Math.random() > 0.5 ? 1 : 0;
       },
     }),
+
+    location: Factory.extend({
+      booking_id(i) {
+        return `booking ${i}`;
+      },
+      location_coordinates(i) {
+        return `Location ${i}`;
+      },
+      on_datetime(i) {
+        let start = new Date(2019, 0, 1);
+        let end = new Date();
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      }
+    }),
   },
   routes() {
     this.logging = false;
@@ -614,6 +632,30 @@ createServer({
       return lab.update(newCons);
     });
 
+    this.get('/locations/', (schema) => {
+      return schema.locations.all();
+    });
+
+    this.post('/locations/', (schema, request) => {
+      let newBook = JSON.parse(request.requestBody);
+
+      return schema.locations.create(newBook);
+    });
+
+    this.delete('/locations/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.locations.find(id).destroy();
+    });
+
+    this.patch('/locations/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let book = schema.locations.find(id);
+
+      return book.update(newAttrs);
+    });
+
   },
   seeds(server) {
     server.createList('booking', 40);
@@ -627,5 +669,6 @@ createServer({
     server.createList('consultation', 40);
     server.createList('transaction', 40);
     server.createList('patient', 40);
+    server.createList('location', 40);
   },
 });
