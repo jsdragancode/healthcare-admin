@@ -148,7 +148,7 @@ export default function LabResultTables() {
     return (
         <GridContainer>
             <GridItem xs={12}>
-                {moment().format('HH:mm:ss.SSS')}
+                {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
@@ -343,7 +343,7 @@ export default function LabResultTables() {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Edit Driver</h4>
+                                <h4 className={classes.modalTitle}>Edit Lab</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="edit-driver-dialog-modal-description"

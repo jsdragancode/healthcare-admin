@@ -13,8 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 import Colorize from '@material-ui/icons/Colorize';
-import CreditCard from '@material-ui/icons/CreditCard';
-
+import AccountCircle from '@material-ui/icons/AccountCircle';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -42,40 +41,43 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function TransactionTables() {
+export default function PatientsTables() {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
 
-    const [deleteTransactionId, setDeleteTransactionId] = useState(null);
-    const [newBookingId, setNewBookingId] = useState('');
-    const [newChargeId, setNewChargeId] = useState('');
-    const [newTrackCode, setNewTrackCode] = useState('');
-    const [newPaymentCode, setNewPaymentCode] = useState('');
-    const [newGatewayCode, setNewGatewayCode] = useState('');
-    const [newTransactionCode, setNewTransactionCode] = useState('');
-    const [newOrderCode, setNewOrderCode] = useState('');
-    const [newSecretHash, setNewSecretHash] = useState('');
-    const [newResult, setNewResult] = useState('');
-    const [newIsSuccess, setNewIsSuccess] = useState('');
-    const [newCreatedOn, setNewCreatedOn] = useState('');
+    const [deletePatientId, setDeletePatientId] = useState(null);
+
+    const [newFullNameEn, setNewFullNameEn] = useState('');
+
+    const [newFullName, setNewFullName] = useState('');
+    const [newGender, setNewGender] = useState('');
+    const [newBirthday, setNewBirthday] = useState('');
+    const [newCPRNumber, setNewCPRNumber] = useState('');
+    const [newCPRFront, setNewCPRFront] = useState('');
+    const [newCPRBack, setNewCPRBack] = useState('');
+    const [newInsuranceFront, setNewInsuranceFront] = useState('');
+    const [newInsuranceBack, setNewInsuranceBack] = useState('');
+    const [newUserId, setUserId] = useState('');
+    const [newIsUserMain, setNewIsUserMain] = useState('');
+    const [newIsDeleted, setNewIsDeleted] = useState('');
 
     const classes = useStyles();
 
-    const setTransactionParam = (info) => {
-        const { booking_id, charge_id, track_code, payment_code, gateway_code, transaction_code, order_code, secret_hash, result_text, is_success, created_on } = info;
-        setNewBookingId(booking_id);
-        setNewChargeId(charge_id);
-        setNewTrackCode(track_code);
-        setNewPaymentCode(payment_code);
-        setNewGatewayCode(gateway_code);
-        setNewTransactionCode(transaction_code);
-        setNewOrderCode(order_code);
-        setNewSecretHash(secret_hash);
-        setNewResult(result_text);
-        setNewIsSuccess(is_success);
-        setNewCreatedOn(created_on);
+    const setPatientParam = (info) => {
+        const { full_name, gender, date_of_birth, cpr_number, scanned_cpr_front, scanned_cpr_back, scanned_insurance_front, scanned_insurance_back, user_id, is_user_main, is_deleted } = info;
+        setNewFullName(full_name);
+        setNewGender(gender);
+        setNewBirthday(date_of_birth);
+        setNewCPRNumber(cpr_number);
+        setNewCPRFront(scanned_cpr_front);
+        setNewCPRBack(scanned_cpr_back);
+        setNewInsuranceFront(scanned_insurance_front);
+        setNewInsuranceBack(scanned_insurance_back);
+        setUserId(user_id);
+        setNewIsUserMain(is_user_main);
+        setNewIsDeleted(is_deleted);
     };
 
     const makeTableRow = (info) => {
@@ -88,8 +90,8 @@ export default function TransactionTables() {
                         round
                         simple
                         onClick={() => {
-                            setTransactionParam(info);
-                            setDeleteTransactionId(info.id);
+                            setPatientParam(info);
+                            setDeletePatientId(info.id);
                             setEditModal(true);
                         }}
                         color="warning"
@@ -102,7 +104,7 @@ export default function TransactionTables() {
                         round
                         simple
                         onClick={() => {
-                            setDeleteTransactionId(info.id);
+                            setDeletePatientId(info.id);
                             setDeleteModal(true);
                         }}
                         color="danger"
@@ -115,60 +117,60 @@ export default function TransactionTables() {
         };
     };
 
-    const getTransaction = () => {
-        axios.get('/api/transactions/').then((res) => {
-            setData(res.data.transactions.map((prop) => makeTableRow(prop)));
+    const getPatientResults = () => {
+        axios.get('/api/patients/').then((res) => {
+            setData(res.data.patients.map((prop) => makeTableRow(prop)));
         });
     };
 
-    useEffect(getTransaction, []);
+    useEffect(getPatientResults, []);
 
-    const deleteTransaction = (deleteId) => {
-        axios.delete(`/api/transactions/${deleteId}`).then(() => {
+    const deltePatients = (deleteId) => {
+        axios.delete(`/api/patients/${deleteId}`).then(() => {
             setData(data.filter((prop) => prop.id !== deleteId));
         });
     };
 
-    const addTransaction = () => {
+    const addPatients = () => {
         axios
-            .post('/api/transactions/', {
-                booking_id: newBookingId,
-                charge_id: newChargeId,
-                track_code: newTrackCode,
-                payment_code: newPaymentCode,
-                gateway_code: newGatewayCode,
-                transaction_code: newTransactionCode,
-                order_code: newOrderCode,
-                secret_hash: newSecretHash,
-                result_text: newResult,
-                is_success: newIsSuccess,
-                created_on: newCreatedOn,
+            .post('/api/patients/', {
+                full_name: newFullName,
+                gender: newGender,
+                date_of_birth: newBirthday,
+                cpr_number: newCPRNumber,
+                scanned_cpr_front: newCPRFront,
+                scanned_cpr_back: newCPRBack,
+                scanned_insurance_front: newInsuranceFront,
+                scanned_insurance_back: newInsuranceBack,
+                user_id: newUserId,
+                is_user_main: newIsUserMain,
+                is_deleted: newIsDeleted,
             })
             .then((res) => {
-                setData([...data, makeTableRow(res.data.transaction)]);
+                setData([...data, makeTableRow(res.data.patient)]);
                 setAddModal(false);
             });
     };
 
-    const updateTransaction = () => {
+    const updatePatient = () => {
         axios
-            .patch(`/api/transactions/${deleteTransactionId}`, {
-                booking_id: newBookingId,
-                charge_id: newChargeId,
-                track_code: newTrackCode,
-                payment_code: newPaymentCode,
-                gateway_code: newGatewayCode,
-                transaction_code: newTransactionCode,
-                order_code: newOrderCode,
-                secret_hash: newSecretHash,
-                result_text: newResult,
-                is_success: newIsSuccess,
-                created_on: newCreatedOn,
+            .patch(`/api/patients/${deletePatientId}`, {
+                full_name: newFullName,
+                gender: newGender,
+                date_of_birth: newBirthday,
+                cpr_number: newCPRNumber,
+                scanned_cpr_front: newCPRFront,
+                scanned_cpr_back: newCPRBack,
+                scanned_insurance_front: newInsuranceFront,
+                scanned_insurance_back: newInsuranceBack,
+                user_id: newUserId,
+                is_user_main: newIsUserMain,
+                is_deleted: newIsDeleted,
             })
             .then((res) => {
                 setData(
                     data.map((prop) =>
-                        prop.id === deleteTransactionId ? makeTableRow(res.data.transaction) : prop
+                        prop.id === deletePatientId ? makeTableRow(res.data.patient) : prop
                     )
                 );
                 setEditModal(false);
@@ -182,9 +184,9 @@ export default function TransactionTables() {
                 <Card>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
-                            <CreditCard />
+                            <AccountCircle />
                         </CardIcon>
-                        <h4 className={classes.cardIconTitle}>Transaction</h4>
+                        <h4 className={classes.cardIconTitle}>Patients</h4>
                     </CardHeader>
                     <CardBody>
                         <GridContainer justify="flex-end">
@@ -192,71 +194,72 @@ export default function TransactionTables() {
                                 <Button
                                     color="primary"
                                     onClick={() => {
-                                        setTransactionParam({
-                                            booking_id: '',
-                                            charge_id: '',
-                                            track_code: '',
-                                            payment_code: '',
-                                            gateway_code: '',
-                                            transaction_code: '',
-                                            order_code: '',
-                                            secret_hash: '',
-                                            result_text: '',
-                                            is_success: '',
-                                            created_on: '',
+                                        setPatientParam({
+                                            full_name: '',
+                                            gender: '',
+                                            date_of_birth: '',
+                                            cpr_number: '',
+                                            scanned_cpr_front: '',
+                                            scanned_cpr_back: '',
+                                            scanned_insurance_front: '',
+                                            scanned_insurance_back: '',
+                                            user_id: '',
+                                            is_user_main: '',
+                                            is_deleted: '',
                                         });
 
                                         setAddModal(true);
                                     }}
                                 >
-                                    Add Transaction
+                                    Add Patient
                                 </Button>
                             </GridItem>
                         </GridContainer>
                         <ReactTableBottomPagination
                             columns={[
                                 {
-                                    Header: 'Booking ID',
-                                    accessor: 'booking_id',
+                                    Header: 'Full Name',
+                                    accessor: 'full_name',
                                 },
                                 {
-                                    Header: 'Charge ID',
-                                    accessor: 'charge_id',
+                                    Header: 'Gender',
+                                    accessor: 'gender',
                                 },
                                 {
-                                    Header: 'Track Code',
-                                    accessor: 'track_code',
+                                    Header: 'Birthday',
+                                    accessor: 'date_of_birth',
                                 },
                                 {
-                                    Header: 'Payment Code',
-                                    accessor: 'payment_code',
+                                    Header: 'CPR Number',
+                                    accessor: 'cpr_number',
                                 },
                                 {
-                                    Header: 'Gateway Code',
-                                    accessor: 'gateway_code',
+                                    Header: 'CPR Front',
+                                    accessor: 'scanned_cpr_front',
                                 },
                                 {
-                                    Header: 'Transaction Code',
-                                    accessor: 'transaction_code',
+                                    Header: 'CPR Back',
+                                    accessor: 'scanned_cpr_back',
                                 },
                                 {
-                                    Header: 'Order Code',
-                                    accessor: 'order_code',
+                                    Header: 'Insurance Front',
+                                    accessor: 'scanned_insurance_front',
                                 },
                                 {
-                                    Header: 'Secret Hash',
-                                    accessor: 'secret_hash',
+                                    Header: 'Insurance Back',
+                                    accessor: 'scanned_insurance_back',
                                 },
                                 {
-                                    Header: 'Result',
-                                    accessor: 'result_text',
-                                }, {
-                                    Header: 'Success',
-                                    accessor: 'is_success',
+                                    Header: 'User ID',
+                                    accessor: 'user_id',
                                 },
                                 {
-                                    Header: 'Created On',
-                                    accessor: 'created_on',
+                                    Header: 'User Main',
+                                    accessor: 'is_user_main',
+                                },
+                                {
+                                    Header: 'Deleted',
+                                    accessor: 'is_deleted',
                                 },
                                 {
                                     Header: 'Actions',
@@ -280,7 +283,7 @@ export default function TransactionTables() {
                                 id="small-modal-slide-description"
                                 className={classes.modalBody + ' ' + classes.modalSmallBody}
                             >
-                                <h5>Are you sure you want to delete this lab result?</h5>
+                                <h5>Are you sure you want to delete this patient?</h5>
                             </DialogContent>
                             <DialogActions
                                 className={
@@ -297,7 +300,7 @@ export default function TransactionTables() {
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
-                                        deleteTransaction(deleteTransactionId);
+                                        deltePatients(deletePatientId);
                                     }}
                                     color="success"
                                     simple
@@ -328,7 +331,7 @@ export default function TransactionTables() {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Add Transaction</h4>
+                                <h4 className={classes.modalTitle}>Add Patient</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="add-driver-dialog-modal-description"
@@ -336,142 +339,142 @@ export default function TransactionTables() {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Booking ID"
-                                        id="add_booking_id"
+                                        labelText="Full Name"
+                                        id="add_full_name"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newBookingId,
-                                            onChange: (e) => setNewBookingId(e.target.value),
+                                            value: newFullName,
+                                            onChange: (e) => setNewFullName(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Charge ID"
-                                        id="add_charge_id"
+                                        labelText="Gender"
+                                        id="add_gender"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newChargeId,
-                                            onChange: (e) => setNewChargeId(e.target.value),
+                                            value: newGender,
+                                            onChange: (e) => setNewGender(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Track Code"
-                                        id="add_track_code"
+                                        labelText="Birthday"
+                                        id="add_birthday"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTrackCode,
-                                            onChange: (e) => setNewTrackCode(e.target.value),
+                                            value: newBirthday,
+                                            onChange: (e) => setNewBirthday(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Payment Code"
-                                        id="add_payment_code"
+                                        labelText="CPR Number"
+                                        id="add_cpr_number"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newPaymentCode,
-                                            onChange: (e) => setNewPaymentCode(e.target.value),
+                                            value: newCPRNumber,
+                                            onChange: (e) => setNewCPRNumber(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Gateway Code"
-                                        id="add_gateway_code"
+                                        labelText="CPR Front"
+                                        id="add_cpr_front"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newGatewayCode,
-                                            onChange: (e) => setNewGatewayCode(e.target.value),
+                                            value: newCPRFront,
+                                            onChange: (e) => setNewCPRFront(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Transaction Code"
-                                        id="add_transaction_code"
+                                        labelText="CPR Back"
+                                        id="add_cpr_back"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTransactionCode,
-                                            onChange: (e) => setNewTransactionCode(e.target.value),
+                                            value: newCPRBack,
+                                            onChange: (e) => setNewCPRBack(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Order Code"
-                                        id="add_order_code"
+                                        labelText="Insurance Front"
+                                        id="add_insurance_front"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newOrderCode,
-                                            onChange: (e) => setNewOrderCode(e.target.value),
+                                            value: newInsuranceFront,
+                                            onChange: (e) => setNewInsuranceFront(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Secret Hash"
-                                        id="add_secret_hash"
+                                        labelText="Insurance Back"
+                                        id="add_insurance_back"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newSecretHash,
-                                            onChange: (e) => setNewSecretHash(e.target.value),
+                                            value: newInsuranceBack,
+                                            onChange: (e) => setNewInsuranceBack(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Result"
-                                        id="add_result"
+                                        labelText="User ID"
+                                        id="add_user_id"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newResult,
-                                            onChange: (e) => setNewResult(e.target.value),
+                                            value: newUserId,
+                                            onChange: (e) => setUserId(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Success"
-                                        id="add_success"
+                                        labelText="User Main"
+                                        id="add_user_main"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newIsSuccess,
-                                            onChange: (e) => setNewIsSuccess(e.target.value),
+                                            value: newIsUserMain,
+                                            onChange: (e) => setNewIsUserMain(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Created On"
-                                        id="add_created_on"
+                                        labelText="Deleted"
+                                        id="add_deleted"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newCreatedOn,
-                                            onChange: (e) => setNewCreatedOn(e.target.value),
+                                            value: newIsDeleted,
+                                            onChange: (e) => setNewIsDeleted(e.target.value),
                                         }}
                                     />
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addTransaction()} color="primary">Add</Button>
+                                <Button onClick={() => addPatients()} color="primary">Add</Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -491,7 +494,7 @@ export default function TransactionTables() {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Edit Transaction</h4>
+                                <h4 className={classes.modalTitle}>Edit Patient</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="edit-driver-dialog-modal-description"
@@ -499,142 +502,142 @@ export default function TransactionTables() {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Booking ID"
-                                        id="add_booking_id"
+                                        labelText="Full Name"
+                                        id="add_full_name"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newBookingId,
-                                            onChange: (e) => setNewBookingId(e.target.value),
+                                            value: newFullName,
+                                            onChange: (e) => setNewFullName(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Charge ID"
-                                        id="add_charge_id"
+                                        labelText="Gender"
+                                        id="add_gender"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newChargeId,
-                                            onChange: (e) => setNewChargeId(e.target.value),
+                                            value: newGender,
+                                            onChange: (e) => setNewGender(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Track Code"
-                                        id="add_track_code"
+                                        labelText="Birthday"
+                                        id="add_birthday"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTrackCode,
-                                            onChange: (e) => setNewTrackCode(e.target.value),
+                                            value: newBirthday,
+                                            onChange: (e) => setNewBirthday(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Payment Code"
-                                        id="add_payment_code"
+                                        labelText="CPR Number"
+                                        id="add_cpr_number"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newPaymentCode,
-                                            onChange: (e) => setNewPaymentCode(e.target.value),
+                                            value: newCPRNumber,
+                                            onChange: (e) => setNewCPRNumber(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Gateway Code"
-                                        id="add_gateway_code"
+                                        labelText="CPR Front"
+                                        id="add_cpr_front"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newGatewayCode,
-                                            onChange: (e) => setNewGatewayCode(e.target.value),
+                                            value: newCPRFront,
+                                            onChange: (e) => setNewCPRFront(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Transaction Code"
-                                        id="add_transaction_code"
+                                        labelText="CPR Back"
+                                        id="add_cpr_back"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTransactionCode,
-                                            onChange: (e) => setNewTransactionCode(e.target.value),
+                                            value: newCPRBack,
+                                            onChange: (e) => setNewCPRBack(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Order Code"
-                                        id="add_order_code"
+                                        labelText="Insurance Front"
+                                        id="add_insurance_front"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newOrderCode,
-                                            onChange: (e) => setNewOrderCode(e.target.value),
+                                            value: newCPRNumber,
+                                            onChange: (e) => setNewInsuranceFront(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Secret Hash"
-                                        id="add_secret_hash"
+                                        labelText="Insurance Back"
+                                        id="add_insurance_back"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newSecretHash,
-                                            onChange: (e) => setNewSecretHash(e.target.value),
+                                            value: newInsuranceBack,
+                                            onChange: (e) => setNewInsuranceBack(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Result"
-                                        id="add_result"
+                                        labelText="User ID"
+                                        id="add_user_id"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newResult,
-                                            onChange: (e) => setNewResult(e.target.value),
+                                            value: newUserId,
+                                            onChange: (e) => setUserId(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Success"
-                                        id="add_success"
+                                        labelText="User Main"
+                                        id="add_user_main"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newIsSuccess,
-                                            onChange: (e) => setNewIsSuccess(e.target.value),
+                                            value: newIsUserMain,
+                                            onChange: (e) => setNewIsUserMain(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Created On"
-                                        id="add_created_on"
+                                        labelText="Deleted"
+                                        id="add_deleted"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newCreatedOn,
-                                            onChange: (e) => setNewCreatedOn(e.target.value),
+                                            value: newIsDeleted,
+                                            onChange: (e) => setNewIsDeleted(e.target.value),
                                         }}
                                     />
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateTransaction()} color="primary">
+                                <Button onClick={() => updatePatient()} color="primary">
                                     Update
                                 </Button>
                             </DialogActions>

@@ -37,6 +37,7 @@ import LabResultTables from './views/Tables/LabResultTables';
 import FaqTables from './views/Tables/FaqTables';
 import ConsultationTables from './views/Tables/ConsultationTables';
 import TransactionTables from './views/Tables/TransactionTables';
+import PatientsTables from './views/Tables/PatientsTables';
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
@@ -49,6 +50,7 @@ import Colorize from '@material-ui/icons/Colorize';
 import Info from '@material-ui/icons/Info';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import CreditCard from '@material-ui/icons/CreditCard';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -130,6 +132,14 @@ var dashRoutes = [
     rtlName: 'عملية تجارية',
     icon: CreditCard,
     component: TransactionTables,
+    layout: '/admin',
+  },
+  {
+    path: '/patients',
+    name: 'Patients',
+    rtlName: 'عملية تجارية',
+    icon: AccountCircle,
+    component: PatientsTables,
     layout: '/admin',
   },
   {

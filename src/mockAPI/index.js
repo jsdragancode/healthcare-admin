@@ -12,6 +12,7 @@ createServer({
     faq: Model,
     consultation: Model,
     transaction: Model,
+    patient: Model,
   },
   factories: {
     driver: Factory.extend({
@@ -189,10 +190,10 @@ createServer({
     }),
     transaction: Factory.extend({
       booking_id(i) {
-        return `Booking Id ${i}`;
+        return `Booking ${i}`;
       },
       charge_id(i) {
-        return `Charge Id ${i}`;
+        return `Charge ${i}`;
       },
       track_code(i) {
         return parseInt(Math.random() * 1000000);
@@ -225,6 +226,47 @@ createServer({
         return new Date(
           start.getTime() + Math.random() * (end.getTime() - start.getTime())
         );
+      },
+    }),
+
+    patient: Factory.extend({
+      full_name(i) {
+        return `Name ${i}`;
+      },
+      gender(i) {
+        return Math.random() > 0.5 ? 1 : 0;
+      },
+      date_of_birth(i) {
+        let start = new Date(1940, 0, 1);
+        let end = new Date();
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      cpr_number(i) {
+        return `CPR Number ${i}`;
+      },
+      scanned_cpr_front(i) {
+        return `CPR Front ${i}`;
+      },
+      scanned_cpr_back(i) {
+        return `CPR Back ${i}`;
+      },
+      scanned_insurance_front(i) {
+        return `Insurance Front ${i}`;
+      },
+      scanned_insurance_back(i) {
+        return `Insurance Back ${i}`;
+      },
+      user_id(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      is_user_main(i) {
+        return Math.random() > 0.5 ? 1 : 0;
+      },
+      is_deleted(i) {
+        return Math.random() > 0.5 ? 1 : 0;
       },
     }),
   },
@@ -448,6 +490,30 @@ createServer({
       return lab.update(newCons);
     });
 
+    this.get('/patients/', (schema) => {
+      return schema.patients.all();
+    });
+
+    this.post('/patients/', (schema, request) => {
+      let newCons = JSON.parse(request.requestBody);
+
+      return schema.patients.create(newCons);
+    });
+
+    this.delete('/patients/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.patients.find(id).destroy();
+    });
+
+    this.patch('/patients/:id', (schema, request) => {
+      let newCons = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let lab = schema.patients.find(id);
+
+      return lab.update(newCons);
+    });
+
   },
   seeds(server) {
     server.createList('driver', 40);
@@ -459,5 +525,6 @@ createServer({
     server.createList('faq', 40);
     server.createList('consultation', 40);
     server.createList('transaction', 40);
+    server.createList('patient', 40);
   },
 });
