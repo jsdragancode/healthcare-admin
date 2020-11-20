@@ -109,7 +109,6 @@ export default function LabResultTables() {
 
     const delteLabResults = (deleteId) => {
         axios.delete(`/api/labresults/${deleteId}`).then(() => {
-            // console.log('delete', res);
             setData(data.filter((prop) => prop.id !== deleteId));
         });
     };
@@ -174,7 +173,7 @@ export default function LabResultTables() {
                                     }}
                                 >
                                     Add Lab Result
-                </Button>
+                                </Button>
                             </GridItem>
                         </GridContainer>
                         <ReactTableBottomPagination
@@ -405,7 +404,7 @@ export default function LabResultTables() {
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
                                 <Button onClick={() => updateLabResult()} color="primary">
                                     Update
-                </Button>
+                                </Button>
                             </DialogActions>
                         </Dialog>
                     </CardBody>

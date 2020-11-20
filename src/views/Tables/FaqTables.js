@@ -40,7 +40,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function LabResultTables() {
+export default function FaqTables() {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);

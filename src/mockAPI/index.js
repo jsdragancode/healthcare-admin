@@ -1,3 +1,4 @@
+import { Modal } from '@material-ui/core';
 import { createServer, Model, Factory } from 'miragejs';
 
 createServer({
@@ -10,6 +11,7 @@ createServer({
     labresult: Model,
     faq: Model,
     consultation: Model,
+    transaction: Model,
   },
   factories: {
     driver: Factory.extend({
@@ -152,7 +154,7 @@ createServer({
     }),
     consultation: Factory.extend({
       booking_id(i) {
-        return `Booking Id ${i}`;
+        return `booking ${i}`;
       },
       examination(i) {
         return `Examination ${i}`;
@@ -176,13 +178,53 @@ createServer({
         return `Respiration ${i}`;
       },
       blood_pressure(i) {
-        return `Blood ${i}`;
+        return parseInt(Math.random() * 1000);
       },
       weight(i) {
         return `Weight ${i}`;
       },
       height(i) {
         return `height ${i}`;
+      },
+    }),
+    transaction: Factory.extend({
+      booking_id(i) {
+        return `Booking Id ${i}`;
+      },
+      charge_id(i) {
+        return `Charge Id ${i}`;
+      },
+      track_code(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      payment_code(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      gateway_code(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      transaction_code(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      order_code(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      secret_hash(i) {
+        return parseInt(Math.random() * 10000000);
+      },
+      result_text(i) {
+        return `Result ${i}`;
+      },
+      is_success(i) {
+        return Math.random() > 0.5 ? 1 : 0;
+      },
+      created_on(i) {
+        let start = new Date(2012, 0, 1);
+        let end = new Date();
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
       },
     }),
   },
@@ -381,6 +423,31 @@ createServer({
 
       return lab.update(newCons);
     });
+
+    this.get('/transactions/', (schema) => {
+      return schema.transactions.all();
+    });
+
+    this.post('/transactions/', (schema, request) => {
+      let newCons = JSON.parse(request.requestBody);
+
+      return schema.transactions.create(newCons);
+    });
+
+    this.delete('/transactions/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.transactions.find(id).destroy();
+    });
+
+    this.patch('/transactions/:id', (schema, request) => {
+      let newCons = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let lab = schema.transactions.find(id);
+
+      return lab.update(newCons);
+    });
+
   },
   seeds(server) {
     server.createList('driver', 40);
@@ -391,5 +458,6 @@ createServer({
     server.createList('labresult', 40);
     server.createList('faq', 40);
     server.createList('consultation', 40);
+    server.createList('transaction', 40);
   },
 });

@@ -36,6 +36,7 @@ import TrackVansTables from './views/Tables/TrackVansTables';
 import LabResultTables from './views/Tables/LabResultTables';
 import FaqTables from './views/Tables/FaqTables';
 import ConsultationTables from './views/Tables/ConsultationTables';
+import TransactionTables from './views/Tables/TransactionTables';
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
@@ -47,6 +48,7 @@ import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Colorize from '@material-ui/icons/Colorize';
 import Info from '@material-ui/icons/Info';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import CreditCard from '@material-ui/icons/CreditCard';
 
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -120,6 +122,14 @@ var dashRoutes = [
     rtlName: 'التشاور',
     icon: RecordVoiceOverIcon,
     component: ConsultationTables,
+    layout: '/admin',
+  },
+  {
+    path: '/transaction',
+    name: 'Transaction',
+    rtlName: 'عملية تجارية',
+    icon: CreditCard,
+    component: TransactionTables,
     layout: '/admin',
   },
   {
