@@ -9,6 +9,7 @@ createServer({
     van: Model,
     labresult: Model,
     faq: Model,
+    consultation: Model,
   },
   factories: {
     driver: Factory.extend({
@@ -148,6 +149,41 @@ createServer({
       order_no(i) {
         return `Order ${i}`;
       }
+    }),
+    consultation: Factory.extend({
+      booking_id(i) {
+        return `Booking Id ${i}`;
+      },
+      examination(i) {
+        return `Examination ${i}`;
+      },
+      diagnosis(i) {
+        return `Diagnosis ${i}`;
+      },
+      follow_up(i) {
+        return `Follow Up ${i}`;
+      },
+      medication(i) {
+        return `Medication ${i}`;
+      },
+      body_temp(i) {
+        return `Body Temp ${i}`;
+      },
+      pulse_rate(i) {
+        return `Pulse ${i}`;
+      },
+      respiration_rate(i) {
+        return `Respiration ${i}`;
+      },
+      blood_pressure(i) {
+        return `Blood ${i}`;
+      },
+      weight(i) {
+        return `Weight ${i}`;
+      },
+      height(i) {
+        return `height ${i}`;
+      },
     }),
   },
   routes() {
@@ -320,7 +356,31 @@ createServer({
       let lab = schema.faqs.find(id);
 
       return lab.update(newFaq);
-    })
+    });
+
+    this.get('/consultations/', (schema) => {
+      return schema.consultations.all();
+    });
+
+    this.post('/consultations/', (schema, request) => {
+      let newCons = JSON.parse(request.requestBody);
+
+      return schema.consultations.create(newCons);
+    });
+
+    this.delete('/consultations/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.consultations.find(id).destroy();
+    });
+
+    this.patch('/consultations/:id', (schema, request) => {
+      let newCons = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let lab = schema.consultations.find(id);
+
+      return lab.update(newCons);
+    });
   },
   seeds(server) {
     server.createList('driver', 40);
@@ -330,5 +390,6 @@ createServer({
     server.createList('van', 40);
     server.createList('labresult', 40);
     server.createList('faq', 40);
+    server.createList('consultation', 40);
   },
 });

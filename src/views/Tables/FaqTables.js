@@ -12,7 +12,7 @@ import Slide from '@material-ui/core/Slide';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
-import Colorize from '@material-ui/icons/Colorize';
+import Info from '@material-ui/icons/Info';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -160,7 +160,7 @@ export default function LabResultTables() {
                 <Card>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
-                            <Colorize />
+                            <Info />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>FAQ</h4>
                     </CardHeader>

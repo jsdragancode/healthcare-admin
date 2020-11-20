@@ -35,16 +35,19 @@ import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
 import LabResultTables from './views/Tables/LabResultTables';
 import FaqTables from './views/Tables/FaqTables';
+import ConsultationTables from './views/Tables/ConsultationTables';
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
 import DriveEta from '@material-ui/icons/DriveEta';
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 import LocalHospital from '@material-ui/icons/LocalHospital';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Colorize from '@material-ui/icons/Colorize';
 import Info from '@material-ui/icons/Info';
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRange from '@material-ui/icons/DateRange';
@@ -67,7 +70,7 @@ var dashRoutes = [
     path: '/users',
     name: 'Users',
     rtlName: 'Users',
-    icon: RecordVoiceOverIcon,
+    icon: PersonAdd,
     component: UsersTables,
     layout: '/admin',
   },
@@ -109,6 +112,14 @@ var dashRoutes = [
     rtlName: 'نتيجة المختبر',
     icon: Info,
     component: FaqTables,
+    layout: '/admin',
+  },
+  {
+    path: '/consultation',
+    name: 'Consultation',
+    rtlName: 'التشاور',
+    icon: RecordVoiceOverIcon,
+    component: ConsultationTables,
     layout: '/admin',
   },
   {
