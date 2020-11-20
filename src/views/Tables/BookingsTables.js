@@ -13,7 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
-import Book from '@material-ui/icons/Book';
+import Bookmark from '@material-ui/icons/Bookmark';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -223,7 +223,7 @@ export default function BookingsTables() {
                 <Card>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
-                            <Book />
+                            <Bookmark />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Bookings</h4>
                     </CardHeader>
