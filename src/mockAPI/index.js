@@ -3,6 +3,8 @@ import { createServer, Model, Factory } from 'miragejs';
 
 createServer({
   models: {
+    adminparam: Model,
+    availabilityslot: Model,
     booking: Model,
     driver: Model,
     doctor: Model,
@@ -23,6 +25,41 @@ createServer({
 
   },
   factories: {
+    adminparam: Factory.extend({
+      param_key(i) {
+        return `param key ${i}`;
+      },
+      param_name(i) {
+        return `param name ${i}`;
+      },
+      param_value(i) {
+        return `param value ${i}`;
+      },
+    }),
+    availabilityslot: Factory.extend({
+      day_id(i) {
+        return parseInt(Math.random() * 1000);
+      },
+      start_time(i) {
+        let start = new Date(2018, 0, 1);
+        let end = new Date(2019, 0, 1);
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      end_time() {
+        let start = new Date(2018, 0, 1);
+        let end = new Date(2019, 0, 1);
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      number_of_concurrent_bookings() {
+        return parseInt(Math.random() * 1000);
+      },
+    }),
     booking: Factory.extend({
       user_id(i) {
         return `user ${i}`;
@@ -480,6 +517,54 @@ createServer({
     this.logging = false;
     this.namespace = 'api';
 
+    this.get('/adminparams/', (schema) => {
+      return schema.adminparams.all();
+    });
+
+    this.post('/adminparams/', (schema, request) => {
+      let newBook = JSON.parse(request.requestBody);
+
+      return schema.adminparams.create(newBook);
+    });
+
+    this.delete('/adminparams/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.adminparams.find(id).destroy();
+    });
+
+    this.patch('/adminparams/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let book = schema.adminparams.find(id);
+
+      return book.update(newAttrs);
+    });
+
+    this.get('/availabilityslots/', (schema) => {
+      return schema.availabilityslots.all();
+    });
+
+    this.post('/availabilityslots/', (schema, request) => {
+      let newBook = JSON.parse(request.requestBody);
+
+      return schema.availabilityslots.create(newBook);
+    });
+
+    this.delete('/availabilityslots/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.availabilityslots.find(id).destroy();
+    });
+
+    this.patch('/availabilityslots/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let book = schema.availabilityslots.find(id);
+
+      return book.update(newAttrs);
+    });
+
     this.get('/bookings/', (schema) => {
       return schema.bookings.all();
     });
@@ -890,6 +975,8 @@ createServer({
 
   },
   seeds(server) {
+    server.createList('adminparam', 40);
+    server.createList('availabilityslot', 40);
     server.createList('booking', 40);
     server.createList('driver', 40);
     server.createList('doctor', 40);

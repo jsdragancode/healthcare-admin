@@ -28,6 +28,8 @@ import VectorMap from 'views/Maps/VectorMap.js';
 import Widgets from 'views/Widgets/Widgets.js';
 import Wizard from 'views/Forms/Wizard.js';
 
+import AdminParamsTables from './views/Tables/AdminParamsTables';
+import AvailabilitySlotsTables from './views/Tables/AvailabilitySlotsTables';
 import BookingsTables from './views/Tables/BookingsTables';
 import BookingStatusHistoryTables from './views/Tables/BookingStatusHistoryTables';
 import DriversTables from './views/Tables/DriversTables';
@@ -61,6 +63,8 @@ import Info from '@material-ui/icons/Info';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import CreditCard from '@material-ui/icons/CreditCard';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Person from '@material-ui/icons/Person';
+import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import Bookmark from '@material-ui/icons/Bookmark';
 import Bookmarks from '@material-ui/icons/Bookmarks';
 import Contacts from '@material-ui/icons/Contacts';
@@ -75,6 +79,15 @@ import Timeline from '@material-ui/icons/Timeline';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 
 var dashRoutes = [
+
+  {
+    path: '/param-admin',
+    name: 'Admin Param',
+    rtlName: 'الحجوزات',
+    icon: Person,
+    component: AdminParamsTables,
+    layout: '/admin',
+  },
   {
     path: '/bookings',
     name: 'Bookings',
@@ -89,6 +102,14 @@ var dashRoutes = [
     rtlName: 'سجل الحجز',
     icon: Bookmarks,
     component: BookingStatusHistoryTables,
+    layout: '/admin',
+  },
+  {
+    path: '/availability-slot',
+    name: 'Availability Slot',
+    rtlName: 'الحجوزات',
+    icon: LibraryBooks,
+    component: AvailabilitySlotsTables,
     layout: '/admin',
   },
   {
