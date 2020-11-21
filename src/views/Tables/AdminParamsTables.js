@@ -123,7 +123,7 @@ export default function AdminParamsTables() {
             });
     };
 
-    const updateUserNotification = () => {
+    const updateAdminParam = () => {
         axios
             .patch(`/api/adminparams/${deleteAdminParam}`, {
                 param_key: newParamKey,
@@ -149,7 +149,7 @@ export default function AdminParamsTables() {
                         <CardIcon color="primary">
                             <Person />
                         </CardIcon>
-                        <h4 className={classes.cardIconTitle}>User Admin Param</h4>
+                        <h4 className={classes.cardIconTitle}>Admin Param</h4>
                     </CardHeader>
                     <CardBody>
                         <GridContainer justify="flex-end">
@@ -206,7 +206,7 @@ export default function AdminParamsTables() {
                                 id="small-modal-slide-description"
                                 className={classes.modalBody + ' ' + classes.modalSmallBody}
                             >
-                                <h5>Are you sure you want to delete this user admin param?</h5>
+                                <h5>Are you sure you want to delete this admin param?</h5>
                             </DialogContent>
                             <DialogActions
                                 className={
@@ -370,7 +370,7 @@ export default function AdminParamsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateUserNotification()} color="primary">
+                                <Button onClick={() => updateAdminParam()} color="primary">
                                     Update
                 </Button>
                             </DialogActions>
