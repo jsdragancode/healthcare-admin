@@ -31,11 +31,12 @@ import Wizard from 'views/Forms/Wizard.js';
 import BookingsTables from './views/Tables/BookingsTables';
 import BookingStatusHistoryTables from './views/Tables/BookingStatusHistoryTables';
 import DriversTables from './views/Tables/DriversTables';
-import UsersTables from './views/Tables/UsersTables';
 import DoctorsTables from './views/Tables/DoctorsTables';
 import ConsoleUsersTables from './views/Tables/ConsoleUsersTables';
 import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
+import UsersTables from './views/Tables/UsersTables';
+import UserInterfaceIdTables from './views/Tables/UserInterfaceIdTables';
 import LabResultTables from './views/Tables/LabResultTables';
 import LabTestTables from './views/Tables/LabTestTables';
 import FaqTables from './views/Tables/FaqTables';
@@ -61,7 +62,7 @@ import CreditCard from '@material-ui/icons/CreditCard';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Bookmark from '@material-ui/icons/Bookmark';
 import Bookmarks from '@material-ui/icons/Bookmarks';
-
+import Contacts from '@material-ui/icons/Contacts';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRange from '@material-ui/icons/DateRange';
@@ -97,14 +98,6 @@ var dashRoutes = [
     layout: '/admin',
   },
   {
-    path: '/users',
-    name: 'Users',
-    rtlName: 'Users',
-    icon: PersonAdd,
-    component: UsersTables,
-    layout: '/admin',
-  },
-  {
     path: '/doctors',
     name: 'Doctors',
     rtlName: 'Doctors',
@@ -134,6 +127,22 @@ var dashRoutes = [
     rtlName: 'Track Vans',
     icon: AirportShuttle,
     component: TrackVansTables,
+    layout: '/admin',
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    rtlName: 'Users',
+    icon: PersonAdd,
+    component: UsersTables,
+    layout: '/admin',
+  },
+  {
+    path: '/interface-user',
+    name: 'Users Interface',
+    rtlName: 'واجهة المستخدم',
+    icon: Contacts,
+    component: UserInterfaceIdTables,
     layout: '/admin',
   },
   {

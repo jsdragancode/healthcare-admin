@@ -5,11 +5,12 @@ createServer({
   models: {
     booking: Model,
     driver: Model,
-    user: Model,
     doctor: Model,
     consoleUser: Model,
     nurse: Model,
     van: Model,
+    user: Model,
+    userInterface: Model,
     labresult: Model,
     labtest: Model,
     faq: Model,
@@ -18,6 +19,7 @@ createServer({
     patient: Model,
     location: Model,
     bookingHistory: Model,
+
   },
   factories: {
     booking: Factory.extend({
@@ -143,6 +145,20 @@ createServer({
         return new Date(
           start.getTime() + Math.random() * (end.getTime() - start.getTime())
         );
+      },
+    }),
+    userInterface: Factory.extend({
+      user_id(i) {
+        return parseInt(Math.random() * 100000);
+      },
+      instance_id(i) {
+        return parseInt(Math.random() * 100000);
+      },
+      device_os(i) {
+        return `device os ${i}`;
+      },
+      device_model(i) {
+        return `device model ${i}`;
       },
     }),
     doctor: Factory.extend({
@@ -489,30 +505,6 @@ createServer({
       return driver.update(newAttrs);
     });
 
-    this.get('/users/', (schema) => {
-      return schema.users.all();
-    });
-
-    this.post('/users/', (schema, request) => {
-      let newUser = JSON.parse(request.requestBody);
-
-      return schema.users.create(newUser);
-    });
-
-    this.delete('/users/:id', (schema, request) => {
-      let id = request.params.id;
-
-      return schema.users.find(id).destroy();
-    });
-
-    this.patch('/users/:id', (schema, request) => {
-      let newAttrs = JSON.parse(request.requestBody);
-      let id = request.params.id;
-      let user = schema.users.find(id);
-
-      return user.update(newAttrs);
-    });
-
     this.get('/doctors/', (schema) => {
       return schema.doctors.all();
     });
@@ -607,6 +599,54 @@ createServer({
       let van = schema.vans.find(id);
 
       return van.update(newAttrs);
+    });
+
+    this.get('/users/', (schema) => {
+      return schema.users.all();
+    });
+
+    this.post('/users/', (schema, request) => {
+      let newUser = JSON.parse(request.requestBody);
+
+      return schema.users.create(newUser);
+    });
+
+    this.delete('/users/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.users.find(id).destroy();
+    });
+
+    this.patch('/users/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let user = schema.users.find(id);
+
+      return user.update(newAttrs);
+    });
+
+    this.get('/userInterfaces/', (schema) => {
+      return schema.userInterfaces.all();
+    });
+
+    this.post('/userInterfaces/', (schema, request) => {
+      let newUser = JSON.parse(request.requestBody);
+
+      return schema.userInterfaces.create(newUser);
+    });
+
+    this.delete('/userInterfaces/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.userInterfaces.find(id).destroy();
+    });
+
+    this.patch('/userInterfaces/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let user = schema.userInterfaces.find(id);
+
+      return user.update(newAttrs);
     });
 
     this.get('/labresults/', (schema) => {
@@ -805,11 +845,12 @@ createServer({
   seeds(server) {
     server.createList('booking', 40);
     server.createList('driver', 40);
-    server.createList('user', 40);
     server.createList('doctor', 40);
     server.createList('consoleUser', 40);
     server.createList('nurse', 40);
     server.createList('van', 40);
+    server.createList('user', 40);
+    server.createList('userInterface', 40);
     server.createList('labresult', 40);
     server.createList('labtest', 40);
     server.createList('faq', 40);
