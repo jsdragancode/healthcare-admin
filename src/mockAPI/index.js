@@ -10,6 +10,7 @@ createServer({
     nurse: Model,
     van: Model,
     labresult: Model,
+    labtest: Model,
     faq: Model,
     consultation: Model,
     transaction: Model,
@@ -212,6 +213,26 @@ createServer({
       },
       result(i) {
         return `result ${i}`;
+      }
+    }),
+    labtest: Factory.extend({
+      test_name_ar(i) {
+        return `Aame ar ${i}`;
+      },
+      test_name_en(i) {
+        return `Name en ${i}`;
+      },
+      test_short_desc_ar(i) {
+        return `Desc ar ${i}`;
+      },
+      test_short_desc_en(i) {
+        return `Desc en ${i}`;
+      },
+      is_available(i) {
+        return `Availalbe ${i}`;
+      },
+      price(i) {
+        return `Price {i}`;
       }
     }),
     faq: Factory.extend({
@@ -554,6 +575,30 @@ createServer({
       return lab.update(newLabs);
     });
 
+    this.get('/labtests/', (schema) => {
+      return schema.labtests.all();
+    });
+
+    this.post('/labtests/', (schema, request) => {
+      let newLab = JSON.parse(request.requestBody);
+
+      return schema.labtests.create(newLab);
+    });
+
+    this.delete('/labtests/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.labtests.find(id).destroy();
+    });
+
+    this.patch('/labtests/:id', (schema, request) => {
+      let newLabs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let lab = schema.labtests.find(id);
+
+      return lab.update(newLabs);
+    });
+
     this.get('/faqs/', (schema) => {
       return schema.faqs.all();
     });
@@ -707,6 +752,7 @@ createServer({
     server.createList('nurse', 40);
     server.createList('van', 40);
     server.createList('labresult', 40);
+    server.createList('labtest', 40);
     server.createList('faq', 40);
     server.createList('consultation', 40);
     server.createList('transaction', 40);

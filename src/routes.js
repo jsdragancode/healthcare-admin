@@ -29,18 +29,20 @@ import Widgets from 'views/Widgets/Widgets.js';
 import Wizard from 'views/Forms/Wizard.js';
 
 import BookingsTables from './views/Tables/BookingsTables';
+import BookingStatusHistoryTables from './views/Tables/BookingStatusHistoryTables';
 import DriversTables from './views/Tables/DriversTables';
 import UsersTables from './views/Tables/UsersTables';
 import DoctorsTables from './views/Tables/DoctorsTables';
 import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
 import LabResultTables from './views/Tables/LabResultTables';
+import LabTestTables from './views/Tables/LabTestTables';
 import FaqTables from './views/Tables/FaqTables';
 import ConsultationTables from './views/Tables/ConsultationTables';
 import TransactionTables from './views/Tables/TransactionTables';
 import PatientsTables from './views/Tables/PatientsTables';
 import LocationTrackingTables from './views/Tables/LocationTrackingTables';
-import BookingStatusHistoryTables from './views/Tables/BookingStatusHistoryTables';
+
 
 // @material-ui/icons
 import Apps from '@material-ui/icons/Apps';
@@ -50,6 +52,7 @@ import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 import LocalHospital from '@material-ui/icons/LocalHospital';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Colorize from '@material-ui/icons/Colorize';
+import Edit from '@material-ui/icons/Edit';
 import Info from '@material-ui/icons/Info';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import CreditCard from '@material-ui/icons/CreditCard';
@@ -73,6 +76,14 @@ var dashRoutes = [
     rtlName: 'الحجوزات',
     icon: Bookmark,
     component: BookingsTables,
+    layout: '/admin',
+  },
+  {
+    path: '/booking-history',
+    name: 'Booking History',
+    rtlName: 'سجل الحجز',
+    icon: Bookmarks,
+    component: BookingStatusHistoryTables,
     layout: '/admin',
   },
   {
@@ -124,6 +135,14 @@ var dashRoutes = [
     layout: '/admin',
   },
   {
+    path: '/lab-test',
+    name: 'Lab Tests',
+    rtlName: 'التحاليل المخبرية',
+    icon: Edit,
+    component: LabTestTables,
+    layout: '/admin',
+  },
+  {
     path: '/faq',
     name: 'FAQ',
     rtlName: 'نتيجة المختبر',
@@ -161,14 +180,6 @@ var dashRoutes = [
     rtlName: 'تتبع الموقع',
     icon: Place,
     component: LocationTrackingTables,
-    layout: '/admin',
-  },
-  {
-    path: '/booking-history',
-    name: 'Booking History',
-    rtlName: 'سجل الحجز',
-    icon: Bookmarks,
-    component: BookingStatusHistoryTables,
     layout: '/admin',
   },
   {

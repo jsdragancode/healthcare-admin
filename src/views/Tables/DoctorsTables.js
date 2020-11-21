@@ -126,8 +126,9 @@ export default function DoctorsTables() {
 
   useEffect(getDriver, []);
 
-  const delteDriver = (deleteId) => {
-    axios.delete(`/api/drivers/${deleteId}`).then(() => {
+  const deleteDoctor = (deleteId) => {
+    console.log(deleteId);
+    axios.delete(`/api/doctors/${deleteId}`).then(() => {
       // console.log('delete', res);
       setData(data.filter((prop) => prop.id !== deleteId));
     });
@@ -296,7 +297,7 @@ export default function DoctorsTables() {
                 <Button
                   onClick={() => {
                     setDeleteModal(false);
-                    delteDriver(selectedDoctorId);
+                    deleteDoctor(selectedDoctorId);
                   }}
                   color="success"
                   simple

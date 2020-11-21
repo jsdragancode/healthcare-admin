@@ -120,7 +120,7 @@ export default function NursesTables() {
 
   useEffect(getNurses, []);
 
-  const delteNurse = (deleteId) => {
+  const deleteNurse = (deleteId) => {
     axios.delete(`/api/nurses/${deleteId}`).then(() => {
       // console.log('delete', res);
       setData(data.filter((prop) => prop.id !== deleteId));
@@ -274,7 +274,7 @@ export default function NursesTables() {
                 <Button
                   onClick={() => {
                     setDeleteModal(false);
-                    delteNurse(selectedNurseId);
+                    deleteNurse(selectedNurseId);
                   }}
                   color="success"
                   simple
