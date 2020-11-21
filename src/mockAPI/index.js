@@ -7,6 +7,7 @@ createServer({
     driver: Model,
     user: Model,
     doctor: Model,
+    consoleUser: Model,
     nurse: Model,
     van: Model,
     labresult: Model,
@@ -169,6 +170,39 @@ createServer({
       is_active() {
         // 0 : in-active, 1 : active
         return Math.random() > 0.5 ? 1 : 0;
+      },
+    }),
+    consoleUser: Factory.extend({
+      username(i) {
+        return `user ${i}`;
+      },
+      password_hash(i) {
+        return `password hash ${i}`;
+      },
+      role(i) {
+        return `role ${i}`;
+      },
+      last_login(i) {
+        let start = new Date(2018, 0, 1);
+        let end = new Date(2019, 0, 1);
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      last_failed_login(i) {
+        let start = new Date(2018, 0, 1);
+        let end = new Date(2019, 0, 1);
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      consecutive_failed_logins_count() {
+        return parseInt(Math.random() * 10);
+      },
+      doctor_id() {
+        return parseInt(Math.random() * 100);
       },
     }),
     nurse: Factory.extend({
@@ -503,6 +537,30 @@ createServer({
       return doctor.update(newAttrs);
     });
 
+    this.get('/consoleUsers/', (schema) => {
+      return schema.consoleUsers.all();
+    });
+
+    this.post('/consoleUsers/', (schema, request) => {
+      let newDoctor = JSON.parse(request.requestBody);
+
+      return schema.consoleUsers.create(newDoctor);
+    });
+
+    this.delete('/consoleUsers/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.consoleUsers.find(id).destroy();
+    });
+
+    this.patch('/consoleUsers/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let doctor = schema.consoleUsers.find(id);
+
+      return doctor.update(newAttrs);
+    });
+
     this.get('/nurses/', (schema) => {
       return schema.nurses.all();
     });
@@ -749,6 +807,7 @@ createServer({
     server.createList('driver', 40);
     server.createList('user', 40);
     server.createList('doctor', 40);
+    server.createList('consoleUser', 40);
     server.createList('nurse', 40);
     server.createList('van', 40);
     server.createList('labresult', 40);

@@ -33,6 +33,7 @@ import BookingStatusHistoryTables from './views/Tables/BookingStatusHistoryTable
 import DriversTables from './views/Tables/DriversTables';
 import UsersTables from './views/Tables/UsersTables';
 import DoctorsTables from './views/Tables/DoctorsTables';
+import ConsoleUsersTables from './views/Tables/ConsoleUsersTables';
 import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
 import LabResultTables from './views/Tables/LabResultTables';
@@ -50,6 +51,7 @@ import DriveEta from '@material-ui/icons/DriveEta';
 import PersonAdd from '@material-ui/icons/PersonAdd';
 import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 import LocalHospital from '@material-ui/icons/LocalHospital';
+import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Colorize from '@material-ui/icons/Colorize';
 import Edit from '@material-ui/icons/Edit';
@@ -108,6 +110,14 @@ var dashRoutes = [
     rtlName: 'Doctors',
     icon: LocalHospital,
     component: DoctorsTables,
+    layout: '/admin',
+  },
+  {
+    path: '/console-users',
+    name: 'Console Users',
+    rtlName: 'مستخدمي وحدة التحكم',
+    icon: AssignmentInd,
+    component: ConsoleUsersTables,
     layout: '/admin',
   },
   {
