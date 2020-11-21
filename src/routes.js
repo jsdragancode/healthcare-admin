@@ -37,6 +37,7 @@ import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
 import UsersTables from './views/Tables/UsersTables';
 import UserInterfaceIdTables from './views/Tables/UserInterfaceIdTables';
+import UserNotificationTables from './views/Tables/UserNotificationTables';
 import LabResultTables from './views/Tables/LabResultTables';
 import LabTestTables from './views/Tables/LabTestTables';
 import FaqTables from './views/Tables/FaqTables';
@@ -63,6 +64,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Bookmark from '@material-ui/icons/Bookmark';
 import Bookmarks from '@material-ui/icons/Bookmarks';
 import Contacts from '@material-ui/icons/Contacts';
+import AddAlert from '@material-ui/icons/AddAlert';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRange from '@material-ui/icons/DateRange';
@@ -143,6 +145,14 @@ var dashRoutes = [
     rtlName: 'واجهة المستخدم',
     icon: Contacts,
     component: UserInterfaceIdTables,
+    layout: '/admin',
+  },
+  {
+    path: '/notification-user',
+    name: 'Users Notification',
+    rtlName: 'واجهة المستخدم',
+    icon: AddAlert,
+    component: UserNotificationTables,
     layout: '/admin',
   },
   {

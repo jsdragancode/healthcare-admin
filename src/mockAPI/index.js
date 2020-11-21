@@ -11,6 +11,7 @@ createServer({
     van: Model,
     user: Model,
     userInterface: Model,
+    userNotification: Model,
     labresult: Model,
     labtest: Model,
     faq: Model,
@@ -159,6 +160,28 @@ createServer({
       },
       device_model(i) {
         return `device model ${i}`;
+      },
+    }),
+    userNotification: Factory.extend({
+      title(i) {
+        return `title ${i}`;
+      },
+      message(i) {
+        return `message ${i}`;
+      },
+      user_id(i) {
+        return parseInt(Math.random() * 10000);
+      },
+      on_datetime(i) {
+        let start = new Date(2012, 0, 1);
+        let end = new Date();
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      },
+      is_read(i) {
+        return Math.random() > 0.5 ? 1 : 0;
       },
     }),
     doctor: Factory.extend({
@@ -649,6 +672,30 @@ createServer({
       return user.update(newAttrs);
     });
 
+    this.get('/userNotifications/', (schema) => {
+      return schema.userNotifications.all();
+    });
+
+    this.post('/userNotifications/', (schema, request) => {
+      let newUser = JSON.parse(request.requestBody);
+
+      return schema.userNotifications.create(newUser);
+    });
+
+    this.delete('/userNotifications/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.userNotifications.find(id).destroy();
+    });
+
+    this.patch('/userNotifications/:id', (schema, request) => {
+      let newAttrs = JSON.parse(request.requestBody);
+      let id = request.params.id;
+      let user = schema.userNotifications.find(id);
+
+      return user.update(newAttrs);
+    });
+
     this.get('/labresults/', (schema) => {
       return schema.labresults.all();
     });
@@ -851,6 +898,7 @@ createServer({
     server.createList('van', 40);
     server.createList('user', 40);
     server.createList('userInterface', 40);
+    server.createList('userNotification', 40);
     server.createList('labresult', 40);
     server.createList('labtest', 40);
     server.createList('faq', 40);
