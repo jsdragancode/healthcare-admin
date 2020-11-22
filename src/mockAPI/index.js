@@ -342,7 +342,7 @@ createServer({
         return `Availalbe ${i}`;
       },
       price(i) {
-        return `Price {i}`;
+        return `Price ${i}`;
       }
     }),
     faq: Factory.extend({
