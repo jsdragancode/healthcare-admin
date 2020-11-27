@@ -24,6 +24,8 @@ import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
 
+import Snackbar from "../../components/Snackbar/Snackbar.js";
+
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 
 const styles = {
@@ -52,6 +54,8 @@ export default function UserNotificationTables() {
     const [newOnDatetime, setNewOnDatetime] = useState('');
     const [newIsRead, setNewIsRead] = useState('');
     const classes = useStyles();
+    const [failed, setFailed] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
 
     const setUserNotification = (info) => {
         const { title, message, user_id, on_datetime, is_read, } = info;
@@ -116,18 +120,42 @@ export default function UserNotificationTables() {
     };
 
     const addUserNotification = () => {
-        axios
-            .post('/api/userNotifications/', {
-                title: newTitle,
-                message: newMessage,
-                user_id: newUserId,
-                on_datetime: newOnDatetime,
-                is_read: newIsRead,
-            })
-            .then((res) => {
-                setData([...data, makeTableRow(res.data.userNotification)]);
-                setAddModal(false);
-            });
+        const userId = parseInt(Math.random() * 10000);
+        const onDate = moment().format();
+        const isRead = '0';
+
+        const randCheck = parseInt(Math.random() * 10)
+
+        if (randCheck < 5) {
+            // setData([...data, makeTableRow(res.data.userNotification)]);
+            setAddModal(false);
+            setFailed(true);
+            setTimeout(function () {
+                setFailed(false);
+            }, 3000);
+        } else {
+            axios
+                .post('/api/userNotifications/', {
+                    title: newTitle,
+                    message: newMessage,
+                    // user_id: newUserId,
+                    // on_datetime: newOnDatetime,
+                    // is_read: newIsRead,
+                    user_id: userId,
+                    on_datetime: onDate,
+                    is_read: isRead,
+                })
+                .then((res) => {
+                    setData([...data, makeTableRow(res.data.userNotification)]);
+                    setAddModal(false);
+                });
+
+            setSuccess(true);
+            setTimeout(function () {
+                setSuccess(false);
+            }, 3000);
+        }
+
     };
 
     const updateUserNotification = () => {
@@ -300,11 +328,13 @@ export default function UserNotificationTables() {
                                         }}
                                         inputProps={{
                                             type: 'text',
+                                            multiline: true,
+                                            rows: 10,
                                             value: newMessage,
                                             onChange: (e) => setNewMessage(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
+                                    {/* <CustomInput
                                         labelText="User ID"
                                         id="add_mobile_number"
                                         formControlProps={{
@@ -339,16 +369,34 @@ export default function UserNotificationTables() {
                                             value: newIsRead,
                                             onChange: (e) => setNewIsRead(e.target.value),
                                         }}
-                                    />
+                                    /> */}
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
                                 <Button onClick={() => addUserNotification()} color="primary">
-                                    Add
-                </Button>
+                                    Submit
+                                </Button>
                             </DialogActions>
                         </Dialog>
+                        <Snackbar
+                            place="tr"
+                            color="success"
+                            icon={AddAlert}
+                            message="Congratulations! Your notification was pushed successfully."
+                            open={success}
+                            closeNotification={() => setSuccess(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="rose"
+                            icon={AddAlert}
+                            message="Sorry, but your notification was failed. "
+                            open={failed}
+                            closeNotification={() => setFailed(false)}
+                            close
+                        />
                         <Dialog
                             classes={{
                                 root: classes.center + ' ' + classes.modalRoot,
@@ -394,10 +442,12 @@ export default function UserNotificationTables() {
                                         inputProps={{
                                             type: 'text',
                                             value: newMessage,
+                                            multiline: true,
+                                            rows: 10,
                                             onChange: (e) => setNewMessage(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
+                                    {/* <CustomInput
                                         labelText="User ID"
                                         id="add_mobile_number"
                                         formControlProps={{
@@ -432,7 +482,7 @@ export default function UserNotificationTables() {
                                             value: newIsRead,
                                             onChange: (e) => setNewIsRead(e.target.value),
                                         }}
-                                    />
+                                    /> */}
                                 </form>
                             </DialogContent>
                             <DialogActions>
