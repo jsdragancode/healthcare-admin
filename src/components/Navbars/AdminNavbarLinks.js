@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { Route, Redirect } from "react-router-dom"
 // import { Manager, Target, Popper } from "react-popper";
 
 // @material-ui/core components
@@ -30,6 +31,9 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const [openNotification, setOpenNotification] = React.useState(null);
+
+  const [loginToken, setLoginToken] = useState('');
+
   const handleClickNotification = (event) => {
     if (openNotification && openNotification.contains(event.target)) {
       setOpenNotification(null);
@@ -50,6 +54,9 @@ export default function HeaderLinks(props) {
   };
   const handleCloseProfile = () => {
     setOpenProfile(null);
+    setLoginToken('failed');
+    localStorage.setItem("LoginToken", "failed");
+    localStorage.setItem("UserRole", "failed");
   };
   const classes = useStyles();
   const { rtlActive } = props;
@@ -72,7 +79,7 @@ export default function HeaderLinks(props) {
   });
   return (
     <div className={wrapper}>
-      <CustomInput
+      {/* <CustomInput
         rtlActive={rtlActive}
         formControlProps={{
           className: classes.top + ' ' + classes.search,
@@ -212,7 +219,11 @@ export default function HeaderLinks(props) {
             </Grow>
           )}
         </Popper>
-      </div>
+      </div> */}
+
+      {(loginToken === 'failed') && (
+        <Redirect to='../auth/login'></Redirect>
+      )}
 
       <div className={managerClasses}>
         <Button
@@ -263,7 +274,7 @@ export default function HeaderLinks(props) {
               <Paper className={classes.dropdown}>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={handleCloseProfile}
                       className={dropdownItem}
                     >
@@ -274,7 +285,7 @@ export default function HeaderLinks(props) {
                       className={dropdownItem}
                     >
                       {rtlActive ? 'الإعدادات' : 'Settings'}
-                    </MenuItem>
+                    </MenuItem> */}
                     <Divider light />
                     <MenuItem
                       onClick={handleCloseProfile}

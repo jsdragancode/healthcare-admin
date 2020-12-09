@@ -66,8 +66,6 @@ export default function LoginPage() {
         console.log('User Role =>' + res.data.user.role);
 
         setLoginToken(res.data.token);
-
-        {/* <Redirect to="/dashboard" /> */ }
       })
       .catch((e) => {
         console.log(e);
@@ -79,7 +77,7 @@ export default function LoginPage() {
         <GridItem xs={12} sm={6} md={4}>
           <form>
             {(loginToken === 'admin_token' || loginToken === 'driver_token') && (
-              <Redirect from='/login' to='../admin/users'></Redirect>
+              <Redirect to='../admin/users'></Redirect>
             )}
             <Card login className={classes[cardAnimaton]}>
               <CardHeader
