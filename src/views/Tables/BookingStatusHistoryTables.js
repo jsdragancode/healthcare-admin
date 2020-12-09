@@ -99,9 +99,7 @@ export default function BookingStatusHistoryTables() {
     };
 
     const getBookingHistory = () => {
-        console.log(123);
         axios.get('/api/bookingHistories/').then((res) => {
-            console.log(456);
             setData(res.data.bookingHistories.map((prop) => makeTableRow(prop)));
         });
     };

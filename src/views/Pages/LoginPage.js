@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Route, Redirect } from "react-router-dom"
+import axios from 'axios';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,6 +21,7 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
+import SnackbarContent from "components/Snackbar/SnackbarContent.js";
 
 import styles from 'assets/jss/material-dashboard-pro-react/views/loginPageStyle.js';
 
@@ -26,6 +29,12 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage() {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginToken, setLoginToken] = useState('');
+  const [userRole, setUserRole] = useState('');
+
   React.useEffect(() => {
     let id = setTimeout(function () {
       setCardAnimation('');
@@ -36,18 +45,49 @@ export default function LoginPage() {
     };
   });
   const classes = useStyles();
+
+  const makeTableRow = (info) => {
+    alert('info');
+  }
+
+  const handleLogin = () => {
+    // localStorage.setItem("user", loginEmail)
+    // const savedEmail = localStorage.getItem("user");
+
+    axios
+      .post('/api/logins/', {
+        email: loginEmail,
+        password: loginPassword,
+      })
+      .then((res) => {
+        localStorage.setItem("LoginToken", res.data.token);
+        localStorage.setItem("UserRole", res.data.user.role);
+        console.log('Login Token =>' + res.data.token);
+        console.log('User Role =>' + res.data.user.role);
+
+        setLoginToken(res.data.token);
+
+        {/* <Redirect to="/dashboard" /> */ }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className={classes.container}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={6} md={4}>
           <form>
+            {(loginToken === 'admin_token' || loginToken === 'driver_token') && (
+              <Redirect from='/login' to='../admin/users'></Redirect>
+            )}
             <Card login className={classes[cardAnimaton]}>
               <CardHeader
                 className={`${classes.cardHeader} ${classes.textCenter}`}
                 color="rose"
               >
                 <h4 className={classes.cardTitle}>Log in</h4>
-                <div className={classes.socialLine}>
+                {/* <div className={classes.socialLine}>
                   {[
                     'fab fa-facebook-square',
                     'fab fa-twitter',
@@ -64,11 +104,11 @@ export default function LoginPage() {
                       </Button>
                     );
                   })}
-                </div>
+                </div> */}
               </CardHeader>
               <CardBody>
-                <CustomInput
-                  labelText="First Name.."
+                {/* <CustomInput
+                  labelText="First Name"
                   id="firstname"
                   formControlProps={{
                     fullWidth: true,
@@ -80,9 +120,9 @@ export default function LoginPage() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
                 <CustomInput
-                  labelText="Email..."
+                  labelText="Email"
                   id="email"
                   formControlProps={{
                     fullWidth: true,
@@ -93,6 +133,7 @@ export default function LoginPage() {
                         <Email className={classes.inputAdornmentIcon} />
                       </InputAdornment>
                     ),
+                    onChange: (e) => setLoginEmail(e.target.value),
                   }}
                 />
                 <CustomInput
@@ -111,11 +152,22 @@ export default function LoginPage() {
                     ),
                     type: 'password',
                     autoComplete: 'off',
+                    onChange: (e) => setLoginPassword(e.target.value),
                   }}
                 />
               </CardBody>
+
+              {(loginToken === 'failed') && (
+                <CardHeader
+                  className={`${classes.cardHeader} ${classes.textCenter}`}
+                  color="rose"
+                >
+                  <h4 className={classes.cardTitle}>Incorrect Email or Password!</h4>
+                </CardHeader>
+              )}
+
               <CardFooter className={classes.justifyContentCenter}>
-                <Button color="rose" simple size="lg" block>
+                <Button color="rose" simple size="lg" block onClick={() => handleLogin()} >
                   Let{"'"}s Go
                 </Button>
               </CardFooter>

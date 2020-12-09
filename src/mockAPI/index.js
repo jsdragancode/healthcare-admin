@@ -22,7 +22,6 @@ createServer({
     patient: Model,
     location: Model,
     bookingHistory: Model,
-
   },
   factories: {
     adminparam: Factory.extend({
@@ -973,6 +972,31 @@ createServer({
       return book.update(newAttrs);
     });
 
+    this.post('/logins/', (schema, request) => {
+      let loginInfo = JSON.parse(request.requestBody);
+      if (loginInfo.email === 'admin@test.com' && loginInfo.password === 'admin123') {
+        return {
+          token: 'admin_token',
+          user: {
+            role: 'admin'
+          }
+        };
+      } else if (loginInfo.email === 'driver@test.com' && loginInfo.password === 'driver123') {
+        return {
+          token: 'driver_token',
+          user: {
+            role: 'driver'
+          }
+        };
+      } else {
+        return {
+          token: 'failed',
+          user: {
+            role: 'failed'
+          }
+        };
+      }
+    });
   },
   seeds(server) {
     server.createList('adminparam', 40);

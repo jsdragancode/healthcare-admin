@@ -22,7 +22,7 @@
     "react-dom": "16.13.1",
     "react-google-maps": "9.4.5",
     "react-jvectormap": "0.0.16",
-    "react-router-dom": "5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-swipeable-views": "0.13.9",
     "react-table": "7.1.0",
