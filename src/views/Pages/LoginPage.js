@@ -34,6 +34,7 @@ export default function LoginPage() {
   const [loginPassword, setLoginPassword] = useState('');
   const [loginToken, setLoginToken] = useState('');
   const [userRole, setUserRole] = useState('');
+  const [hideWarning, setHideWarning] = useState('false');
 
   React.useEffect(() => {
     let id = setTimeout(function () {
@@ -62,6 +63,13 @@ export default function LoginPage() {
         console.log('User Role =>' + res.data.user.role);
 
         setLoginToken(res.data.token);
+
+        if (res.data.token === 'failed') {
+          setHideWarning('true');
+          setTimeout(function () {
+            setHideWarning('false')
+          }, 2000);
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -73,7 +81,7 @@ export default function LoginPage() {
         <GridItem xs={12} sm={6} md={4}>
           <form>
             {(loginToken === 'admin_token' || loginToken === 'doctor_token') && (
-              <Redirect to='../admin/users'></Redirect>
+              <Redirect to='../admin/param-admin'></Redirect>
             )}
             <Card login className={classes[cardAnimaton]}>
               <CardHeader
@@ -151,7 +159,7 @@ export default function LoginPage() {
                 />
               </CardBody>
 
-              {(loginToken === 'failed') && (
+              {(loginToken === 'failed' && hideWarning === 'true') && (
                 <CardHeader
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="rose"
