@@ -106,20 +106,26 @@ export default function Dashboard(props) {
     let userRole = localStorage.getItem("UserRole");
     let loginToken = localStorage.getItem("LoginToken");
 
-    if (loginToken == 'failed') {
+    if (loginToken === 'failed') {
       setCurrentLoginToken('failed');
     }
 
     for (let i = 0; i < route.length; i++) {
       let collapseActiveRouteRole = route[i].role;
 
-      // alert('route role reset =>' + collapseActiveRouteRole);
-
-      if (userRole == collapseActiveRouteRole || collapseActiveRouteRole == 'all') {
-        newRoute[newRouteId] = route[i];
-        newRouteId = newRouteId + 1;
+      if (userRole === 'admin') {
+        if (route[i].role != 'failed') {
+          newRoute[newRouteId] = route[i];
+          newRouteId = newRouteId + 1;
+        }
+      } else if (userRole === 'doctor') {
+        if (userRole == collapseActiveRouteRole) {
+          newRoute[newRouteId] = route[i];
+          newRouteId = newRouteId + 1;
+        }
       }
     }
+
     return newRoute;
   }
 
@@ -132,36 +138,29 @@ export default function Dashboard(props) {
     let loginToken = localStorage.getItem("LoginToken");
     let userRole = localStorage.getItem("UserRole");
 
-    // alert('userRole => ' + userRole);
-    // alert('route role =>' + collapseActiveRouteRole);
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
 
-        let collapseActiveRouteRole = routes[i].role;
+        let collapseActiveRouteRole = newRoutes[i].role;
 
-        // alert('route role =>' + collapseActiveRouteRole);
+        // if (userRole == collapseActiveRouteRole) {
+        let collapseActiveRoute = getActiveRoute(routes[i].views);
 
-        if (userRole == collapseActiveRouteRole) {
-          let collapseActiveRoute = getActiveRoute(routes[i].views);
-
-          if (collapseActiveRoute !== activeRoute) {
-            return collapseActiveRoute;
-          }
+        if (collapseActiveRoute !== activeRoute) {
+          return collapseActiveRoute;
         }
+        // }
       } else {
         let collapseActiveRouteRole = routes[i].role;
 
-        if (userRole == collapseActiveRouteRole) {
+        // if (userRole == collapseActiveRouteRole) {
 
-          // alert('route role second =>' + collapseActiveRouteRole);
-
-          if (
-            window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
-          ) {
-            return routes[i].name;
-          }
+        if (
+          window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
+        ) {
+          return routes[i].name;
         }
-
+        // }
       }
     }
     return activeRoute;
