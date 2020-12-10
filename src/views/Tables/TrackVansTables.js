@@ -105,7 +105,7 @@ export default function TrackVansTables() {
 
   useEffect(getVans, []);
 
-  const delteVan = (deleteId) => {
+  const deleteVan = (deleteId) => {
     axios.delete(`/api/vans/${deleteId}`).then(() => {
       // console.log('delete', res);
       setData(data.filter((prop) => prop.id !== deleteId));
@@ -227,7 +227,7 @@ export default function TrackVansTables() {
                 <Button
                   onClick={() => {
                     setDeleteModal(false);
-                    delteVan(selectedVanId);
+                    deleteVan(selectedVanId);
                   }}
                   color="success"
                   simple

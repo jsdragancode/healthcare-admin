@@ -153,7 +153,7 @@ export default function UsersTables() {
 
   useEffect(getUser, []);
 
-  const delteUser = (deleteId) => {
+  const deleteUser = (deleteId) => {
     axios.delete(`/api/drivers/${deleteId}`).then(() => {
       // console.log('delete', res);
       setData(data.filter((prop) => prop.id !== deleteId));
@@ -219,7 +219,9 @@ export default function UsersTables() {
   };
 
   const handleSimple = (event) => {
-    setSimpleSelect(event.target.value);
+    // setSimpleSelect(event.target.value);
+    let selectedGender = event.target.value - 2;
+    setGender(selectedGender);
   };
 
   return (
@@ -321,7 +323,7 @@ export default function UsersTables() {
                 <Button
                   onClick={() => {
                     setDeleteModal(false);
-                    delteUser(deleteDriverId);
+                    deleteUser(deleteDriverId);
                   }}
                   color="success"
                   simple
@@ -386,7 +388,7 @@ export default function UsersTables() {
                       classes={{
                         select: classes.select,
                       }}
-                      value={simpleSelect}
+                      value={gender}
                       onChange={handleSimple}
                       inputProps={{
                         name: 'simpleSelect',
@@ -473,11 +475,11 @@ export default function UsersTables() {
                       onChange: (e) => setCity(e.target.value),
                     }}
                   />
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     control={
                       <Switch
                         checked={checkedA}
-                        onChange={(event) => setCheckedA(event.target.checked)}
+                        onChange={(e) => setActive(e.target.value)}
                         value="checkedA"
                         classes={{
                           switchBase: classes.switchBase,
@@ -491,7 +493,21 @@ export default function UsersTables() {
                       label: classes.label,
                     }}
                     label="Active"
+                  /> */}
+
+                  <CustomInput
+                    labelText="Active"
+                    id="edit_Active"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: active,
+                      onChange: (e) => setActive(e.target.value),
+                    }}
                   />
+
                   <CustomInput
                     labelText="Firebase Uid"
                     id="add_firebase_uid"
