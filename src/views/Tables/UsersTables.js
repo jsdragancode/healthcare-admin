@@ -504,14 +504,26 @@ export default function UsersTables() {
                       onChange: (e) => setFirebaseURL(e.target.value),
                     }}
                   />
-                  <InputLabel className={classes.label}>Date Picker</InputLabel>
+                  <CustomInput
+                    labelText="Date Picker"
+                    id="add_date_picker"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                      value: registeredOn,
+                      onChange: (e) => setRegisteredOn(e.target.value),
+                    }}
+                  />
+                  {/* <InputLabel className={classes.label}>Date Picker</InputLabel>
                   <br />
                   <FormControl fullWidth>
                     <Datetime
                       timeFormat={false}
                       inputProps={{ placeholder: 'Registered On', onChange: (e) => setRegisteredOn(e.target.value), }}
                     />
-                  </FormControl>
+                  </FormControl> */}
                 </form>
               </DialogContent>
               <DialogActions>
