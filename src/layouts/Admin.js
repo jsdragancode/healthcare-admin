@@ -30,6 +30,9 @@ export default function Dashboard(props) {
   const [image, setImage] = React.useState(require('assets/img/sidebar-2.jpg'));
   const [color, setColor] = React.useState('blue');
   const [bgColor, setBgColor] = React.useState('black');
+
+  const [currentLoginToken, setCurrentLoginToken] = React.useState('');
+
   // const [hasImage, setHasImage] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState('dropdown');
   const [logo, setLogo] = React.useState(require('assets/img/serenia_logo.png'));
@@ -95,20 +98,70 @@ export default function Dashboard(props) {
   const getRoute = () => {
     return window.location.pathname !== '/admin/full-screen-maps';
   };
+
+  // Get available routes based user role and login token
+  const getAvailableRoute = (route) => {
+    const newRoute = [];
+    let newRouteId = 0;
+    let userRole = localStorage.getItem("UserRole");
+    let loginToken = localStorage.getItem("LoginToken");
+
+    if (loginToken == 'failed') {
+      setCurrentLoginToken('failed');
+    }
+
+    for (let i = 0; i < route.length; i++) {
+      let collapseActiveRouteRole = route[i].role;
+
+      // alert('route role reset =>' + collapseActiveRouteRole);
+
+      if (userRole == collapseActiveRouteRole || collapseActiveRouteRole == 'all') {
+        newRoute[newRouteId] = route[i];
+        newRouteId = newRouteId + 1;
+      }
+    }
+    return newRoute;
+  }
+
+  const newRoutes = getAvailableRoute(routes);
+
+
   const getActiveRoute = (routes) => {
     let activeRoute = 'Default Brand Text';
+
+    let loginToken = localStorage.getItem("LoginToken");
+    let userRole = localStorage.getItem("UserRole");
+
+    // alert('userRole => ' + userRole);
+    // alert('route role =>' + collapseActiveRouteRole);
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
-        let collapseActiveRoute = getActiveRoute(routes[i].views);
-        if (collapseActiveRoute !== activeRoute) {
-          return collapseActiveRoute;
+
+        let collapseActiveRouteRole = routes[i].role;
+
+        // alert('route role =>' + collapseActiveRouteRole);
+
+        if (userRole == collapseActiveRouteRole) {
+          let collapseActiveRoute = getActiveRoute(routes[i].views);
+
+          if (collapseActiveRoute !== activeRoute) {
+            return collapseActiveRoute;
+          }
         }
       } else {
-        if (
-          window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
-        ) {
-          return routes[i].name;
+        let collapseActiveRouteRole = routes[i].role;
+
+        if (userRole == collapseActiveRouteRole) {
+
+          // alert('route role second =>' + collapseActiveRouteRole);
+
+          if (
+            window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
+          ) {
+            return routes[i].name;
+          }
         }
+
       }
     }
     return activeRoute;
@@ -140,10 +193,19 @@ export default function Dashboard(props) {
     }
   };
 
+
+
   return (
     <div className={classes.wrapper}>
+
+      {(currentLoginToken === 'failed') && (
+        <Switch>
+          <Redirect to='../auth/login'></Redirect>
+        </Switch>
+      )}
+
       <Sidebar
-        routes={routes}
+        routes={newRoutes}
         logoText={'Serenia'}
         logo={logo}
         image={image}
@@ -158,7 +220,7 @@ export default function Dashboard(props) {
         <AdminNavbar
           sidebarMinimize={sidebarMinimize.bind(this)}
           miniActive={miniActive}
-          brandText={getActiveRoute(routes)}
+          brandText={getActiveRoute(newRoutes)}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
@@ -167,7 +229,7 @@ export default function Dashboard(props) {
           <div className={classes.content}>
             <div className={classes.container}>
               <Switch>
-                {getRoutes(routes)}
+                {getRoutes(newRoutes)}
                 <Redirect from="/admin" to="/admin/dashboard" />
               </Switch>
             </div>
@@ -175,7 +237,7 @@ export default function Dashboard(props) {
         ) : (
             <div className={classes.map}>
               <Switch>
-                {getRoutes(routes)}
+                {getRoutes(newRoutes)}
                 <Redirect from="/admin" to="/admin/dashboard" />
               </Switch>
             </div>

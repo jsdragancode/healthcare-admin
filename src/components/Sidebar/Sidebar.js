@@ -350,8 +350,9 @@ class Sidebar extends React.Component {
         [classes.photoRTL]: rtlActive
       });
     var user = (
-      <div className={userWrapperClass}>
-        <div className={photo}>
+      // <div className={userWrapperClass}>
+      <div>
+        {/* <div className={photo}>
           <img src={avatar} className={classes.avatarImg} alt="..." />
         </div>
         <List className={classes.list}>
@@ -436,7 +437,7 @@ class Sidebar extends React.Component {
               </List>
             </Collapse>
           </ListItem>
-        </List>
+        </List> */}
       </div>
     );
     var links = (

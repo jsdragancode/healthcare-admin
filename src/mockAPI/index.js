@@ -981,11 +981,11 @@ createServer({
             role: 'admin'
           }
         };
-      } else if (loginInfo.email === 'driver@test.com' && loginInfo.password === 'driver123') {
+      } else if (loginInfo.email === 'doctor@test.com' && loginInfo.password === 'doctor123') {
         return {
-          token: 'driver_token',
+          token: 'doctor_token',
           user: {
-            role: 'driver'
+            role: 'doctor'
           }
         };
       } else {

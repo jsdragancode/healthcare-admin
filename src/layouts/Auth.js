@@ -29,7 +29,7 @@ export default function Pages(props) {
   React.useEffect(() => {
     document.body.style.overflow = 'unset';
     // Specify how to clean up after this effect:
-    return function cleanup() {};
+    return function cleanup() { };
   });
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {

@@ -87,6 +87,7 @@ var dashRoutes = [
     icon: Person,
     component: AdminParamsTables,
     layout: '/admin',
+    role: 'admin'
   },
   {
     path: '/bookings',
@@ -95,6 +96,7 @@ var dashRoutes = [
     icon: Bookmark,
     component: BookingsTables,
     layout: '/admin',
+    role: 'admin'
   },
   {
     path: '/booking-history',
@@ -103,6 +105,7 @@ var dashRoutes = [
     icon: Bookmarks,
     component: BookingStatusHistoryTables,
     layout: '/admin',
+    role: 'admin'
   },
   {
     path: '/availability-slot',
@@ -111,6 +114,7 @@ var dashRoutes = [
     icon: LibraryBooks,
     component: AvailabilitySlotsTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/drivers',
@@ -119,6 +123,7 @@ var dashRoutes = [
     icon: DriveEta,
     component: DriversTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/doctors',
@@ -127,6 +132,7 @@ var dashRoutes = [
     icon: LocalHospital,
     component: DoctorsTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/console-users',
@@ -135,6 +141,7 @@ var dashRoutes = [
     icon: AssignmentInd,
     component: ConsoleUsersTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/nurses',
@@ -143,6 +150,7 @@ var dashRoutes = [
     icon: LocalPharmacy,
     component: NursesTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/track-vans',
@@ -151,6 +159,7 @@ var dashRoutes = [
     icon: AirportShuttle,
     component: TrackVansTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/users',
@@ -159,6 +168,7 @@ var dashRoutes = [
     icon: PersonAdd,
     component: UsersTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/interface-user',
@@ -167,6 +177,7 @@ var dashRoutes = [
     icon: Contacts,
     component: UserInterfaceIdTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/notification-user',
@@ -175,6 +186,7 @@ var dashRoutes = [
     icon: AddAlert,
     component: UserNotificationTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/lab-result',
@@ -183,6 +195,7 @@ var dashRoutes = [
     icon: Colorize,
     component: LabResultTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/lab-test',
@@ -191,6 +204,7 @@ var dashRoutes = [
     icon: Edit,
     component: LabTestTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/faq',
@@ -199,6 +213,7 @@ var dashRoutes = [
     icon: Info,
     component: FaqTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/consultation',
@@ -207,6 +222,7 @@ var dashRoutes = [
     icon: RecordVoiceOverIcon,
     component: ConsultationTables,
     layout: '/admin',
+    role: 'all',
   },
   {
     path: '/transaction',
@@ -215,6 +231,7 @@ var dashRoutes = [
     icon: CreditCard,
     component: TransactionTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/patients',
@@ -223,6 +240,7 @@ var dashRoutes = [
     icon: AccountCircle,
     component: PatientsTables,
     layout: '/admin',
+    role: 'all',
   },
   {
     path: '/location-track',
@@ -231,6 +249,7 @@ var dashRoutes = [
     icon: Place,
     component: LocationTrackingTables,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/dashboard',
@@ -239,6 +258,7 @@ var dashRoutes = [
     icon: DashboardIcon,
     component: Dashboard,
     layout: '/admin',
+    role: 'admin',
   },
   {
     collapse: true,
@@ -273,6 +293,7 @@ var dashRoutes = [
         rtlMini: 'تي',
         component: TimelinePage,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/login-page',
@@ -309,6 +330,7 @@ var dashRoutes = [
         rtlMini: 'شع',
         component: UserProfile,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/error-page',
@@ -344,6 +366,7 @@ var dashRoutes = [
             rtlMini: 'ب',
             component: Buttons,
             layout: '/admin',
+            role: 'admin',
           },
         ],
       },
@@ -355,6 +378,7 @@ var dashRoutes = [
         rtlMini: 'ب',
         component: Buttons,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/grid-system',
@@ -364,6 +388,7 @@ var dashRoutes = [
         rtlMini: 'زو',
         component: GridSystem,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/panels',
@@ -373,6 +398,7 @@ var dashRoutes = [
         rtlMini: 'ع',
         component: Panels,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/sweet-alert',
@@ -382,6 +408,7 @@ var dashRoutes = [
         rtlMini: 'ومن',
         component: SweetAlert,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/notifications',
@@ -391,6 +418,7 @@ var dashRoutes = [
         rtlMini: 'ن',
         component: Notifications,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/icons',
@@ -400,6 +428,7 @@ var dashRoutes = [
         rtlMini: 'و',
         component: Icons,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/typography',
@@ -409,6 +438,7 @@ var dashRoutes = [
         rtlMini: 'ر',
         component: Typography,
         layout: '/admin',
+        role: 'admin',
       },
     ],
   },
@@ -427,6 +457,7 @@ var dashRoutes = [
         rtlMini: 'صو',
         component: RegularForms,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/extended-forms',
@@ -436,6 +467,7 @@ var dashRoutes = [
         rtlMini: 'هوو',
         component: ExtendedForms,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/validation-forms',
@@ -445,6 +477,7 @@ var dashRoutes = [
         rtlMini: 'تو',
         component: ValidationForms,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/wizard',
@@ -454,6 +487,7 @@ var dashRoutes = [
         rtlMini: 'ث',
         component: Wizard,
         layout: '/admin',
+        role: 'admin',
       },
     ],
   },
@@ -472,6 +506,7 @@ var dashRoutes = [
         rtlMini: 'صر',
         component: RegularTables,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/extended-tables',
@@ -481,6 +516,7 @@ var dashRoutes = [
         rtlMini: 'هور',
         component: ExtendedTables,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/react-tables',
@@ -490,6 +526,7 @@ var dashRoutes = [
         rtlMini: 'در',
         component: ReactTables,
         layout: '/admin',
+        role: 'admin',
       },
     ],
   },
@@ -508,6 +545,7 @@ var dashRoutes = [
         rtlMini: 'زم',
         component: GoogleMaps,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/full-screen-maps',
@@ -517,6 +555,7 @@ var dashRoutes = [
         rtlMini: 'ووم',
         component: FullScreenMap,
         layout: '/admin',
+        role: 'admin',
       },
       {
         path: '/vector-maps',
@@ -526,6 +565,7 @@ var dashRoutes = [
         rtlMini: 'تم',
         component: VectorMap,
         layout: '/admin',
+        role: 'admin',
       },
     ],
   },
@@ -536,6 +576,7 @@ var dashRoutes = [
     icon: WidgetsIcon,
     component: Widgets,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/charts',
@@ -544,6 +585,7 @@ var dashRoutes = [
     icon: Timeline,
     component: Charts,
     layout: '/admin',
+    role: 'admin',
   },
   {
     path: '/calendar',
@@ -552,6 +594,7 @@ var dashRoutes = [
     icon: DateRange,
     component: Calendar,
     layout: '/admin',
+    role: 'admin',
   },
 ];
 export default dashRoutes;

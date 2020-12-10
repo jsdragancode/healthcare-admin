@@ -46,10 +46,6 @@ export default function LoginPage() {
   });
   const classes = useStyles();
 
-  const makeTableRow = (info) => {
-    alert('info');
-  }
-
   const handleLogin = () => {
     // localStorage.setItem("user", loginEmail)
     // const savedEmail = localStorage.getItem("user");
@@ -76,7 +72,7 @@ export default function LoginPage() {
       <GridContainer justify="center">
         <GridItem xs={12} sm={6} md={4}>
           <form>
-            {(loginToken === 'admin_token' || loginToken === 'driver_token') && (
+            {(loginToken === 'admin_token' || loginToken === 'doctor_token') && (
               <Redirect to='../admin/users'></Redirect>
             )}
             <Card login className={classes[cardAnimaton]}>

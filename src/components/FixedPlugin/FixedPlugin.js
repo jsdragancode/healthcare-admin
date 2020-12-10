@@ -262,7 +262,7 @@ export default function FixedPlugin(props) {
               <img src={imagine4} alt="..." />
             </a>
           </li>
-          <li className="button-container">
+          {/* <li className="button-container">
             <div>
               <Button
                 color="warning"
@@ -285,7 +285,7 @@ export default function FixedPlugin(props) {
                 Documentation
               </Button>
             </div>
-          </li>
+          </li> */}
           <li className="header-title" id="sharrreTitle">
             Thank you for sharing!
             <br />
