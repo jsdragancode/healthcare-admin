@@ -200,7 +200,7 @@ export default function Dashboard(props) {
 
       {(currentLoginToken === 'failed') && (
         <Switch>
-          <Redirect to='../auth/login'></Redirect>
+          <Redirect to='/auth/login'></Redirect>
         </Switch>
       )}
 

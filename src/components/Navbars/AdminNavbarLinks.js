@@ -272,7 +272,8 @@ export default function HeaderLinks(props) {
               style={{ transformOrigin: '0 0 0' }}
             >
               <Paper className={classes.dropdown}>
-                <ClickAwayListener onClickAway={handleCloseProfile}>
+                {/* <ClickAwayListener onClickAway={handleCloseProfile}> */}
+                <ClickAwayListener>
                   <MenuList role="menu">
                     {/* <MenuItem
                       onClick={handleCloseProfile}
