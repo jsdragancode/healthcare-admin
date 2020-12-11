@@ -26,6 +26,8 @@ import ReactTableBottomPagination from '../../components/ReactTableBottomPaginat
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 
+import Snackbar from "../../components/Snackbar/Snackbar.js";
+
 const styles = {
     cardIconTitle: {
         ...cardTitle,
@@ -51,6 +53,10 @@ export default function LabResultTables() {
     const [newFullNameEn, setNewFullNameEn] = useState('');
     const [newFullNameAr, setNewFullNameAr] = useState('');
     const [newResult, setNewResult] = useState('');
+    const [failed, setFailed] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [updateFailed, setUpdateFailed] = React.useState(false);
+    const [updateSuccess, setUpdateSuccess] = React.useState(false);
 
     const classes = useStyles();
 
@@ -124,6 +130,17 @@ export default function LabResultTables() {
             .then((res) => {
                 setData([...data, makeTableRow(res.data.labresult)]);
                 setAddModal(false);
+                setSuccess(true);
+                setTimeout(function () {
+                    setSuccess(false);
+                }, 3000);
+            })
+            .catch((e) => {
+                console.log(e);
+                setFailed(true);
+                setTimeout(function () {
+                    setFailed(false);
+                }, 3000);
             });
     };
 
@@ -142,6 +159,17 @@ export default function LabResultTables() {
                     )
                 );
                 setEditModal(false);
+                setUpdateSuccess(true);
+                setTimeout(function () {
+                    setUpdateSuccess(false);
+                }, 3000);
+            })
+            .catch((e) => {
+                console.log(e);
+                setUpdateFailed(true);
+                setTimeout(function () {
+                    setUpdateFailed(false);
+                }, 3000);
             });
     };
 
@@ -407,6 +435,42 @@ export default function LabResultTables() {
                                 </Button>
                             </DialogActions>
                         </Dialog>
+                        <Snackbar
+                            place="tr"
+                            color="success"
+                            // icon={AddAlert}
+                            message="Your new data was added successfully."
+                            open={success}
+                            closeNotification={() => setSuccess(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="rose"
+                            // icon={AddAlert}
+                            message="Failed to add new data. Please try again."
+                            open={failed}
+                            closeNotification={() => setFailed(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="success"
+                            // icon={AddAlert}
+                            message="Your new data was updated successfully."
+                            open={updateSuccess}
+                            closeNotification={() => setUpdateSuccess(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="rose"
+                            // icon={AddAlert}
+                            message="Failed to update new data. Please try again."
+                            open={updateFailed}
+                            closeNotification={() => setUpdateFailed(false)}
+                            close
+                        />
                     </CardBody>
                 </Card>
             </GridItem>

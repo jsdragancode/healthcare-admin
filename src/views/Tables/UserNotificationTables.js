@@ -128,7 +128,6 @@ export default function UserNotificationTables() {
         const randCheck = parseInt(Math.random() * 10)
 
         if (randCheck < 5) {
-            // setData([...data, makeTableRow(res.data.userNotification)]);
             setAddModal(false);
             setFailed(true);
             setTimeout(function () {
