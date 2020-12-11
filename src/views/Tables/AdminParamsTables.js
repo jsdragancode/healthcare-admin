@@ -113,13 +113,14 @@ export default function AdminParamsTables() {
     useEffect(getAdminParam, []);
 
     const delteAdminParam = (deleteId) => {
-        axios.delete(`/api/adminparams/${deleteId}`).then(() => {
-            setData(data.filter((prop) => prop.id !== deleteId));
-            setDeleteSuccess(true);
-            setTimeout(function () {
-                setDeleteSuccess(false);
-            }, 3000);
-        })
+        axios
+            .delete(`/api/adminparams/${deleteId}`).then(() => {
+                setData(data.filter((prop) => prop.id !== deleteId));
+                setDeleteSuccess(true);
+                setTimeout(function () {
+                    setDeleteSuccess(false);
+                }, 3000);
+            })
             .catch((e) => {
                 console.log(e);
                 setDeleteFailed(true);
