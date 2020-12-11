@@ -25,6 +25,7 @@ import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
+import Snackbar from "../../components/Snackbar/Snackbar.js";
 
 const styles = {
     cardIconTitle: {
@@ -54,6 +55,10 @@ export default function ConsoleUsersTables() {
     const [newLastFailedLogin, setNewLastFailedLogin] = useState('');
     const [newConsecutiveFailedLoginsCount, setNewConsecutiveFailedLoginsCount] = useState('');
     const [newDoctorId, setNewDoctorId] = useState('');
+    const [failed, setFailed] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [updateFailed, setUpdateFailed] = React.useState(false);
+    const [updateSuccess, setUpdateSuccess] = React.useState(false);
 
     const classes = useStyles();
 
@@ -142,6 +147,18 @@ export default function ConsoleUsersTables() {
             .then((res) => {
                 setData([...data, makeTableRow(res.data.consoleUser)]);
                 setAddModal(false);
+
+                setSuccess(true);
+                setTimeout(function () {
+                    setSuccess(false);
+                }, 3000);
+            })
+            .catch((e) => {
+                console.log(e);
+                setFailed(true);
+                setTimeout(function () {
+                    setFailed(false);
+                }, 3000);
             });
     };
 
@@ -176,6 +193,18 @@ export default function ConsoleUsersTables() {
                 });
 
                 setEditModal(false);
+
+                setUpdateSuccess(true);
+                setTimeout(function () {
+                    setUpdateSuccess(false);
+                }, 3000);
+            })
+            .catch((e) => {
+                console.log(e);
+                setUpdateFailed(true);
+                setTimeout(function () {
+                    setUpdateFailed(false);
+                }, 3000);
             });
     };
 
@@ -530,6 +559,43 @@ export default function ConsoleUsersTables() {
                 </Button>
                             </DialogActions>
                         </Dialog>
+
+                        <Snackbar
+                            place="tr"
+                            color="success"
+                            // icon={AddAlert}
+                            message="Your new data was added successfully."
+                            open={success}
+                            closeNotification={() => setSuccess(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="rose"
+                            // icon={AddAlert}
+                            message="Failed to add new data. Please try again."
+                            open={failed}
+                            closeNotification={() => setFailed(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="success"
+                            // icon={AddAlert}
+                            message="Your new data was updated successfully."
+                            open={updateSuccess}
+                            closeNotification={() => setUpdateSuccess(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="rose"
+                            // icon={AddAlert}
+                            message="Failed to update new data. Please try again."
+                            open={updateFailed}
+                            closeNotification={() => setUpdateFailed(false)}
+                            close
+                        />
                     </CardBody>
                 </Card>
             </GridItem>
