@@ -24,9 +24,8 @@ import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
 
-import Snackbar from "../../components/Snackbar/Snackbar.js";
-
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
+import Snackbar from "../../components/Snackbar/Snackbar.js";
 
 const styles = {
     cardIconTitle: {
