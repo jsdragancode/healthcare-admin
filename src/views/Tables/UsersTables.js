@@ -81,6 +81,8 @@ export default function UsersTables() {
   const [success, setSuccess] = React.useState(false);
   const [updateFailed, setUpdateFailed] = React.useState(false);
   const [updateSuccess, setUpdateSuccess] = React.useState(false);
+  const [deleteFailed, setDeleteFailed] = React.useState(false);
+  const [deleteSuccess, setDeleteSuccess] = React.useState(false);
 
   const classes = useStyles();
 
@@ -160,10 +162,23 @@ export default function UsersTables() {
   useEffect(getUser, []);
 
   const deleteUser = (deleteId) => {
-    axios.delete(`/api/drivers/${deleteId}`).then(() => {
-      // console.log('delete', res);
-      setData(data.filter((prop) => prop.id !== deleteId));
-    });
+    axios
+      .delete(`/api/drivers/${deleteId}`).then(() => {
+        // console.log('delete', res);
+        setData(data.filter((prop) => prop.id !== deleteId));
+
+        setDeleteSuccess(true);
+        setTimeout(function () {
+          setDeleteSuccess(false);
+        }, 3000);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDeleteFailed(true);
+        setTimeout(function () {
+          setDeleteFailed(false);
+        }, 3000);
+      });
   };
 
   const addUser = () => {
@@ -765,6 +780,24 @@ export default function UsersTables() {
               message="Failed to update new data. Please try again."
               open={updateFailed}
               closeNotification={() => setUpdateFailed(false)}
+              close
+            />
+            <Snackbar
+              place="tr"
+              color="success"
+              // icon={AddAlert}
+              message="Your new data was deleted successfully."
+              open={deleteSuccess}
+              closeNotification={() => setDeleteSuccess(false)}
+              close
+            />
+            <Snackbar
+              place="tr"
+              color="rose"
+              // icon={AddAlert}
+              message="Failed to delete data. Please try again."
+              open={deleteFailed}
+              closeNotification={() => setDeleteFailed(false)}
               close
             />
           </CardBody>
