@@ -55,6 +55,8 @@ export default function UserNotificationTables() {
     const classes = useStyles();
     const [failed, setFailed] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
+    const [updateFailed, setUpdateFailed] = React.useState(false);
+    const [updateSuccess, setUpdateSuccess] = React.useState(false);
 
     const setUserNotification = (info) => {
         const { title, message, user_id, on_datetime, is_read, } = info;
@@ -173,6 +175,18 @@ export default function UserNotificationTables() {
                     )
                 );
                 setEditModal(false);
+
+                setUpdateSuccess(true);
+                setTimeout(function () {
+                    setUpdateSuccess(false);
+                }, 3000);
+            })
+            .catch((e) => {
+                console.log(e);
+                setUpdateFailed(true);
+                setTimeout(function () {
+                    setUpdateFailed(false);
+                }, 3000);
             });
     };
 
@@ -394,6 +408,24 @@ export default function UserNotificationTables() {
                             message="Sorry, but your notification was failed. "
                             open={failed}
                             closeNotification={() => setFailed(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="success"
+                            // icon={AddAlert}
+                            message="Your new data was updated successfully."
+                            open={updateSuccess}
+                            closeNotification={() => setUpdateSuccess(false)}
+                            close
+                        />
+                        <Snackbar
+                            place="tr"
+                            color="rose"
+                            // icon={AddAlert}
+                            message="Failed to update new data. Please try again."
+                            open={updateFailed}
+                            closeNotification={() => setUpdateFailed(false)}
                             close
                         />
                         <Dialog
