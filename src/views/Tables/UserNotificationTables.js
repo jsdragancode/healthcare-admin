@@ -148,12 +148,12 @@ export default function UserNotificationTables() {
                 .then((res) => {
                     setData([...data, makeTableRow(res.data.userNotification)]);
                     setAddModal(false);
-                });
 
-            setSuccess(true);
-            setTimeout(function () {
-                setSuccess(false);
-            }, 3000);
+                    setSuccess(true);
+                    setTimeout(function () {
+                        setSuccess(false);
+                    }, 3000);
+                });
         }
 
     };
@@ -382,7 +382,7 @@ export default function UserNotificationTables() {
                         <Snackbar
                             place="tr"
                             color="success"
-                            icon={AddAlert}
+                            // icon={AddAlert}
                             message="Congratulations! Your notification was pushed successfully."
                             open={success}
                             closeNotification={() => setSuccess(false)}
@@ -391,7 +391,7 @@ export default function UserNotificationTables() {
                         <Snackbar
                             place="tr"
                             color="rose"
-                            icon={AddAlert}
+                            // icon={AddAlert}
                             message="Sorry, but your notification was failed. "
                             open={failed}
                             closeNotification={() => setFailed(false)}
