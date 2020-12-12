@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Datetime from 'react-datetime';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +10,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
@@ -323,6 +326,16 @@ export default function BookingStatusHistoryTables() {
                                             onChange: (e) => setNewBookingId(e.target.value),
                                         }}
                                     />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'On Datetime123111', }}
+                                            onChange={(e) => setNewOnDatetime(e)}
+                                            value={newOnDatetime}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Status"
                                         id="add_status"
@@ -333,18 +346,6 @@ export default function BookingStatusHistoryTables() {
                                             type: 'text',
                                             value: newStatus,
                                             onChange: (e) => setNewStatus(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="On Datetime"
-                                        id="add_on_datetime"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newOnDatetime,
-                                            onChange: (e) => setNewOnDatetime(e.target.value),
                                         }}
                                     />
                                 </form>
@@ -392,6 +393,16 @@ export default function BookingStatusHistoryTables() {
                                             onChange: (e) => setNewBookingId(e.target.value),
                                         }}
                                     />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'On Datetime', }}
+                                            onChange={(e) => setNewOnDatetime(e)}
+                                            value={newOnDatetime}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Status"
                                         id="add_status"
@@ -402,18 +413,6 @@ export default function BookingStatusHistoryTables() {
                                             type: 'text',
                                             value: newStatus,
                                             onChange: (e) => setNewStatus(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="On Datetime"
-                                        id="add_on_datetime"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newOnDatetime,
-                                            onChange: (e) => setNewOnDatetime(e.target.value),
                                         }}
                                     />
                                 </form>
