@@ -181,10 +181,6 @@ export default function UsersTables() {
       });
   };
 
-  const dateTimeFunc = (e) => {
-    alert(e);
-  }
-
   const addUser = () => {
     axios
       .post('/api/users/', {

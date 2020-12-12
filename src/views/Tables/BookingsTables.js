@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
+import Datetime from 'react-datetime';
+
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +11,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -494,30 +498,26 @@ export default function BookingsTables() {
                                             onChange: (e) => setNewPatientId(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Start Datetime"
-                                        id="add_diagnosis"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newStartDateTime,
-                                            onChange: (e) => setNewStartDateTime(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="End Datetime"
-                                        id="add_follow_up"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newEndDateTime,
-                                            onChange: (e) => setNewEndDateTime(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Start Datetime', }}
+                                            onChange={(e) => setNewStartDateTime(e)}
+                                            value={newStartDateTime}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'End Datetime', }}
+                                            onChange={(e) => setNewEndDateTime(e)}
+                                            value={newEndDateTime}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Booking Type"
                                         id="add_medication"
@@ -777,30 +777,26 @@ export default function BookingsTables() {
                                             onChange: (e) => setNewPatientId(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Start Datetime"
-                                        id="add_diagnosis"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newStartDateTime,
-                                            onChange: (e) => setNewStartDateTime(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="End Datetime"
-                                        id="add_follow_up"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newEndDateTime,
-                                            onChange: (e) => setNewEndDateTime(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Start Datetime', }}
+                                            onChange={(e) => setNewStartDateTime(e)}
+                                            value={newStartDateTime}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'End Datetime', }}
+                                            onChange={(e) => setNewEndDateTime(e)}
+                                            value={newEndDateTime}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Booking Type"
                                         id="add_medication"
