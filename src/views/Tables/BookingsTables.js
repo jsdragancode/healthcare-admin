@@ -12,7 +12,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';

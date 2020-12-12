@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
+import Datetime from 'react-datetime';
+
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -497,18 +500,16 @@ export default function TransactionTables() {
                                             onChange: (e) => setNewIsSuccess(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Created On"
-                                        id="add_created_on"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newCreatedOn,
-                                            onChange: (e) => setNewCreatedOn(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Created On', }}
+                                            onChange={(e) => setNewCreatedOn(e)}
+                                            value={newCreatedOn}
+                                        />
+                                    </FormControl>
                                 </form>
                             </DialogContent>
                             <DialogActions>
@@ -660,18 +661,16 @@ export default function TransactionTables() {
                                             onChange: (e) => setNewIsSuccess(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Created On"
-                                        id="add_created_on"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newCreatedOn,
-                                            onChange: (e) => setNewCreatedOn(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Created On', }}
+                                            onChange={(e) => setNewCreatedOn(e)}
+                                            value={newCreatedOn}
+                                        />
+                                    </FormControl>
                                 </form>
                             </DialogContent>
                             <DialogActions>
