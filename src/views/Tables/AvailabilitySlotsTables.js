@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Datetime from 'react-datetime';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +10,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -328,30 +331,26 @@ export default function AvailabilitySlotsTables() {
                                             onChange: (e) => setNewDayId(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Start Time"
-                                        id="add_full_name_ar"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newStartTime,
-                                            onChange: (e) => setNewStartTime(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="End Time"
-                                        id="add_mobile_number"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newEndTime,
-                                            onChange: (e) => setNewEndTime(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Start Datetime', }}
+                                            onChange={(e) => setNewStartTime(e)}
+                                            value={newStartTime}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'End Datetime', }}
+                                            onChange={(e) => setNewEndTime(e)}
+                                            value={newEndTime}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Current Booking Number"
                                         id="add_mobile_number"
@@ -409,30 +408,26 @@ export default function AvailabilitySlotsTables() {
                                             onChange: (e) => setNewDayId(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Start Time"
-                                        id="add_full_name_ar"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newStartTime,
-                                            onChange: (e) => setNewStartTime(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="End Time"
-                                        id="add_mobile_number"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newEndTime,
-                                            onChange: (e) => setNewEndTime(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Start Datetime', }}
+                                            onChange={(e) => setNewStartTime(e)}
+                                            value={newStartTime}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'End Datetime', }}
+                                            onChange={(e) => setNewEndTime(e)}
+                                            value={newEndTime}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Current Booking Number"
                                         id="add_mobile_number"
