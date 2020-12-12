@@ -181,6 +181,10 @@ export default function UsersTables() {
       });
   };
 
+  const dateTimeFunc = (e) => {
+    alert(e);
+  }
+
   const addUser = () => {
     axios
       .post('/api/users/', {
@@ -564,7 +568,7 @@ export default function UsersTables() {
                       onChange: (e) => setFirebaseURL(e.target.value),
                     }}
                   />
-                  <CustomInput
+                  {/* <CustomInput
                     labelText="Date Picker"
                     id="add_date_picker"
                     formControlProps={{
@@ -575,15 +579,17 @@ export default function UsersTables() {
                       value: registeredOn,
                       onChange: (e) => setRegisteredOn(e.target.value),
                     }}
-                  />
-                  {/* <InputLabel className={classes.label}>Date Picker</InputLabel>
+                  /> */}
+                  <InputLabel className={classes.label}>Date Picker</InputLabel>
                   <br />
                   <FormControl fullWidth>
                     <Datetime
-                      timeFormat={false}
-                      inputProps={{ placeholder: 'Registered On', onChange: (e) => setRegisteredOn(e.target.value), }}
+                      timeFormat={true}
+                      inputProps={{ placeholder: 'Registered On', }}
+                      onChange={(e) => setRegisteredOn(e)}
+                      value={registeredOn}
                     />
-                  </FormControl> */}
+                  </FormControl>
                 </form>
               </DialogContent>
               <DialogActions>
@@ -725,7 +731,7 @@ export default function UsersTables() {
                       onChange: (e) => setFirebaseURL(e.target.value),
                     }}
                   />
-                  <CustomInput
+                  {/* <CustomInput
                     labelText="Registered On"
                     id="edit_registered_on"
                     formControlProps={{
@@ -736,7 +742,17 @@ export default function UsersTables() {
                       value: registeredOn,
                       onChange: (e) => setRegisteredOn(e.target.value),
                     }}
-                  />
+                  /> */}
+                  <InputLabel className={classes.label}>Date Picker</InputLabel>
+                  <br />
+                  <FormControl fullWidth>
+                    <Datetime
+                      timeFormat={true}
+                      inputProps={{ placeholder: 'Registered On', }}
+                      onChange={(e) => setRegisteredOn(e)}
+                      value={registeredOn}
+                    />
+                  </FormControl>
                 </form>
               </DialogContent>
               <DialogActions>
