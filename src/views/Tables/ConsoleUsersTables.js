@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Datetime from 'react-datetime';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +10,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -400,7 +403,7 @@ export default function ConsoleUsersTables() {
                                             onChange: (e) => setNewRole(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
+                                    {/* <CustomInput
                                         labelText="Last Login"
                                         id="add_available"
                                         formControlProps={{
@@ -423,7 +426,27 @@ export default function ConsoleUsersTables() {
                                             value: newLastFailedLogin,
                                             onChange: (e) => setNewLastFailedLogin(e.target.value),
                                         }}
-                                    />
+                                    /> */}
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Login', }}
+                                            onChange={(e) => setNewLastLogin(e)}
+                                            value={newLastLogin}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Failed Login', }}
+                                            onChange={(e) => setNewLastFailedLogin(e)}
+                                            value={newLastFailedLogin}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Failed Login Count"
                                         id="add_test_desc_ar"
@@ -517,7 +540,7 @@ export default function ConsoleUsersTables() {
                                             onChange: (e) => setNewRole(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
+                                    {/* <CustomInput
                                         labelText="Last Login"
                                         id="add_available"
                                         formControlProps={{
@@ -540,7 +563,27 @@ export default function ConsoleUsersTables() {
                                             value: newLastFailedLogin,
                                             onChange: (e) => setNewLastFailedLogin(e.target.value),
                                         }}
-                                    />
+                                    /> */}
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Login', }}
+                                            onChange={(e) => setNewLastLogin(e)}
+                                            value={newLastLogin}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Failed Login', }}
+                                            onChange={(e) => setNewLastFailedLogin(e)}
+                                            value={newLastFailedLogin}
+                                        />
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Failed Login Count"
                                         id="add_test_desc_ar"
