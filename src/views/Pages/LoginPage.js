@@ -23,9 +23,17 @@ import CardHeader from 'components/Card/CardHeader.js';
 import CardFooter from 'components/Card/CardFooter.js';
 import SnackbarContent from "components/Snackbar/SnackbarContent.js";
 
+import PulseLoader from "react-spinners/PulseLoader";
+
 import styles from 'assets/jss/material-dashboard-pro-react/views/loginPageStyle.js';
 
 const useStyles = makeStyles(styles);
+
+const override = `
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 export default function LoginPage() {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
@@ -34,7 +42,8 @@ export default function LoginPage() {
   const [loginPassword, setLoginPassword] = useState('');
   const [loginToken, setLoginToken] = useState('');
   const [userRole, setUserRole] = useState('');
-  const [hideWarning, setHideWarning] = useState('false');
+  const [hideWarning, setHideWarning] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   React.useEffect(() => {
     let id = setTimeout(function () {
@@ -51,6 +60,8 @@ export default function LoginPage() {
     // localStorage.setItem("user", loginEmail)
     // const savedEmail = localStorage.getItem("user");
 
+    setLoading(true);
+
     axios
       .post('/api/logins/', {
         email: loginEmail,
@@ -65,14 +76,16 @@ export default function LoginPage() {
         setLoginToken(res.data.token);
 
         if (res.data.token === 'failed') {
-          setHideWarning('true');
+          setHideWarning(true);
           setTimeout(function () {
-            setHideWarning('false')
+            setHideWarning(false)
           }, 2000);
         }
+        setLoading(false);
       })
       .catch((e) => {
         console.log(e);
+        setLoading(false);
       });
   };
   return (
@@ -158,8 +171,14 @@ export default function LoginPage() {
                   }}
                 />
               </CardBody>
+              <PulseLoader
+                css={override}
+                size={12}
+                color={"#4caf50"}
+                loading={loading}
+              />
 
-              {(loginToken === 'failed' && hideWarning === 'true') && (
+              {(loginToken === 'failed' && hideWarning === true) && (
                 <CardHeader
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="rose"

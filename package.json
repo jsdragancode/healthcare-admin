@@ -24,6 +24,7 @@
     "react-jvectormap": "0.0.16",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-spinners": "^0.9.0",
     "react-swipeable-views": "0.13.9",
     "react-table": "7.1.0",
     "react-tagsinput": "3.19.0"
