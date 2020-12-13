@@ -27,6 +27,7 @@ import CardBody from 'components/Card/CardBody.js';
 import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
+import PictureUpload from 'components/CustomUpload/PictureUpload.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
@@ -66,8 +67,24 @@ export default function DoctorsTables() {
   const [updateSuccess, setUpdateSuccess] = React.useState(false);
   const [deleteFailed, setDeleteFailed] = React.useState(false);
   const [deleteSuccess, setDeleteSuccess] = React.useState(false);
+  const [file, setFile] = React.useState(null);
+  const [imageName, setImageName] = React.useState('');
 
   const classes = useStyles();
+
+  const handleImageChange = e => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let newFile = e.target.files[0];
+    reader.onloadend = () => {
+      setFile(newFile);
+      setNewImageUrl(reader.result);
+      setImageName(newFile.name);
+    };
+    if (newFile) {
+      reader.readAsDataURL(newFile);
+    }
+  };
 
   const setDoctorParam = (info) => {
     const {
@@ -75,6 +92,7 @@ export default function DoctorsTables() {
       full_name_ar,
       details_en,
       details_ar,
+      image_name,
       image_url,
       mobile_number,
       team_order_no,
@@ -85,6 +103,7 @@ export default function DoctorsTables() {
     setNewFullNameAr(full_name_ar);
     setNewDetailsEn(details_en);
     setNewDetailsAr(details_ar);
+    setImageName(image_name);
     setNewImageUrl(image_url);
     setNewMobileNumber(mobile_number);
     setNewTeamOrderNo(team_order_no);
@@ -165,6 +184,7 @@ export default function DoctorsTables() {
         full_name_ar: newFullNameAr,
         details_en: newDetailsEn,
         details_ar: newDetailsAr,
+        image_name: imageName,
         image_url: newImageUrl,
         mobile_number: newMobileNumber,
         team_order_no: newTeamOrderNo,
@@ -197,6 +217,7 @@ export default function DoctorsTables() {
         details_en: newDetailsEn,
         details_ar: newDetailsAr,
         image_url: newImageUrl,
+        image_name: imageName,
         mobile_number: newMobileNumber,
         team_order_no: newTeamOrderNo,
         is_active: newIsActive,
@@ -216,6 +237,7 @@ export default function DoctorsTables() {
           details_en: '',
           details_ar: '',
           image_url: '',
+          image_name: '',
           mobile_number: '',
           team_order_no: '',
           is_active: '',
@@ -260,6 +282,7 @@ export default function DoctorsTables() {
                       details_en: '',
                       details_ar: '',
                       image_url: '',
+                      image_name: '',
                       mobile_number: '',
                       team_order_no: '',
                       is_active: '',
@@ -292,7 +315,7 @@ export default function DoctorsTables() {
                 },
                 {
                   Header: 'Image Url',
-                  accessor: 'image_url',
+                  accessor: 'image_name',
                 },
                 {
                   Header: 'Mobile Number',
@@ -431,7 +454,7 @@ export default function DoctorsTables() {
                       onChange: (e) => setNewDetailsAr(e.target.value),
                     }}
                   />
-                  <CustomInput
+                  {/* <CustomInput
                     labelText="Image Url"
                     id="add_image_url"
                     formControlProps={{
@@ -442,7 +465,14 @@ export default function DoctorsTables() {
                       value: newImageUrl,
                       onChange: (e) => setNewImageUrl(e.target.value),
                     }}
-                  />
+                  /> */}
+                  <div className="picture-container">
+                    <div className="picture">
+                      <img src={newImageUrl} className="picture-src" alt="..." />
+                      <input type="file" onChange={e => handleImageChange(e)} />
+                    </div>
+                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div>
                   <CustomInput
                     labelText="Mobile Number"
                     id="add_mobile_number"
@@ -589,7 +619,7 @@ export default function DoctorsTables() {
                       onChange: (e) => setNewDetailsAr(e.target.value),
                     }}
                   />
-                  <CustomInput
+                  {/* <CustomInput
                     labelText="Image Url"
                     id="edit_image_url"
                     formControlProps={{
@@ -600,7 +630,14 @@ export default function DoctorsTables() {
                       value: newImageUrl,
                       onChange: (e) => setNewImageUrl(e.target.value),
                     }}
-                  />
+                  /> */}
+                  <div className="picture-container">
+                    <div className="picture">
+                      <img src={newImageUrl} className="picture-src" alt="..." />
+                      <input type="file" onChange={e => handleImageChange(e)} />
+                    </div>
+                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div>
                   <CustomInput
                     labelText="Mobile Number"
                     id="edit_mobile_number"

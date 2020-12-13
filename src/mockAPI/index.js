@@ -262,8 +262,11 @@ createServer({
       details_ar(i) {
         return `تفاصيل ${i}`;
       },
+      image_name(i) {
+        return `Image Name ${i}`;
+      },
       image_url(i) {
-        return `doctor_image ${i}`;
+        return `../../assets/img/default-avatar.png`;
       },
       mobile_number() {
         return parseInt(Math.random() * 1000000);
