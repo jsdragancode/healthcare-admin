@@ -27,6 +27,7 @@ import CardBody from 'components/Card/CardBody.js';
 import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
+import PictureUpload from 'components/CustomUpload/PictureUpload.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
@@ -64,8 +65,25 @@ export default function LabTestTables() {
     const [updateSuccess, setUpdateSuccess] = React.useState(false);
     const [deleteFailed, setDeleteFailed] = React.useState(false);
     const [deleteSuccess, setDeleteSuccess] = React.useState(false);
+    const [file, setFile] = React.useState(null);
+    const [imageName, setImageName] = React.useState('');
+    const [newImageUrl, setNewImageUrl] = useState('');
 
     const classes = useStyles();
+
+    const handleImageChange = e => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let newFile = e.target.files[0];
+        reader.onloadend = () => {
+            setFile(newFile);
+            setNewImageUrl(reader.result);
+            setImageName(newFile.name);
+        };
+        if (newFile) {
+            reader.readAsDataURL(newFile);
+        }
+    };
 
     const setLabTestParam = (info) => {
         const {
@@ -74,6 +92,8 @@ export default function LabTestTables() {
             test_short_desc_ar,
             test_short_desc_en,
             is_available,
+            image_name,
+            image_url,
             price,
         } = info;
 
@@ -83,6 +103,8 @@ export default function LabTestTables() {
         setNewTestShortDescEn(test_short_desc_en);
         setNewAvailable(is_available);
         setNewPrice(price);
+        setImageName(image_name);
+        setNewImageUrl(image_url);
     };
 
     const makeTableRow = (info) => {
@@ -157,6 +179,8 @@ export default function LabTestTables() {
                 test_short_desc_en: newTestShortDescEn,
                 is_available: newAvailable,
                 price: newPrice,
+                image_name: imageName,
+                image_url: newImageUrl,
             })
             .then((res) => {
                 // console.log('post', res.data.doctor);
@@ -185,6 +209,8 @@ export default function LabTestTables() {
                 test_short_desc_en: newTestShortDescEn,
                 is_available: newAvailable,
                 price: newPrice,
+                image_name: imageName,
+                image_url: newImageUrl,
             })
             .then((res) => {
                 // console.log('patch', res.data.doctor);
@@ -202,6 +228,8 @@ export default function LabTestTables() {
                     test_short_desc_en: '',
                     is_available: '',
                     price: '',
+                    image_name: '',
+                    image_url: '',
                 });
 
                 setEditModal(false);
@@ -243,6 +271,8 @@ export default function LabTestTables() {
                                             test_short_desc_en: '',
                                             is_available: '',
                                             price: '',
+                                            image_name: '',
+                                            image_url: '',
                                         });
 
                                         setAddModal(true);
@@ -273,6 +303,10 @@ export default function LabTestTables() {
                                 {
                                     Header: 'Availalble',
                                     accessor: 'is_available',
+                                },
+                                {
+                                    Header: 'Image Url',
+                                    accessor: 'image_name',
                                 },
                                 {
                                     Header: 'Price',
@@ -444,6 +478,15 @@ export default function LabTestTables() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
+                                    <br />
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newImageUrl} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleImageChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                                    </div>
                                     <CustomInput
                                         labelText="Price"
                                         id="add_price"
@@ -578,6 +621,15 @@ export default function LabTestTables() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
+                                    <br />
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newImageUrl} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleImageChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                                    </div>
                                     <CustomInput
                                         labelText="Price"
                                         id="add_price"

@@ -369,6 +369,12 @@ createServer({
       is_available(i) {
         return Math.random() > 0.5 ? 'Yes' : 'No';
       },
+      image_name(i) {
+        return `Image Name ${i}`;
+      },
+      image_url(i) {
+        return `../../assets/img/default-avatar.png`;
+      },
       price(i) {
         return `Price ${i}`;
       }
