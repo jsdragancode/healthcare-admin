@@ -28,6 +28,7 @@ import CardBody from 'components/Card/CardBody.js';
 import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
+import PictureUpload from 'components/CustomUpload/PictureUpload.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
@@ -65,14 +66,31 @@ export default function NursesTables() {
   const [updateSuccess, setUpdateSuccess] = React.useState(false);
   const [deleteFailed, setDeleteFailed] = React.useState(false);
   const [deleteSuccess, setDeleteSuccess] = React.useState(false);
+  const [file, setFile] = React.useState(null);
+  const [imageName, setImageName] = React.useState('');
 
   const classes = useStyles();
+
+  const handleImageChange = e => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let newFile = e.target.files[0];
+    reader.onloadend = () => {
+      setFile(newFile);
+      setNewImageUrl(reader.result);
+      setImageName(newFile.name);
+    };
+    if (newFile) {
+      reader.readAsDataURL(newFile);
+    }
+  };
 
   const setNurseParam = (info) => {
     const {
       full_name_en,
       full_name_ar,
       image_url,
+      image_name,
       mobile_number,
       team_order_no,
       is_active,
@@ -81,6 +99,7 @@ export default function NursesTables() {
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
     setNewImageUrl(image_url);
+    setImageName(image_name);
     setNewMobileNumber(mobile_number);
     setNewTeamOrderNo(team_order_no);
     setNewIsActive(is_active);
@@ -158,6 +177,7 @@ export default function NursesTables() {
         full_name_en: newFullNameEn,
         full_name_ar: newFullNameAr,
         image_url: newImageUrl,
+        image_name: imageName,
         mobile_number: newMobileNumber,
         team_order_no: newTeamOrderNo,
         is_active: newIsActive,
@@ -187,6 +207,7 @@ export default function NursesTables() {
         full_name_en: newFullNameEn,
         full_name_ar: newFullNameAr,
         image_url: newImageUrl,
+        image_name: imageName,
         mobile_number: newMobileNumber,
         team_order_no: newTeamOrderNo,
         is_active: newIsActive,
@@ -204,6 +225,7 @@ export default function NursesTables() {
           full_name_en: '',
           full_name_ar: '',
           image_url: '',
+          image_name: '',
           mobile_number: '',
           team_order_no: '',
           is_active: '',
@@ -246,6 +268,7 @@ export default function NursesTables() {
                       full_name_en: '',
                       full_name_ar: '',
                       image_url: '',
+                      image_name: '',
                       mobile_number: '',
                       team_order_no: '',
                       is_active: '',
@@ -270,7 +293,7 @@ export default function NursesTables() {
                 },
                 {
                   Header: 'Image Url',
-                  accessor: 'image_url',
+                  accessor: 'image_name',
                 },
                 {
                   Header: 'Mobile Number',
@@ -385,18 +408,14 @@ export default function NursesTables() {
                       onChange: (e) => setNewFullNameAr(e.target.value),
                     }}
                   />
-                  <CustomInput
-                    labelText="Image Url"
-                    id="add_image_url"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: newImageUrl,
-                      onChange: (e) => setNewImageUrl(e.target.value),
-                    }}
-                  />
+                  <br />
+                  <div className="picture-container">
+                    <div className="picture">
+                      <img src={newImageUrl} className="picture-src" alt="..." />
+                      <input type="file" onChange={e => handleImageChange(e)} />
+                    </div>
+                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div>
                   <CustomInput
                     labelText="Mobile Number"
                     id="add_mobile_number"
@@ -519,18 +538,14 @@ export default function NursesTables() {
                       onChange: (e) => setNewFullNameAr(e.target.value),
                     }}
                   />
-                  <CustomInput
-                    labelText="Image Url"
-                    id="edit_image_url"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: newImageUrl,
-                      onChange: (e) => setNewImageUrl(e.target.value),
-                    }}
-                  />
+                  <br />
+                  <div className="picture-container">
+                    <div className="picture">
+                      <img src={newImageUrl} className="picture-src" alt="..." />
+                      <input type="file" onChange={e => handleImageChange(e)} />
+                    </div>
+                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div>
                   <CustomInput
                     labelText="Mobile Number"
                     id="edit_mobile_number"

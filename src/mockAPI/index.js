@@ -318,8 +318,11 @@ createServer({
       full_name_ar(i) {
         return `ممرضة ${i}`;
       },
+      image_name(i) {
+        return `Image Name ${i}`;
+      },
       image_url(i) {
-        return `nurse_image ${i}`;
+        return `../../assets/img/default-avatar.png`;
       },
       mobile_number() {
         return parseInt(Math.random() * 1000000);
