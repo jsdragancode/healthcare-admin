@@ -500,7 +500,7 @@ createServer({
         return `booking ${i}`;
       },
       status(i) {
-        return `status ${i}`;
+        return Math.random() > 0.5 ? 'In Progress' : 'Completed';
       },
       on_datetime(i) {
         let start = new Date(2019, 0, 1);

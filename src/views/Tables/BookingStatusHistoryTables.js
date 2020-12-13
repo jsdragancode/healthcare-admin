@@ -11,7 +11,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 // @material-ui/icons
 import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
@@ -336,18 +338,48 @@ export default function BookingStatusHistoryTables() {
                                             value={newOnDatetime}
                                         />
                                     </FormControl>
-                                    <CustomInput
-                                        labelText="Status"
-                                        id="add_status"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newStatus,
-                                            onChange: (e) => setNewStatus(e.target.value),
-                                        }}
-                                    />
+
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Status
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newStatus}
+                                            onChange={(e) => setNewStatus(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="In Progress"
+                                            >
+                                                In Progress
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Completed"
+                                            >
+                                                Completed
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </form>
                             </DialogContent>
                             <DialogActions>
@@ -403,18 +435,47 @@ export default function BookingStatusHistoryTables() {
                                             value={newOnDatetime}
                                         />
                                     </FormControl>
-                                    <CustomInput
-                                        labelText="Status"
-                                        id="add_status"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newStatus,
-                                            onChange: (e) => setNewStatus(e.target.value),
-                                        }}
-                                    />
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Status
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newStatus}
+                                            onChange={(e) => setNewStatus(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="In Progress"
+                                            >
+                                                In Progress
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Completed"
+                                            >
+                                                Completed
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </form>
                             </DialogContent>
                             <DialogActions>
