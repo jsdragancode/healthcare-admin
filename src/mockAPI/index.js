@@ -101,10 +101,36 @@ createServer({
         return `nurse ${i}`;
       },
       status(i) {
-        return Math.random() > 0.5 ? 'In Progress' : 'Completed';
+        let booking_status;
+
+        if (Math.random() >= 0 && Math.random() < 0.15) {
+          booking_status = 'Booking Placed';
+        } else if (Math.random() >= 0.15 && Math.random() < 0.3) {
+          booking_status = 'Team Assigned';
+        } else if (Math.random() >= 0.3 && Math.random() < 0.45) {
+          booking_status = 'Van Dispatched';
+        } else if (Math.random() >= 0.45 && Math.random() < 0.6) {
+          booking_status = 'Van Reached';
+        } else if (Math.random() >= 0.6 && Math.random() < 0.75) {
+          booking_status = 'Service Provided';
+        } else if (Math.random() >= 0.75 && Math.random() < 0.85) {
+          booking_status = 'Payment Failed';
+        } else {
+          booking_status = 'Booking Cancelled';
+        }
+        return booking_status;
       },
       payment_method(i) {
-        return Math.random() > 0.5 ? 'credit/debid' : 'insurance';
+        let payment_methods;
+
+        if (Math.random() >= 0 && Math.random() < 0.35) {
+          payment_methods = 'VISA / Mastercard Credit Card';
+        } else if (Math.random() >= 0.35 && Math.random() < 0.7) {
+          payment_methods = 'Benefit Debit Card';
+        } else {
+          payment_methods = 'Insurance';
+        }
+        return payment_methods;
       },
       payment_url(i) {
         return `payment ${i}`;
