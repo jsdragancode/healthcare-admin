@@ -500,7 +500,24 @@ createServer({
         return `booking ${i}`;
       },
       status(i) {
-        return Math.random() > 0.5 ? 'In Progress' : 'Completed';
+        let booking_status;
+
+        if (Math.random() >= 0 && Math.random() < 0.15) {
+          booking_status = 'Booking Placed';
+        } else if (Math.random() >= 0.15 && Math.random() < 0.3) {
+          booking_status = 'Team Assigned';
+        } else if (Math.random() >= 0.3 && Math.random() < 0.45) {
+          booking_status = 'Van Dispatched';
+        } else if (Math.random() >= 0.45 && Math.random() < 0.6) {
+          booking_status = 'Van Reached';
+        } else if (Math.random() >= 0.6 && Math.random() < 0.75) {
+          booking_status = 'Service Provided';
+        } else if (Math.random() >= 0.75 && Math.random() < 0.85) {
+          booking_status = 'Payment Failed';
+        } else {
+          booking_status = 'Booking Cancelled';
+        }
+        return booking_status;
       },
       on_datetime(i) {
         let start = new Date(2019, 0, 1);

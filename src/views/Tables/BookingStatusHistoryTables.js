@@ -365,18 +365,63 @@ export default function BookingStatusHistoryTables() {
                                                     root: classes.selectMenuItem,
                                                     selected: classes.selectMenuItemSelected,
                                                 }}
-                                                value="In Progress"
+                                                value="Booking Placed"
                                             >
-                                                In Progress
+                                                Booking Placed
                                             </MenuItem>
                                             <MenuItem
                                                 classes={{
                                                     root: classes.selectMenuItem,
                                                     selected: classes.selectMenuItemSelected,
                                                 }}
-                                                value="Completed"
+                                                value="Team Assigned"
                                             >
-                                                Completed
+                                                Team Assigned
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Van Dispatched"
+                                            >
+                                                Van Dispatched
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Van Reached"
+                                            >
+                                                Van Reached
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Service Provided"
+                                            >
+                                                Service Provided
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Payment Failed"
+                                            >
+                                                Payment Failed
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Booking Cancelled"
+                                            >
+                                                Booking Cancelled
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
@@ -461,18 +506,63 @@ export default function BookingStatusHistoryTables() {
                                                     root: classes.selectMenuItem,
                                                     selected: classes.selectMenuItemSelected,
                                                 }}
-                                                value="In Progress"
+                                                value="Booking Placed"
                                             >
-                                                In Progress
+                                                Booking Placed
                                             </MenuItem>
                                             <MenuItem
                                                 classes={{
                                                     root: classes.selectMenuItem,
                                                     selected: classes.selectMenuItemSelected,
                                                 }}
-                                                value="Completed"
+                                                value="Team Assigned"
                                             >
-                                                Completed
+                                                Team Assigned
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Van Dispatched"
+                                            >
+                                                Van Dispatched
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Van Reached"
+                                            >
+                                                Van Reached
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Service Provided"
+                                            >
+                                                Service Provided
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Payment Failed"
+                                            >
+                                                Payment Failed
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Booking Cancelled"
+                                            >
+                                                Booking Cancelled
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
