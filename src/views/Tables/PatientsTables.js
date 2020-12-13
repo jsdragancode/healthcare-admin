@@ -30,6 +30,7 @@ import CardBody from 'components/Card/CardBody.js';
 import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
+import PictureUpload from 'components/CustomUpload/PictureUpload.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
@@ -63,9 +64,13 @@ export default function PatientsTables() {
     const [newBirthday, setNewBirthday] = useState('');
     const [newCPRNumber, setNewCPRNumber] = useState('');
     const [newCPRFront, setNewCPRFront] = useState('');
+    const [newCPRFrontURL, setNewCPRFrontURL] = useState('');
     const [newCPRBack, setNewCPRBack] = useState('');
+    const [newCPRBackURL, setNewCPRBackURL] = useState('');
     const [newInsuranceFront, setNewInsuranceFront] = useState('');
+    const [newInsuranceFrontURL, setNewInsuranceFrontURL] = useState('');
     const [newInsuranceBack, setNewInsuranceBack] = useState('');
+    const [newInsuranceBackURL, setNewInsuranceBackURL] = useState('');
     const [newUserId, setUserId] = useState('');
     const [newIsUserMain, setNewIsUserMain] = useState('');
     const [newIsDeleted, setNewIsDeleted] = useState('');
@@ -76,18 +81,80 @@ export default function PatientsTables() {
     const [deleteFailed, setDeleteFailed] = React.useState(false);
     const [deleteSuccess, setDeleteSuccess] = React.useState(false);
 
+    const [file, setFile] = React.useState(null);
+
     const classes = useStyles();
 
+    const handleCPRFrontChange = e => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let newFile = e.target.files[0];
+        reader.onloadend = () => {
+            setFile(newFile);
+            setNewCPRFrontURL(reader.result);
+            setNewCPRFront(newFile.name);
+        };
+        if (newFile) {
+            reader.readAsDataURL(newFile);
+        }
+    };
+
+    const handleCPRBackChange = e => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let newFile = e.target.files[0];
+        reader.onloadend = () => {
+            setFile(newFile);
+            setNewCPRBackURL(reader.result);
+            setNewCPRBack(newFile.name);
+        };
+        if (newFile) {
+            reader.readAsDataURL(newFile);
+        }
+    };
+
+    const handleInsuranceFrontChange = e => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let newFile = e.target.files[0];
+        reader.onloadend = () => {
+            setFile(newFile);
+            setNewInsuranceFrontURL(reader.result);
+            setNewInsuranceFront(newFile.name);
+        };
+        if (newFile) {
+            reader.readAsDataURL(newFile);
+        }
+    };
+
+    const handleInsuranceBackChange = e => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let newFile = e.target.files[0];
+        reader.onloadend = () => {
+            setFile(newFile);
+            setNewInsuranceBackURL(reader.result);
+            setNewInsuranceBack(newFile.name);
+        };
+        if (newFile) {
+            reader.readAsDataURL(newFile);
+        }
+    };
+
     const setPatientParam = (info) => {
-        const { full_name, gender, date_of_birth, cpr_number, scanned_cpr_front, scanned_cpr_back, scanned_insurance_front, scanned_insurance_back, user_id, is_user_main, is_deleted } = info;
+        const { full_name, gender, date_of_birth, cpr_number, scanned_cpr_front, scanned_cpr_front_url, scanned_cpr_back, scanned_cpr_back_url, scanned_insurance_front, scanned_insurance_front_url, scanned_insurance_back, scanned_insurance_back_url, user_id, is_user_main, is_deleted } = info;
         setNewFullName(full_name);
         setNewGender(gender);
         setNewBirthday(date_of_birth);
         setNewCPRNumber(cpr_number);
         setNewCPRFront(scanned_cpr_front);
+        setNewCPRFrontURL(scanned_cpr_front_url);
         setNewCPRBack(scanned_cpr_back);
+        setNewCPRBackURL(scanned_cpr_back_url);
         setNewInsuranceFront(scanned_insurance_front);
+        setNewInsuranceFrontURL(scanned_insurance_front_url);
         setNewInsuranceBack(scanned_insurance_back);
+        setNewInsuranceBackURL(scanned_insurance_back_url);
         setUserId(user_id);
         setNewIsUserMain(is_user_main);
         setNewIsDeleted(is_deleted);
@@ -164,9 +231,13 @@ export default function PatientsTables() {
                 date_of_birth: newBirthday,
                 cpr_number: newCPRNumber,
                 scanned_cpr_front: newCPRFront,
+                scanned_cpr_front_url: newCPRFrontURL,
                 scanned_cpr_back: newCPRBack,
+                scanned_cpr_back_url: newCPRBackURL,
                 scanned_insurance_front: newInsuranceFront,
+                scanned_insurance_front_url: newInsuranceFrontURL,
                 scanned_insurance_back: newInsuranceBack,
+                scanned_insurance_back_url: newInsuranceBackURL,
                 user_id: newUserId,
                 is_user_main: newIsUserMain,
                 is_deleted: newIsDeleted,
@@ -196,9 +267,13 @@ export default function PatientsTables() {
                 date_of_birth: newBirthday,
                 cpr_number: newCPRNumber,
                 scanned_cpr_front: newCPRFront,
+                scanned_cpr_front_url: newCPRFrontURL,
                 scanned_cpr_back: newCPRBack,
+                scanned_cpr_back_url: newCPRBackURL,
                 scanned_insurance_front: newInsuranceFront,
+                scanned_insurance_front_url: newInsuranceFrontURL,
                 scanned_insurance_back: newInsuranceBack,
+                scanned_insurance_back_url: newInsuranceBackURL,
                 user_id: newUserId,
                 is_user_main: newIsUserMain,
                 is_deleted: newIsDeleted,
@@ -247,9 +322,13 @@ export default function PatientsTables() {
                                             date_of_birth: '',
                                             cpr_number: '',
                                             scanned_cpr_front: '',
+                                            scanned_cpr_front_url: '',
                                             scanned_cpr_back: '',
+                                            scanned_cpr_back_url: '',
                                             scanned_insurance_front: '',
+                                            scanned_insurance_front_url: '',
                                             scanned_insurance_back: '',
+                                            scanned_insurance_back_url: '',
                                             user_id: '',
                                             is_user_main: '',
                                             is_deleted: '',
@@ -460,30 +539,42 @@ export default function PatientsTables() {
                                             onChange: (e) => setNewCPRNumber(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="CPR Front"
-                                        id="add_cpr_front"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newCPRFront,
-                                            onChange: (e) => setNewCPRFront(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="CPR Back"
-                                        id="add_cpr_back"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newCPRBack,
-                                            onChange: (e) => setNewCPRBack(e.target.value),
-                                        }}
-                                    />
+
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newCPRFrontURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleCPRFrontChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newCPRFront == '') ? 'Choose CPR Front' : newCPRFront}</h6>
+                                    </div>
+
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newCPRBackURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleCPRBackChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newCPRBack == '') ? 'Choose CPR Back' : newCPRBack}</h6>
+                                    </div>
+
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newInsuranceFrontURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleInsuranceFrontChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newInsuranceFront == '') ? 'Choose Insurance Front' : newInsuranceFront}</h6>
+                                    </div>
+
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newInsuranceBackURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleInsuranceBackChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newInsuranceBack == '') ? 'Choose Insurance Back' : newInsuranceBack}</h6>
+                                    </div>
                                     <CustomInput
                                         labelText="Insurance Front"
                                         id="add_insurance_front"
@@ -709,7 +800,7 @@ export default function PatientsTables() {
                                             onChange: (e) => setNewCPRNumber(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
+                                    {/* <CustomInput
                                         labelText="CPR Front"
                                         id="add_cpr_front"
                                         formControlProps={{
@@ -720,7 +811,43 @@ export default function PatientsTables() {
                                             value: newCPRFront,
                                             onChange: (e) => setNewCPRFront(e.target.value),
                                         }}
-                                    />
+                                    /> */}
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newCPRFrontURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleCPRFrontChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newCPRFront == '') ? 'Choose CPR Front' : newCPRFront}</h6>
+                                    </div>
+
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newCPRBackURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleCPRBackChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newCPRBack == '') ? 'Choose CPR Back' : newCPRBack}</h6>
+                                    </div>
+
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newInsuranceFrontURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleInsuranceFrontChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newInsuranceFront == '') ? 'Choose Insurance Front' : newInsuranceFront}</h6>
+                                    </div>
+
+                                    <br />
+                                    <div className="picture-container">
+                                        <div className="picture">
+                                            <img src={newInsuranceBackURL} className="picture-src" alt="..." />
+                                            <input type="file" onChange={e => handleInsuranceBackChange(e)} />
+                                        </div>
+                                        <h6 className="description">{(newInsuranceBack == '') ? 'Choose Insurance Back' : newInsuranceBack}</h6>
+                                    </div>
+
                                     <CustomInput
                                         labelText="CPR Back"
                                         id="add_cpr_back"

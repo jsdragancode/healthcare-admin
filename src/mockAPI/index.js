@@ -496,13 +496,25 @@ createServer({
       scanned_cpr_front(i) {
         return `CPR Front ${i}`;
       },
+      scanned_cpr_front_url(i) {
+        return `CPR Front ${i}`;
+      },
       scanned_cpr_back(i) {
+        return `CPR Back ${i}`;
+      },
+      scanned_cpr_back_url(i) {
         return `CPR Back ${i}`;
       },
       scanned_insurance_front(i) {
         return `Insurance Front ${i}`;
       },
+      scanned_insurance_front_url(i) {
+        return `Insurance Front ${i}`;
+      },
       scanned_insurance_back(i) {
+        return `Insurance Back ${i}`;
+      },
+      scanned_insurance_back_url(i) {
         return `Insurance Back ${i}`;
       },
       user_id(i) {
