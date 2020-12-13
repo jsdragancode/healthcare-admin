@@ -365,7 +365,7 @@ export default function DriversTables() {
                       className={classes.selectLabel}
                     >
                       Is Active
-                                        </InputLabel>
+                    </InputLabel>
                     <Select
                       MenuProps={{
                         className: classes.selectMenu,
@@ -388,7 +388,7 @@ export default function DriversTables() {
                         value="Active"
                       >
                         Active
-                                            </MenuItem>
+                      </MenuItem>
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
@@ -397,7 +397,7 @@ export default function DriversTables() {
                         value="In Active"
                       >
                         In Active
-                                            </MenuItem>
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 </form>
@@ -475,7 +475,7 @@ export default function DriversTables() {
                       className={classes.selectLabel}
                     >
                       Is Active
-                                        </InputLabel>
+                    </InputLabel>
                     <Select
                       MenuProps={{
                         className: classes.selectMenu,
@@ -498,7 +498,7 @@ export default function DriversTables() {
                         value="Active"
                       >
                         Active
-                                            </MenuItem>
+                      </MenuItem>
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
@@ -507,7 +507,7 @@ export default function DriversTables() {
                         value="In Active"
                       >
                         In Active
-                                            </MenuItem>
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 </form>
