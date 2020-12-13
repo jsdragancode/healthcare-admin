@@ -307,8 +307,7 @@ createServer({
         return `van ${i}`;
       },
       is_deleted() {
-        // 0 : not-deleted, 1 : deleted
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'Yes' : 'No';
       },
     }),
     labresult: Factory.extend({
