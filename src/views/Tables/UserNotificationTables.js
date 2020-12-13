@@ -9,6 +9,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -293,7 +297,7 @@ export default function UserNotificationTables() {
                                     className={classes.modalSmallFooterFirstButton}
                                 >
                                     Never Mind
-                </Button>
+                                </Button>
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
@@ -308,7 +312,7 @@ export default function UserNotificationTables() {
                                     }
                                 >
                                     Yes
-                </Button>
+                                </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog

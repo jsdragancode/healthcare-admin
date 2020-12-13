@@ -220,7 +220,7 @@ createServer({
         );
       },
       is_read(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'Yes' : 'No';
       },
     }),
     doctor: Factory.extend({
@@ -338,7 +338,7 @@ createServer({
         return `Desc en ${i}`;
       },
       is_available(i) {
-        return `Availalbe ${i}`;
+        return Math.random() > 0.5 ? 'Yes' : 'No';
       },
       price(i) {
         return `Price ${i}`;
@@ -425,7 +425,7 @@ createServer({
         return `Result ${i}`;
       },
       is_success(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'Yes' : 'No';
       },
       created_on(i) {
         let start = new Date(2012, 0, 1);

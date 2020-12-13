@@ -12,6 +12,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -488,18 +491,48 @@ export default function TransactionTables() {
                                             onChange: (e) => setNewResult(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Success"
-                                        id="add_success"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newIsSuccess,
-                                            onChange: (e) => setNewIsSuccess(e.target.value),
-                                        }}
-                                    />
+
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Success
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newIsSuccess}
+                                            onChange={(e) => setNewIsSuccess(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Yes"
+                                            >
+                                                Yes
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="No"
+                                            >
+                                                No
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
                                     <br />
                                     <br />
                                     <FormControl fullWidth>
@@ -649,18 +682,47 @@ export default function TransactionTables() {
                                             onChange: (e) => setNewResult(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Success"
-                                        id="add_success"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newIsSuccess,
-                                            onChange: (e) => setNewIsSuccess(e.target.value),
-                                        }}
-                                    />
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Success
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newIsSuccess}
+                                            onChange={(e) => setNewIsSuccess(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Yes"
+                                            >
+                                                Yes
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="No"
+                                            >
+                                                No
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
                                     <br />
                                     <br />
                                     <FormControl fullWidth>
