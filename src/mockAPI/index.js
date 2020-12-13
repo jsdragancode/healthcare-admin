@@ -151,7 +151,7 @@ createServer({
       },
       gender() {
         // 0 : male, 1 : female
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'Male' : 'Female';
       },
       mobile_number() {
         return parseInt(Math.random() * 1000000);
@@ -170,7 +170,7 @@ createServer({
       },
       is_active() {
         // 0 : in-active, 1 : active
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? "Active" : "In Active";
       },
       firebase_uid(i) {
         return `firebase_uid ${i}`;

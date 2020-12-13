@@ -264,8 +264,13 @@ export default function UsersTables() {
 
   const handleSimple = (event) => {
     // setSimpleSelect(event.target.value);
-    let selectedGender = event.target.value - 2;
-    setGender(selectedGender);
+    // let selectedGender = event.target.value - 2;
+    // if (selectedGender == 0) {
+    //   setGender("Male");
+    // } else if (selectedGender == 1) {
+    //   setGender("Female");
+    // }
+    setGender(event.target.value);
   };
 
   return (
@@ -444,7 +449,7 @@ export default function UsersTables() {
                           root: classes.selectMenuItem,
                           selected: classes.selectMenuItemSelected,
                         }}
-                        value="2"
+                        value="Male"
                       >
                         Male
                       </MenuItem>
@@ -453,7 +458,7 @@ export default function UsersTables() {
                           root: classes.selectMenuItem,
                           selected: classes.selectMenuItemSelected,
                         }}
-                        value="3"
+                        value="Female"
                       >
                         Female
                       </MenuItem>
@@ -522,9 +527,9 @@ export default function UsersTables() {
                   {/* <FormControlLabel
                     control={
                       <Switch
-                        checked={checkedA}
+                        checked={active}
                         onChange={(e) => setActive(e.target.value)}
-                        value="checkedA"
+                        value="Active"
                         classes={{
                           switchBase: classes.switchBase,
                           checked: classes.switchChecked,
@@ -539,18 +544,47 @@ export default function UsersTables() {
                     label="Active"
                   /> */}
 
-                  <CustomInput
-                    labelText="Active"
-                    id="edit_Active"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: active,
-                      onChange: (e) => setActive(e.target.value),
-                    }}
-                  />
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Active
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu,
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      value={active}
+                      onChange={(e) => setActive(e.target.value)}
+                      inputProps={{
+                        name: 'simpleSelect',
+                        id: 'simple-select',
+                      }}
+                    >
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="Active"
+                      >
+                        Active
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="In Active"
+                      >
+                        In Active
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
 
                   <CustomInput
                     labelText="Firebase Uid"
@@ -631,7 +665,7 @@ export default function UsersTables() {
                       onChange: (e) => setNewFullNameEn(e.target.value),
                     }}
                   />
-                  <CustomInput
+                  {/* <CustomInput
                     labelText="Gender"
                     id="edit_gender"
                     formControlProps={{
@@ -642,7 +676,48 @@ export default function UsersTables() {
                       value: gender,
                       onChange: (e) => setGender(e.target.value),
                     }}
-                  />
+                  /> */}
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Gender
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu,
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      value={gender}
+                      onChange={handleSimple}
+                      inputProps={{
+                        name: 'simpleSelect',
+                        id: 'simple-select',
+                      }}
+                    >
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="Male"
+                      >
+                        Male
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="Female"
+                      >
+                        Female
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
                   <CustomInput
                     labelText="Mobile"
                     id="edit_mobile"
@@ -703,18 +778,47 @@ export default function UsersTables() {
                       onChange: (e) => setCity(e.target.value),
                     }}
                   />
-                  <CustomInput
-                    labelText="Active"
-                    id="edit_Active"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: active,
-                      onChange: (e) => setActive(e.target.value),
-                    }}
-                  />
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Active
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu,
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      value={active}
+                      onChange={(e) => setActive(e.target.value)}
+                      inputProps={{
+                        name: 'simpleSelect',
+                        id: 'simple-select',
+                      }}
+                    >
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="Active"
+                      >
+                        Active
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="In Active"
+                      >
+                        In Active
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
                   <CustomInput
                     labelText="Firebase Uid"
                     id="edit_firebase_ui"
