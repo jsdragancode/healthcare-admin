@@ -83,7 +83,7 @@ createServer({
         );
       },
       booking_type(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'General physician' : 'Laboratory test';
       },
       lap_test_id(i) {
         return `lap test ${i}`;
@@ -101,10 +101,10 @@ createServer({
         return `nurse ${i}`;
       },
       status(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'In Progress' : 'Completed';
       },
       payment_method(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'credit/debid' : 'insurance';
       },
       payment_url(i) {
         return `payment ${i}`;

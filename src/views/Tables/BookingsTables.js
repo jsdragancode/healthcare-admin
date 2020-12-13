@@ -12,6 +12,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -517,18 +520,48 @@ export default function BookingsTables() {
                                             value={newEndDateTime}
                                         />
                                     </FormControl>
-                                    <CustomInput
-                                        labelText="Booking Type"
-                                        id="add_medication"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newBookingType,
-                                            onChange: (e) => setNewBookingType(e.target.value),
-                                        }}
-                                    />
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Booking Type
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newBookingType}
+                                            onChange={(e) => setNewBookingType(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="General physician"
+                                            >
+                                                General physician
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Laboratory test"
+                                            >
+                                                Laboratory test
+                                            </MenuItem>
+
+                                        </Select>
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Lap Test ID"
                                         id="add_body_temp"
@@ -589,30 +622,89 @@ export default function BookingsTables() {
                                             onChange: (e) => setNewAssignedNurse(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Status"
-                                        id="add_height"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newStatus,
-                                            onChange: (e) => setNewStatus(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="Payment Method"
-                                        id="add_height"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newPaymentMethod,
-                                            onChange: (e) => setNewPaymentMethod(e.target.value),
-                                        }}
-                                    />
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Status
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newStatus}
+                                            onChange={(e) => setNewStatus(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="In Progress"
+                                            >
+                                                In Progress
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Completed"
+                                            >
+                                                Completed
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Payment Method
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newPaymentMethod}
+                                            onChange={(e) => setNewPaymentMethod(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="credit/debid"
+                                            >
+                                                credit/debid
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="insurance"
+                                            >
+                                                insurance
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Payment Url"
                                         id="add_height"
@@ -796,18 +888,49 @@ export default function BookingsTables() {
                                             value={newEndDateTime}
                                         />
                                     </FormControl>
-                                    <CustomInput
-                                        labelText="Booking Type"
-                                        id="add_medication"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newBookingType,
-                                            onChange: (e) => setNewBookingType(e.target.value),
-                                        }}
-                                    />
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Booking Type
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newBookingType}
+                                            onChange={(e) => setNewBookingType(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="General physician"
+                                            >
+                                                General physician
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Laboratory test"
+                                            >
+                                                Laboratory test
+                                            </MenuItem>
+
+                                        </Select>
+                                    </FormControl>
+
                                     <CustomInput
                                         labelText="Lap Test ID"
                                         id="add_body_temp"
@@ -880,18 +1003,90 @@ export default function BookingsTables() {
                                             onChange: (e) => setNewStatus(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Payment Method"
-                                        id="add_height"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newPaymentMethod,
-                                            onChange: (e) => setNewPaymentMethod(e.target.value),
-                                        }}
-                                    />
+
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Status
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newStatus}
+                                            onChange={(e) => setNewStatus(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="In Progress"
+                                            >
+                                                In Progress
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Completed"
+                                            >
+                                                Completed
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Payment Method
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newPaymentMethod}
+                                            onChange={(e) => setNewPaymentMethod(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="credit/debid"
+                                            >
+                                                credit/debid
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="insurance"
+                                            >
+                                                insurance
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
                                     <CustomInput
                                         labelText="Payment Url"
                                         id="add_height"
