@@ -442,7 +442,7 @@ createServer({
         return `Name ${i}`;
       },
       gender(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'Male' : 'Female';
       },
       date_of_birth(i) {
         let start = new Date(1940, 0, 1);
@@ -471,10 +471,10 @@ createServer({
         return parseInt(Math.random() * 1000000);
       },
       is_user_main(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > '0.5' ? 'Yes' : 'No';
       },
       is_deleted(i) {
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'Yes' : 'No';
       },
     }),
 
