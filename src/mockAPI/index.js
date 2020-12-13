@@ -144,6 +144,9 @@ createServer({
       mobile_number() {
         return parseInt(Math.random() * 1000000);
       },
+      is_active() {
+        return Math.random() > 0.5 ? 'Active' : 'In Active';
+      },
     }),
     user: Factory.extend({
       full_name(i) {
@@ -243,8 +246,7 @@ createServer({
         return parseInt(Math.random() * 1000);
       },
       is_active() {
-        // 0 : in-active, 1 : active
-        return Math.random() > 0.5 ? 1 : 0;
+        return Math.random() > 0.5 ? 'Active' : 'In Active';
       },
     }),
     consoleUser: Factory.extend({

@@ -9,6 +9,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 // @material-ui/icons
 import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
@@ -51,6 +55,7 @@ export default function DriversTables() {
   const [newFullNameAr, setNewFullNameAr] = useState('');
   const [newMobileNumber, setNewMobileNumber] = useState('');
   const [failed, setFailed] = React.useState(false);
+  const [newIsActive, setNewIsActive] = useState('');
   const [success, setSuccess] = React.useState(false);
   const [updateFailed, setUpdateFailed] = React.useState(false);
   const [updateSuccess, setUpdateSuccess] = React.useState(false);
@@ -60,11 +65,12 @@ export default function DriversTables() {
   const classes = useStyles();
 
   const setDriverParam = (info) => {
-    const { full_name_en, full_name_ar, mobile_number } = info;
+    const { full_name_en, full_name_ar, mobile_number, is_active } = info;
 
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
     setNewMobileNumber(mobile_number);
+    setNewIsActive(is_active);
   };
 
   const makeTableRow = (info) => {
@@ -138,6 +144,7 @@ export default function DriversTables() {
         full_name_en: newFullNameEn,
         full_name_ar: newFullNameAr,
         mobile_number: newMobileNumber,
+        is_active: newIsActive,
       })
       .then((res) => {
         // console.log('post', res.data.driver);
@@ -164,6 +171,7 @@ export default function DriversTables() {
         full_name_en: newFullNameEn,
         full_name_ar: newFullNameAr,
         mobile_number: newMobileNumber,
+        is_active: newIsActive,
       })
       .then((res) => {
         // console.log('patch', res.data.driver);
@@ -210,6 +218,7 @@ export default function DriversTables() {
                       full_name_en: '',
                       full_name_ar: '',
                       mobile_number: '',
+                      is_active: '',
                     });
 
                     setAddModal(true);
@@ -232,6 +241,10 @@ export default function DriversTables() {
                 {
                   Header: 'Mobile Number',
                   accessor: 'mobile_number',
+                },
+                {
+                  Header: 'Is Active',
+                  accessor: 'is_active',
                 },
                 {
                   Header: 'Actions',
@@ -346,6 +359,47 @@ export default function DriversTables() {
                       onChange: (e) => setNewMobileNumber(e.target.value),
                     }}
                   />
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Is Active
+                                        </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu,
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      value={newIsActive}
+                      onChange={(e) => setNewIsActive(e.target.value)}
+                      inputProps={{
+                        name: 'simpleSelect',
+                        id: 'simple-select',
+                      }}
+                    >
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="Active"
+                      >
+                        Active
+                                            </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="In Active"
+                      >
+                        In Active
+                                            </MenuItem>
+                    </Select>
+                  </FormControl>
                 </form>
               </DialogContent>
               <DialogActions>
@@ -415,6 +469,47 @@ export default function DriversTables() {
                       onChange: (e) => setNewMobileNumber(e.target.value),
                     }}
                   />
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Is Active
+                                        </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu,
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      value={newIsActive}
+                      onChange={(e) => setNewIsActive(e.target.value)}
+                      inputProps={{
+                        name: 'simpleSelect',
+                        id: 'simple-select',
+                      }}
+                    >
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="Active"
+                      >
+                        Active
+                                            </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="In Active"
+                      >
+                        In Active
+                                            </MenuItem>
+                    </Select>
+                  </FormControl>
                 </form>
               </DialogContent>
               <DialogActions>
