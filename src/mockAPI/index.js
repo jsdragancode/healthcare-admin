@@ -136,7 +136,12 @@ createServer({
         return `payment ${i}`;
       },
       placed_on(i) {
-        return `place ${i}`;
+        let start = new Date(2018, 0, 1);
+        let end = new Date(2019, 0, 1);
+
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
       },
       location_coordinates(i) {
         return `location ${i}`;

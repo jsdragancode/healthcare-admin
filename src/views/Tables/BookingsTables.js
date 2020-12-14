@@ -772,18 +772,18 @@ export default function BookingsTables() {
                                             onChange: (e) => setNewPaymentUrl(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Placed On"
-                                        id="add_height"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newPlacedOn,
-                                            onChange: (e) => setNewPlacedOn(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Placed On', }}
+                                            onChange={(e) => setNewPlacedOn(e)}
+                                            value={newPlacedOn}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
                                     <CustomInput
                                         labelText="Coordinates"
                                         id="add_height"
@@ -1208,18 +1208,18 @@ export default function BookingsTables() {
                                             onChange: (e) => setNewPaymentUrl(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Placed On"
-                                        id="add_height"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newPlacedOn,
-                                            onChange: (e) => setNewPlacedOn(e.target.value),
-                                        }}
-                                    />
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Placed On', }}
+                                            onChange={(e) => setNewPlacedOn(e)}
+                                            value={newPlacedOn}
+                                        />
+                                    </FormControl>
+                                    <br />
+                                    <br />
                                     <CustomInput
                                         labelText="Coordinates"
                                         id="add_height"
