@@ -71,6 +71,12 @@ export default function NursesTables() {
 
   const classes = useStyles();
 
+  let fileInput = React.createRef();
+
+  const handleClick = () => {
+    fileInput.current.click();
+  };
+
   const handleImageChange = e => {
     e.preventDefault();
     let reader = new FileReader();
@@ -409,12 +415,23 @@ export default function NursesTables() {
                     }}
                   />
                   <br />
-                  <div className="picture-container">
+                  {/* <div className="picture-container">
                     <div className="picture">
                       <img src={newImageUrl} className="picture-src" alt="..." />
                       <input type="file" onChange={e => handleImageChange(e)} />
                     </div>
                     <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div> */}
+                  <div className="fileinput text-center">
+                    <input type="file" onChange={handleImageChange} ref={fileInput} />
+                    <div className={'thumbnail'}>
+                      <img src={newImageUrl} alt="..." />
+                    </div>
+                    <div>
+                      <Button onClick={() => handleClick()}>
+                        Upload image
+                      </Button>
+                    </div>
                   </div>
                   <CustomInput
                     labelText="Mobile Number"
@@ -539,12 +556,23 @@ export default function NursesTables() {
                     }}
                   />
                   <br />
-                  <div className="picture-container">
+                  {/* <div className="picture-container">
                     <div className="picture">
                       <img src={newImageUrl} className="picture-src" alt="..." />
                       <input type="file" onChange={e => handleImageChange(e)} />
                     </div>
                     <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div> */}
+                  <div className="fileinput text-center">
+                    <input type="file" onChange={handleImageChange} ref={fileInput} />
+                    <div className={'thumbnail'}>
+                      <img src={newImageUrl} alt="..." />
+                    </div>
+                    <div>
+                      <Button onClick={() => handleClick()}>
+                        Upload image
+                      </Button>
+                    </div>
                   </div>
                   <CustomInput
                     labelText="Mobile Number"
