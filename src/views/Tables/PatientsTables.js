@@ -85,6 +85,27 @@ export default function PatientsTables() {
 
     const classes = useStyles();
 
+    let fileInput1 = React.createRef();
+    let fileInput2 = React.createRef();
+    let fileInput3 = React.createRef();
+    let fileInput4 = React.createRef();
+
+    const handleClick1 = () => {
+        fileInput1.current.click();
+    };
+
+    const handleClick2 = () => {
+        fileInput2.current.click();
+    };
+
+    const handleClick3 = () => {
+        fileInput3.current.click();
+    };
+
+    const handleClick4 = () => {
+        fileInput4.current.click();
+    };
+
     const handleCPRFrontChange = e => {
         e.preventDefault();
         let reader = new FileReader();
@@ -541,39 +562,87 @@ export default function PatientsTables() {
                                     />
 
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newCPRFrontURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleCPRFrontChange(e)} />
                                         </div>
                                         <h6 className="description">{(newCPRFront == '') ? 'Choose CPR Front' : newCPRFront}</h6>
+                                    </div> */}
+
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleCPRFrontChange} ref={fileInput1} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newCPRFrontURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick1()}>
+                                                Upload CPR Front
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newCPRBackURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleCPRBackChange(e)} />
                                         </div>
                                         <h6 className="description">{(newCPRBack == '') ? 'Choose CPR Back' : newCPRBack}</h6>
+                                    </div> */}
+
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleCPRBackChange} ref={fileInput2} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newCPRBackURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick2()}>
+                                                Upload CPR Back
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newInsuranceFrontURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleInsuranceFrontChange(e)} />
                                         </div>
                                         <h6 className="description">{(newInsuranceFront == '') ? 'Choose Insurance Front' : newInsuranceFront}</h6>
+                                    </div> */}
+
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleInsuranceFrontChange} ref={fileInput3} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newInsuranceFrontURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick3()}>
+                                                Upload Insurance Front
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newInsuranceBackURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleInsuranceBackChange(e)} />
                                         </div>
                                         <h6 className="description">{(newInsuranceBack == '') ? 'Choose Insurance Back' : newInsuranceBack}</h6>
+                                    </div> */}
+
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleInsuranceBackChange} ref={fileInput4} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newInsuranceBackURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick4()}>
+                                                Upload Insurance Back
+                                            </Button>
+                                        </div>
                                     </div>
                                     <CustomInput
                                         labelText="Insurance Front"
@@ -813,39 +882,85 @@ export default function PatientsTables() {
                                         }}
                                     /> */}
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newCPRFrontURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleCPRFrontChange(e)} />
                                         </div>
                                         <h6 className="description">{(newCPRFront == '') ? 'Choose CPR Front' : newCPRFront}</h6>
+                                    </div> */}
+
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleCPRFrontChange} ref={fileInput1} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newCPRFrontURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick1()}>
+                                                Upload CPR Front
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newCPRBackURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleCPRBackChange(e)} />
                                         </div>
                                         <h6 className="description">{(newCPRBack == '') ? 'Choose CPR Back' : newCPRBack}</h6>
+                                    </div> */}
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleCPRBackChange} ref={fileInput2} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newCPRBackURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick2()}>
+                                                Upload CPR Back
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newInsuranceFrontURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleInsuranceFrontChange(e)} />
                                         </div>
                                         <h6 className="description">{(newInsuranceFront == '') ? 'Choose Insurance Front' : newInsuranceFront}</h6>
+                                    </div> */}
+
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleInsuranceFrontChange} ref={fileInput3} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newInsuranceFrontURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick3()}>
+                                                Upload Insurance Front
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     <br />
-                                    <div className="picture-container">
+                                    {/* <div className="picture-container">
                                         <div className="picture">
                                             <img src={newInsuranceBackURL} className="picture-src" alt="..." />
                                             <input type="file" onChange={e => handleInsuranceBackChange(e)} />
                                         </div>
                                         <h6 className="description">{(newInsuranceBack == '') ? 'Choose Insurance Back' : newInsuranceBack}</h6>
+                                    </div> */}
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleInsuranceBackChange} ref={fileInput4} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newInsuranceBackURL} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button style={{ width: 180 }} onClick={() => handleClick4()}>
+                                                Upload Insurance Back
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     <CustomInput
