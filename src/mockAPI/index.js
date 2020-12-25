@@ -357,8 +357,11 @@ createServer({
       },
     }),
     labresult: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       booking_id(i) {
-        return `booking ${i}`;
+        return (i + 1);
       },
       line_name_en(i) {
         return `Name ${i}`;
@@ -449,8 +452,11 @@ createServer({
       },
     }),
     transaction: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       booking_id(i) {
-        return `Booking ${i}`;
+        return (i + 1);
       },
       charge_id(i) {
         return `Charge ${i}`;
@@ -962,6 +968,11 @@ createServer({
 
     this.get('/transactions/', (schema) => {
       return schema.transactions.all();
+    });
+
+    this.get('/transactions/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.transactions.find(id);
     });
 
     this.post('/transactions/', (schema, request) => {

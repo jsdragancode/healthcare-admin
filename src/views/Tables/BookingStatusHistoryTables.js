@@ -70,7 +70,7 @@ export default function BookingStatusHistoryTables(props) {
 
     const setLocationTrackParam = (info) => {
         const { id, booking_id, status, on_datetime } = info;
-
+        setId(id);
         setNewBookingId(id);
         setNewBookingId(booking_id);
         setNewStatus(status);

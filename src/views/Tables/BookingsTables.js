@@ -1408,7 +1408,7 @@ export default function BookingsTables() {
                     (
                         <div>
                             <BookingHistory bookingId={bookingId} />
-                            {/* <Transaction /> */}
+                            <Transaction bookingId={bookingId} />
                         </div>
                     )
                 }

@@ -49,13 +49,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function TransactionTables() {
+export default function TransactionTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
 
     const [deleteTransactionId, setDeleteTransactionId] = useState(null);
+    const [id, setId] = useState('');
     const [newBookingId, setNewBookingId] = useState('');
     const [newChargeId, setNewChargeId] = useState('');
     const [newTrackCode, setNewTrackCode] = useState('');
@@ -77,7 +78,8 @@ export default function TransactionTables() {
     const classes = useStyles();
 
     const setTransactionParam = (info) => {
-        const { booking_id, charge_id, track_code, payment_code, gateway_code, transaction_code, order_code, secret_hash, result_text, is_success, created_on } = info;
+        const { id, booking_id, charge_id, track_code, payment_code, gateway_code, transaction_code, order_code, secret_hash, result_text, is_success, created_on } = info;
+        setId(id);
         setNewBookingId(booking_id);
         setNewChargeId(charge_id);
         setNewTrackCode(track_code);
@@ -129,8 +131,8 @@ export default function TransactionTables() {
     };
 
     const getTransaction = () => {
-        axios.get('/api/transactions/').then((res) => {
-            setData(res.data.transactions.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/transactions/${props.bookingId}`).then((res) => {
+            setData([makeTableRow(res.data.transaction)]);
         });
     };
 
@@ -264,9 +266,13 @@ export default function TransactionTables() {
                         <ReactTableBottomPagination
                             columns={[
                                 {
-                                    Header: 'Booking ID',
-                                    accessor: 'booking_id',
+                                    Header: 'ID',
+                                    accessor: 'id',
                                 },
+                                // {
+                                //     Header: 'Booking ID',
+                                //     accessor: 'booking_id',
+                                // },
                                 {
                                     Header: 'Charge ID',
                                     accessor: 'charge_id',
