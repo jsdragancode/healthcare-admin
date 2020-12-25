@@ -17,6 +17,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 import LocalHospital from '@material-ui/icons/LocalHospital';
+import Visibility from '@material-ui/icons/Visibility';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -31,6 +32,7 @@ import PictureUpload from 'components/CustomUpload/PictureUpload.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
+import ConsoleUsers from "../Widgets/ConsoleUsersTables.js";
 
 const styles = {
   cardIconTitle: {
@@ -52,6 +54,8 @@ export default function DoctorsTables() {
   const [addModal, setAddModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [selectedDoctorId, setSelectedDoctorId] = useState(null);
+  const [showCard, setShowCard] = useState('flex');
+  const [showState, setShowState] = useState(1);
 
   const [id, setId] = useState('');
   const [newFullNameEn, setNewFullNameEn] = useState('');
@@ -119,11 +123,29 @@ export default function DoctorsTables() {
     setNewIsActive(is_active);
   };
 
+  const selectDoctor = (info) => {
+    setShowCard('none');
+    setShowState(2);
+    setId(info.id);
+  };
+
   const makeTableRow = (info) => {
     return {
       ...info,
       actions: (
         <div className="actions-right">
+          <Button
+            justIcon
+            round
+            simple
+            onClick={() => {
+              selectDoctor(info);
+            }}
+            color="success"
+            className="like"
+          >
+            <Visibility />
+          </Button>{' '}
           <Button
             justIcon
             round
@@ -272,7 +294,7 @@ export default function DoctorsTables() {
     <GridContainer>
       <GridItem xs={12}>
         {/* {moment().format('HH:mm:ss.SSS')} */}
-        <Card>
+        <Card style={{ display: showCard }}>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <LocalHospital />
@@ -808,6 +830,14 @@ export default function DoctorsTables() {
             />
           </CardBody>
         </Card>
+
+        {showState == 2 &&
+          (
+            <div>
+              <ConsoleUsers consoleUserId={id} />
+            </div>
+          )
+        }
       </GridItem>
     </GridContainer>
   );

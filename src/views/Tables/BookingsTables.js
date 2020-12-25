@@ -437,18 +437,18 @@ export default function BookingsTables() {
                                     Header: 'Placed On',
                                     accessor: 'placed_on',
                                 },
-                                {
-                                    Header: 'Coordinate',
-                                    accessor: 'location_coordinates',
-                                },
-                                {
-                                    Header: 'Address1',
-                                    accessor: 'location_address_line_1',
-                                },
-                                {
-                                    Header: 'Address2',
-                                    accessor: 'location_address_line_2',
-                                },
+                                // {
+                                //     Header: 'Coordinate',
+                                //     accessor: 'location_coordinates',
+                                // },
+                                // {
+                                //     Header: 'Address1',
+                                //     accessor: 'location_address_line_1',
+                                // },
+                                // {
+                                //     Header: 'Address2',
+                                //     accessor: 'location_address_line_2',
+                                // },
                                 {
                                     Header: 'City',
                                     accessor: 'location_city',

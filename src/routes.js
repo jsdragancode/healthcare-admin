@@ -81,7 +81,7 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 var dashRoutes = [
 
   {
-    path: '/bookings',
+    path: '/dashboard',
     name: 'Bookings',
     rtlName: 'الحجوزات',
     icon: Bookmark,
@@ -99,6 +99,51 @@ var dashRoutes = [
     role: 'admin',
   },
   {
+    path: '/patients',
+    name: 'Patients',
+    rtlName: 'عملية تجارية',
+    icon: AccountCircle,
+    component: PatientsTables,
+    layout: '/admin',
+    role: 'doctor',
+  },
+  {
+    path: '/doctors',
+    name: 'Doctors',
+    rtlName: 'Doctors',
+    icon: LocalHospital,
+    component: DoctorsTables,
+    layout: '/admin',
+    role: 'admin',
+  },
+  {
+    path: '/nurses',
+    name: 'Nurses',
+    rtlName: 'Nurses',
+    icon: LocalPharmacy,
+    component: NursesTables,
+    layout: '/admin',
+    role: 'admin',
+  },
+  {
+    path: '/drivers',
+    name: 'Drivers',
+    rtlName: 'Drivers',
+    icon: DriveEta,
+    component: DriversTables,
+    layout: '/admin',
+    role: 'admin',
+  },
+  {
+    path: '/track-vans',
+    name: 'Track Vans',
+    rtlName: 'Track Vans',
+    icon: AirportShuttle,
+    component: TrackVansTables,
+    layout: '/admin',
+    role: 'admin',
+  },
+  {
     path: '/param-admin',
     name: 'Admin Param',
     rtlName: 'الحجوزات',
@@ -107,15 +152,6 @@ var dashRoutes = [
     layout: '/admin',
     role: 'admin'
   },
-  // {
-  //   path: '/booking-history',
-  //   name: 'Booking History',
-  //   rtlName: 'سجل الحجز',
-  //   icon: Bookmarks,
-  //   component: BookingStatusHistoryTables,
-  //   layout: '/admin',
-  //   role: 'admin'
-  // },
   {
     path: '/availability-slot',
     name: 'Availability Slot',
@@ -134,24 +170,15 @@ var dashRoutes = [
     layout: '/admin',
     role: 'admin',
   },
-  {
-    path: '/drivers',
-    name: 'Drivers',
-    rtlName: 'Drivers',
-    icon: DriveEta,
-    component: DriversTables,
-    layout: '/admin',
-    role: 'admin',
-  },
-  {
-    path: '/doctors',
-    name: 'Doctors',
-    rtlName: 'Doctors',
-    icon: LocalHospital,
-    component: DoctorsTables,
-    layout: '/admin',
-    role: 'admin',
-  },
+  // {
+  //   path: '/booking-history',
+  //   name: 'Booking History',
+  //   rtlName: 'سجل الحجز',
+  //   icon: Bookmarks,
+  //   component: BookingStatusHistoryTables,
+  //   layout: '/admin',
+  //   role: 'admin'
+  // },
   // {
   //   path: '/console-users',
   //   name: 'Console Users',
@@ -161,24 +188,6 @@ var dashRoutes = [
   //   layout: '/admin',
   //   role: 'admin',
   // },
-  {
-    path: '/nurses',
-    name: 'Nurses',
-    rtlName: 'Nurses',
-    icon: LocalPharmacy,
-    component: NursesTables,
-    layout: '/admin',
-    role: 'admin',
-  },
-  {
-    path: '/track-vans',
-    name: 'Track Vans',
-    rtlName: 'Track Vans',
-    icon: AirportShuttle,
-    component: TrackVansTables,
-    layout: '/admin',
-    role: 'admin',
-  },
 
   // {
   //   path: '/Instance-user',
@@ -234,15 +243,7 @@ var dashRoutes = [
   //   layout: '/admin',
   //   role: 'admin',
   // },
-  {
-    path: '/patients',
-    name: 'Patients',
-    rtlName: 'عملية تجارية',
-    icon: AccountCircle,
-    component: PatientsTables,
-    layout: '/admin',
-    role: 'doctor',
-  },
+
   // {
   //   path: '/location-track',
   //   name: 'Location Track',

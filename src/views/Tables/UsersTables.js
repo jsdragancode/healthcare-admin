@@ -344,14 +344,14 @@ export default function UsersTables() {
                   Header: 'Mobile Number',
                   accessor: 'mobile_number',
                 },
-                {
-                  Header: 'Location Coordinates',
-                  accessor: 'default_location_coordinates',
-                },
-                {
-                  Header: 'Address',
-                  accessor: 'address',
-                },
+                // {
+                //   Header: 'Location Coordinates',
+                //   accessor: 'default_location_coordinates',
+                // },
+                // {
+                //   Header: 'Address',
+                //   accessor: 'address',
+                // },
                 {
                   Header: 'Active',
                   accessor: 'is_active',
