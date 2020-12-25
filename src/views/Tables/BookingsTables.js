@@ -36,7 +36,7 @@ import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
 import BookingHistory from "./BookingStatusHistoryTables.js";
 import Transaction from "./TransactionTables.js";
-// import BookingHistory from "../Widgets/BookingHistory.js";
+import LabResult from "./LabResultTables.js";
 
 const styles = {
     cardIconTitle: {
@@ -1409,6 +1409,7 @@ export default function BookingsTables() {
                         <div>
                             <BookingHistory bookingId={bookingId} />
                             <Transaction bookingId={bookingId} />
+                            <LabResult bookingId={bookingId} />
                         </div>
                     )
                 }

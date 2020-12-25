@@ -874,6 +874,11 @@ createServer({
       return schema.labresults.all();
     });
 
+    this.get('/labresults/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.labresults.find(id);
+    });
+
     this.post('/labresults/', (schema, request) => {
       let newLab = JSON.parse(request.requestBody);
 

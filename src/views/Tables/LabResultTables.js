@@ -42,13 +42,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function LabResultTables() {
+export default function LabResultTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
 
     const [deleteLabResultId, setDeleteLabResultId] = useState(null);
+    const [id, setId] = useState('');
     const [newBookingId, setNewBookingId] = useState('');
     const [newFullNameEn, setNewFullNameEn] = useState('');
     const [newFullNameAr, setNewFullNameAr] = useState('');
@@ -63,7 +64,8 @@ export default function LabResultTables() {
     const classes = useStyles();
 
     const setLabParam = (info) => {
-        const { booking_id, line_name_en, line_name_ar, result } = info;
+        const { id, booking_id, line_name_en, line_name_ar, result } = info;
+        setId(id);
         setNewBookingId(booking_id);
         setNewFullNameEn(line_name_en);
         setNewFullNameAr(line_name_ar);
@@ -108,8 +110,9 @@ export default function LabResultTables() {
     };
 
     const getLabResults = () => {
-        axios.get('/api/labresults/').then((res) => {
-            setData(res.data.labresults.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/labresults/${props.bookingId}`).then((res) => {
+            // setData(res.data.labresults.map((prop) => makeTableRow(prop)));
+            setData([makeTableRow(res.data.labresult)]);
         });
     };
 
@@ -221,9 +224,13 @@ export default function LabResultTables() {
                         <ReactTableBottomPagination
                             columns={[
                                 {
-                                    Header: 'Booking ID',
-                                    accessor: 'booking_id',
+                                    Header: 'ID',
+                                    accessor: 'id',
                                 },
+                                // {
+                                //     Header: 'Booking ID',
+                                //     accessor: 'booking_id',
+                                // },
                                 {
                                     Header: 'Full Name EN',
                                     accessor: 'line_name_en',
