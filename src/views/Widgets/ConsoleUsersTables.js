@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Datetime from 'react-datetime';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,14 +11,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
-import LocalHospital from '@material-ui/icons/LocalHospital';
-import Visibility from '@material-ui/icons/Visibility';
+import AssignmentInd from '@material-ui/icons/AssignmentInd';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -28,7 +26,6 @@ import CardBody from 'components/Card/CardBody.js';
 import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
-import PictureUpload from 'components/CustomUpload/PictureUpload.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
@@ -47,81 +44,50 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function DoctorsTables(props) {
+export default function ConsoleUsersTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
-    const [selectedDoctorId, setSelectedDoctorId] = useState(null);
+    const [selectedConsoleUserId, setSelectedConsoleUserId] = useState(null);
 
     const [id, setId] = useState('');
-    const [newFullNameEn, setNewFullNameEn] = useState('');
-    const [newFullNameAr, setNewFullNameAr] = useState('');
-    const [newDetailsEn, setNewDetailsEn] = useState('');
-    const [newDetailsAr, setNewDetailsAr] = useState('');
-    const [newImageUrl, setNewImageUrl] = useState('');
-    const [newMobileNumber, setNewMobileNumber] = useState('');
-    const [newTeamOrderNo, setNewTeamOrderNo] = useState('');
-    const [newIsActive, setNewIsActive] = useState('');
+    const [newUserName, setNewUserName] = useState('');
+    const [newPasswordHash, setNewPasswordHash] = useState('');
+    const [newRole, setNewRole] = useState('');
+    const [newLastLogin, setNewLastLogin] = useState('');
+    const [newLastFailedLogin, setNewLastFailedLogin] = useState('');
+    const [newConsecutiveFailedLoginsCount, setNewConsecutiveFailedLoginsCount] = useState('');
+    const [newDoctorId, setNewDoctorId] = useState('');
     const [failed, setFailed] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [updateFailed, setUpdateFailed] = React.useState(false);
     const [updateSuccess, setUpdateSuccess] = React.useState(false);
     const [deleteFailed, setDeleteFailed] = React.useState(false);
     const [deleteSuccess, setDeleteSuccess] = React.useState(false);
-    const [file, setFile] = React.useState(null);
-    const [imageName, setImageName] = React.useState('');
-
-    let fileInput = React.createRef();
-
-    const handleClick = () => {
-        fileInput.current.click();
-    };
 
     const classes = useStyles();
 
-    const handleImageChange = e => {
-        e.preventDefault();
-        let reader = new FileReader();
-        let newFile = e.target.files[0];
-        reader.onloadend = () => {
-            setFile(newFile);
-            setNewImageUrl(reader.result);
-            setImageName(newFile.name);
-        };
-        if (newFile) {
-            reader.readAsDataURL(newFile);
-        }
-    };
-
-    const setDoctorParam = (info) => {
+    const setConsoleUsersParam = (info) => {
         const {
             id,
-            full_name_en,
-            full_name_ar,
-            details_en,
-            details_ar,
-            image_name,
-            image_url,
-            mobile_number,
-            team_order_no,
-            is_active,
+            username,
+            password_hash,
+            role,
+            last_login,
+            last_failed_login,
+            consecutive_failed_logins_count,
+            doctor_id,
         } = info;
 
         setId(id);
-        setNewFullNameEn(full_name_en);
-        setNewFullNameAr(full_name_ar);
-        setNewDetailsEn(details_en);
-        setNewDetailsAr(details_ar);
-        setImageName(image_name);
-        setNewImageUrl(image_url);
-        setNewMobileNumber(mobile_number);
-        setNewTeamOrderNo(team_order_no);
-        setNewIsActive(is_active);
-    };
-
-    const selectDoctor = (info) => {
-        props.parentDoctorCallback(info.id);
+        setNewUserName(username);
+        setNewPasswordHash(password_hash);
+        setNewRole(role);
+        setNewLastLogin(last_login);
+        setNewLastFailedLogin(last_failed_login);
+        setNewConsecutiveFailedLoginsCount(consecutive_failed_logins_count);
+        setNewDoctorId(doctor_id);
     };
 
     const makeTableRow = (info) => {
@@ -134,20 +100,8 @@ export default function DoctorsTables(props) {
                         round
                         simple
                         onClick={() => {
-                            selectDoctor(info);
-                        }}
-                        color="success"
-                        className="like"
-                    >
-                        <Visibility />
-                    </Button>{' '}
-                    <Button
-                        justIcon
-                        round
-                        simple
-                        onClick={() => {
-                            setDoctorParam(info);
-                            setSelectedDoctorId(info.id);
+                            setConsoleUsersParam(info);
+                            setSelectedConsoleUserId(info.id);
                             setEditModal(true);
                         }}
                         color="warning"
@@ -160,7 +114,7 @@ export default function DoctorsTables(props) {
                         round
                         simple
                         onClick={() => {
-                            setSelectedDoctorId(info.id);
+                            setSelectedConsoleUserId(info.id);
                             setDeleteModal(true);
                         }}
                         color="danger"
@@ -173,19 +127,17 @@ export default function DoctorsTables(props) {
         };
     };
 
-    const getDriver = () => {
-        axios.get(`/api/doctors/${props.doctorId}`).then((res) => {
-            setData([makeTableRow(res.data.doctor)]);
+    const getConsoleUser = () => {
+        axios.get(`/api/consoleUsers/${props.consoleUserId}`).then((res) => {
+            setData([makeTableRow(res.data.consoleUser)]);
         });
     };
 
-    useEffect(getDriver, []);
+    useEffect(getConsoleUser, []);
 
-    const deleteDoctor = (deleteId) => {
-        console.log(deleteId);
+    const deleteConsoleUser = (deleteId) => {
         axios
-            .delete(`/api/doctors/${deleteId}`).then(() => {
-                // console.log('delete', res);
+            .delete(`/api/consoleUsers/${deleteId}`).then(() => {
                 setData(data.filter((prop) => prop.id !== deleteId));
 
                 setDeleteSuccess(true);
@@ -202,22 +154,19 @@ export default function DoctorsTables(props) {
             });
     };
 
-    const addDoctor = () => {
+    const addConsoleUser = () => {
         axios
-            .post('/api/doctors/', {
-                full_name_en: newFullNameEn,
-                full_name_ar: newFullNameAr,
-                details_en: newDetailsEn,
-                details_ar: newDetailsAr,
-                image_name: imageName,
-                image_url: newImageUrl,
-                mobile_number: newMobileNumber,
-                team_order_no: newTeamOrderNo,
-                is_active: newIsActive,
+            .post('/api/consoleUsers/', {
+                username: newUserName,
+                password_hash: newPasswordHash,
+                role: newRole,
+                last_login: newLastLogin,
+                last_failed_login: newLastFailedLogin,
+                consecutive_failed_logins_count: newConsecutiveFailedLoginsCount,
+                doctor_id: newDoctorId,
             })
             .then((res) => {
-                // console.log('post', res.data.doctor);
-                setData([...data, makeTableRow(res.data.doctor)]);
+                setData([...data, makeTableRow(res.data.consoleUser)]);
                 setAddModal(false);
 
                 setSuccess(true);
@@ -234,38 +183,34 @@ export default function DoctorsTables(props) {
             });
     };
 
-    const updateDoctor = () => {
+    const updateConsoleUser = () => {
         axios
-            .patch(`/api/doctors/${selectedDoctorId}`, {
-                full_name_en: newFullNameEn,
-                full_name_ar: newFullNameAr,
-                details_en: newDetailsEn,
-                details_ar: newDetailsAr,
-                image_url: newImageUrl,
-                image_name: imageName,
-                mobile_number: newMobileNumber,
-                team_order_no: newTeamOrderNo,
-                is_active: newIsActive,
+            .patch(`/api/consoleUsers/${selectedConsoleUserId}`, {
+                username: newUserName,
+                password_hash: newPasswordHash,
+                role: newRole,
+                last_login: newLastLogin,
+                last_failed_login: newLastFailedLogin,
+                consecutive_failed_logins_count: newConsecutiveFailedLoginsCount,
+                doctor_id: newDoctorId,
             })
             .then((res) => {
                 // console.log('patch', res.data.doctor);
 
                 setData(
                     data.map((prop) =>
-                        prop.id === selectedDoctorId ? makeTableRow(res.data.doctor) : prop
+                        prop.id === selectedConsoleUserId ? makeTableRow(res.data.consoleUser) : prop
                     )
                 );
 
-                setDoctorParam({
-                    full_name_en: '',
-                    full_name_ar: '',
-                    details_en: '',
-                    details_ar: '',
-                    image_url: '',
-                    image_name: '',
-                    mobile_number: '',
-                    team_order_no: '',
-                    is_active: '',
+                setConsoleUsersParam({
+                    username: '',
+                    password_hash: '',
+                    role: '',
+                    last_login: '',
+                    last_failed_login: '',
+                    consecutive_failed_logins_count: '',
+                    doctor_id: '',
                 });
 
                 setEditModal(false);
@@ -291,9 +236,9 @@ export default function DoctorsTables(props) {
                 <Card>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
-                            <LocalHospital />
+                            <AssignmentInd />
                         </CardIcon>
-                        <h4 className={classes.cardIconTitle}>Doctors</h4>
+                        <h4 className={classes.cardIconTitle}>Console users</h4>
                     </CardHeader>
                     <CardBody>
                         <GridContainer justify="flex-end">
@@ -301,23 +246,21 @@ export default function DoctorsTables(props) {
                                 <Button
                                     color="primary"
                                     onClick={() => {
-                                        setDoctorParam({
-                                            full_name_en: '',
-                                            full_name_ar: '',
-                                            details_en: '',
-                                            details_ar: '',
-                                            image_url: '',
-                                            image_name: '',
-                                            mobile_number: '',
-                                            team_order_no: '',
-                                            is_active: '',
+                                        setConsoleUsersParam({
+                                            username: '',
+                                            password_hash: '',
+                                            role: '',
+                                            last_login: '',
+                                            last_failed_login: '',
+                                            consecutive_failed_logins_count: '',
+                                            doctor_id: '',
                                         });
 
                                         setAddModal(true);
                                     }}
                                 >
-                                    Add Doctor
-                                </Button>
+                                    Add Console User
+                </Button>
                             </GridItem>
                         </GridContainer>
                         <ReactTableBottomPagination
@@ -327,36 +270,32 @@ export default function DoctorsTables(props) {
                                     accessor: 'id',
                                 },
                                 {
-                                    Header: 'Full Name EN',
-                                    accessor: 'full_name_en',
+                                    Header: 'User Name',
+                                    accessor: 'username',
                                 },
                                 {
-                                    Header: 'Full Name AR',
-                                    accessor: 'full_name_ar',
+                                    Header: 'Password',
+                                    accessor: 'password_hash',
                                 },
                                 {
-                                    Header: 'Details EN',
-                                    accessor: 'details_en',
+                                    Header: 'Role',
+                                    accessor: 'role',
                                 },
                                 {
-                                    Header: 'Details AR',
-                                    accessor: 'details_ar',
+                                    Header: 'Last Login',
+                                    accessor: 'last_login',
                                 },
                                 {
-                                    Header: 'Image Url',
-                                    accessor: 'image_name',
+                                    Header: 'Last Failed Login',
+                                    accessor: 'last_failed_login',
                                 },
                                 {
-                                    Header: 'Mobile Number',
-                                    accessor: 'mobile_number',
+                                    Header: 'Failed Login Count',
+                                    accessor: 'consecutive_failed_logins_count',
                                 },
                                 {
-                                    Header: 'Team Order No',
-                                    accessor: 'team_order_no',
-                                },
-                                {
-                                    Header: 'Is Active',
-                                    accessor: 'is_active',
+                                    Header: 'Doctor ID',
+                                    accessor: 'doctor_id',
                                 },
                                 {
                                     Header: 'Actions',
@@ -380,7 +319,7 @@ export default function DoctorsTables(props) {
                                 id="small-modal-slide-description"
                                 className={classes.modalBody + ' ' + classes.modalSmallBody}
                             >
-                                <h5>Are you sure you want to delete this doctor?</h5>
+                                <h5>Are you sure you want to delete this console user?</h5>
                             </DialogContent>
                             <DialogActions
                                 className={
@@ -393,11 +332,11 @@ export default function DoctorsTables(props) {
                                     className={classes.modalSmallFooterFirstButton}
                                 >
                                     Never Mind
-                                </Button>
+                </Button>
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
-                                        deleteDoctor(selectedDoctorId);
+                                        deleteConsoleUser(selectedConsoleUserId);
                                     }}
                                     color="success"
                                     simple
@@ -408,7 +347,7 @@ export default function DoctorsTables(props) {
                                     }
                                 >
                                     Yes
-                                </Button>
+                </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -428,7 +367,7 @@ export default function DoctorsTables(props) {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Add Doctor</h4>
+                                <h4 className={classes.modalTitle}>Add Console User</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="add-driver-dialog-modal-description"
@@ -436,157 +375,116 @@ export default function DoctorsTables(props) {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Full Name EN"
-                                        id="add_full_name_en"
+                                        labelText="User Name"
+                                        id="add_test_name_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameEn,
-                                            onChange: (e) => setNewFullNameEn(e.target.value),
+                                            value: newUserName,
+                                            onChange: (e) => setNewUserName(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Full Name AR"
-                                        id="add_full_name_ar"
+                                        labelText="Password"
+                                        id="add_test_name_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameAr,
-                                            onChange: (e) => setNewFullNameAr(e.target.value),
+                                            value: newPasswordHash,
+                                            onChange: (e) => setNewPasswordHash(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Details EN"
-                                        id="add_details_en"
+                                        labelText="Role"
+                                        id="add_test_desc_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newDetailsEn,
-                                            onChange: (e) => setNewDetailsEn(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="Details AR"
-                                        id="add_details_ar"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newDetailsAr,
-                                            onChange: (e) => setNewDetailsAr(e.target.value),
+                                            value: newRole,
+                                            onChange: (e) => setNewRole(e.target.value),
                                         }}
                                     />
                                     {/* <CustomInput
-                    labelText="Image Url"
-                    id="add_image_url"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: newImageUrl,
-                      onChange: (e) => setNewImageUrl(e.target.value),
-                    }}
-                  /> */}
-                                    {/* <div className="picture-container">
-                    <div className="picture">
-                      <img src={newImageUrl} className="picture-src" alt="..." />
-                      <input type="file" onChange={e => handleImageChange(e)} key={imageKey} />
-                    </div>
-                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
-                  </div> */}
-
-                                    <div className="fileinput text-center">
-                                        <input type="file" onChange={handleImageChange} ref={fileInput} />
-                                        <div className={'thumbnail'}>
-                                            <img src={newImageUrl} alt="..." />
-                                        </div>
-                                        <div>
-                                            <Button onClick={() => handleClick()}>
-                                                Upload image
-                                            </Button>
-                                        </div>
-                                    </div>
-
-                                    <CustomInput
-                                        labelText="Mobile Number"
-                                        id="add_mobile_number"
+                                        labelText="Last Login"
+                                        id="add_available"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newMobileNumber,
-                                            onChange: (e) => setNewMobileNumber(e.target.value),
+                                            value: newLastLogin,
+                                            onChange: (e) => setNewLastLogin(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Team Order No"
-                                        id="add_team_order_no"
+                                        labelText="Last Failed Login"
+                                        id="add_price"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTeamOrderNo,
-                                            onChange: (e) => setNewTeamOrderNo(e.target.value),
+                                            value: newLastFailedLogin,
+                                            onChange: (e) => setNewLastFailedLogin(e.target.value),
                                         }}
-                                    />
-                                    <FormControl fullWidth className={classes.selectFormControl}>
-                                        <InputLabel
-                                            htmlFor="simple-select"
-                                            className={classes.selectLabel}
-                                        >
-                                            Is Active
-                                        </InputLabel>
-                                        <Select
-                                            MenuProps={{
-                                                className: classes.selectMenu,
-                                            }}
-                                            classes={{
-                                                select: classes.select,
-                                            }}
-                                            value={newIsActive}
-                                            onChange={(e) => setNewIsActive(e.target.value)}
-                                            inputProps={{
-                                                name: 'simpleSelect',
-                                                id: 'simple-select',
-                                            }}
-                                        >
-                                            <MenuItem
-                                                classes={{
-                                                    root: classes.selectMenuItem,
-                                                    selected: classes.selectMenuItemSelected,
-                                                }}
-                                                value="Active"
-                                            >
-                                                Active
-                                            </MenuItem>
-                                            <MenuItem
-                                                classes={{
-                                                    root: classes.selectMenuItem,
-                                                    selected: classes.selectMenuItemSelected,
-                                                }}
-                                                value="In Active"
-                                            >
-                                                In Active
-                                            </MenuItem>
-                                        </Select>
+                                    /> */}
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Login', }}
+                                            onChange={(e) => setNewLastLogin(e)}
+                                            value={newLastLogin}
+                                        />
                                     </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Failed Login', }}
+                                            onChange={(e) => setNewLastFailedLogin(e)}
+                                            value={newLastFailedLogin}
+                                        />
+                                    </FormControl>
+                                    <CustomInput
+                                        labelText="Failed Login Count"
+                                        id="add_test_desc_ar"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newConsecutiveFailedLoginsCount,
+                                            onChange: (e) => setNewConsecutiveFailedLoginsCount(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Doctor ID"
+                                        id="add_test_desc_ar"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newDoctorId,
+                                            onChange: (e) => setNewDoctorId(e.target.value),
+                                        }}
+                                    />
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addDoctor()} color="primary">
+                                <Button onClick={() => addConsoleUser()} color="primary">
                                     Add
-                                </Button>
+                </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -606,7 +504,7 @@ export default function DoctorsTables(props) {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Edit Doctor</h4>
+                                <h4 className={classes.modalTitle}>Edit Console User</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="edit-driver-dialog-modal-description"
@@ -614,157 +512,116 @@ export default function DoctorsTables(props) {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Full Name EN"
-                                        id="edit_full_name_en"
+                                        labelText="User Name"
+                                        id="add_test_name_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameEn,
-                                            onChange: (e) => setNewFullNameEn(e.target.value),
+                                            value: newUserName,
+                                            onChange: (e) => setNewUserName(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Full Name AR"
-                                        id="edit_full_name_ar"
+                                        labelText="Password"
+                                        id="add_test_name_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newFullNameAr,
-                                            onChange: (e) => setNewFullNameAr(e.target.value),
+                                            value: newPasswordHash,
+                                            onChange: (e) => setNewPasswordHash(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Details EN"
-                                        id="edit_details_en"
+                                        labelText="Role"
+                                        id="add_test_desc_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newDetailsEn,
-                                            onChange: (e) => setNewDetailsEn(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="Details AR"
-                                        id="edit_details_ar"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newDetailsAr,
-                                            onChange: (e) => setNewDetailsAr(e.target.value),
+                                            value: newRole,
+                                            onChange: (e) => setNewRole(e.target.value),
                                         }}
                                     />
                                     {/* <CustomInput
-                    labelText="Image Url"
-                    id="edit_image_url"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: 'text',
-                      value: newImageUrl,
-                      onChange: (e) => setNewImageUrl(e.target.value),
-                    }}
-                  /> */}
-                                    {/* <div className="picture-container">
-                    <div className="picture">
-                      <img src={newImageUrl} className="picture-src" alt="..." />
-                      <input type="file" onChange={e => handleImageChange(e)} />
-                    </div>
-                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
-                  </div> */}
-
-                                    <div className="fileinput text-center">
-                                        <input type="file" onChange={handleImageChange} ref={fileInput} />
-                                        <div className={'thumbnail'}>
-                                            <img src={newImageUrl} alt="..." />
-                                        </div>
-                                        <div>
-                                            <Button onClick={() => handleClick()}>
-                                                Upload image
-                                            </Button>
-                                        </div>
-                                    </div>
-
-                                    <CustomInput
-                                        labelText="Mobile Number"
-                                        id="edit_mobile_number"
+                                        labelText="Last Login"
+                                        id="add_available"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newMobileNumber,
-                                            onChange: (e) => setNewMobileNumber(e.target.value),
+                                            value: newLastLogin,
+                                            onChange: (e) => setNewLastLogin(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Team Order No"
-                                        id="edit_team_order_no"
+                                        labelText="Last Failed Login"
+                                        id="add_price"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTeamOrderNo,
-                                            onChange: (e) => setNewTeamOrderNo(e.target.value),
+                                            value: newLastFailedLogin,
+                                            onChange: (e) => setNewLastFailedLogin(e.target.value),
                                         }}
-                                    />
-                                    <FormControl fullWidth className={classes.selectFormControl}>
-                                        <InputLabel
-                                            htmlFor="simple-select"
-                                            className={classes.selectLabel}
-                                        >
-                                            Is Active
-                    </InputLabel>
-                                        <Select
-                                            MenuProps={{
-                                                className: classes.selectMenu,
-                                            }}
-                                            classes={{
-                                                select: classes.select,
-                                            }}
-                                            value={newIsActive}
-                                            onChange={(e) => setNewIsActive(e.target.value)}
-                                            inputProps={{
-                                                name: 'simpleSelect',
-                                                id: 'simple-select',
-                                            }}
-                                        >
-                                            <MenuItem
-                                                classes={{
-                                                    root: classes.selectMenuItem,
-                                                    selected: classes.selectMenuItemSelected,
-                                                }}
-                                                value="Active"
-                                            >
-                                                Active
-                                            </MenuItem>
-                                            <MenuItem
-                                                classes={{
-                                                    root: classes.selectMenuItem,
-                                                    selected: classes.selectMenuItemSelected,
-                                                }}
-                                                value="In Active"
-                                            >
-                                                In Active
-                                            </MenuItem>
-                                        </Select>
+                                    /> */}
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Login', }}
+                                            onChange={(e) => setNewLastLogin(e)}
+                                            value={newLastLogin}
+                                        />
                                     </FormControl>
+                                    <br />
+                                    <br />
+                                    <FormControl fullWidth>
+                                        <Datetime
+                                            timeFormat={true}
+                                            inputProps={{ placeholder: 'Last Failed Login', }}
+                                            onChange={(e) => setNewLastFailedLogin(e)}
+                                            value={newLastFailedLogin}
+                                        />
+                                    </FormControl>
+                                    <CustomInput
+                                        labelText="Failed Login Count"
+                                        id="add_test_desc_ar"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newConsecutiveFailedLoginsCount,
+                                            onChange: (e) => setNewConsecutiveFailedLoginsCount(e.target.value),
+                                        }}
+                                    />
+                                    <CustomInput
+                                        labelText="Doctor ID"
+                                        id="add_test_desc_ar"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newDoctorId,
+                                            onChange: (e) => setNewDoctorId(e.target.value),
+                                        }}
+                                    />
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateDoctor()} color="primary">
+                                <Button onClick={() => updateConsoleUser()} color="primary">
                                     Update
-                                </Button>
+                </Button>
                             </DialogActions>
                         </Dialog>
 

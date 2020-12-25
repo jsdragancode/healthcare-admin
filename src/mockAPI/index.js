@@ -302,6 +302,9 @@ createServer({
       },
     }),
     consoleUser: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       username(i) {
         return `user ${i + 1}`;
       },
@@ -762,6 +765,11 @@ createServer({
 
     this.get('/consoleUsers/', (schema) => {
       return schema.consoleUsers.all();
+    });
+
+    this.get('/consoleUsers/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.consoleUsers.find(id);
     });
 
     this.post('/consoleUsers/', (schema, request) => {

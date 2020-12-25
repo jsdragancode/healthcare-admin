@@ -46,6 +46,7 @@ import Nurses from "../Widgets/NursesTables.js";
 import TrackVans from "../Widgets/TrackVansTables.js";
 import Patients from "../Widgets/PatientsTables.js";
 import Users from "../Widgets/UsersTables.js";
+import ConsoleUsers from "../Widgets/ConsoleUsersTables.js";
 
 
 const styles = {
@@ -94,6 +95,7 @@ export default function BookingsTables() {
     const [newPrice, setNewPrice] = useState('');
     const [newVat, setNewVat] = useState('');
     const [newTotalPrice, setNewTotalPrice] = useState('');
+    const [consoleUserId, setConsoleUserId] = useState('');
     const [failed, setFailed] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [updateFailed, setUpdateFailed] = React.useState(false);
@@ -142,6 +144,11 @@ export default function BookingsTables() {
         setBookingId(info.id);
         console.log("selectBook =>" + bookingId);
     };
+
+    const handleDoctorCallback = (info) => {
+        setConsoleUserId(info);
+        setShowState(3);
+    }
 
     const makeTableRow = (info) => {
         return {
@@ -1429,12 +1436,20 @@ export default function BookingsTables() {
                             <LabResult bookingId={bookingId} />
                             <Consultation bookingId={bookingId} />
                             <LocationTracking bookingId={bookingId} />
-                            <Doctors doctorId={newAssignedDoctor} />
+                            <Doctors doctorId={newAssignedDoctor} parentDoctorCallback={handleDoctorCallback} />
                             <Drivers driverId={newAssignedDriver} />
                             <Nurses nurseId={newAssignedNurse} />
                             <TrackVans vanId={newAssigned_van} />
                             <Patients patientId={newPatientId} />
                             <Users userId={newUserId} />
+                        </div>
+                    )
+                }
+
+                {showState == 3 &&
+                    (
+                        <div>
+                            <ConsoleUsers consoleUserId={consoleUserId} />
                         </div>
                     )
                 }

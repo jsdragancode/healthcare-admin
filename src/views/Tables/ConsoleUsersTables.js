@@ -51,6 +51,7 @@ export default function ConsoleUsersTables() {
     const [editModal, setEditModal] = useState(false);
     const [selectedConsoleUserId, setSelectedConsoleUserId] = useState(null);
 
+    const [id, setId] = useState('');
     const [newUserName, setNewUserName] = useState('');
     const [newPasswordHash, setNewPasswordHash] = useState('');
     const [newRole, setNewRole] = useState('');
@@ -69,6 +70,7 @@ export default function ConsoleUsersTables() {
 
     const setConsoleUsersParam = (info) => {
         const {
+            id,
             username,
             password_hash,
             role,
@@ -78,6 +80,7 @@ export default function ConsoleUsersTables() {
             doctor_id,
         } = info;
 
+        setId(id);
         setNewUserName(username);
         setNewPasswordHash(password_hash);
         setNewRole(role);
@@ -262,6 +265,10 @@ export default function ConsoleUsersTables() {
                         </GridContainer>
                         <ReactTableBottomPagination
                             columns={[
+                                {
+                                    Header: 'ID',
+                                    accessor: 'id',
+                                },
                                 {
                                     Header: 'User Name',
                                     accessor: 'username',
