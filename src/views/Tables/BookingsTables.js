@@ -47,7 +47,7 @@ import TrackVans from "../Widgets/TrackVansTables.js";
 import Patients from "../Widgets/PatientsTables.js";
 import Users from "../Widgets/UsersTables.js";
 import ConsoleUsers from "../Widgets/ConsoleUsersTables.js";
-
+import UserInstances from "../Widgets/UserInstanceIdTables.js";
 
 const styles = {
     cardIconTitle: {
@@ -96,6 +96,7 @@ export default function BookingsTables() {
     const [newVat, setNewVat] = useState('');
     const [newTotalPrice, setNewTotalPrice] = useState('');
     const [consoleUserId, setConsoleUserId] = useState('');
+    const [userId, setUserId] = useState('');
     const [failed, setFailed] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [updateFailed, setUpdateFailed] = React.useState(false);
@@ -148,6 +149,11 @@ export default function BookingsTables() {
     const handleDoctorCallback = (info) => {
         setConsoleUserId(info);
         setShowState(3);
+    }
+
+    const handleUserCallback = (info) => {
+        setUserId(info);
+        setShowState(4);
     }
 
     const makeTableRow = (info) => {
@@ -1441,7 +1447,7 @@ export default function BookingsTables() {
                             <Nurses nurseId={newAssignedNurse} />
                             <TrackVans vanId={newAssigned_van} />
                             <Patients patientId={newPatientId} />
-                            <Users userId={newUserId} />
+                            <Users userId={newUserId} parentUserCallback={handleUserCallback} />
                         </div>
                     )
                 }
@@ -1450,6 +1456,14 @@ export default function BookingsTables() {
                     (
                         <div>
                             <ConsoleUsers consoleUserId={consoleUserId} />
+                        </div>
+                    )
+                }
+
+                {showState == 4 &&
+                    (
+                        <div>
+                            <UserInstances userInstanceId={userId} />
                         </div>
                     )
                 }

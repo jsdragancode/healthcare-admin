@@ -23,6 +23,7 @@ import Switch from '@material-ui/core/Switch';
 import Group from '@material-ui/icons/Group';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+import Visibility from '@material-ui/icons/Visibility';
 
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
@@ -117,12 +118,28 @@ export default function UsersTables(props) {
         setRegisteredOn(registered_on);
     };
 
+    const selectUser = (info) => {
+        props.parentUserCallback(info.id);
+    };
+
     const makeTableRow = (info) => {
         return {
             ...info,
             address: `${info.default_address_line_1} ${info.default_address_line_2} ${info.default_city}`,
             actions: (
                 <div className="actions-right">
+                    <Button
+                        justIcon
+                        round
+                        simple
+                        onClick={() => {
+                            selectUser(info);
+                        }}
+                        color="success"
+                        className="like"
+                    >
+                        <Visibility />
+                    </Button>{' '}
                     <Button
                         justIcon
                         round

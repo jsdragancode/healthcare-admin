@@ -41,12 +41,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function UserInterfaceTables() {
+export default function UserInstanceTables() {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
-    const [deleteUserInterfaceId, setDeleteUserInterfaceId] = useState(null);
+    const [deleteUserInstanceId, setDeleteUserInstanceId] = useState(null);
+    const [id, setId] = useState('');
     const [newUserId, setNewUserId] = useState('');
     const [newInstanceId, setNewInstanceId] = useState('');
     const [newDeviceOS, setNewDeviceOS] = useState('');
@@ -59,9 +60,10 @@ export default function UserInterfaceTables() {
     const [deleteFailed, setDeleteFailed] = React.useState(false);
     const [deleteSuccess, setDeleteSuccess] = React.useState(false);
 
-    const setUserInterface = (info) => {
-        const { user_id, instance_id, device_os, device_model } = info;
+    const setUserInstance = (info) => {
+        const { id, user_id, instance_id, device_os, device_model } = info;
 
+        setId(id);
         setNewUserId(user_id);
         setNewInstanceId(instance_id);
         setNewDeviceOS(device_os);
@@ -78,8 +80,8 @@ export default function UserInterfaceTables() {
                         round
                         simple
                         onClick={() => {
-                            setUserInterface(info);
-                            setDeleteUserInterfaceId(info.id);
+                            setUserInstance(info);
+                            setDeleteUserInstanceId(info.id);
                             setEditModal(true);
                         }}
                         color="warning"
@@ -92,7 +94,7 @@ export default function UserInterfaceTables() {
                         round
                         simple
                         onClick={() => {
-                            setDeleteUserInterfaceId(info.id);
+                            setDeleteUserInstanceId(info.id);
                             setDeleteModal(true);
                         }}
                         color="danger"
@@ -105,18 +107,18 @@ export default function UserInterfaceTables() {
         };
     };
 
-    const getUserInterface = () => {
-        axios.get('/api/userInterfaces/').then((res) => {
-            // console.log('get', res.data.userInterfaces);
-            setData(res.data.userInterfaces.map((prop) => makeTableRow(prop)));
+    const getUserInstance = () => {
+        axios.get('/api/userInstances/').then((res) => {
+            // console.log('get', res.data.userInstances);
+            setData(res.data.userInstances.map((prop) => makeTableRow(prop)));
         });
     };
 
-    useEffect(getUserInterface, []);
+    useEffect(getUserInstance, []);
 
-    const delteUserInterface = (deleteId) => {
+    const delteUserInstance = (deleteId) => {
         axios
-            .delete(`/api/userInterfaces/${deleteId}`).then(() => {
+            .delete(`/api/userInstances/${deleteId}`).then(() => {
                 setData(data.filter((prop) => prop.id !== deleteId));
 
                 setDeleteSuccess(true);
@@ -133,16 +135,16 @@ export default function UserInterfaceTables() {
             });
     };
 
-    const addUserInterface = () => {
+    const addUserInstance = () => {
         axios
-            .post('/api/userInterfaces/', {
+            .post('/api/userInstances/', {
                 user_id: newUserId,
                 instance_id: newInstanceId,
                 device_os: newDeviceOS,
                 device_model: newDeviceModel,
             })
             .then((res) => {
-                setData([...data, makeTableRow(res.data.userInterface)]);
+                setData([...data, makeTableRow(res.data.userInstance)]);
                 setAddModal(false);
                 setSuccess(true);
                 setTimeout(function () {
@@ -158,9 +160,9 @@ export default function UserInterfaceTables() {
             });
     };
 
-    const updateUserInterface = () => {
+    const updateUserInstance = () => {
         axios
-            .patch(`/api/userInterfaces/${deleteUserInterfaceId}`, {
+            .patch(`/api/userInstances/${deleteUserInstanceId}`, {
                 user_id: newUserId,
                 instance_id: newInstanceId,
                 device_os: newDeviceOS,
@@ -169,7 +171,7 @@ export default function UserInterfaceTables() {
             .then((res) => {
                 setData(
                     data.map((prop) =>
-                        prop.id === deleteUserInterfaceId ? makeTableRow(res.data.userInterface) : prop
+                        prop.id === deleteUserInstanceId ? makeTableRow(res.data.userInstance) : prop
                     )
                 );
                 setEditModal(false);
@@ -197,7 +199,7 @@ export default function UserInterfaceTables() {
                         <CardIcon color="primary">
                             <Contacts />
                         </CardIcon>
-                        <h4 className={classes.cardIconTitle}>User Interface</h4>
+                        <h4 className={classes.cardIconTitle}>User Instance</h4>
                     </CardHeader>
                     <CardBody>
                         <GridContainer justify="flex-end">
@@ -205,7 +207,7 @@ export default function UserInterfaceTables() {
                                 <Button
                                     color="primary"
                                     onClick={() => {
-                                        setUserInterface({
+                                        setUserInstance({
                                             user_id: '',
                                             instance_id: '',
                                             device_os: '',
@@ -215,12 +217,16 @@ export default function UserInterfaceTables() {
                                         setAddModal(true);
                                     }}
                                 >
-                                    Add User Interface
-                </Button>
+                                    Add User Instance
+                                </Button>
                             </GridItem>
                         </GridContainer>
                         <ReactTableBottomPagination
                             columns={[
+                                {
+                                    Header: 'ID',
+                                    accessor: 'id',
+                                },
                                 {
                                     Header: 'User ID',
                                     accessor: 'user_id',
@@ -259,7 +265,7 @@ export default function UserInterfaceTables() {
                                 id="small-modal-slide-description"
                                 className={classes.modalBody + ' ' + classes.modalSmallBody}
                             >
-                                <h5>Are you sure you want to delete this user interface?</h5>
+                                <h5>Are you sure you want to delete this user Instance?</h5>
                             </DialogContent>
                             <DialogActions
                                 className={
@@ -276,7 +282,7 @@ export default function UserInterfaceTables() {
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
-                                        delteUserInterface(deleteUserInterfaceId);
+                                        delteUserInstance(deleteUserInstanceId);
                                     }}
                                     color="success"
                                     simple
@@ -307,7 +313,7 @@ export default function UserInterfaceTables() {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Add User Interface</h4>
+                                <h4 className={classes.modalTitle}>Add User Instance</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="add-driver-dialog-modal-description"
@@ -366,7 +372,7 @@ export default function UserInterfaceTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addUserInterface()} color="primary">
+                                <Button onClick={() => addUserInstance()} color="primary">
                                     Add
                 </Button>
                             </DialogActions>
@@ -388,7 +394,7 @@ export default function UserInterfaceTables() {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Edit User Interface</h4>
+                                <h4 className={classes.modalTitle}>Edit User Instance</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="edit-driver-dialog-modal-description"
@@ -447,7 +453,7 @@ export default function UserInterfaceTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateUserInterface()} color="primary">
+                                <Button onClick={() => updateUserInstance()} color="primary">
                                     Update
                 </Button>
                             </DialogActions>

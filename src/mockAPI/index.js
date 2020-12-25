@@ -12,7 +12,7 @@ createServer({
     nurse: Model,
     van: Model,
     user: Model,
-    userInterface: Model,
+    userInstance: Model,
     userNotification: Model,
     labresult: Model,
     labtest: Model,
@@ -233,7 +233,10 @@ createServer({
         );
       },
     }),
-    userInterface: Factory.extend({
+    userInstance: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       user_id(i) {
         return parseInt(Math.random() * 100000);
       },
@@ -879,26 +882,31 @@ createServer({
       return user.update(newAttrs);
     });
 
-    this.get('/userInterfaces/', (schema) => {
-      return schema.userInterfaces.all();
+    this.get('/userInstances/', (schema) => {
+      return schema.userInstances.all();
     });
 
-    this.post('/userInterfaces/', (schema, request) => {
+    this.get('/userInstances/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.userInstances.find(id);
+    });
+
+    this.post('/userInstances/', (schema, request) => {
       let newUser = JSON.parse(request.requestBody);
 
-      return schema.userInterfaces.create(newUser);
+      return schema.userInstances.create(newUser);
     });
 
-    this.delete('/userInterfaces/:id', (schema, request) => {
+    this.delete('/userInstances/:id', (schema, request) => {
       let id = request.params.id;
 
-      return schema.userInterfaces.find(id).destroy();
+      return schema.userInstances.find(id).destroy();
     });
 
-    this.patch('/userInterfaces/:id', (schema, request) => {
+    this.patch('/userInstances/:id', (schema, request) => {
       let newAttrs = JSON.parse(request.requestBody);
       let id = request.params.id;
-      let user = schema.userInterfaces.find(id);
+      let user = schema.userInstances.find(id);
 
       return user.update(newAttrs);
     });
@@ -1191,7 +1199,7 @@ createServer({
     server.createList('nurse', 40);
     server.createList('van', 40);
     server.createList('user', 40);
-    server.createList('userInterface', 40);
+    server.createList('userInstance', 40);
     server.createList('userNotification', 40);
     server.createList('labresult', 40);
     server.createList('labtest', 40);

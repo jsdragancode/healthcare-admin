@@ -38,7 +38,7 @@ import ConsoleUsersTables from './views/Tables/ConsoleUsersTables';
 import NursesTables from './views/Tables/NursesTables';
 import TrackVansTables from './views/Tables/TrackVansTables';
 import UsersTables from './views/Tables/UsersTables';
-import UserInterfaceIdTables from './views/Tables/UserInterfaceIdTables';
+import UserInstanceIdTables from './views/Tables/UserInstanceIdTables';
 import UserNotificationTables from './views/Tables/UserNotificationTables';
 import LabResultTables from './views/Tables/LabResultTables';
 import LabTestTables from './views/Tables/LabTestTables';
@@ -171,11 +171,11 @@ var dashRoutes = [
     role: 'admin',
   },
   {
-    path: '/interface-user',
-    name: 'Users Interface',
+    path: '/Instance-user',
+    name: 'Users Instance',
     rtlName: 'واجهة المستخدم',
     icon: Contacts,
-    component: UserInterfaceIdTables,
+    component: UserInstanceIdTables,
     layout: '/admin',
     role: 'admin',
   },
