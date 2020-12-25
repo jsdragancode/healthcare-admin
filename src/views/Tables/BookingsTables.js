@@ -36,6 +36,7 @@ import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
 import BookingHistory from "./BookingStatusHistoryTables.js";
 import Transaction from "./TransactionTables.js";
+import LabTest from "./LabTestTables.js";
 import LabResult from "./LabResultTables.js";
 import Consultation from "./ConsultationTables.js";
 import LocationTracking from "./LocationTrackingTables.js";
@@ -71,7 +72,7 @@ export default function BookingsTables() {
     const [newStartDateTime, setNewStartDateTime] = useState('');
     const [newEndDateTime, setNewEndDateTime] = useState('');
     const [newBookingType, setNewBookingType] = useState('');
-    const [newLapTestId, setNewLapTestId] = useState('');
+    const [newLabTestId, setNewLabTestId] = useState('');
     const [newAssignedDriver, setNewAssignedDriver] = useState('');
     const [newAssigned_van, setNewAssigned_van] = useState('');
     const [newAssignedDoctor, setNewAssignedDoctor] = useState('');
@@ -97,14 +98,14 @@ export default function BookingsTables() {
     const classes = useStyles();
 
     const setBookingsParam = (info) => {
-        const { id, user_id, patient_id, start_datetime, end_datetime, booking_type, lap_test_id, assigned_driver, assigned_van, assigned_doctor, assigned_nurse, status, payment_method, payment_url, placed_on, location_coordinates, location_address_line_1, location_address_line_2, location_city, price, vat, total_price } = info;
+        const { id, user_id, patient_id, start_datetime, end_datetime, booking_type, lab_test_id, assigned_driver, assigned_van, assigned_doctor, assigned_nurse, status, payment_method, payment_url, placed_on, location_coordinates, location_address_line_1, location_address_line_2, location_city, price, vat, total_price } = info;
         setId(id);
         setNnewUserId(user_id);
         setNewPatientId(patient_id);
         setNewStartDateTime(start_datetime);
         setNewEndDateTime(end_datetime);
         setNewBookingType(booking_type);
-        setNewLapTestId(lap_test_id);
+        setNewLabTestId(lab_test_id);
         setNewAssignedDriver(assigned_driver);
         setNewAssigned_van(assigned_van);
         setNewAssignedDoctor(assigned_doctor);
@@ -123,9 +124,9 @@ export default function BookingsTables() {
     };
 
     const selectBook = (info) => {
-        const { param_key, param_name, param_value } = info;
         setShowCard('none');
         setShowState(2);
+        setNewLabTestId(info.lab_test_id);
         setBookingId(info.id);
         console.log("selectBook =>" + bookingId);
     };
@@ -216,7 +217,7 @@ export default function BookingsTables() {
                 start_datetime: newStartDateTime,
                 end_datetime: newEndDateTime,
                 booking_type: newBookingType,
-                lap_test_id: newLapTestId,
+                lab_test_id: newLabTestId,
                 assigned_driver: newAssignedDriver,
                 assigned_van: newAssigned_van,
                 assigned_doctor: newAssignedDoctor,
@@ -260,7 +261,7 @@ export default function BookingsTables() {
                 start_datetime: newStartDateTime,
                 end_datetime: newEndDateTime,
                 booking_type: newBookingType,
-                lap_test_id: newLapTestId,
+                lab_test_id: newLabTestId,
                 assigned_driver: newAssignedDriver,
                 assigned_van: newAssigned_van,
                 assigned_doctor: newAssignedDoctor,
@@ -323,7 +324,7 @@ export default function BookingsTables() {
                                             start_datetime: '',
                                             end_datetime: '',
                                             booking_type: '',
-                                            lap_test_id: '',
+                                            lab_test_id: '',
                                             assigned_driver: '',
                                             assigned_van: '',
                                             assigned_doctor: '',
@@ -374,10 +375,10 @@ export default function BookingsTables() {
                                     Header: 'Type',
                                     accessor: 'booking_type',
                                 },
-                                // {
-                                //     Header: 'Lap Test ID',
-                                //     accessor: 'lap_test_id',
-                                // },
+                                {
+                                    Header: 'Lab Test ID',
+                                    accessor: 'lab_test_id',
+                                },
                                 // {
                                 //     Header: 'Assigned Driver',
                                 //     accessor: 'assigned_driver',
@@ -602,15 +603,15 @@ export default function BookingsTables() {
                                         </Select>
                                     </FormControl>
                                     <CustomInput
-                                        labelText="Lap Test ID"
+                                        labelText="Lab Test ID"
                                         id="add_body_temp"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newLapTestId,
-                                            onChange: (e) => setNewLapTestId(e.target.value),
+                                            value: newLabTestId,
+                                            onChange: (e) => setNewLabTestId(e.target.value),
                                         }}
                                     />
                                     <CustomInput
@@ -1026,15 +1027,15 @@ export default function BookingsTables() {
                                     </FormControl>
 
                                     <CustomInput
-                                        labelText="Lap Test ID"
+                                        labelText="Lab Test ID"
                                         id="add_body_temp"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newLapTestId,
-                                            onChange: (e) => setNewLapTestId(e.target.value),
+                                            value: newLabTestId,
+                                            onChange: (e) => setNewLabTestId(e.target.value),
                                         }}
                                     />
                                     <CustomInput
@@ -1412,15 +1413,14 @@ export default function BookingsTables() {
                         <div>
                             <BookingHistory bookingId={bookingId} />
                             <Transaction bookingId={bookingId} />
+                            <LabTest labTestId={newLabTestId} />
                             <LabResult bookingId={bookingId} />
                             <Consultation bookingId={bookingId} />
                             <LocationTracking bookingId={bookingId} />
-
                         </div>
                     )
                 }
             </GridItem>
         </GridContainer>
-
     );
 }

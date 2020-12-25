@@ -89,7 +89,7 @@ createServer({
       booking_type(i) {
         return Math.random() > 0.5 ? 'General physician' : 'Laboratory test';
       },
-      lap_test_id(i) {
+      lab_test_id(i) {
         // return `lap test ${i + 1}`;
         return (i + 1);
       },
@@ -374,6 +374,9 @@ createServer({
       }
     }),
     labtest: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       test_name_ar(i) {
         return `Aame ar ${i + 1}`;
       },
@@ -907,6 +910,11 @@ createServer({
 
     this.get('/labtests/', (schema) => {
       return schema.labtests.all();
+    });
+
+    this.get('/labtests/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.labtests.find(id);
     });
 
     this.post('/labtests/', (schema, request) => {

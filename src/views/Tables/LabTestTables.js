@@ -46,13 +46,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function LabTestTables() {
+export default function LabTestTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [selectedLabTestId, setSelectedLabTestId] = useState(null);
 
+    const [id, setId] = useState('');
     const [newTestNameAr, setNewTestNameAr] = useState('');
     const [newTestNameEn, setNewTestNameEn] = useState('');
     const [newTestShortDescAr, setNewTestShortDescAr] = useState('');
@@ -93,6 +94,7 @@ export default function LabTestTables() {
 
     const setLabTestParam = (info) => {
         const {
+            id,
             test_name_ar,
             test_name_en,
             test_short_desc_ar,
@@ -103,6 +105,7 @@ export default function LabTestTables() {
             price,
         } = info;
 
+        setId(id);
         setNewTestNameAr(test_name_ar);
         setNewTestNameEn(test_name_en);
         setNewTestShortDescAr(test_short_desc_ar);
@@ -151,8 +154,8 @@ export default function LabTestTables() {
     };
 
     const getLabTest = () => {
-        axios.get('/api/labtests/').then((res) => {
-            setData(res.data.labtests.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/labtests/${props.labTestId}`).then((res) => {
+            setData([makeTableRow(res.data.labtest)]);
         });
     };
 
@@ -290,6 +293,10 @@ export default function LabTestTables() {
                         </GridContainer>
                         <ReactTableBottomPagination
                             columns={[
+                                {
+                                    Header: 'Id',
+                                    accessor: 'id',
+                                },
                                 {
                                     Header: 'Test Name AR',
                                     accessor: 'test_name_ar',
