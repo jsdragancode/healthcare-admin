@@ -46,12 +46,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function LocationTrackingTables() {
+export default function LocationTrackingTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteDriverId, setDeleteDriverId] = useState(null);
+    const [id, setId] = useState('');
     const [newBookingId, setNewBookingId] = useState('');
     const [newLocationCoordinates, setNewLocationCoordinates] = useState('');
     const [newOnDatetime, setNewOnDatetime] = useState('');
@@ -65,8 +66,9 @@ export default function LocationTrackingTables() {
 
 
     const setLocationTrackParam = (info) => {
-        const { booking_id, location_coordinates, on_datetime } = info;
+        const { id, booking_id, location_coordinates, on_datetime } = info;
 
+        setId(id);
         setNewBookingId(booking_id);
         setNewLocationCoordinates(location_coordinates);
         setNewOnDatetime(on_datetime);
@@ -110,9 +112,8 @@ export default function LocationTrackingTables() {
     };
 
     const getLocation = () => {
-        axios.get('/api/locations/').then((res) => {
-            // console.log('get', res.data.drivers);
-            setData(res.data.locations.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/locations/${props.bookingId}`).then((res) => {
+            setData([makeTableRow(res.data.location)]);
         });
     };
 
@@ -226,9 +227,13 @@ export default function LocationTrackingTables() {
                         <ReactTableBottomPagination
                             columns={[
                                 {
-                                    Header: 'Booking ID',
-                                    accessor: 'booking_id',
+                                    Header: 'ID',
+                                    accessor: 'id',
                                 },
+                                // {
+                                //     Header: 'Booking ID',
+                                //     accessor: 'booking_id',
+                                // },
                                 {
                                     Header: 'Location Coordinates',
                                     accessor: 'location_coordinates',

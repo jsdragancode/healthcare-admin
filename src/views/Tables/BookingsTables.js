@@ -38,6 +38,8 @@ import BookingHistory from "./BookingStatusHistoryTables.js";
 import Transaction from "./TransactionTables.js";
 import LabResult from "./LabResultTables.js";
 import Consultation from "./ConsultationTables.js";
+import LocationTracking from "./LocationTrackingTables.js";
+
 
 const styles = {
     cardIconTitle: {
@@ -1412,6 +1414,8 @@ export default function BookingsTables() {
                             <Transaction bookingId={bookingId} />
                             <LabResult bookingId={bookingId} />
                             <Consultation bookingId={bookingId} />
+                            <LocationTracking bookingId={bookingId} />
+
                         </div>
                     )
                 }

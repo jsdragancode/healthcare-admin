@@ -26,13 +26,13 @@ createServer({
   factories: {
     adminparam: Factory.extend({
       param_key(i) {
-        return `param key ${i}`;
+        return `param key ${i + 1}`;
       },
       param_name(i) {
-        return `param name ${i}`;
+        return `param name ${i + 1}`;
       },
       param_value(i) {
-        return `param value ${i}`;
+        return `param value ${i + 1}`;
       },
     }),
     availabilityslot: Factory.extend({
@@ -67,7 +67,7 @@ createServer({
         return (i + 1);
       },
       patient_id(i) {
-        // return `patient ${i}`;
+        // return `patient ${i + 1}`;
         return (i + 1);
       },
       start_datetime(i) {
@@ -90,23 +90,23 @@ createServer({
         return Math.random() > 0.5 ? 'General physician' : 'Laboratory test';
       },
       lap_test_id(i) {
-        // return `lap test ${i}`;
+        // return `lap test ${i + 1}`;
         return (i + 1);
       },
       assigned_driver(i) {
-        // return `driver ${i}`;
+        // return `driver ${i + 1}`;
         return (i + 1);
       },
       assigned_van(i) {
-        // return `van ${i}`;
+        // return `van ${i + 1}`;
         return (i + 1);
       },
       assigned_doctor(i) {
-        // return `doctor ${i}`;
+        // return `doctor ${i + 1}`;
         return (i + 1);
       },
       assigned_nurse(i) {
-        // return `nurse ${i}`;
+        // return `nurse ${i + 1}`;
         return (i + 1);
       },
       status(i) {
@@ -142,7 +142,7 @@ createServer({
         return payment_methods;
       },
       payment_url(i) {
-        return `payment ${i}`;
+        return `payment ${i + 1}`;
       },
       placed_on(i) {
         let start = new Date(2018, 0, 1);
@@ -153,16 +153,16 @@ createServer({
         );
       },
       location_coordinates(i) {
-        return `location ${i}`;
+        return `location ${i + 1}`;
       },
       location_address_line_1(i) {
-        return `address_1 ${i}`;
+        return `address_1 ${i + 1}`;
       },
       location_address_line_2(i) {
-        return `address_2 ${i}`;
+        return `address_2 ${i + 1}`;
       },
       location_city(i) {
-        return `city ${i}`;
+        return `city ${i + 1}`;
       },
       price(i) {
         return parseInt(Math.random() * 1000000);
@@ -176,10 +176,10 @@ createServer({
     }),
     driver: Factory.extend({
       full_name_en(i) {
-        return `driver ${i}`;
+        return `driver ${i + 1}`;
       },
       full_name_ar(i) {
-        return `سائق ${i}`;
+        return `سائق ${i + 1}`;
       },
       mobile_number() {
         return parseInt(Math.random() * 1000000);
@@ -190,7 +190,7 @@ createServer({
     }),
     user: Factory.extend({
       full_name(i) {
-        return `user ${i}`;
+        return `user ${i + 1}`;
       },
       gender() {
         // 0 : male, 1 : female
@@ -200,23 +200,23 @@ createServer({
         return parseInt(Math.random() * 1000000);
       },
       default_location_coordinates(i) {
-        return `coordinates ${i}`;
+        return `coordinates ${i + 1}`;
       },
       default_address_line_1(i) {
-        return `address_1 ${i}`;
+        return `address_1 ${i + 1}`;
       },
       default_address_line_2(i) {
-        return `address_2 ${i}`;
+        return `address_2 ${i + 1}`;
       },
       default_city(i) {
-        return `city ${i}`;
+        return `city ${i + 1}`;
       },
       is_active() {
         // 0 : in-active, 1 : active
         return Math.random() > 0.5 ? "Active" : "In Active";
       },
       firebase_uid(i) {
-        return `firebase_uid ${i}`;
+        return `firebase_uid ${i + 1}`;
       },
       registered_on() {
         let start = new Date(2012, 0, 1);
@@ -235,18 +235,18 @@ createServer({
         return parseInt(Math.random() * 100000);
       },
       device_os(i) {
-        return `device os ${i}`;
+        return `device os ${i + 1}`;
       },
       device_model(i) {
-        return `device model ${i}`;
+        return `device model ${i + 1}`;
       },
     }),
     userNotification: Factory.extend({
       title(i) {
-        return `title ${i}`;
+        return `title ${i + 1}`;
       },
       message(i) {
-        return `message ${i}`;
+        return `message ${i + 1}`;
       },
       user_id(i) {
         return parseInt(Math.random() * 10000);
@@ -265,19 +265,19 @@ createServer({
     }),
     doctor: Factory.extend({
       full_name_en(i) {
-        return `doctor ${i}`;
+        return `doctor ${i + 1}`;
       },
       full_name_ar(i) {
-        return `طبيب ${i}`;
+        return `طبيب ${i + 1}`;
       },
       details_en(i) {
-        return `details ${i}`;
+        return `details ${i + 1}`;
       },
       details_ar(i) {
-        return `تفاصيل ${i}`;
+        return `تفاصيل ${i + 1}`;
       },
       image_name(i) {
-        return `Image Name ${i}`;
+        return `Image Name ${i + 1}`;
       },
       image_url(i) {
         return `../../assets/img/default-avatar.png`;
@@ -294,13 +294,13 @@ createServer({
     }),
     consoleUser: Factory.extend({
       username(i) {
-        return `user ${i}`;
+        return `user ${i + 1}`;
       },
       password_hash(i) {
-        return `password hash ${i}`;
+        return `password hash ${i + 1}`;
       },
       role(i) {
-        return `role ${i}`;
+        return `role ${i + 1}`;
       },
       last_login(i) {
         let start = new Date(2018, 0, 1);
@@ -327,13 +327,13 @@ createServer({
     }),
     nurse: Factory.extend({
       full_name_en(i) {
-        return `nurse ${i}`;
+        return `nurse ${i + 1}`;
       },
       full_name_ar(i) {
-        return `ممرضة ${i}`;
+        return `ممرضة ${i + 1}`;
       },
       image_name(i) {
-        return `Image Name ${i}`;
+        return `Image Name ${i + 1}`;
       },
       image_url(i) {
         return `../../assets/img/default-avatar.png`;
@@ -350,7 +350,7 @@ createServer({
     }),
     van: Factory.extend({
       title(i) {
-        return `van ${i}`;
+        return `van ${i + 1}`;
       },
       is_deleted() {
         return Math.random() > 0.5 ? 'Yes' : 'No';
@@ -364,56 +364,56 @@ createServer({
         return (i + 1);
       },
       line_name_en(i) {
-        return `Name ${i}`;
+        return `Name ${i + 1}`;
       },
       line_name_ar(i) {
-        return `سائق ${i}`;
+        return `سائق ${i + 1}`;
       },
       result(i) {
-        return `result ${i}`;
+        return `result ${i + 1}`;
       }
     }),
     labtest: Factory.extend({
       test_name_ar(i) {
-        return `Aame ar ${i}`;
+        return `Aame ar ${i + 1}`;
       },
       test_name_en(i) {
-        return `Name en ${i}`;
+        return `Name en ${i + 1}`;
       },
       test_short_desc_ar(i) {
-        return `Desc ar ${i}`;
+        return `Desc ar ${i + 1}`;
       },
       test_short_desc_en(i) {
-        return `Desc en ${i}`;
+        return `Desc en ${i + 1}`;
       },
       is_available(i) {
         return Math.random() > 0.5 ? 'Yes' : 'No';
       },
       image_name(i) {
-        return `Image Name ${i}`;
+        return `Image Name ${i + 1}`;
       },
       image_url(i) {
         return `../../assets/img/default-avatar.png`;
       },
       price(i) {
-        return `Price ${i}`;
+        return `Price ${i + 1}`;
       }
     }),
     faq: Factory.extend({
       question_en(i) {
-        return `Question ${i}`;
+        return `Question ${i + 1}`;
       },
       question_ar(i) {
-        return `سؤال ${i}`;
+        return `سؤال ${i + 1}`;
       },
       answer_en(i) {
-        return `Answer ${i}`;
+        return `Answer ${i + 1}`;
       },
       answer_ar(i) {
-        return `إجابة ${i}`;
+        return `إجابة ${i + 1}`;
       },
       order_no(i) {
-        return `Order ${i}`;
+        return `Order ${i + 1}`;
       }
     }),
     consultation: Factory.extend({
@@ -424,34 +424,34 @@ createServer({
         return (i + 1);
       },
       examination(i) {
-        return `Examination ${i}`;
+        return `Examination ${i + 1}`;
       },
       diagnosis(i) {
-        return `Diagnosis ${i}`;
+        return `Diagnosis ${i + 1}`;
       },
       follow_up(i) {
-        return `Follow Up ${i}`;
+        return `Follow Up ${i + 1}`;
       },
       medication(i) {
-        return `Medication ${i}`;
+        return `Medication ${i + 1}`;
       },
       body_temp(i) {
-        return `Body Temp ${i}`;
+        return `Body Temp ${i + 1}`;
       },
       pulse_rate(i) {
-        return `Pulse ${i}`;
+        return `Pulse ${i + 1}`;
       },
       respiration_rate(i) {
-        return `Respiration ${i}`;
+        return `Respiration ${i + 1}`;
       },
       blood_pressure(i) {
         return parseInt(Math.random() * 1000);
       },
       weight(i) {
-        return `Weight ${i}`;
+        return `Weight ${i + 1}`;
       },
       height(i) {
-        return `height ${i}`;
+        return `height ${i + 1}`;
       },
     }),
     transaction: Factory.extend({
@@ -462,7 +462,7 @@ createServer({
         return (i + 1);
       },
       charge_id(i) {
-        return `Charge ${i}`;
+        return `Charge ${i + 1}`;
       },
       track_code(i) {
         return parseInt(Math.random() * 1000000);
@@ -483,7 +483,7 @@ createServer({
         return parseInt(Math.random() * 10000000);
       },
       result_text(i) {
-        return `Result ${i}`;
+        return `Result ${i + 1}`;
       },
       is_success(i) {
         return Math.random() > 0.5 ? 'Yes' : 'No';
@@ -500,7 +500,7 @@ createServer({
 
     patient: Factory.extend({
       full_name(i) {
-        return `Name ${i}`;
+        return `Name ${i + 1}`;
       },
       gender(i) {
         return Math.random() > 0.5 ? 'Male' : 'Female';
@@ -514,31 +514,31 @@ createServer({
         );
       },
       cpr_number(i) {
-        return `CPR Number ${i}`;
+        return `CPR Number ${i + 1}`;
       },
       scanned_cpr_front(i) {
-        return `CPR Front ${i}`;
+        return `CPR Front ${i + 1}`;
       },
       scanned_cpr_front_url(i) {
-        return `CPR Front ${i}`;
+        return `CPR Front ${i + 1}`;
       },
       scanned_cpr_back(i) {
-        return `CPR Back ${i}`;
+        return `CPR Back ${i + 1}`;
       },
       scanned_cpr_back_url(i) {
-        return `CPR Back ${i}`;
+        return `CPR Back ${i + 1}`;
       },
       scanned_insurance_front(i) {
-        return `Insurance Front ${i}`;
+        return `Insurance Front ${i + 1}`;
       },
       scanned_insurance_front_url(i) {
-        return `Insurance Front ${i}`;
+        return `Insurance Front ${i + 1}`;
       },
       scanned_insurance_back(i) {
-        return `Insurance Back ${i}`;
+        return `Insurance Back ${i + 1}`;
       },
       scanned_insurance_back_url(i) {
-        return `Insurance Back ${i}`;
+        return `Insurance Back ${i + 1}`;
       },
       user_id(i) {
         return parseInt(Math.random() * 1000000);
@@ -552,11 +552,14 @@ createServer({
     }),
 
     location: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       booking_id(i) {
-        return `booking ${i}`;
+        return (i + 1);
       },
       location_coordinates(i) {
-        return `Location ${i}`;
+        return `Location ${i + 1}`;
       },
       on_datetime(i) {
         let start = new Date(2019, 0, 1);
@@ -1035,6 +1038,11 @@ createServer({
 
     this.get('/locations/', (schema) => {
       return schema.locations.all();
+    });
+
+    this.get('/locations/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.locations.find(id);
     });
 
     this.post('/locations/', (schema, request) => {
