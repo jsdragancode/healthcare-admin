@@ -1616,17 +1616,17 @@ export default function BookingsTables() {
                             </GridContainer>
 
                             <BookingHistory bookingId={bookingId} />
+                            <Users userId={newUserId} parentUserCallback={handleUserCallback} />
                             <Transaction bookingId={bookingId} />
+                            <Patients patientId={newPatientId} />
                             <LabTest labTestId={newLabTestId} />
                             <LabResult bookingId={bookingId} />
                             <Consultation bookingId={bookingId} />
                             <LocationTracking bookingId={bookingId} />
                             <Doctors doctorId={newAssignedDoctor} parentDoctorCallback={handleDoctorCallback} />
-                            <Drivers driverId={newAssignedDriver} />
                             <Nurses nurseId={newAssignedNurse} />
+                            <Drivers driverId={newAssignedDriver} />
                             <TrackVans vanId={newAssigned_van} />
-                            <Patients patientId={newPatientId} />
-                            <Users userId={newUserId} parentUserCallback={handleUserCallback} />
                         </div>
                     )
                 }
