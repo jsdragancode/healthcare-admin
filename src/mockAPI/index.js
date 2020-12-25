@@ -60,11 +60,15 @@ createServer({
       },
     }),
     booking: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       user_id(i) {
-        return `user ${i}`;
+        return (i + 1);
       },
       patient_id(i) {
-        return `patient ${i}`;
+        // return `patient ${i}`;
+        return (i + 1);
       },
       start_datetime(i) {
         let start = new Date(2018, 0, 1);
@@ -86,19 +90,24 @@ createServer({
         return Math.random() > 0.5 ? 'General physician' : 'Laboratory test';
       },
       lap_test_id(i) {
-        return `lap test ${i}`;
+        // return `lap test ${i}`;
+        return (i + 1);
       },
       assigned_driver(i) {
-        return `driver ${i}`;
+        // return `driver ${i}`;
+        return (i + 1);
       },
       assigned_van(i) {
-        return `van ${i}`;
+        // return `van ${i}`;
+        return (i + 1);
       },
       assigned_doctor(i) {
-        return `doctor ${i}`;
+        // return `doctor ${i}`;
+        return (i + 1);
       },
       assigned_nurse(i) {
-        return `nurse ${i}`;
+        // return `nurse ${i}`;
+        return (i + 1);
       },
       status(i) {
         let booking_status;
@@ -551,8 +560,11 @@ createServer({
     }),
 
     bookingHistory: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       booking_id(i) {
-        return `booking ${i}`;
+        return (i + 1);
       },
       status(i) {
         let booking_status;
@@ -1022,6 +1034,11 @@ createServer({
 
     this.get('/bookingHistories/', (schema) => {
       return schema.bookingHistories.all();
+    });
+
+    this.get('/bookingHistories/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.bookingHistories.find(id);
     });
 
     this.post('/bookingHistories/', (schema, request) => {

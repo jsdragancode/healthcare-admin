@@ -98,15 +98,15 @@ var dashRoutes = [
     layout: '/admin',
     role: 'admin'
   },
-  {
-    path: '/booking-history',
-    name: 'Booking History',
-    rtlName: 'سجل الحجز',
-    icon: Bookmarks,
-    component: BookingStatusHistoryTables,
-    layout: '/admin',
-    role: 'admin'
-  },
+  // {
+  //   path: '/booking-history',
+  //   name: 'Booking History',
+  //   rtlName: 'سجل الحجز',
+  //   icon: Bookmarks,
+  //   component: BookingStatusHistoryTables,
+  //   layout: '/admin',
+  //   role: 'admin'
+  // },
   {
     path: '/availability-slot',
     name: 'Availability Slot',

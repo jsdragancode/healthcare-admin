@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Visibility from '@material-ui/icons/Visibility';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -33,6 +34,9 @@ import ReactTableBottomPagination from '../../components/ReactTableBottomPaginat
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
+import BookingHistory from "./BookingStatusHistoryTables.js";
+import Transaction from "./TransactionTables.js";
+// import BookingHistory from "../Widgets/BookingHistory.js";
 
 const styles = {
     cardIconTitle: {
@@ -53,8 +57,12 @@ export default function BookingsTables() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
+    const [showCard, setShowCard] = useState('flex');
+    const [showState, setShowState] = useState(1);
 
     const [deleteBooksId, setDeleteBooksId] = useState(null);
+    const [bookingId, setBookingId] = useState('');
+    const [id, setId] = useState('');
     const [newUserId, setNnewUserId] = useState('');
     const [newPatientId, setNewPatientId] = useState('');
     const [newStartDateTime, setNewStartDateTime] = useState('');
@@ -86,7 +94,8 @@ export default function BookingsTables() {
     const classes = useStyles();
 
     const setBookingsParam = (info) => {
-        const { user_id, patient_id, start_datetime, end_datetime, booking_type, lap_test_id, assigned_driver, assigned_van, assigned_doctor, assigned_nurse, status, payment_method, payment_url, placed_on, location_coordinates, location_address_line_1, location_address_line_2, location_city, price, vat, total_price } = info;
+        const { id, user_id, patient_id, start_datetime, end_datetime, booking_type, lap_test_id, assigned_driver, assigned_van, assigned_doctor, assigned_nurse, status, payment_method, payment_url, placed_on, location_coordinates, location_address_line_1, location_address_line_2, location_city, price, vat, total_price } = info;
+        setId(id);
         setNnewUserId(user_id);
         setNewPatientId(patient_id);
         setNewStartDateTime(start_datetime);
@@ -110,11 +119,31 @@ export default function BookingsTables() {
         setNewTotalPrice(total_price);
     };
 
+    const selectBook = (info) => {
+        const { param_key, param_name, param_value } = info;
+        setShowCard('none');
+        setShowState(2);
+        setBookingId(info.id);
+        console.log("selectBook =>" + bookingId);
+    };
+
     const makeTableRow = (info) => {
         return {
             ...info,
             actions: (
                 <div className="actions-right">
+                    <Button
+                        justIcon
+                        round
+                        simple
+                        onClick={() => {
+                            selectBook(info);
+                        }}
+                        color="success"
+                        className="like"
+                    >
+                        <Visibility />
+                    </Button>{' '}
                     <Button
                         justIcon
                         round
@@ -178,6 +207,7 @@ export default function BookingsTables() {
     const addBookings = () => {
         axios
             .post('/api/bookings/', {
+                id: id,
                 user_id: newUserId,
                 patient_id: newPatientId,
                 start_datetime: newStartDateTime,
@@ -221,6 +251,7 @@ export default function BookingsTables() {
     const updateBookings = () => {
         axios
             .patch(`/api/bookings/${deleteBooksId}`, {
+                id: id,
                 user_id: newUserId,
                 patient_id: newPatientId,
                 start_datetime: newStartDateTime,
@@ -269,7 +300,7 @@ export default function BookingsTables() {
         <GridContainer>
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
-                <Card>
+                <Card style={{ display: showCard }}>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
                             <Bookmark />
@@ -283,6 +314,7 @@ export default function BookingsTables() {
                                     color="primary"
                                     onClick={() => {
                                         setBookingsParam({
+                                            id: '',
                                             user_id: '',
                                             patient_id: '',
                                             start_datetime: '',
@@ -316,55 +348,59 @@ export default function BookingsTables() {
                         <ReactTableBottomPagination
                             columns={[
                                 {
-                                    Header: 'User ID',
-                                    accessor: 'user_id',
+                                    Header: 'ID',
+                                    accessor: 'id',
                                 },
+                                // {
+                                //     Header: 'User ID',
+                                //     accessor: 'user_id',
+                                // },
+                                // {
+                                //     Header: 'Patient ID',
+                                //     accessor: 'patient_id',
+                                // },
                                 {
-                                    Header: 'Patient ID',
-                                    accessor: 'patient_id',
-                                },
-                                {
-                                    Header: 'Start Datetime',
+                                    Header: 'Start',
                                     accessor: 'start_datetime',
                                 },
                                 {
-                                    Header: 'End Datetime',
+                                    Header: 'End',
                                     accessor: 'end_datetime',
                                 },
                                 {
-                                    Header: 'Booking Type',
+                                    Header: 'Type',
                                     accessor: 'booking_type',
                                 },
-                                {
-                                    Header: 'Lap Test ID',
-                                    accessor: 'lap_test_id',
-                                },
-                                {
-                                    Header: 'Assigned Driver',
-                                    accessor: 'assigned_driver',
-                                },
-                                {
-                                    Header: 'Assigned Van',
-                                    accessor: 'assigned_van',
-                                },
-                                {
-                                    Header: 'Assigned Doctor',
-                                    accessor: 'assigned_doctor',
-                                },
-                                {
-                                    Header: 'Assigned Nurse',
-                                    accessor: 'assigned_nurse',
-                                },
+                                // {
+                                //     Header: 'Lap Test ID',
+                                //     accessor: 'lap_test_id',
+                                // },
+                                // {
+                                //     Header: 'Assigned Driver',
+                                //     accessor: 'assigned_driver',
+                                // },
+                                // {
+                                //     Header: 'Assigned Van',
+                                //     accessor: 'assigned_van',
+                                // },
+                                // {
+                                //     Header: 'Assigned Doctor',
+                                //     accessor: 'assigned_doctor',
+                                // },
+                                // {
+                                //     Header: 'Assigned Nurse',
+                                //     accessor: 'assigned_nurse',
+                                // },
                                 {
                                     Header: 'Status',
                                     accessor: 'status',
                                 },
                                 {
-                                    Header: 'Payment Method',
+                                    Header: 'Pay Way',
                                     accessor: 'payment_method',
                                 },
                                 {
-                                    Header: 'Payment Url',
+                                    Header: 'Pay Url',
                                     accessor: 'payment_url',
                                 },
                                 {
@@ -372,15 +408,15 @@ export default function BookingsTables() {
                                     accessor: 'placed_on',
                                 },
                                 {
-                                    Header: 'Coordinates',
+                                    Header: 'Coordinate',
                                     accessor: 'location_coordinates',
                                 },
                                 {
-                                    Header: 'Address Line1',
+                                    Header: 'Address1',
                                     accessor: 'location_address_line_1',
                                 },
                                 {
-                                    Header: 'Address Line 2',
+                                    Header: 'Address2',
                                     accessor: 'location_address_line_2',
                                 },
                                 {
@@ -396,7 +432,7 @@ export default function BookingsTables() {
                                     accessor: 'vat',
                                 },
                                 {
-                                    Header: 'Total Price',
+                                    Header: 'Total',
                                     accessor: 'total_price',
                                 },
                                 {
@@ -1368,7 +1404,16 @@ export default function BookingsTables() {
                         />
                     </CardBody>
                 </Card>
+                {showState == 2 &&
+                    (
+                        <div>
+                            <BookingHistory bookingId={bookingId} />
+                            {/* <Transaction /> */}
+                        </div>
+                    )
+                }
             </GridItem>
         </GridContainer>
+
     );
 }

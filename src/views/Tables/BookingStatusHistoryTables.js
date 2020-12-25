@@ -49,12 +49,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function BookingStatusHistoryTables() {
+export default function BookingStatusHistoryTables(props) {
+
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteBookingHistoryId, setDeleteBookingHistoryId] = useState(null);
+    const [id, setId] = useState('');
     const [newBookingId, setNewBookingId] = useState('');
     const [newStatus, setNewStatus] = useState('');
     const [newOnDatetime, setNewOnDatetime] = useState('');
@@ -67,12 +69,14 @@ export default function BookingStatusHistoryTables() {
     const [deleteSuccess, setDeleteSuccess] = React.useState(false);
 
     const setLocationTrackParam = (info) => {
-        const { booking_id, status, on_datetime } = info;
+        const { id, booking_id, status, on_datetime } = info;
 
+        setNewBookingId(id);
         setNewBookingId(booking_id);
         setNewStatus(status);
         setNewOnDatetime(on_datetime);
     };
+
 
     const makeTableRow = (info) => {
         return {
@@ -112,8 +116,8 @@ export default function BookingStatusHistoryTables() {
     };
 
     const getBookingHistory = () => {
-        axios.get('/api/bookingHistories/').then((res) => {
-            setData(res.data.bookingHistories.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/bookingHistories/${props.bookingId}`).then((res) => {
+            setData([makeTableRow(res.data.bookingHistory)]);
         });
     };
 
@@ -227,6 +231,10 @@ export default function BookingStatusHistoryTables() {
                         </GridContainer>
                         <ReactTableBottomPagination
                             columns={[
+                                {
+                                    Header: 'ID',
+                                    accessor: 'id',
+                                },
                                 {
                                     Header: 'Booking ID',
                                     accessor: 'booking_id',

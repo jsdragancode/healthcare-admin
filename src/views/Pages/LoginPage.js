@@ -70,9 +70,6 @@ export default function LoginPage() {
       .then((res) => {
         localStorage.setItem("LoginToken", res.data.token);
         localStorage.setItem("UserRole", res.data.user.role);
-        console.log('Login Token =>' + res.data.token);
-        console.log('User Role =>' + res.data.user.role);
-
         setLoginToken(res.data.token);
 
         if (res.data.token === 'failed') {
@@ -96,7 +93,7 @@ export default function LoginPage() {
             {(loginToken === 'admin_token' || loginToken === 'doctor_token') && (
               <Redirect to='../admin/param-admin'></Redirect>
             )}
-            <Card login className={classes[cardAnimaton]}>
+            <Card login className={classes[cardAnimaton]} style={{ width: '100%', display: 'flex' }}>
               <CardHeader
                 className={`${classes.cardHeader} ${classes.textCenter}`}
                 color="rose"

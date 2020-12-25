@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import Visibility from '@material-ui/icons/Visibility';
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
@@ -46,6 +47,7 @@ export default function AdminParamsTables() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
+    const [showCard, setShowCard] = useState('flex');
     const [deleteAdminParam, setDeleteAdminParam] = useState(null);
     const [newParamKey, setNewParamKey] = useState('');
     const [newParamName, setNewParamName] = useState('');
@@ -67,11 +69,43 @@ export default function AdminParamsTables() {
         setNewParamValue(param_value);
     };
 
+    const selectBook = (info) => {
+        const { param_key, param_name, param_value } = info;
+        alert(param_key)
+        setShowCard('none');
+    }
+
     const makeTableRow = (info) => {
         return {
             ...info,
             actions: (
                 <div className="actions-right">
+                    <Button
+                        justIcon
+                        round
+                        simple
+                        // onClick={() => {
+                        //     let obj = data.find((o) => o.id === key);
+                        //     alert(
+                        //         "You've clicked LIKE button on \n{ \nName: " +
+                        //         obj.name +
+                        //         ', \nposition: ' +
+                        //         obj.position +
+                        //         ', \noffice: ' +
+                        //         obj.office +
+                        //         ', \nage: ' +
+                        //         obj.age +
+                        //         '\n}.'
+                        //     );
+                        // }}
+                        onClick={() => {
+                            selectBook(info);
+                        }}
+                        color="success"
+                        className="like"
+                    >
+                        <Visibility />
+                    </Button>{' '}
                     <Button
                         justIcon
                         round
@@ -188,7 +222,7 @@ export default function AdminParamsTables() {
         <GridContainer>
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
-                <Card>
+                <Card style={{ display: showCard }}>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
                             <Person />
