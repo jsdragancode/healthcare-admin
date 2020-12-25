@@ -175,6 +175,9 @@ createServer({
       },
     }),
     driver: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       full_name_en(i) {
         return `driver ${i + 1}`;
       },
@@ -692,6 +695,11 @@ createServer({
 
     this.get('/drivers/', (schema) => {
       return schema.drivers.all();
+    });
+
+    this.get('/drivers/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.drivers.find(id);
     });
 
     this.post('/drivers/', (schema, request) => {

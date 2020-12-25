@@ -40,6 +40,7 @@ import LabTest from "./LabTestTables.js";
 import LabResult from "./LabResultTables.js";
 import Consultation from "./ConsultationTables.js";
 import LocationTracking from "./LocationTrackingTables.js";
+import Drivers from "../Widgets/DriversTables.js";
 import Nurses from "../Widgets/NursesTables.js";
 
 const styles = {
@@ -127,6 +128,7 @@ export default function BookingsTables() {
         setShowCard('none');
         setShowState(2);
         setNewLabTestId(info.lab_test_id);
+        setNewAssignedDriver(info.assigned_driver);
         setNewAssignedNurse(info.assigned_nurse);
         setBookingId(info.id);
         console.log("selectBook =>" + bookingId);
@@ -1418,6 +1420,7 @@ export default function BookingsTables() {
                             <LabResult bookingId={bookingId} />
                             <Consultation bookingId={bookingId} />
                             <LocationTracking bookingId={bookingId} />
+                            <Drivers driverId={newAssignedDriver} />
                             <Nurses nurseId={newAssignedNurse} />
 
                         </div>

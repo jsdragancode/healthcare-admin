@@ -51,6 +51,7 @@ export default function DriversTables() {
   const [addModal, setAddModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [deleteDriverId, setDeleteDriverId] = useState(null);
+  const [id, setId] = useState('');
   const [newFullNameEn, setNewFullNameEn] = useState('');
   const [newFullNameAr, setNewFullNameAr] = useState('');
   const [newMobileNumber, setNewMobileNumber] = useState('');
@@ -65,8 +66,9 @@ export default function DriversTables() {
   const classes = useStyles();
 
   const setDriverParam = (info) => {
-    const { full_name_en, full_name_ar, mobile_number, is_active } = info;
+    const { id, full_name_en, full_name_ar, mobile_number, is_active } = info;
 
+    setId(id);
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
     setNewMobileNumber(mobile_number);
@@ -230,6 +232,10 @@ export default function DriversTables() {
             </GridContainer>
             <ReactTableBottomPagination
               columns={[
+                {
+                  Header: 'ID',
+                  accessor: 'id',
+                },
                 {
                   Header: 'Full Name EN',
                   accessor: 'full_name_en',

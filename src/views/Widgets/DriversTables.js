@@ -13,11 +13,10 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
 // @material-ui/icons
+import DriveEta from '@material-ui/icons/DriveEta';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
-import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -28,7 +27,6 @@ import CardBody from 'components/Card/CardBody.js';
 import CardIcon from '../../components/Card/CardIcon.js';
 import CardHeader from 'components/Card/CardHeader.js';
 import ReactTableBottomPagination from '../../components/ReactTableBottomPagination/ReactTableBottomPagination.js';
-import PictureUpload from 'components/CustomUpload/PictureUpload.js';
 
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
@@ -47,70 +45,33 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function NursesTables(props) {
+export default function DriversTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
-    const [selectedNurseId, setSelectedNurseId] = useState(null);
-
+    const [deleteDriverId, setDeleteDriverId] = useState(null);
     const [id, setId] = useState('');
     const [newFullNameEn, setNewFullNameEn] = useState('');
     const [newFullNameAr, setNewFullNameAr] = useState('');
-    const [newImageUrl, setNewImageUrl] = useState('');
     const [newMobileNumber, setNewMobileNumber] = useState('');
-    const [newTeamOrderNo, setNewTeamOrderNo] = useState('');
-    const [newIsActive, setNewIsActive] = useState('');
     const [failed, setFailed] = React.useState(false);
+    const [newIsActive, setNewIsActive] = useState('');
     const [success, setSuccess] = React.useState(false);
     const [updateFailed, setUpdateFailed] = React.useState(false);
     const [updateSuccess, setUpdateSuccess] = React.useState(false);
     const [deleteFailed, setDeleteFailed] = React.useState(false);
     const [deleteSuccess, setDeleteSuccess] = React.useState(false);
-    const [file, setFile] = React.useState(null);
-    const [imageName, setImageName] = React.useState('');
 
     const classes = useStyles();
 
-    let fileInput = React.createRef();
-
-    const handleClick = () => {
-        fileInput.current.click();
-    };
-
-    const handleImageChange = e => {
-        e.preventDefault();
-        let reader = new FileReader();
-        let newFile = e.target.files[0];
-        reader.onloadend = () => {
-            setFile(newFile);
-            setNewImageUrl(reader.result);
-            setImageName(newFile.name);
-        };
-        if (newFile) {
-            reader.readAsDataURL(newFile);
-        }
-    };
-
-    const setNurseParam = (info) => {
-        const {
-            id,
-            full_name_en,
-            full_name_ar,
-            image_url,
-            image_name,
-            mobile_number,
-            team_order_no,
-            is_active,
-        } = info;
+    const setDriverParam = (info) => {
+        const { id, full_name_en, full_name_ar, mobile_number, is_active } = info;
 
         setId(id);
         setNewFullNameEn(full_name_en);
         setNewFullNameAr(full_name_ar);
-        setNewImageUrl(image_url);
-        setImageName(image_name);
         setNewMobileNumber(mobile_number);
-        setNewTeamOrderNo(team_order_no);
         setNewIsActive(is_active);
     };
 
@@ -124,8 +85,8 @@ export default function NursesTables(props) {
                         round
                         simple
                         onClick={() => {
-                            setNurseParam(info);
-                            setSelectedNurseId(info.id);
+                            setDriverParam(info);
+                            setDeleteDriverId(info.id);
                             setEditModal(true);
                         }}
                         color="warning"
@@ -138,7 +99,7 @@ export default function NursesTables(props) {
                         round
                         simple
                         onClick={() => {
-                            setSelectedNurseId(info.id);
+                            setDeleteDriverId(info.id);
                             setDeleteModal(true);
                         }}
                         color="danger"
@@ -151,20 +112,19 @@ export default function NursesTables(props) {
         };
     };
 
-    const getNurses = () => {
-        axios.get(`/api/nurses/${props.nurseId}`).then((res) => {
-            setData([makeTableRow(res.data.nurse)]);
+    const getDriver = () => {
+        axios.get(`/api/drivers/${props.driverId}`).then((res) => {
+            setData([makeTableRow(res.data.driver)]);
         });
     };
 
-    useEffect(getNurses, []);
+    useEffect(getDriver, []);
 
-    const deleteNurse = (deleteId) => {
+    const delteDriver = (deleteId) => {
         axios
-            .delete(`/api/nurses/${deleteId}`).then(() => {
+            .delete(`/api/drivers/${deleteId}`).then(() => {
                 // console.log('delete', res);
                 setData(data.filter((prop) => prop.id !== deleteId));
-
                 setDeleteSuccess(true);
                 setTimeout(function () {
                     setDeleteSuccess(false);
@@ -179,20 +139,17 @@ export default function NursesTables(props) {
             });
     };
 
-    const addNurse = () => {
+    const addDriver = () => {
         axios
-            .post('/api/nurses/', {
+            .post('/api/drivers/', {
                 full_name_en: newFullNameEn,
                 full_name_ar: newFullNameAr,
-                image_url: newImageUrl,
-                image_name: imageName,
                 mobile_number: newMobileNumber,
-                team_order_no: newTeamOrderNo,
                 is_active: newIsActive,
             })
             .then((res) => {
-                // console.log('post', res.data.nurse);
-                setData([...data, makeTableRow(res.data.nurse)]);
+                // console.log('post', res.data.driver);
+                setData([...data, makeTableRow(res.data.driver)]);
                 setAddModal(false);
 
                 setSuccess(true);
@@ -209,36 +166,22 @@ export default function NursesTables(props) {
             });
     };
 
-    const updateNurse = () => {
+    const updateDriver = () => {
         axios
-            .patch(`/api/nurses/${selectedNurseId}`, {
+            .patch(`/api/drivers/${deleteDriverId}`, {
                 full_name_en: newFullNameEn,
                 full_name_ar: newFullNameAr,
-                image_url: newImageUrl,
-                image_name: imageName,
                 mobile_number: newMobileNumber,
-                team_order_no: newTeamOrderNo,
                 is_active: newIsActive,
             })
             .then((res) => {
-                // console.log('patch', res.data.nurse);
+                // console.log('patch', res.data.driver);
 
                 setData(
                     data.map((prop) =>
-                        prop.id === selectedNurseId ? makeTableRow(res.data.nurse) : prop
+                        prop.id === deleteDriverId ? makeTableRow(res.data.driver) : prop
                     )
                 );
-
-                setNurseParam({
-                    full_name_en: '',
-                    full_name_ar: '',
-                    image_url: '',
-                    image_name: '',
-                    mobile_number: '',
-                    team_order_no: '',
-                    is_active: '',
-                });
-
                 setEditModal(false);
 
                 setUpdateSuccess(true);
@@ -262,9 +205,9 @@ export default function NursesTables(props) {
                 <Card>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
-                            <LocalPharmacy />
+                            <DriveEta />
                         </CardIcon>
-                        <h4 className={classes.cardIconTitle}>Nurses</h4>
+                        <h4 className={classes.cardIconTitle}>Drivers</h4>
                     </CardHeader>
                     <CardBody>
                         <GridContainer justify="flex-end">
@@ -272,21 +215,18 @@ export default function NursesTables(props) {
                                 <Button
                                     color="primary"
                                     onClick={() => {
-                                        setNurseParam({
+                                        setDriverParam({
                                             full_name_en: '',
                                             full_name_ar: '',
-                                            image_url: '',
-                                            image_name: '',
                                             mobile_number: '',
-                                            team_order_no: '',
                                             is_active: '',
                                         });
 
                                         setAddModal(true);
                                     }}
                                 >
-                                    Add Nurse
-                                </Button>
+                                    Add Driver
+                </Button>
                             </GridItem>
                         </GridContainer>
                         <ReactTableBottomPagination
@@ -304,16 +244,8 @@ export default function NursesTables(props) {
                                     accessor: 'full_name_ar',
                                 },
                                 {
-                                    Header: 'Image Url',
-                                    accessor: 'image_name',
-                                },
-                                {
                                     Header: 'Mobile Number',
                                     accessor: 'mobile_number',
-                                },
-                                {
-                                    Header: 'Team Order No',
-                                    accessor: 'team_order_no',
                                 },
                                 {
                                     Header: 'Is Active',
@@ -341,7 +273,7 @@ export default function NursesTables(props) {
                                 id="small-modal-slide-description"
                                 className={classes.modalBody + ' ' + classes.modalSmallBody}
                             >
-                                <h5>Are you sure you want to delete this nurse?</h5>
+                                <h5>Are you sure you want to delete this driver?</h5>
                             </DialogContent>
                             <DialogActions
                                 className={
@@ -354,11 +286,11 @@ export default function NursesTables(props) {
                                     className={classes.modalSmallFooterFirstButton}
                                 >
                                     Never Mind
-                                </Button>
+                </Button>
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
-                                        deleteNurse(selectedNurseId);
+                                        delteDriver(deleteDriverId);
                                     }}
                                     color="success"
                                     simple
@@ -369,7 +301,7 @@ export default function NursesTables(props) {
                                     }
                                 >
                                     Yes
-                                </Button>
+                </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -389,7 +321,7 @@ export default function NursesTables(props) {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Add Nurse</h4>
+                                <h4 className={classes.modalTitle}>Add Driver</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="add-driver-dialog-modal-description"
@@ -420,25 +352,6 @@ export default function NursesTables(props) {
                                             onChange: (e) => setNewFullNameAr(e.target.value),
                                         }}
                                     />
-                                    <br />
-                                    {/* <div className="picture-container">
-                    <div className="picture">
-                      <img src={newImageUrl} className="picture-src" alt="..." />
-                      <input type="file" onChange={e => handleImageChange(e)} />
-                    </div>
-                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
-                  </div> */}
-                                    <div className="fileinput text-center">
-                                        <input type="file" onChange={handleImageChange} ref={fileInput} />
-                                        <div className={'thumbnail'}>
-                                            <img src={newImageUrl} alt="..." />
-                                        </div>
-                                        <div>
-                                            <Button onClick={() => handleClick()}>
-                                                Upload image
-                                            </Button>
-                                        </div>
-                                    </div>
                                     <CustomInput
                                         labelText="Mobile Number"
                                         id="add_mobile_number"
@@ -451,25 +364,13 @@ export default function NursesTables(props) {
                                             onChange: (e) => setNewMobileNumber(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Team Order No"
-                                        id="add_team_order_no"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newTeamOrderNo,
-                                            onChange: (e) => setNewTeamOrderNo(e.target.value),
-                                        }}
-                                    />
                                     <FormControl fullWidth className={classes.selectFormControl}>
                                         <InputLabel
                                             htmlFor="simple-select"
                                             className={classes.selectLabel}
                                         >
                                             Is Active
-                                        </InputLabel>
+                    </InputLabel>
                                         <Select
                                             MenuProps={{
                                                 className: classes.selectMenu,
@@ -492,7 +393,7 @@ export default function NursesTables(props) {
                                                 value="Active"
                                             >
                                                 Active
-                                            </MenuItem>
+                      </MenuItem>
                                             <MenuItem
                                                 classes={{
                                                     root: classes.selectMenuItem,
@@ -501,16 +402,16 @@ export default function NursesTables(props) {
                                                 value="In Active"
                                             >
                                                 In Active
-                                            </MenuItem>
+                      </MenuItem>
                                         </Select>
                                     </FormControl>
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addNurse()} color="primary">
+                                <Button onClick={() => addDriver()} color="primary">
                                     Add
-                                </Button>
+                </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -530,7 +431,7 @@ export default function NursesTables(props) {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Edit Nurse</h4>
+                                <h4 className={classes.modalTitle}>Edit Driver</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="edit-driver-dialog-modal-description"
@@ -561,25 +462,6 @@ export default function NursesTables(props) {
                                             onChange: (e) => setNewFullNameAr(e.target.value),
                                         }}
                                     />
-                                    <br />
-                                    {/* <div className="picture-container">
-                    <div className="picture">
-                      <img src={newImageUrl} className="picture-src" alt="..." />
-                      <input type="file" onChange={e => handleImageChange(e)} />
-                    </div>
-                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
-                  </div> */}
-                                    <div className="fileinput text-center">
-                                        <input type="file" onChange={handleImageChange} ref={fileInput} />
-                                        <div className={'thumbnail'}>
-                                            <img src={newImageUrl} alt="..." />
-                                        </div>
-                                        <div>
-                                            <Button onClick={() => handleClick()}>
-                                                Upload image
-                                            </Button>
-                                        </div>
-                                    </div>
                                     <CustomInput
                                         labelText="Mobile Number"
                                         id="edit_mobile_number"
@@ -592,25 +474,13 @@ export default function NursesTables(props) {
                                             onChange: (e) => setNewMobileNumber(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Team Order No"
-                                        id="edit_team_order_no"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newTeamOrderNo,
-                                            onChange: (e) => setNewTeamOrderNo(e.target.value),
-                                        }}
-                                    />
                                     <FormControl fullWidth className={classes.selectFormControl}>
                                         <InputLabel
                                             htmlFor="simple-select"
                                             className={classes.selectLabel}
                                         >
                                             Is Active
-                                        </InputLabel>
+                    </InputLabel>
                                         <Select
                                             MenuProps={{
                                                 className: classes.selectMenu,
@@ -633,7 +503,7 @@ export default function NursesTables(props) {
                                                 value="Active"
                                             >
                                                 Active
-                                            </MenuItem>
+                      </MenuItem>
                                             <MenuItem
                                                 classes={{
                                                     root: classes.selectMenuItem,
@@ -642,19 +512,18 @@ export default function NursesTables(props) {
                                                 value="In Active"
                                             >
                                                 In Active
-                                            </MenuItem>
+                      </MenuItem>
                                         </Select>
                                     </FormControl>
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateNurse()} color="primary">
+                                <Button onClick={() => updateDriver()} color="primary">
                                     Update
-                                </Button>
+                </Button>
                             </DialogActions>
                         </Dialog>
-
                         <Snackbar
                             place="tr"
                             color="success"
