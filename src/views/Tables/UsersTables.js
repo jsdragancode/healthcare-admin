@@ -23,6 +23,7 @@ import Switch from '@material-ui/core/Switch';
 import Group from '@material-ui/icons/Group';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+import Visibility from '@material-ui/icons/Visibility';
 
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
@@ -40,6 +41,8 @@ import customSelectStyle from '../../assets/jss/material-dashboard-pro-react/cus
 import customCheckboxRadioSwitch from 'assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js';
 
 import Snackbar from "../../components/Snackbar/Snackbar.js";
+import UserInstances from "../Widgets/UserInstanceIdTables.js";
+import UserNotifcations from "../Widgets/UserNotificationTables.js";
 
 const styles = {
   ...customSelectStyle,
@@ -64,6 +67,8 @@ export default function UsersTables() {
   const [simpleSelect, setSimpleSelect] = useState('');
   const [editModal, setEditModal] = useState(false);
   const [deleteDriverId, setDeleteDriverId] = useState(null);
+  const [showCard, setShowCard] = useState('flex');
+  const [showState, setShowState] = useState(1);
 
   const [id, setId] = useState('');
   const [newFullNameEn, setNewFullNameEn] = useState('');
@@ -84,6 +89,7 @@ export default function UsersTables() {
   const [updateSuccess, setUpdateSuccess] = React.useState(false);
   const [deleteFailed, setDeleteFailed] = React.useState(false);
   const [deleteSuccess, setDeleteSuccess] = React.useState(false);
+  const [userId, setUserId] = useState('');
 
   const classes = useStyles();
 
@@ -117,12 +123,30 @@ export default function UsersTables() {
     setRegisteredOn(registered_on);
   };
 
+  const selectUser = (info) => {
+    setShowCard('none');
+    setShowState(2);
+    setUserId(info.id);
+  };
+
   const makeTableRow = (info) => {
     return {
       ...info,
       address: `${info.default_address_line_1} ${info.default_address_line_2} ${info.default_city}`,
       actions: (
         <div className="actions-right">
+          <Button
+            justIcon
+            round
+            simple
+            onClick={() => {
+              selectUser(info);
+            }}
+            color="success"
+            className="like"
+          >
+            <Visibility />
+          </Button>{' '}
           <Button
             justIcon
             round
@@ -280,7 +304,7 @@ export default function UsersTables() {
     <GridContainer>
       <GridItem xs={12}>
         {/* {moment().format('HH:mm:ss.SSS')} */}
-        <Card>
+        <Card style={{ display: showCard }}>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <PersonAdd />
@@ -925,6 +949,16 @@ export default function UsersTables() {
             />
           </CardBody>
         </Card>
+
+        {showState == 2 &&
+          (
+            <div>
+              <UserInstances userInstanceId={userId} />
+              <UserNotifcations userNotificationId={userId} />
+            </div>
+          )
+        }
+
       </GridItem>
     </GridContainer>
   );

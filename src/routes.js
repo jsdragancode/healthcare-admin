@@ -81,20 +81,29 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 var dashRoutes = [
 
   {
-    path: '/param-admin',
-    name: 'Admin Param',
-    rtlName: 'الحجوزات',
-    icon: Person,
-    component: AdminParamsTables,
-    layout: '/admin',
-    role: 'admin'
-  },
-  {
     path: '/bookings',
     name: 'Bookings',
     rtlName: 'الحجوزات',
     icon: Bookmark,
     component: BookingsTables,
+    layout: '/admin',
+    role: 'admin'
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    rtlName: 'Users',
+    icon: PersonAdd,
+    component: UsersTables,
+    layout: '/admin',
+    role: 'admin',
+  },
+  {
+    path: '/param-admin',
+    name: 'Admin Param',
+    rtlName: 'الحجوزات',
+    icon: Person,
+    component: AdminParamsTables,
     layout: '/admin',
     role: 'admin'
   },
@@ -113,6 +122,15 @@ var dashRoutes = [
     rtlName: 'الحجوزات',
     icon: LibraryBooks,
     component: AvailabilitySlotsTables,
+    layout: '/admin',
+    role: 'admin',
+  },
+  {
+    path: '/faq',
+    name: 'FAQ',
+    rtlName: 'نتيجة المختبر',
+    icon: Info,
+    component: FaqTables,
     layout: '/admin',
     role: 'admin',
   },
@@ -161,15 +179,7 @@ var dashRoutes = [
     layout: '/admin',
     role: 'admin',
   },
-  {
-    path: '/users',
-    name: 'Users',
-    rtlName: 'Users',
-    icon: PersonAdd,
-    component: UsersTables,
-    layout: '/admin',
-    role: 'admin',
-  },
+
   // {
   //   path: '/Instance-user',
   //   name: 'Users Instance',
@@ -206,15 +216,6 @@ var dashRoutes = [
   //   layout: '/admin',
   //   role: 'admin',
   // },
-  {
-    path: '/faq',
-    name: 'FAQ',
-    rtlName: 'نتيجة المختبر',
-    icon: Info,
-    component: FaqTables,
-    layout: '/admin',
-    role: 'admin',
-  },
   // {
   //   path: '/consultation',
   //   name: 'Consultation',
