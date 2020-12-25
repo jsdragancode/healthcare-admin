@@ -417,8 +417,11 @@ createServer({
       }
     }),
     consultation: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       booking_id(i) {
-        return `booking ${i}`;
+        return (i + 1);
       },
       examination(i) {
         return `Examination ${i}`;
@@ -949,6 +952,12 @@ createServer({
 
     this.get('/consultations/', (schema) => {
       return schema.consultations.all();
+    });
+
+    this.get('/consultations/:id', (schema, request) => {
+      let id = request.params.id;
+
+      return schema.consultations.find(id);
     });
 
     this.post('/consultations/', (schema, request) => {

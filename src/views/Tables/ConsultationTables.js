@@ -42,13 +42,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function ConsultationTables() {
+export default function ConsultationTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
 
     const [deleteConsId, setDeleteConsId] = useState(null);
+    const [id, setId] = useState('');
     const [newBookingId, setNnewBookingId] = useState('');
     const [newExamination, setNewExamination] = useState('');
     const [newDiagnosis, setNewDiagnosis] = useState('');
@@ -70,7 +71,8 @@ export default function ConsultationTables() {
     const classes = useStyles();
 
     const setConsultationParam = (info) => {
-        const { booking_id, examination, diagnosis, follow_up, medication, body_temp, pulse_rate, respiration_rate, blood_pressure, weight, height, } = info;
+        const { id, booking_id, examination, diagnosis, follow_up, medication, body_temp, pulse_rate, respiration_rate, blood_pressure, weight, height, } = info;
+        setId(id);
         setNnewBookingId(booking_id);
         setNewExamination(examination);
         setNewDiagnosis(diagnosis);
@@ -122,8 +124,8 @@ export default function ConsultationTables() {
     };
 
     const getCons = () => {
-        axios.get('/api/consultations/').then((res) => {
-            setData(res.data.consultations.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/consultations/${props.bookingId}`).then((res) => {
+            setData([makeTableRow(res.data.consultation)]);
         });
     };
 
@@ -258,9 +260,13 @@ export default function ConsultationTables() {
                         <ReactTableBottomPagination
                             columns={[
                                 {
-                                    Header: 'Booking ID',
-                                    accessor: 'booking_id',
+                                    Header: 'ID',
+                                    accessor: 'id',
                                 },
+                                // {
+                                //     Header: 'Booking ID',
+                                //     accessor: 'booking_id',
+                                // },
                                 {
                                     Header: 'Examination',
                                     accessor: 'examination',

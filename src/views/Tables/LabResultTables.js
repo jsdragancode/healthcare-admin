@@ -111,7 +111,6 @@ export default function LabResultTables(props) {
 
     const getLabResults = () => {
         axios.get(`/api/labresults/${props.bookingId}`).then((res) => {
-            // setData(res.data.labresults.map((prop) => makeTableRow(prop)));
             setData([makeTableRow(res.data.labresult)]);
         });
     };
