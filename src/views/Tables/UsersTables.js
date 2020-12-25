@@ -65,6 +65,7 @@ export default function UsersTables() {
   const [editModal, setEditModal] = useState(false);
   const [deleteDriverId, setDeleteDriverId] = useState(null);
 
+  const [id, setId] = useState('');
   const [newFullNameEn, setNewFullNameEn] = useState('');
   const [gender, setGender] = useState('');
   const [newMobileNumber, setNewMobileNumber] = useState('');
@@ -88,6 +89,7 @@ export default function UsersTables() {
 
   const setUserParam = (info) => {
     const {
+      id,
       full_name,
       full_name_ar,
       gender,
@@ -101,6 +103,7 @@ export default function UsersTables() {
       registered_on,
     } = info;
 
+    setId(id);
     setNewFullNameEn(full_name);
     setNewFullNameAr(full_name_ar);
     setNewMobileNumber(mobile_number);
@@ -301,6 +304,10 @@ export default function UsersTables() {
             </GridContainer>
             <ReactTableBottomPagination
               columns={[
+                {
+                  Header: 'ID',
+                  accessor: 'id',
+                },
                 {
                   Header: 'Full Name',
                   accessor: 'full_name',

@@ -45,6 +45,7 @@ import Drivers from "../Widgets/DriversTables.js";
 import Nurses from "../Widgets/NursesTables.js";
 import TrackVans from "../Widgets/TrackVansTables.js";
 import Patients from "../Widgets/PatientsTables.js";
+import Users from "../Widgets/UsersTables.js";
 
 
 const styles = {
@@ -137,6 +138,7 @@ export default function BookingsTables() {
         setNewAssignedNurse(info.assigned_nurse);
         setNewAssigned_van(info.assigned_van);
         setNewPatientId(info.patient_id);
+        setNnewUserId(info.user_id);
         setBookingId(info.id);
         console.log("selectBook =>" + bookingId);
     };
@@ -1432,6 +1434,7 @@ export default function BookingsTables() {
                             <Nurses nurseId={newAssignedNurse} />
                             <TrackVans vanId={newAssigned_van} />
                             <Patients patientId={newPatientId} />
+                            <Users userId={newUserId} />
                         </div>
                     )
                 }

@@ -192,6 +192,9 @@ createServer({
       },
     }),
     user: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       full_name(i) {
         return `user ${i + 1}`;
       },
@@ -841,6 +844,11 @@ createServer({
 
     this.get('/users/', (schema) => {
       return schema.users.all();
+    });
+
+    this.get('/users/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.users.find(id);
     });
 
     this.post('/users/', (schema, request) => {
