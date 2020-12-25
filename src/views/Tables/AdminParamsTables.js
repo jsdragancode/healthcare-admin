@@ -71,8 +71,8 @@ export default function AdminParamsTables() {
 
     const selectBook = (info) => {
         const { param_key, param_name, param_value } = info;
-        alert(param_key)
-        setShowCard('none');
+        // alert(param_key)
+        // setShowCard('none');
     }
 
     const makeTableRow = (info) => {
@@ -80,24 +80,10 @@ export default function AdminParamsTables() {
             ...info,
             actions: (
                 <div className="actions-right">
-                    <Button
+                    {/* <Button
                         justIcon
                         round
                         simple
-                        // onClick={() => {
-                        //     let obj = data.find((o) => o.id === key);
-                        //     alert(
-                        //         "You've clicked LIKE button on \n{ \nName: " +
-                        //         obj.name +
-                        //         ', \nposition: ' +
-                        //         obj.position +
-                        //         ', \noffice: ' +
-                        //         obj.office +
-                        //         ', \nage: ' +
-                        //         obj.age +
-                        //         '\n}.'
-                        //     );
-                        // }}
                         onClick={() => {
                             selectBook(info);
                         }}
@@ -105,7 +91,7 @@ export default function AdminParamsTables() {
                         className="like"
                     >
                         <Visibility />
-                    </Button>{' '}
+                    </Button>{' '} */}
                     <Button
                         justIcon
                         round

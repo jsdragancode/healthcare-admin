@@ -40,7 +40,7 @@ import LabTest from "./LabTestTables.js";
 import LabResult from "./LabResultTables.js";
 import Consultation from "./ConsultationTables.js";
 import LocationTracking from "./LocationTrackingTables.js";
-
+import Nurses from "../Widgets/NursesTables.js";
 
 const styles = {
     cardIconTitle: {
@@ -127,6 +127,7 @@ export default function BookingsTables() {
         setShowCard('none');
         setShowState(2);
         setNewLabTestId(info.lab_test_id);
+        setNewAssignedNurse(info.assigned_nurse);
         setBookingId(info.id);
         console.log("selectBook =>" + bookingId);
     };
@@ -375,10 +376,10 @@ export default function BookingsTables() {
                                     Header: 'Type',
                                     accessor: 'booking_type',
                                 },
-                                {
-                                    Header: 'Lab Test ID',
-                                    accessor: 'lab_test_id',
-                                },
+                                // {
+                                //     Header: 'Lab Test ID',
+                                //     accessor: 'lab_test_id',
+                                // },
                                 // {
                                 //     Header: 'Assigned Driver',
                                 //     accessor: 'assigned_driver',
@@ -1417,6 +1418,8 @@ export default function BookingsTables() {
                             <LabResult bookingId={bookingId} />
                             <Consultation bookingId={bookingId} />
                             <LocationTracking bookingId={bookingId} />
+                            <Nurses nurseId={newAssignedNurse} />
+
                         </div>
                     )
                 }

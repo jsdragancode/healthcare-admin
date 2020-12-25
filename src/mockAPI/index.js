@@ -326,6 +326,9 @@ createServer({
       },
     }),
     nurse: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       full_name_en(i) {
         return `nurse ${i + 1}`;
       },
@@ -761,6 +764,11 @@ createServer({
 
     this.get('/nurses/', (schema) => {
       return schema.nurses.all();
+    });
+
+    this.get('/nurses/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.nurses.find(id);
     });
 
     this.post('/nurses/', (schema, request) => {

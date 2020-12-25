@@ -54,6 +54,7 @@ export default function NursesTables() {
   const [editModal, setEditModal] = useState(false);
   const [selectedNurseId, setSelectedNurseId] = useState(null);
 
+  const [id, setId] = useState('');
   const [newFullNameEn, setNewFullNameEn] = useState('');
   const [newFullNameAr, setNewFullNameAr] = useState('');
   const [newImageUrl, setNewImageUrl] = useState('');
@@ -93,6 +94,7 @@ export default function NursesTables() {
 
   const setNurseParam = (info) => {
     const {
+      id,
       full_name_en,
       full_name_ar,
       image_url,
@@ -102,6 +104,7 @@ export default function NursesTables() {
       is_active,
     } = info;
 
+    setId(id);
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
     setNewImageUrl(image_url);
@@ -289,6 +292,10 @@ export default function NursesTables() {
             </GridContainer>
             <ReactTableBottomPagination
               columns={[
+                {
+                  Header: 'ID',
+                  accessor: 'id',
+                },
                 {
                   Header: 'Full Name EN',
                   accessor: 'full_name_en',

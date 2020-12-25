@@ -13,10 +13,11 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+
 // @material-ui/icons
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
+import LocalPharmacy from '@material-ui/icons/LocalPharmacy';
 // core components
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -46,20 +47,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function LabTestTables(props) {
+export default function NursesTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
-    const [selectedLabTestId, setSelectedLabTestId] = useState(null);
+    const [selectedNurseId, setSelectedNurseId] = useState(null);
 
     const [id, setId] = useState('');
-    const [newTestNameAr, setNewTestNameAr] = useState('');
-    const [newTestNameEn, setNewTestNameEn] = useState('');
-    const [newTestShortDescAr, setNewTestShortDescAr] = useState('');
-    const [newTestShortDescEn, setNewTestShortDescEn] = useState('');
-    const [newAvailable, setNewAvailable] = useState('');
-    const [newPrice, setNewPrice] = useState('');
+    const [newFullNameEn, setNewFullNameEn] = useState('');
+    const [newFullNameAr, setNewFullNameAr] = useState('');
+    const [newImageUrl, setNewImageUrl] = useState('');
+    const [newMobileNumber, setNewMobileNumber] = useState('');
+    const [newTeamOrderNo, setNewTeamOrderNo] = useState('');
+    const [newIsActive, setNewIsActive] = useState('');
     const [failed, setFailed] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [updateFailed, setUpdateFailed] = React.useState(false);
@@ -68,7 +69,6 @@ export default function LabTestTables(props) {
     const [deleteSuccess, setDeleteSuccess] = React.useState(false);
     const [file, setFile] = React.useState(null);
     const [imageName, setImageName] = React.useState('');
-    const [newImageUrl, setNewImageUrl] = useState('');
 
     const classes = useStyles();
 
@@ -92,28 +92,26 @@ export default function LabTestTables(props) {
         }
     };
 
-    const setLabTestParam = (info) => {
+    const setNurseParam = (info) => {
         const {
             id,
-            test_name_ar,
-            test_name_en,
-            test_short_desc_ar,
-            test_short_desc_en,
-            is_available,
-            image_name,
+            full_name_en,
+            full_name_ar,
             image_url,
-            price,
+            image_name,
+            mobile_number,
+            team_order_no,
+            is_active,
         } = info;
 
         setId(id);
-        setNewTestNameAr(test_name_ar);
-        setNewTestNameEn(test_name_en);
-        setNewTestShortDescAr(test_short_desc_ar);
-        setNewTestShortDescEn(test_short_desc_en);
-        setNewAvailable(is_available);
-        setNewPrice(price);
-        setImageName(image_name);
+        setNewFullNameEn(full_name_en);
+        setNewFullNameAr(full_name_ar);
         setNewImageUrl(image_url);
+        setImageName(image_name);
+        setNewMobileNumber(mobile_number);
+        setNewTeamOrderNo(team_order_no);
+        setNewIsActive(is_active);
     };
 
     const makeTableRow = (info) => {
@@ -126,8 +124,8 @@ export default function LabTestTables(props) {
                         round
                         simple
                         onClick={() => {
-                            setLabTestParam(info);
-                            setSelectedLabTestId(info.id);
+                            setNurseParam(info);
+                            setSelectedNurseId(info.id);
                             setEditModal(true);
                         }}
                         color="warning"
@@ -140,7 +138,7 @@ export default function LabTestTables(props) {
                         round
                         simple
                         onClick={() => {
-                            setSelectedLabTestId(info.id);
+                            setSelectedNurseId(info.id);
                             setDeleteModal(true);
                         }}
                         color="danger"
@@ -153,18 +151,20 @@ export default function LabTestTables(props) {
         };
     };
 
-    const getLabTest = () => {
-        axios.get(`/api/labtests/${props.labTestId}`).then((res) => {
-            setData([makeTableRow(res.data.labtest)]);
+    const getNurses = () => {
+        axios.get(`/api/nurses/${props.nurseId}`).then((res) => {
+            setData([makeTableRow(res.data.nurse)]);
         });
     };
 
-    useEffect(getLabTest, []);
+    useEffect(getNurses, []);
 
-    const delteLabTest = (deleteId) => {
+    const deleteNurse = (deleteId) => {
         axios
-            .delete(`/api/labtests/${deleteId}`).then(() => {
+            .delete(`/api/nurses/${deleteId}`).then(() => {
+                // console.log('delete', res);
                 setData(data.filter((prop) => prop.id !== deleteId));
+
                 setDeleteSuccess(true);
                 setTimeout(function () {
                     setDeleteSuccess(false);
@@ -179,22 +179,22 @@ export default function LabTestTables(props) {
             });
     };
 
-    const addLabTest = () => {
+    const addNurse = () => {
         axios
-            .post('/api/labtests/', {
-                test_name_ar: newTestNameAr,
-                test_name_en: newTestNameEn,
-                test_short_desc_ar: newTestShortDescAr,
-                test_short_desc_en: newTestShortDescEn,
-                is_available: newAvailable,
-                price: newPrice,
-                image_name: imageName,
+            .post('/api/nurses/', {
+                full_name_en: newFullNameEn,
+                full_name_ar: newFullNameAr,
                 image_url: newImageUrl,
+                image_name: imageName,
+                mobile_number: newMobileNumber,
+                team_order_no: newTeamOrderNo,
+                is_active: newIsActive,
             })
             .then((res) => {
-                // console.log('post', res.data.doctor);
-                setData([...data, makeTableRow(res.data.labtest)]);
+                // console.log('post', res.data.nurse);
+                setData([...data, makeTableRow(res.data.nurse)]);
                 setAddModal(false);
+
                 setSuccess(true);
                 setTimeout(function () {
                     setSuccess(false);
@@ -209,39 +209,38 @@ export default function LabTestTables(props) {
             });
     };
 
-    const updateDoctor = () => {
+    const updateNurse = () => {
         axios
-            .patch(`/api/labtests/${selectedLabTestId}`, {
-                test_name_ar: newTestNameAr,
-                test_name_en: newTestNameEn,
-                test_short_desc_ar: newTestShortDescAr,
-                test_short_desc_en: newTestShortDescEn,
-                is_available: newAvailable,
-                price: newPrice,
-                image_name: imageName,
+            .patch(`/api/nurses/${selectedNurseId}`, {
+                full_name_en: newFullNameEn,
+                full_name_ar: newFullNameAr,
                 image_url: newImageUrl,
+                image_name: imageName,
+                mobile_number: newMobileNumber,
+                team_order_no: newTeamOrderNo,
+                is_active: newIsActive,
             })
             .then((res) => {
-                // console.log('patch', res.data.doctor);
+                // console.log('patch', res.data.nurse);
 
                 setData(
                     data.map((prop) =>
-                        prop.id === selectedLabTestId ? makeTableRow(res.data.labtest) : prop
+                        prop.id === selectedNurseId ? makeTableRow(res.data.nurse) : prop
                     )
                 );
 
-                setLabTestParam({
-                    test_name_ar: '',
-                    test_name_en: '',
-                    test_short_desc_ar: '',
-                    test_short_desc_en: '',
-                    is_available: '',
-                    price: '',
-                    image_name: '',
+                setNurseParam({
+                    full_name_en: '',
+                    full_name_ar: '',
                     image_url: '',
+                    image_name: '',
+                    mobile_number: '',
+                    team_order_no: '',
+                    is_active: '',
                 });
 
                 setEditModal(false);
+
                 setUpdateSuccess(true);
                 setTimeout(function () {
                     setUpdateSuccess(false);
@@ -263,9 +262,9 @@ export default function LabTestTables(props) {
                 <Card>
                     <CardHeader color="primary" icon>
                         <CardIcon color="primary">
-                            <Edit />
+                            <LocalPharmacy />
                         </CardIcon>
-                        <h4 className={classes.cardIconTitle}>Lab Tests</h4>
+                        <h4 className={classes.cardIconTitle}>Nurses</h4>
                     </CardHeader>
                     <CardBody>
                         <GridContainer justify="flex-end">
@@ -273,22 +272,21 @@ export default function LabTestTables(props) {
                                 <Button
                                     color="primary"
                                     onClick={() => {
-                                        setLabTestParam({
-                                            test_name_ar: '',
-                                            test_name_en: '',
-                                            test_short_desc_ar: '',
-                                            test_short_desc_en: '',
-                                            is_available: '',
-                                            price: '',
-                                            image_name: '',
+                                        setNurseParam({
+                                            full_name_en: '',
+                                            full_name_ar: '',
                                             image_url: '',
+                                            image_name: '',
+                                            mobile_number: '',
+                                            team_order_no: '',
+                                            is_active: '',
                                         });
 
                                         setAddModal(true);
                                     }}
                                 >
-                                    Add Lab Test
-                </Button>
+                                    Add Nurse
+                                </Button>
                             </GridItem>
                         </GridContainer>
                         <ReactTableBottomPagination
@@ -298,32 +296,28 @@ export default function LabTestTables(props) {
                                     accessor: 'id',
                                 },
                                 {
-                                    Header: 'Test Name AR',
-                                    accessor: 'test_name_ar',
+                                    Header: 'Full Name EN',
+                                    accessor: 'full_name_en',
                                 },
                                 {
-                                    Header: 'Test Name EN',
-                                    accessor: 'test_name_en',
-                                },
-                                {
-                                    Header: 'Test Desc AR',
-                                    accessor: 'test_short_desc_ar',
-                                },
-                                {
-                                    Header: 'Test Desc EN',
-                                    accessor: 'test_short_desc_en',
-                                },
-                                {
-                                    Header: 'Availalble',
-                                    accessor: 'is_available',
+                                    Header: 'Full Name AR',
+                                    accessor: 'full_name_ar',
                                 },
                                 {
                                     Header: 'Image Url',
                                     accessor: 'image_name',
                                 },
                                 {
-                                    Header: 'Price',
-                                    accessor: 'price',
+                                    Header: 'Mobile Number',
+                                    accessor: 'mobile_number',
+                                },
+                                {
+                                    Header: 'Team Order No',
+                                    accessor: 'team_order_no',
+                                },
+                                {
+                                    Header: 'Is Active',
+                                    accessor: 'is_active',
                                 },
                                 {
                                     Header: 'Actions',
@@ -347,7 +341,7 @@ export default function LabTestTables(props) {
                                 id="small-modal-slide-description"
                                 className={classes.modalBody + ' ' + classes.modalSmallBody}
                             >
-                                <h5>Are you sure you want to delete this lab test?</h5>
+                                <h5>Are you sure you want to delete this nurse?</h5>
                             </DialogContent>
                             <DialogActions
                                 className={
@@ -360,11 +354,11 @@ export default function LabTestTables(props) {
                                     className={classes.modalSmallFooterFirstButton}
                                 >
                                     Never Mind
-                </Button>
+                                </Button>
                                 <Button
                                     onClick={() => {
                                         setDeleteModal(false);
-                                        delteLabTest(selectedLabTestId);
+                                        deleteNurse(selectedNurseId);
                                     }}
                                     color="success"
                                     simple
@@ -375,7 +369,7 @@ export default function LabTestTables(props) {
                                     }
                                 >
                                     Yes
-                </Button>
+                                </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -395,7 +389,7 @@ export default function LabTestTables(props) {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Add Lab Test</h4>
+                                <h4 className={classes.modalTitle}>Add Nurse</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="add-driver-dialog-modal-description"
@@ -403,103 +397,37 @@ export default function LabTestTables(props) {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Test Name AR"
-                                        id="add_test_name_ar"
+                                        labelText="Full Name EN"
+                                        id="add_full_name_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTestNameAr,
-                                            onChange: (e) => setNewTestNameAr(e.target.value),
+                                            value: newFullNameEn,
+                                            onChange: (e) => setNewFullNameEn(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Test Name EM"
-                                        id="add_test_name_en"
+                                        labelText="Full Name AR"
+                                        id="add_full_name_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTestNameEn,
-                                            onChange: (e) => setNewTestNameEn(e.target.value),
+                                            value: newFullNameAr,
+                                            onChange: (e) => setNewFullNameAr(e.target.value),
                                         }}
                                     />
-                                    <CustomInput
-                                        labelText="Test Desc AR"
-                                        id="add_test_desc_ar"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newTestShortDescAr,
-                                            onChange: (e) => setNewTestShortDescAr(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="Test Desc EN"
-                                        id="add_test_desc_en"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newTestShortDescEn,
-                                            onChange: (e) => setNewTestShortDescEn(e.target.value),
-                                        }}
-                                    />
-                                    <FormControl fullWidth className={classes.selectFormControl}>
-                                        <InputLabel
-                                            htmlFor="simple-select"
-                                            className={classes.selectLabel}
-                                        >
-                                            Available
-                                        </InputLabel>
-                                        <Select
-                                            MenuProps={{
-                                                className: classes.selectMenu,
-                                            }}
-                                            classes={{
-                                                select: classes.select,
-                                            }}
-                                            value={newAvailable}
-                                            onChange={(e) => setNewAvailable(e.target.value)}
-                                            inputProps={{
-                                                name: 'simpleSelect',
-                                                id: 'simple-select',
-                                            }}
-                                        >
-                                            <MenuItem
-                                                classes={{
-                                                    root: classes.selectMenuItem,
-                                                    selected: classes.selectMenuItemSelected,
-                                                }}
-                                                value="Yes"
-                                            >
-                                                Yes
-                                            </MenuItem>
-                                            <MenuItem
-                                                classes={{
-                                                    root: classes.selectMenuItem,
-                                                    selected: classes.selectMenuItemSelected,
-                                                }}
-                                                value="No"
-                                            >
-                                                No
-                                            </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                    <br />
                                     <br />
                                     {/* <div className="picture-container">
-                                        <div className="picture">
-                                            <img src={newImageUrl} className="picture-src" alt="..." />
-                                            <input type="file" onChange={e => handleImageChange(e)} />
-                                        </div>
-                                        <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
-                                    </div> */}
+                    <div className="picture">
+                      <img src={newImageUrl} className="picture-src" alt="..." />
+                      <input type="file" onChange={e => handleImageChange(e)} />
+                    </div>
+                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div> */}
                                     <div className="fileinput text-center">
                                         <input type="file" onChange={handleImageChange} ref={fileInput} />
                                         <div className={'thumbnail'}>
@@ -512,22 +440,75 @@ export default function LabTestTables(props) {
                                         </div>
                                     </div>
                                     <CustomInput
-                                        labelText="Price"
-                                        id="add_price"
+                                        labelText="Mobile Number"
+                                        id="add_mobile_number"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newPrice,
-                                            onChange: (e) => setNewPrice(e.target.value),
+                                            value: newMobileNumber,
+                                            onChange: (e) => setNewMobileNumber(e.target.value),
                                         }}
                                     />
+                                    <CustomInput
+                                        labelText="Team Order No"
+                                        id="add_team_order_no"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newTeamOrderNo,
+                                            onChange: (e) => setNewTeamOrderNo(e.target.value),
+                                        }}
+                                    />
+                                    <FormControl fullWidth className={classes.selectFormControl}>
+                                        <InputLabel
+                                            htmlFor="simple-select"
+                                            className={classes.selectLabel}
+                                        >
+                                            Is Active
+                                        </InputLabel>
+                                        <Select
+                                            MenuProps={{
+                                                className: classes.selectMenu,
+                                            }}
+                                            classes={{
+                                                select: classes.select,
+                                            }}
+                                            value={newIsActive}
+                                            onChange={(e) => setNewIsActive(e.target.value)}
+                                            inputProps={{
+                                                name: 'simpleSelect',
+                                                id: 'simple-select',
+                                            }}
+                                        >
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="Active"
+                                            >
+                                                Active
+                                            </MenuItem>
+                                            <MenuItem
+                                                classes={{
+                                                    root: classes.selectMenuItem,
+                                                    selected: classes.selectMenuItemSelected,
+                                                }}
+                                                value="In Active"
+                                            >
+                                                In Active
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addLabTest()} color="primary">
+                                <Button onClick={() => addNurse()} color="primary">
                                     Add
                 </Button>
                             </DialogActions>
@@ -549,7 +530,7 @@ export default function LabTestTables(props) {
                                 disableTypography
                                 className={classes.modalHeader}
                             >
-                                <h4 className={classes.modalTitle}>Edit Doctor</h4>
+                                <h4 className={classes.modalTitle}>Edit Nurse</h4>
                             </DialogTitle>
                             <DialogContent
                                 id="edit-driver-dialog-modal-description"
@@ -557,51 +538,70 @@ export default function LabTestTables(props) {
                             >
                                 <form>
                                     <CustomInput
-                                        labelText="Test Name AR"
-                                        id="add_test_name_ar"
+                                        labelText="Full Name EN"
+                                        id="edit_full_name_en"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTestNameAr,
-                                            onChange: (e) => setNewTestNameAr(e.target.value),
+                                            value: newFullNameEn,
+                                            onChange: (e) => setNewFullNameEn(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Test Name EM"
-                                        id="add_test_name_en"
+                                        labelText="Full Name AR"
+                                        id="edit_full_name_ar"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTestNameEn,
-                                            onChange: (e) => setNewTestNameEn(e.target.value),
+                                            value: newFullNameAr,
+                                            onChange: (e) => setNewFullNameAr(e.target.value),
+                                        }}
+                                    />
+                                    <br />
+                                    {/* <div className="picture-container">
+                    <div className="picture">
+                      <img src={newImageUrl} className="picture-src" alt="..." />
+                      <input type="file" onChange={e => handleImageChange(e)} />
+                    </div>
+                    <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
+                  </div> */}
+                                    <div className="fileinput text-center">
+                                        <input type="file" onChange={handleImageChange} ref={fileInput} />
+                                        <div className={'thumbnail'}>
+                                            <img src={newImageUrl} alt="..." />
+                                        </div>
+                                        <div>
+                                            <Button onClick={() => handleClick()}>
+                                                Upload image
+                      </Button>
+                                        </div>
+                                    </div>
+                                    <CustomInput
+                                        labelText="Mobile Number"
+                                        id="edit_mobile_number"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                        }}
+                                        inputProps={{
+                                            type: 'text',
+                                            value: newMobileNumber,
+                                            onChange: (e) => setNewMobileNumber(e.target.value),
                                         }}
                                     />
                                     <CustomInput
-                                        labelText="Test Desc AR"
-                                        id="add_test_desc_ar"
+                                        labelText="Team Order No"
+                                        id="edit_team_order_no"
                                         formControlProps={{
                                             fullWidth: true,
                                         }}
                                         inputProps={{
                                             type: 'text',
-                                            value: newTestShortDescAr,
-                                            onChange: (e) => setNewTestShortDescAr(e.target.value),
-                                        }}
-                                    />
-                                    <CustomInput
-                                        labelText="Test Desc EN"
-                                        id="add_test_desc_en"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newTestShortDescEn,
-                                            onChange: (e) => setNewTestShortDescEn(e.target.value),
+                                            value: newTeamOrderNo,
+                                            onChange: (e) => setNewTeamOrderNo(e.target.value),
                                         }}
                                     />
                                     <FormControl fullWidth className={classes.selectFormControl}>
@@ -609,8 +609,8 @@ export default function LabTestTables(props) {
                                             htmlFor="simple-select"
                                             className={classes.selectLabel}
                                         >
-                                            Available
-                                        </InputLabel>
+                                            Is Active
+                    </InputLabel>
                                         <Select
                                             MenuProps={{
                                                 className: classes.selectMenu,
@@ -618,8 +618,8 @@ export default function LabTestTables(props) {
                                             classes={{
                                                 select: classes.select,
                                             }}
-                                            value={newAvailable}
-                                            onChange={(e) => setNewAvailable(e.target.value)}
+                                            value={newIsActive}
+                                            onChange={(e) => setNewIsActive(e.target.value)}
                                             inputProps={{
                                                 name: 'simpleSelect',
                                                 id: 'simple-select',
@@ -630,62 +630,31 @@ export default function LabTestTables(props) {
                                                     root: classes.selectMenuItem,
                                                     selected: classes.selectMenuItemSelected,
                                                 }}
-                                                value="Yes"
+                                                value="Active"
                                             >
-                                                Yes
-                                            </MenuItem>
+                                                Active
+                      </MenuItem>
                                             <MenuItem
                                                 classes={{
                                                     root: classes.selectMenuItem,
                                                     selected: classes.selectMenuItemSelected,
                                                 }}
-                                                value="No"
+                                                value="In Active"
                                             >
-                                                No
-                                            </MenuItem>
+                                                In Active
+                      </MenuItem>
                                         </Select>
                                     </FormControl>
-                                    <br />
-                                    <br />
-                                    {/* <div className="picture-container">
-                                        <div className="picture">
-                                            <img src={newImageUrl} className="picture-src" alt="..." />
-                                            <input type="file" onChange={e => handleImageChange(e)} />
-                                        </div>
-                                        <h6 className="description">{(imageName == '') ? 'Choose Image' : imageName}</h6>
-                                    </div> */}
-                                    <div className="fileinput text-center">
-                                        <input type="file" onChange={handleImageChange} ref={fileInput} />
-                                        <div className={'thumbnail'}>
-                                            <img src={newImageUrl} alt="..." />
-                                        </div>
-                                        <div>
-                                            <Button onClick={() => handleClick()}>
-                                                Upload image
-                                            </Button>
-                                        </div>
-                                    </div>
-                                    <CustomInput
-                                        labelText="Price"
-                                        id="add_price"
-                                        formControlProps={{
-                                            fullWidth: true,
-                                        }}
-                                        inputProps={{
-                                            type: 'text',
-                                            value: newPrice,
-                                            onChange: (e) => setNewPrice(e.target.value),
-                                        }}
-                                    />
                                 </form>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateDoctor()} color="primary">
+                                <Button onClick={() => updateNurse()} color="primary">
                                     Update
                 </Button>
                             </DialogActions>
                         </Dialog>
+
                         <Snackbar
                             place="tr"
                             color="success"
