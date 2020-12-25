@@ -803,6 +803,11 @@ createServer({
       return schema.vans.all();
     });
 
+    this.get('/vans/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.vans.find(id);
+    });
+
     this.post('/vans/', (schema, request) => {
       let newVan = JSON.parse(request.requestBody);
 

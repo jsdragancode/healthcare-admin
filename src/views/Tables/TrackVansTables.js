@@ -52,6 +52,7 @@ export default function TrackVansTables() {
   const [editModal, setEditModal] = useState(false);
   const [selectedVanId, setSelectedVanId] = useState(null);
 
+  const [id, setId] = useState('');
   const [newTitle, setNewTitle] = useState('');
   const [newIsDeleted, setNewIsDeleted] = useState('');
   const [failed, setFailed] = React.useState(false);
@@ -64,8 +65,9 @@ export default function TrackVansTables() {
   const classes = useStyles();
 
   const setVanParam = (info) => {
-    const { title, is_deleted } = info;
+    const { id, title, is_deleted } = info;
 
+    setId(id);
     setNewTitle(title);
     setNewIsDeleted(is_deleted);
   };
@@ -227,6 +229,10 @@ export default function TrackVansTables() {
             </GridContainer>
             <ReactTableBottomPagination
               columns={[
+                {
+                  Header: 'ID',
+                  accessor: 'id',
+                },
                 {
                   Header: 'Title',
                   accessor: 'title',

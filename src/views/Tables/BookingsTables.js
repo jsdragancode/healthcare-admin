@@ -42,6 +42,7 @@ import Consultation from "./ConsultationTables.js";
 import LocationTracking from "./LocationTrackingTables.js";
 import Drivers from "../Widgets/DriversTables.js";
 import Nurses from "../Widgets/NursesTables.js";
+import TrackVans from "../Widgets/TrackVansTables.js";
 
 const styles = {
     cardIconTitle: {
@@ -130,6 +131,7 @@ export default function BookingsTables() {
         setNewLabTestId(info.lab_test_id);
         setNewAssignedDriver(info.assigned_driver);
         setNewAssignedNurse(info.assigned_nurse);
+        setNewAssigned_van(info.assigned_van);
         setBookingId(info.id);
         console.log("selectBook =>" + bookingId);
     };
@@ -1422,7 +1424,7 @@ export default function BookingsTables() {
                             <LocationTracking bookingId={bookingId} />
                             <Drivers driverId={newAssignedDriver} />
                             <Nurses nurseId={newAssignedNurse} />
-
+                            <TrackVans vanId={newAssigned_van} />
                         </div>
                     )
                 }
