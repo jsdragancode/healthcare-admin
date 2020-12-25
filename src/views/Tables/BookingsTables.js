@@ -40,9 +40,12 @@ import LabTest from "./LabTestTables.js";
 import LabResult from "./LabResultTables.js";
 import Consultation from "./ConsultationTables.js";
 import LocationTracking from "./LocationTrackingTables.js";
+import Doctors from "../Widgets/DoctorsTables.js";
 import Drivers from "../Widgets/DriversTables.js";
 import Nurses from "../Widgets/NursesTables.js";
 import TrackVans from "../Widgets/TrackVansTables.js";
+import Patients from "../Widgets/PatientsTables.js";
+
 
 const styles = {
     cardIconTitle: {
@@ -129,9 +132,11 @@ export default function BookingsTables() {
         setShowCard('none');
         setShowState(2);
         setNewLabTestId(info.lab_test_id);
+        setNewAssignedDoctor(info.assigned_doctor);
         setNewAssignedDriver(info.assigned_driver);
         setNewAssignedNurse(info.assigned_nurse);
         setNewAssigned_van(info.assigned_van);
+        setNewPatientId(info.patient_id);
         setBookingId(info.id);
         console.log("selectBook =>" + bookingId);
     };
@@ -1422,9 +1427,11 @@ export default function BookingsTables() {
                             <LabResult bookingId={bookingId} />
                             <Consultation bookingId={bookingId} />
                             <LocationTracking bookingId={bookingId} />
+                            <Doctors doctorId={newAssignedDoctor} />
                             <Drivers driverId={newAssignedDriver} />
                             <Nurses nurseId={newAssignedNurse} />
                             <TrackVans vanId={newAssigned_van} />
+                            <Patients patientId={newPatientId} />
                         </div>
                     )
                 }

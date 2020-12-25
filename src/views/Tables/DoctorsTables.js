@@ -53,6 +53,7 @@ export default function DoctorsTables() {
   const [editModal, setEditModal] = useState(false);
   const [selectedDoctorId, setSelectedDoctorId] = useState(null);
 
+  const [id, setId] = useState('');
   const [newFullNameEn, setNewFullNameEn] = useState('');
   const [newFullNameAr, setNewFullNameAr] = useState('');
   const [newDetailsEn, setNewDetailsEn] = useState('');
@@ -94,6 +95,7 @@ export default function DoctorsTables() {
 
   const setDoctorParam = (info) => {
     const {
+      id,
       full_name_en,
       full_name_ar,
       details_en,
@@ -105,6 +107,7 @@ export default function DoctorsTables() {
       is_active,
     } = info;
 
+    setId(id);
     setNewFullNameEn(full_name_en);
     setNewFullNameAr(full_name_ar);
     setNewDetailsEn(details_en);
@@ -303,6 +306,10 @@ export default function DoctorsTables() {
             </GridContainer>
             <ReactTableBottomPagination
               columns={[
+                {
+                  Header: 'ID',
+                  accessor: 'id',
+                },
                 {
                   Header: 'Full Name EN',
                   accessor: 'full_name_en',

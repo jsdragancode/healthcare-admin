@@ -49,7 +49,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function PatientsTables() {
+export default function PatientsTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
@@ -220,8 +220,8 @@ export default function PatientsTables() {
     };
 
     const getPatientResults = () => {
-        axios.get('/api/patients/').then((res) => {
-            setData(res.data.patients.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/patients/${props.patientId}`).then((res) => {
+            setData([makeTableRow(res.data.patient)]);
         });
     };
 

@@ -267,6 +267,9 @@ createServer({
       },
     }),
     doctor: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       full_name_en(i) {
         return `doctor ${i + 1}`;
       },
@@ -508,6 +511,9 @@ createServer({
     }),
 
     patient: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       full_name(i) {
         return `Name ${i + 1}`;
       },
@@ -724,6 +730,11 @@ createServer({
 
     this.get('/doctors/', (schema) => {
       return schema.doctors.all();
+    });
+
+    this.get('/doctors/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.doctors.find(id);
     });
 
     this.post('/doctors/', (schema, request) => {
@@ -1043,6 +1054,11 @@ createServer({
 
     this.get('/patients/', (schema) => {
       return schema.patients.all();
+    });
+
+    this.get('/patients/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.patients.find(id);
     });
 
     this.post('/patients/', (schema, request) => {
