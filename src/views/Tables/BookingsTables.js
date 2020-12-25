@@ -50,7 +50,6 @@ import ConsoleUsers from "../Widgets/ConsoleUsersTables.js";
 import UserInstances from "../Widgets/UserInstanceIdTables.js";
 import UserNotifcations from "../Widgets/UserNotificationTables.js";
 
-import Language from '@material-ui/icons/Language';
 import Table from 'components/Table/Table.js';
 import { VectorMap } from 'react-jvectormap';
 

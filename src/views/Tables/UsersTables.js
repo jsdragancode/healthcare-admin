@@ -44,6 +44,27 @@ import Snackbar from "../../components/Snackbar/Snackbar.js";
 import UserInstances from "../Widgets/UserInstanceIdTables.js";
 import UserNotifcations from "../Widgets/UserNotificationTables.js";
 
+import Table from 'components/Table/Table.js';
+import { VectorMap } from 'react-jvectormap';
+
+var mapData = {
+  KP: 3760,
+  KR: 3760,
+  AU: 760,
+  BR: 550,
+  CA: 120,
+  DE: 1300,
+  FR: 540,
+  GA: 540,
+  GB: 690,
+  GE: 200,
+  IN: 200,
+  SA: 600,
+  RO: 600,
+  RU: 300,
+  US: 860,
+};
+
 const styles = {
   ...customSelectStyle,
   ...customCheckboxRadioSwitch,
@@ -127,6 +148,18 @@ export default function UsersTables() {
     setShowCard('none');
     setShowState(2);
     setUserId(info.id);
+    setId(info.id);
+    setNewFullNameEn(info.full_name);
+    setNewFullNameAr(info.full_name_ar);
+    setNewMobileNumber(info.mobile_number);
+    setGender(info.gender);
+    setLocation(info.default_location_coordinates);
+    setAddress1(info.default_address_line_1);
+    setAddress2(info.default_address_line_2);
+    setCity(info.default_city);
+    setActive(info.is_active);
+    setFirebaseURL(info.firebase_uid);
+    setRegisteredOn(info.registered_on);
   };
 
   const makeTableRow = (info) => {
@@ -953,6 +986,105 @@ export default function UsersTables() {
         {showState == 2 &&
           (
             <div>
+              <GridContainer>
+                <GridItem xs={12}>
+                  <Card>
+                    <CardHeader color="success" icon>
+                      <CardIcon color="success">
+                        <PersonAdd />
+                      </CardIcon>
+                      <h4 className={classes.cardIconTitle}>
+                        User Info
+                      </h4>
+                    </CardHeader>
+                    <CardBody>
+                      <GridContainer justify="space-between">
+                        <GridItem xs={12} sm={12} md={5}>
+                          <Table
+                            tableData={[
+                              [
+                                'ID',
+                                id,
+                              ],
+                              [
+                                'Full Name',
+                                newFullNameEn,
+                              ],
+                              [
+                                'Gender',
+                                gender,
+                              ],
+                              [
+                                'Mobile',
+                                newMobileNumber,
+                              ],
+                              [
+                                'Coordinates',
+                                location,
+                              ],
+                              [
+                                'Address Line 1',
+                                address1,
+                              ],
+                              [
+                                'Address Line 2',
+                                address2,
+                              ],
+                              [
+                                'City',
+                                city,
+                              ],
+                              [
+                                'Is Active',
+                                active,
+                              ],
+                              [
+                                'Firebase UID',
+                                firebaseURL,
+                              ],
+                              [
+                                'Registered On',
+                                registeredOn
+                              ],
+                            ]}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <VectorMap
+                            map={'world_mill'}
+                            backgroundColor="transparent"
+                            zoomOnScroll={false}
+                            containerStyle={{
+                              width: '100%',
+                              height: '280px',
+                            }}
+                            containerClassName="map"
+                            regionStyle={{
+                              initial: {
+                                fill: '#e4e4e4',
+                                'fill-opacity': 0.9,
+                                stroke: 'none',
+                                'stroke-width': 0,
+                                'stroke-opacity': 0,
+                              },
+                            }}
+                            series={{
+                              regions: [
+                                {
+                                  values: mapData,
+                                  scale: ['#AAAAAA', '#444444'],
+                                  normalizeFunction: 'polynomial',
+                                },
+                              ],
+                            }}
+                          />
+                        </GridItem>
+                      </GridContainer>
+                    </CardBody>
+                  </Card>
+                </GridItem>
+              </GridContainer>
+
               <UserInstances userInstanceId={userId} />
               <UserNotifcations userNotificationId={userId} />
             </div>
