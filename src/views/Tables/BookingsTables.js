@@ -48,6 +48,7 @@ import Patients from "../Widgets/PatientsTables.js";
 import Users from "../Widgets/UsersTables.js";
 import ConsoleUsers from "../Widgets/ConsoleUsersTables.js";
 import UserInstances from "../Widgets/UserInstanceIdTables.js";
+import UserNotifcations from "../Widgets/UserNotificationTables.js";
 
 const styles = {
     cardIconTitle: {
@@ -1464,6 +1465,8 @@ export default function BookingsTables() {
                     (
                         <div>
                             <UserInstances userInstanceId={userId} />
+                            <UserNotifcations userNotificationId={userId} />
+
                         </div>
                     )
                 }

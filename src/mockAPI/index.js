@@ -238,10 +238,10 @@ createServer({
         return (i + 1);
       },
       user_id(i) {
-        return parseInt(Math.random() * 100000);
+        return (i + 1);
       },
       instance_id(i) {
-        return parseInt(Math.random() * 100000);
+        return (i + 1);
       },
       device_os(i) {
         return `device os ${i + 1}`;
@@ -251,6 +251,9 @@ createServer({
       },
     }),
     userNotification: Factory.extend({
+      id(i) {
+        return (i + 1);
+      },
       title(i) {
         return `title ${i + 1}`;
       },
@@ -258,7 +261,7 @@ createServer({
         return `message ${i + 1}`;
       },
       user_id(i) {
-        return parseInt(Math.random() * 10000);
+        return `title ${i + 1}`;
       },
       on_datetime(i) {
         let start = new Date(2012, 0, 1);
@@ -913,6 +916,11 @@ createServer({
 
     this.get('/userNotifications/', (schema) => {
       return schema.userNotifications.all();
+    });
+
+    this.get('/userNotifications/:id', (schema, request) => {
+      let id = request.params.id;
+      return schema.userNotifications.find(id);
     });
 
     this.post('/userNotifications/', (schema, request) => {

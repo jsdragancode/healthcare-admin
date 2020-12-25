@@ -45,7 +45,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function UserNotificationTables() {
+export default function UserNotificationTables(props) {
     const [data, setData] = useState([]);
     const [deleteModal, setDeleteModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
@@ -114,9 +114,8 @@ export default function UserNotificationTables() {
     };
 
     const getUserNotification = () => {
-        axios.get('/api/userNotifications/').then((res) => {
-            // console.log('get', res.data.userNotifications);
-            setData(res.data.userNotifications.map((prop) => makeTableRow(prop)));
+        axios.get(`/api/userNotifications/${props.userNotificationId}`).then((res) => {
+            setData([makeTableRow(res.data.userNotification)]);
         });
     };
 
