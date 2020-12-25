@@ -34,6 +34,27 @@ import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.js';
 import Snackbar from "../../components/Snackbar/Snackbar.js";
 import ConsoleUsers from "../Widgets/ConsoleUsersTables.js";
 
+import Table from 'components/Table/Table.js';
+import { VectorMap } from 'react-jvectormap';
+
+var mapData = {
+  KP: 3760,
+  KR: 3760,
+  AU: 760,
+  BR: 550,
+  CA: 120,
+  DE: 1300,
+  FR: 540,
+  GA: 540,
+  GB: 690,
+  GE: 200,
+  IN: 200,
+  SA: 600,
+  RO: 600,
+  RU: 300,
+  US: 860,
+};
+
 const styles = {
   cardIconTitle: {
     ...cardTitle,
@@ -127,6 +148,15 @@ export default function DoctorsTables() {
     setShowCard('none');
     setShowState(2);
     setId(info.id);
+    setNewFullNameEn(info.full_name_en);
+    setNewFullNameAr(info.full_name_ar);
+    setNewDetailsEn(info.details_en);
+    setNewDetailsAr(info.details_ar);
+    setImageName(info.image_name);
+    setNewImageUrl(info.image_url);
+    setNewMobileNumber(info.mobile_number);
+    setNewTeamOrderNo(info.team_order_no);
+    setNewIsActive(info.is_active);
   };
 
   const makeTableRow = (info) => {
@@ -834,6 +864,97 @@ export default function DoctorsTables() {
         {showState == 2 &&
           (
             <div>
+              <GridContainer>
+                <GridItem xs={12}>
+                  <Card>
+                    <CardHeader color="success" icon>
+                      <CardIcon color="success">
+                        <LocalHospital />
+                      </CardIcon>
+                      <h4 className={classes.cardIconTitle}>
+                        Doctor Info
+                      </h4>
+                    </CardHeader>
+                    <CardBody>
+                      <GridContainer justify="space-between">
+                        <GridItem xs={12} sm={12} md={5}>
+                          <Table
+                            tableData={[
+                              [
+                                'ID',
+                                id,
+                              ],
+                              [
+                                'Full Name(EN)',
+                                newFullNameEn,
+                              ],
+                              [
+                                'Full Name(AR)',
+                                newFullNameAr,
+                              ],
+                              [
+                                'Details(EN)',
+                                newDetailsEn,
+                              ],
+                              [
+                                'Details(AR)',
+                                newDetailsAr,
+                              ],
+                              [
+                                'Mobile',
+                                newMobileNumber,
+                              ],
+                              [
+                                'Image URL',
+                                newImageUrl,
+                              ],
+                              [
+                                'Team Order Number',
+                                newTeamOrderNo,
+                              ],
+                              [
+                                'Is Active',
+                                newIsActive,
+                              ],
+                            ]}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <VectorMap
+                            map={'world_mill'}
+                            backgroundColor="transparent"
+                            zoomOnScroll={false}
+                            containerStyle={{
+                              width: '100%',
+                              height: '280px',
+                            }}
+                            containerClassName="map"
+                            regionStyle={{
+                              initial: {
+                                fill: '#e4e4e4',
+                                'fill-opacity': 0.9,
+                                stroke: 'none',
+                                'stroke-width': 0,
+                                'stroke-opacity': 0,
+                              },
+                            }}
+                            series={{
+                              regions: [
+                                {
+                                  values: mapData,
+                                  scale: ['#AAAAAA', '#444444'],
+                                  normalizeFunction: 'polynomial',
+                                },
+                              ],
+                            }}
+                          />
+                        </GridItem>
+                      </GridContainer>
+                    </CardBody>
+                  </Card>
+                </GridItem>
+              </GridContainer>
+
               <ConsoleUsers consoleUserId={id} />
             </div>
           )
