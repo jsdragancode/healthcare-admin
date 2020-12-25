@@ -50,6 +50,28 @@ import ConsoleUsers from "../Widgets/ConsoleUsersTables.js";
 import UserInstances from "../Widgets/UserInstanceIdTables.js";
 import UserNotifcations from "../Widgets/UserNotificationTables.js";
 
+import Language from '@material-ui/icons/Language';
+import Table from 'components/Table/Table.js';
+import { VectorMap } from 'react-jvectormap';
+
+var mapData = {
+    KP: 3760,
+    KR: 3760,
+    AU: 760,
+    BR: 550,
+    CA: 120,
+    DE: 1300,
+    FR: 540,
+    GA: 540,
+    GB: 690,
+    GE: 200,
+    IN: 200,
+    SA: 600,
+    RO: 600,
+    RU: 300,
+    US: 860,
+};
+
 const styles = {
     cardIconTitle: {
         ...cardTitle,
@@ -130,21 +152,35 @@ export default function BookingsTables() {
         setNewCity(location_city);
         setNewPrice(price);
         setNewVat(vat);
-        setNewTotalPrice(total_price);
+        setNewTotalPrice(price + vat);
     };
 
     const selectBook = (info) => {
         setShowCard('none');
         setShowState(2);
-        setNewLabTestId(info.lab_test_id);
-        setNewAssignedDoctor(info.assigned_doctor);
-        setNewAssignedDriver(info.assigned_driver);
-        setNewAssignedNurse(info.assigned_nurse);
-        setNewAssigned_van(info.assigned_van);
-        setNewPatientId(info.patient_id);
-        setNnewUserId(info.user_id);
+        setId(info.id);
         setBookingId(info.id);
-        console.log("selectBook =>" + bookingId);
+        setNnewUserId(info.user_id);
+        setNewPatientId(info.patient_id);
+        setNewStartDateTime(info.start_datetime);
+        setNewEndDateTime(info.end_datetime);
+        setNewBookingType(info.booking_type);
+        setNewLabTestId(info.lab_test_id);
+        setNewAssignedDriver(info.assigned_driver);
+        setNewAssigned_van(info.assigned_van);
+        setNewAssignedDoctor(info.assigned_doctor);
+        setNewAssignedNurse(info.assigned_nurse);
+        setNewStatus(info.status);
+        setNewPaymentMethod(info.payment_method);
+        setNewPaymentUrl(info.payment_url);
+        setNewPlacedOn(info.placed_on);
+        setNewCoordinates(info.location_coordinates);
+        setNewAddress1(info.location_address_line_1);
+        setNewAddress2(info.location_address_line_2);
+        setNewCity(info.location_city);
+        setNewPrice(info.price);
+        setNewVat(info.vat);
+        setNewTotalPrice(info.total_price);
     };
 
     const handleDoctorCallback = (info) => {
@@ -1437,6 +1473,149 @@ export default function BookingsTables() {
                 {showState == 2 &&
                     (
                         <div>
+                            <GridContainer>
+                                <GridItem xs={12}>
+                                    <Card>
+                                        <CardHeader color="success" icon>
+                                            <CardIcon color="success">
+                                                <Bookmark />
+                                            </CardIcon>
+                                            <h4 className={classes.cardIconTitle}>
+                                                Booking Info
+                                            </h4>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <GridContainer justify="space-between">
+                                                <GridItem xs={12} sm={12} md={5}>
+                                                    <Table
+                                                        tableData={[
+                                                            [
+                                                                'ID',
+                                                                id,
+                                                            ],
+                                                            [
+                                                                'User ID',
+                                                                newUserId,
+                                                            ],
+                                                            [
+                                                                'Patient ID',
+                                                                newPatientId,
+                                                            ],
+                                                            [
+                                                                'Start Datetime',
+                                                                newStartDateTime,
+                                                            ],
+                                                            [
+                                                                'End Datetime',
+                                                                newEndDateTime,
+                                                            ],
+                                                            [
+                                                                'Booking Type',
+                                                                newBookingType,
+                                                            ],
+                                                            [
+                                                                'Lab Test ID',
+                                                                newLabTestId,
+                                                            ],
+                                                            [
+                                                                'Assigned Driver',
+                                                                newAssignedDriver,
+                                                            ],
+                                                            [
+                                                                'Assigned Van',
+                                                                newAssigned_van,
+                                                            ],
+                                                            [
+                                                                'Assigned Doctor',
+                                                                newAssignedDoctor,
+                                                            ],
+                                                            [
+                                                                'Assigned Nurse',
+                                                                newAssignedNurse
+                                                            ],
+                                                            [
+                                                                'Status',
+                                                                newStatus,
+                                                            ],
+                                                            [
+                                                                'Payment Method',
+                                                                newPaymentMethod,
+                                                            ],
+                                                            [
+                                                                'Payment URL',
+                                                                newPaymentUrl,
+                                                            ],
+                                                            [
+                                                                'Placed On',
+                                                                newPlacedOn,
+                                                            ],
+                                                            [
+                                                                'Coordinates',
+                                                                newCoordinates,
+                                                            ],
+                                                            [
+                                                                'Address Line 1',
+                                                                newAddress1,
+                                                            ],
+                                                            [
+                                                                'Address Line 2',
+                                                                newAddress2,
+                                                            ],
+                                                            [
+                                                                'City',
+                                                                newCity,
+                                                            ],
+                                                            [
+                                                                'Price',
+                                                                newPrice,
+                                                            ],
+                                                            [
+                                                                'Vat',
+                                                                newVat,
+                                                            ],
+                                                            [
+                                                                'Total Price',
+                                                                newPrice + newVat,
+                                                            ],
+                                                        ]}
+                                                    />
+                                                </GridItem>
+                                                <GridItem xs={12} sm={12} md={6}>
+                                                    <VectorMap
+                                                        map={'world_mill'}
+                                                        backgroundColor="transparent"
+                                                        zoomOnScroll={false}
+                                                        containerStyle={{
+                                                            width: '100%',
+                                                            height: '280px',
+                                                        }}
+                                                        containerClassName="map"
+                                                        regionStyle={{
+                                                            initial: {
+                                                                fill: '#e4e4e4',
+                                                                'fill-opacity': 0.9,
+                                                                stroke: 'none',
+                                                                'stroke-width': 0,
+                                                                'stroke-opacity': 0,
+                                                            },
+                                                        }}
+                                                        series={{
+                                                            regions: [
+                                                                {
+                                                                    values: mapData,
+                                                                    scale: ['#AAAAAA', '#444444'],
+                                                                    normalizeFunction: 'polynomial',
+                                                                },
+                                                            ],
+                                                        }}
+                                                    />
+                                                </GridItem>
+                                            </GridContainer>
+                                        </CardBody>
+                                    </Card>
+                                </GridItem>
+                            </GridContainer>
+
                             <BookingHistory bookingId={bookingId} />
                             <Transaction bookingId={bookingId} />
                             <LabTest labTestId={newLabTestId} />
