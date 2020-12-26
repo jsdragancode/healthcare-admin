@@ -179,7 +179,7 @@ export default function BookingsTables() {
         setNewCity(info.location_city);
         setNewPrice(info.price);
         setNewVat(info.vat);
-        setNewTotalPrice(info.total_price);
+        setNewTotalPrice(info.price + info.vat);
     };
 
     const handleDoctorCallback = (info) => {
@@ -293,7 +293,7 @@ export default function BookingsTables() {
                 location_city: newCity,
                 price: newPrice,
                 vat: newVat,
-                total_price: newTotalPrice,
+                total_price: newPrice + newVat,
             })
             .then((res) => {
                 setData([...data, makeTableRow(res.data.booking)]);
@@ -337,7 +337,7 @@ export default function BookingsTables() {
                 location_city: newCity,
                 price: newPrice,
                 vat: newVat,
-                total_price: newTotalPrice,
+                total_price: newPrice + newVat,
             })
             .then((res) => {
                 setData(
@@ -496,10 +496,10 @@ export default function BookingsTables() {
                                     Header: 'Vat',
                                     accessor: 'vat',
                                 },
-                                {
-                                    Header: 'Total',
-                                    accessor: 'total_price',
-                                },
+                                // {
+                                //     Header: 'Total',
+                                //     accessor: 'total_price',
+                                // },
                                 {
                                     Header: 'Actions',
                                     accessor: 'actions',
