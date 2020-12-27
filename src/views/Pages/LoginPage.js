@@ -96,7 +96,7 @@ export default function LoginPage() {
             <Card login className={classes[cardAnimaton]} style={{ width: '100%', display: 'flex' }}>
               <CardHeader
                 className={`${classes.cardHeader} ${classes.textCenter}`}
-                color="rose"
+                color="warning"
               >
                 <h4 className={classes.cardTitle}>Log in</h4>
                 {/* <div className={classes.socialLine}>
@@ -171,21 +171,21 @@ export default function LoginPage() {
               <PulseLoader
                 css={override}
                 size={12}
-                color={"#4caf50"}
+                color={"#041F5D"}
                 loading={loading}
               />
 
               {(loginToken === 'failed' && hideWarning === true) && (
                 <CardHeader
                   className={`${classes.cardHeader} ${classes.textCenter}`}
-                  color="rose"
+                  color="warning"
                 >
                   <h4 className={classes.cardTitle}>Incorrect Email or Password!</h4>
                 </CardHeader>
               )}
 
               <CardFooter className={classes.justifyContentCenter}>
-                <Button color="rose" simple size="lg" block onClick={() => handleLogin()} >
+                <Button color="warning" simple size="lg" block onClick={() => handleLogin()} >
                   Let{"'"}s Go
                 </Button>
               </CardFooter>
