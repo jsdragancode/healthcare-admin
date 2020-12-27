@@ -42,12 +42,16 @@ import UsersTables from './views/Tables/UsersTables';
 import UserInstanceIdTables from './views/Tables/UserInstanceIdTables';
 import UserNotificationTables from './views/Tables/UserNotificationTables';
 import LabResultTables from './views/Tables/LabResultTables';
+import LabResultDoctorTables from './views/Tables/LabResultDoctorTables';
 import LabTestTables from './views/Tables/LabTestTables';
 import FaqTables from './views/Tables/FaqTables';
 import ConsultationTables from './views/Tables/ConsultationTables';
+import ConsultationDoctorTables from './views/Tables/ConsultationDoctorTables';
 import TransactionTables from './views/Tables/TransactionTables';
 import PatientsTables from './views/Tables/PatientsTables';
+import PatientsDoctorTables from './views/Tables/PatientsDoctorTables';
 import LocationTrackingTables from './views/Tables/LocationTrackingTables';
+import BookingsDoctorTables from './views/Tables/BookingsDoctorTables';
 
 
 // @material-ui/icons
@@ -99,6 +103,15 @@ var dashRoutes = [
     role: 'admin'
   },
   {
+    path: '/booking-doctor',
+    name: 'Bookings',
+    rtlName: 'التشاور',
+    icon: Bookmark,
+    component: BookingsDoctorTables,
+    layout: '/admin',
+    role: 'doctor',
+  },
+  {
     path: '/users',
     name: 'Users',
     rtlName: 'Users',
@@ -107,12 +120,21 @@ var dashRoutes = [
     layout: '/admin',
     role: 'admin',
   },
+  // {
+  //   path: '/patients',
+  //   name: 'Patients',
+  //   rtlName: 'عملية تجارية',
+  //   icon: AccountCircle,
+  //   component: PatientsTables,
+  //   layout: '/admin',
+  //   role: 'doctor',
+  // },
   {
-    path: '/patients',
+    path: '/patients-doctor',
     name: 'Patients',
     rtlName: 'عملية تجارية',
     icon: AccountCircle,
-    component: PatientsTables,
+    component: PatientsDoctorTables,
     layout: '/admin',
     role: 'doctor',
   },
@@ -179,6 +201,42 @@ var dashRoutes = [
     layout: '/admin',
     role: 'admin',
   },
+  {
+    path: '/consultation',
+    name: 'Consultation',
+    rtlName: 'التشاور',
+    icon: RecordVoiceOverIcon,
+    component: ConsultationDoctorTables,
+    layout: '/admin',
+    role: 'doctor',
+  },
+  {
+    path: '/lab-result-doctor',
+    name: 'Lab Results',
+    rtlName: 'نتيجة المختبر',
+    icon: Colorize,
+    component: LabResultDoctorTables,
+    layout: '/admin',
+    role: 'doctor',
+  },
+  // {
+  //   path: '/lab-result',
+  //   name: 'Lab Results',
+  //   rtlName: 'نتيجة المختبر',
+  //   icon: Colorize,
+  //   component: LabResultTables,
+  //   layout: '/admin',
+  //   role: 'doctor',
+  // },
+  // {
+  //   path: '/consultation',
+  //   name: 'Consultation',
+  //   rtlName: 'التشاور',
+  //   icon: RecordVoiceOverIcon,
+  //   component: ConsultationTables,
+  //   layout: '/admin',
+  //   role: 'admin',
+  // },
   // {
   //   path: '/booking-history',
   //   name: 'Booking History',
@@ -217,15 +275,6 @@ var dashRoutes = [
   //   role: 'admin',
   // },
   // {
-  //   path: '/lab-result',
-  //   name: 'Lab Results',
-  //   rtlName: 'نتيجة المختبر',
-  //   icon: Colorize,
-  //   component: LabResultTables,
-  //   layout: '/admin',
-  //   role: 'admin',
-  // },
-  // {
   //   path: '/lab-test',
   //   name: 'Lab Tests',
   //   rtlName: 'التحاليل المخبرية',
@@ -233,15 +282,6 @@ var dashRoutes = [
   //   component: LabTestTables,
   //   layout: '/admin',
   //   role: 'admin',
-  // },
-  // {
-  //   path: '/consultation',
-  //   name: 'Consultation',
-  //   rtlName: 'التشاور',
-  //   icon: RecordVoiceOverIcon,
-  //   component: ConsultationTables,
-  //   layout: '/admin',
-  //   role: 'doctor',
   // },
   // {
   //   path: '/transaction',

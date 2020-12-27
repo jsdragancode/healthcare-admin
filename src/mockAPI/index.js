@@ -1235,24 +1235,24 @@ createServer({
   },
   seeds(server) {
     server.createList('waitingPatient', 15);
-    server.createList('adminparam', 40);
-    server.createList('availabilityslot', 40);
-    server.createList('booking', 40);
-    server.createList('driver', 40);
-    server.createList('doctor', 40);
-    server.createList('consoleUser', 40);
-    server.createList('nurse', 40);
-    server.createList('van', 40);
-    server.createList('user', 40);
-    server.createList('userInstance', 40);
-    server.createList('userNotification', 40);
-    server.createList('labresult', 40);
-    server.createList('labtest', 40);
-    server.createList('faq', 40);
-    server.createList('consultation', 40);
-    server.createList('transaction', 40);
-    server.createList('patient', 40);
-    server.createList('location', 40);
-    server.createList('bookingHistory', 40);
+    server.createList('adminparam', 15);
+    server.createList('availabilityslot', 15);
+    server.createList('booking', 15);
+    server.createList('driver', 15);
+    server.createList('doctor', 15);
+    server.createList('consoleUser', 15);
+    server.createList('nurse', 15);
+    server.createList('van', 15);
+    server.createList('user', 15);
+    server.createList('userInstance', 15);
+    server.createList('userNotification', 15);
+    server.createList('labresult', 15);
+    server.createList('labtest', 15);
+    server.createList('faq', 15);
+    server.createList('consultation', 15);
+    server.createList('transaction', 15);
+    server.createList('patient', 15);
+    server.createList('location', 15);
+    server.createList('bookingHistory', 15);
   },
 });
