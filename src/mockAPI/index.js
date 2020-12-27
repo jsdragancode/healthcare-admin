@@ -3,6 +3,10 @@ import { createServer, Model, Factory } from 'miragejs';
 
 createServer({
   models: {
+    acceptedPatient: Model,
+    currentServed: Model,
+    bokingCompleted: Model,
+    waitingPatients: Model,
     adminparam: Model,
     availabilityslot: Model,
     booking: Model,
@@ -24,6 +28,20 @@ createServer({
     bookingHistory: Model,
   },
   factories: {
+    waitingPatient: Factory.extend({
+      name(i) {
+        return `Full Name${i + 1}`;
+      },
+      gender(i) {
+        return Math.random() > 0.5 ? 'Male' : 'Female';
+      },
+      mobile_number(i) {
+        return parseInt(Math.random() * 1000000);
+      },
+      waiting_dates(i) {
+        return parseInt(Math.random() * 100);
+      }
+    }),
     adminparam: Factory.extend({
       param_key(i) {
         return `param key ${i + 1}`;
@@ -639,6 +657,24 @@ createServer({
     this.logging = false;
     this.namespace = 'api';
 
+    this.get('/acceptedPatient/', (schema) => {
+      return 25;
+    });
+
+    this.get('/currentServed/', (schema) => {
+      return 19;
+    });
+
+    this.get('/bokingCompleted/', (schema) => {
+      return 245;
+    });
+
+    this.get('/waitingPatients/', (schema) => {
+      // return schema.waitingPatients.all();
+      return 4;
+    });
+
+
     this.get('/adminparams/', (schema) => {
       return schema.adminparams.all();
     });
@@ -1198,6 +1234,7 @@ createServer({
     });
   },
   seeds(server) {
+    server.createList('waitingPatient', 15);
     server.createList('adminparam', 40);
     server.createList('availabilityslot', 40);
     server.createList('booking', 40);

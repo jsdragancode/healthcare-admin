@@ -2,6 +2,7 @@ import Buttons from 'views/Components/Buttons.js';
 import Calendar from 'views/Calendar/Calendar.js';
 import Charts from 'views/Charts/Charts.js';
 import Dashboard from 'views/Dashboard/Dashboard.js';
+import Analytics from 'views/Tables/AnalyticsTables.js';
 import ErrorPage from 'views/Pages/ErrorPage.js';
 import ExtendedForms from 'views/Forms/ExtendedForms.js';
 import ExtendedTables from 'views/Tables/ExtendedTables.js';
@@ -79,9 +80,17 @@ import Timeline from '@material-ui/icons/Timeline';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 
 var dashRoutes = [
-
   {
     path: '/dashboard',
+    name: 'Analytics',
+    rtlName: 'لوحة القيادة',
+    icon: DashboardIcon,
+    component: Analytics,
+    layout: '/admin',
+    role: 'admin',
+  },
+  {
+    path: '/bookings',
     name: 'Bookings',
     rtlName: 'الحجوزات',
     icon: Bookmark,
@@ -250,15 +259,6 @@ var dashRoutes = [
   //   rtlName: 'تتبع الموقع',
   //   icon: Place,
   //   component: LocationTrackingTables,
-  //   layout: '/admin',
-  //   role: 'admin',
-  // },
-  // {
-  //   path: '/dashboard',
-  //   name: 'Dashboard',
-  //   rtlName: 'لوحة القيادة',
-  //   icon: DashboardIcon,
-  //   component: Dashboard,
   //   layout: '/admin',
   //   role: 'admin',
   // },

@@ -245,7 +245,6 @@ export default function BookingsTables() {
         console.log(123123);
         axios.get('/api/bookings/').then((res) => {
             setData(res.data.bookings.map((prop) => makeTableRow(prop)));
-            console.log(res);
         });
     };
 
@@ -1474,7 +1473,7 @@ export default function BookingsTables() {
                         <div>
                             <GridContainer>
                                 <GridItem xs={12}>
-                                    <Card>
+                                    <Card style={{ display: 'flex' }}>
                                         <CardHeader color="success" icon>
                                             <CardIcon color="success">
                                                 <Bookmark />
