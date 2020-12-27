@@ -171,7 +171,7 @@ export default function LoginPage() {
               <PulseLoader
                 css={override}
                 size={12}
-                color={"#041F5D"}
+                color={"#DFB86A"}
                 loading={loading}
               />
 
