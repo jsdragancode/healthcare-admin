@@ -158,7 +158,7 @@ const customDropdownStyle = (theme) => ({
   },
   warningHover: {
     '&:hover': {
-      backgroundColor: warningColor[0],
+      backgroundColor: '#DFB86A',
       color: whiteColor,
       ...warningBoxShadow,
     },

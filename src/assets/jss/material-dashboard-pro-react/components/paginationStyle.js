@@ -112,16 +112,16 @@ const paginationStyle = {
   },
   warning: {
     '&,&:hover,&:focus': {
-      backgroundColor: warningColor[0],
-      borderColor: warningColor[0],
+      backgroundColor: '#DFB86A',
+      borderColor: '#DFB86A',
       color: whiteColor,
       boxShadow:
         '0 4px 5px 0 rgba(' +
-        hexToRgb(warningColor[0]) +
+        hexToRgb('#DFB86A') +
         ', 0.14), 0 1px 10px 0 rgba(' +
-        hexToRgb(warningColor[0]) +
+        hexToRgb('#DFB86A') +
         ', 0.12), 0 2px 4px -1px rgba(' +
-        hexToRgb(warningColor[0]) +
+        hexToRgb('#DFB86A') +
         ', 0.2)',
     },
     '&:hover,&:focus': {

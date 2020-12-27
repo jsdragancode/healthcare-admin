@@ -22,7 +22,7 @@ const customLinearProgressStyle = {
     backgroundColor: primaryColor[0],
   },
   warning: {
-    backgroundColor: warningColor[0],
+    backgroundColor: '#DFB86A',
   },
   danger: {
     backgroundColor: dangerColor[0],

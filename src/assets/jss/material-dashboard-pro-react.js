@@ -162,7 +162,7 @@ const grayColor = [
   '#c8c8c8',
   '#505050',
 ];
-const blackColor = '#000';
+const blackColor = '#041F5D';
 const whiteColor = '#FFF';
 const twitterColor = '#55acee';
 const facebookColor = '#3b5998';

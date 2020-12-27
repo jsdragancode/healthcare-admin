@@ -29,7 +29,7 @@ const chartsStyle = {
     color: primaryColor[0],
   },
   warning: {
-    color: warningColor[0],
+    color: '#DFB86A',
   },
   danger: {
     color: dangerColor[0],

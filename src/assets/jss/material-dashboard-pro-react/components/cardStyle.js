@@ -149,7 +149,7 @@ const cardStyle = {
   },
   warning: {
     background:
-      'linear-gradient(60deg,' + warningColor[1] + ',' + warningColor[4] + ')',
+      '#DFB86A',
     '& h1 small': {
       color: 'rgba(' + hexToRgb(whiteColor) + ', 0.8)',
     },

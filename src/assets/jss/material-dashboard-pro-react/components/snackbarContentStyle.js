@@ -56,7 +56,7 @@ const snackbarContentStyle = {
     ...successBoxShadow,
   },
   warning: {
-    backgroundColor: warningColor[3],
+    backgroundColor: '#DFB86A',
     color: whiteColor,
     ...warningBoxShadow,
   },

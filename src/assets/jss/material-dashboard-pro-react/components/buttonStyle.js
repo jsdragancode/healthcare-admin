@@ -168,7 +168,7 @@ const buttonStyle = {
     },
   },
   warning: {
-    backgroundColor: warningColor[0],
+    backgroundColor: '#DFB86A',
     boxShadow:
       '0 2px 2px 0 rgba(' +
       hexToRgb(warningColor[0]) +
@@ -526,7 +526,7 @@ const buttonStyle = {
     },
     '&$warning': {
       '&,&:focus,&:hover,&:visited': {
-        color: warningColor[0],
+        color: '#DFB86A',
       },
     },
     '&$rose': {

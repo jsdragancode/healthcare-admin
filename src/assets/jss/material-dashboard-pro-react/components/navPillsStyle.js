@@ -127,7 +127,7 @@ const navPillsStyle = (theme) => ({
   warning: {
     '&,&:hover': {
       color: whiteColor,
-      backgroundColor: warningColor[0],
+      backgroundColor: '#DFB86A',
       boxShadow:
         '0 4px 20px 0px rgba(' +
         hexToRgb(blackColor) +

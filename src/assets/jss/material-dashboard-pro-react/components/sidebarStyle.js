@@ -79,7 +79,7 @@ const sidebarStyle = (theme) => ({
     color: whiteColor,
     '&:after': {
       background: blackColor,
-      opacity: '.8',
+      opacity: '1',
     },
   },
   blueBackground: {
@@ -390,7 +390,7 @@ const sidebarStyle = (theme) => ({
   blue: {
     '&,&:hover,&:focus': {
       color: whiteColor,
-      backgroundColor: infoColor[0],
+      backgroundColor: '#DFB86A',
       boxShadow:
         '0 12px 20px -10px rgba(' +
         hexToRgb(infoColor[0]) +
@@ -418,7 +418,7 @@ const sidebarStyle = (theme) => ({
   orange: {
     '&,&:hover,&:focus': {
       color: whiteColor,
-      backgroundColor: warningColor[0],
+      backgroundColor: '#DFB86A',
       boxShadow:
         '0 12px 20px -10px rgba(' +
         hexToRgb(warningColor[0]) +

@@ -1739,7 +1739,7 @@ button.rbc-input::-moz-focus-inner {
   bottom: 0px;
   right: -7px;
   font-family: Font Awesome\ 5 Free;
-  opacity: 0.8; }
+  opacity: 1; }
 
 .ReactTable .rt-thead .rt-th.-cursor-pointer.-sort-asc > div:first-of-type:after {
   content: "\F0DE";
@@ -1750,7 +1750,7 @@ button.rbc-input::-moz-focus-inner {
   bottom: 0px;
   right: -7px;
   font-family: Font Awesome\ 5 Free;
-  opacity: 0.8; }
+  opacity: 1; }
 
 .ReactTable .rt-thead .rt-th,
 .ReactTable .rt-thead .rt-td {
@@ -2732,7 +2732,7 @@ img {
   border-color: #00bbff; }
 
 .fixed-plugin .badge-blue {
-  background-color: #00bcd4; }
+  background-color: #DFB86A; }
 
 .fixed-plugin .badge-green {
   background-color: #4caf50; }

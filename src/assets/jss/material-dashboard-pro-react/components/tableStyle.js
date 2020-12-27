@@ -13,7 +13,7 @@ import {
 
 const tableStyle = (theme) => ({
   warning: {
-    color: warningColor[0],
+    color: '#DFB86A',
   },
   primary: {
     color: primaryColor[0],

@@ -112,7 +112,7 @@ const wizardStyle = {
       ', 0.4)',
   },
   warning: {
-    backgroundColor: warningColor[0],
+    backgroundColor: '#DFB86A',
     boxShadow:
       '0 4px 20px 0px rgba(' +
       hexToRgb(blackColor) +

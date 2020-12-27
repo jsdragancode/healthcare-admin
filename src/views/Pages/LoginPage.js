@@ -86,7 +86,7 @@ export default function LoginPage() {
       });
   };
   return (
-    <div className={classes.container}>
+    <div className={classes.container} style={{ backgroudColor: '#FFFF00' }}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={6} md={4}>
           <form>

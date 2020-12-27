@@ -67,7 +67,7 @@ const headerStyle = () => ({
     ...defaultBoxShadow,
   },
   warning: {
-    backgroundColor: warningColor[0],
+    backgroundColor: '#DFB86A',
     color: whiteColor,
     ...defaultBoxShadow,
   },
