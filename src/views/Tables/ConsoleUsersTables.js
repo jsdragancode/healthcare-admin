@@ -481,7 +481,7 @@ export default function ConsoleUsersTables() {
                                 </form>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={() => setAddModal(false)}>Cancel</Button>
+                                <Button onClick={() => setAddModal(false)} style={{ background: '#041F5D' }}>Cancel</Button>
                                 <Button onClick={() => addConsoleUser()} color="warning">
                                     Add
                 </Button>
@@ -618,7 +618,7 @@ export default function ConsoleUsersTables() {
                                 </form>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={() => setEditModal(false)}>Cancel</Button>
+                                <Button onClick={() => setEditModal(false)} style={{ background: '#041F5D' }}>Cancel</Button>
                                 <Button onClick={() => updateConsoleUser()} color="warning">
                                     Update
                 </Button>

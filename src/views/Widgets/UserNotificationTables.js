@@ -409,7 +409,7 @@ export default function UserNotificationTables(props) {
                                 </form>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={() => setAddModal(false)}>Cancel</Button>
+                                <Button onClick={() => setAddModal(false)} style={{ background: '#041F5D' }}>Cancel</Button>
                                 <Button onClick={() => addUserNotification()} color="warning">
                                     Submit
                                 </Button>
@@ -558,7 +558,7 @@ export default function UserNotificationTables(props) {
                                 </form>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={() => setEditModal(false)}>Cancel</Button>
+                                <Button onClick={() => setEditModal(false)} style={{ background: '#041F5D' }}>Cancel</Button>
                                 <Button onClick={() => updateUserNotification()} color="warning">
                                     Update
                 </Button>
