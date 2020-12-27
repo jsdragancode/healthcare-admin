@@ -989,8 +989,8 @@ export default function UsersTables() {
               <GridContainer>
                 <GridItem xs={12}>
                   <Card>
-                    <CardHeader color="success" icon>
-                      <CardIcon color="success">
+                    <CardHeader color="warning" icon>
+                      <CardIcon color="warning">
                         <PersonAdd />
                       </CardIcon>
                       <h4 className={classes.cardIconTitle}>
