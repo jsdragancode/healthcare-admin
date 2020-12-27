@@ -365,8 +365,8 @@ export default function BookingsTables() {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card style={{ display: showCard }}>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <Bookmark />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Bookings</h4>
@@ -375,7 +375,7 @@ export default function BookingsTables() {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setBookingsParam({
                                             id: '',
@@ -972,7 +972,7 @@ export default function BookingsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addBookings()} color="primary">Add</Button>
+                                <Button onClick={() => addBookings()} color="warning">Add</Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -1408,7 +1408,7 @@ export default function BookingsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateBookings()} color="primary">Update</Button>
+                                <Button onClick={() => updateBookings()} color="warning">Update</Button>
                             </DialogActions>
                         </Dialog>
 
@@ -1474,8 +1474,8 @@ export default function BookingsTables() {
                             <GridContainer>
                                 <GridItem xs={12}>
                                     <Card style={{ display: 'flex' }}>
-                                        <CardHeader color="success" icon>
-                                            <CardIcon color="success">
+                                        <CardHeader color="warning" icon>
+                                            <CardIcon color="warning">
                                                 <Bookmark />
                                             </CardIcon>
                                             <h4 className={classes.cardIconTitle}>

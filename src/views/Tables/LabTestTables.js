@@ -261,8 +261,8 @@ export default function LabTestTables(props) {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <Edit />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Lab Tests</h4>
@@ -271,7 +271,7 @@ export default function LabTestTables(props) {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setLabTestParam({
                                             test_name_ar: '',
@@ -527,7 +527,7 @@ export default function LabTestTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addLabTest()} color="primary">
+                                <Button onClick={() => addLabTest()} color="warning">
                                     Add
                 </Button>
                             </DialogActions>
@@ -681,7 +681,7 @@ export default function LabTestTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateDoctor()} color="primary">
+                                <Button onClick={() => updateDoctor()} color="warning">
                                     Update
                 </Button>
                             </DialogActions>

@@ -44,7 +44,7 @@ export default function RegularTables() {
           </CardHeader>
           <CardBody>
             <Table
-              tableHeaderColor="primary"
+              tableHeaderColor="warning"
               tableHead={['Name', 'Country', 'City', 'Salary']}
               tableData={[
                 ['Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
@@ -55,7 +55,7 @@ export default function RegularTables() {
                 ['Mason Porter', 'Chile', 'Gloucester', '$78,615'],
               ]}
               coloredColls={[3]}
-              colorsColls={['primary']}
+              colorsColls={['warning']}
             />
           </CardBody>
         </Card>

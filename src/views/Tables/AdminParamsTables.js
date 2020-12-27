@@ -209,8 +209,8 @@ export default function AdminParamsTables() {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card style={{ display: showCard }}>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <Person />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Admin Param</h4>
@@ -219,7 +219,7 @@ export default function AdminParamsTables() {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setAdminParam({
                                             param_key: '',
@@ -365,7 +365,7 @@ export default function AdminParamsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addAdminParam()} color="primary">
+                                <Button onClick={() => addAdminParam()} color="warning">
                                     Add
                 </Button>
                             </DialogActions>
@@ -434,7 +434,7 @@ export default function AdminParamsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateAdminParam()} color="primary">
+                                <Button onClick={() => updateAdminParam()} color="warning">
                                     Update
                 </Button>
                             </DialogActions>

@@ -203,8 +203,8 @@ export default function TrackVansTables() {
       <GridItem xs={12}>
         {/* {moment().format('HH:mm:ss.SSS')} */}
         <Card>
-          <CardHeader color="primary" icon>
-            <CardIcon color="primary">
+          <CardHeader color="warning" icon>
+            <CardIcon color="warning">
               <AirportShuttle />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Track Vans</h4>
@@ -213,7 +213,7 @@ export default function TrackVansTables() {
             <GridContainer justify="flex-end">
               <GridItem>
                 <Button
-                  color="primary"
+                  color="warning"
                   onClick={() => {
                     setVanParam({
                       title: '',
@@ -375,7 +375,7 @@ export default function TrackVansTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                <Button onClick={() => addVan()} color="primary">
+                <Button onClick={() => addVan()} color="warning">
                   Add
                 </Button>
               </DialogActions>
@@ -461,7 +461,7 @@ export default function TrackVansTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                <Button onClick={() => updateVan()} color="primary">
+                <Button onClick={() => updateVan()} color="warning">
                   Update
                 </Button>
               </DialogActions>

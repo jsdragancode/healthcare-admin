@@ -261,8 +261,8 @@ export default function NursesTables() {
       <GridItem xs={12}>
         {/* {moment().format('HH:mm:ss.SSS')} */}
         <Card>
-          <CardHeader color="primary" icon>
-            <CardIcon color="primary">
+          <CardHeader color="warning" icon>
+            <CardIcon color="warning">
               <LocalPharmacy />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Nurses</h4>
@@ -271,7 +271,7 @@ export default function NursesTables() {
             <GridContainer justify="flex-end">
               <GridItem>
                 <Button
-                  color="primary"
+                  color="warning"
                   onClick={() => {
                     setNurseParam({
                       full_name_en: '',
@@ -509,7 +509,7 @@ export default function NursesTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                <Button onClick={() => addNurse()} color="primary">
+                <Button onClick={() => addNurse()} color="warning">
                   Add
                 </Button>
               </DialogActions>
@@ -650,7 +650,7 @@ export default function NursesTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                <Button onClick={() => updateNurse()} color="primary">
+                <Button onClick={() => updateNurse()} color="warning">
                   Update
                 </Button>
               </DialogActions>

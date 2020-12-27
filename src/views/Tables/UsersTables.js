@@ -338,8 +338,8 @@ export default function UsersTables() {
       <GridItem xs={12}>
         {/* {moment().format('HH:mm:ss.SSS')} */}
         <Card style={{ display: showCard }}>
-          <CardHeader color="primary" icon>
-            <CardIcon color="primary">
+          <CardHeader color="warning" icon>
+            <CardIcon color="warning">
               <PersonAdd />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Users</h4>
@@ -348,7 +348,7 @@ export default function UsersTables() {
             <GridContainer justify="flex-end">
               <GridItem>
                 <Button
-                  color="primary"
+                  color="warning"
                   onClick={() => {
                     setUserParam('', '', '');
 
@@ -688,7 +688,7 @@ export default function UsersTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                <Button onClick={() => addUser()} color="primary">
+                <Button onClick={() => addUser()} color="warning">
                   Add
                 </Button>
               </DialogActions>
@@ -921,7 +921,7 @@ export default function UsersTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                <Button onClick={() => updateDriver()} color="primary">
+                <Button onClick={() => updateDriver()} color="warning">
                   Update
                 </Button>
               </DialogActions>

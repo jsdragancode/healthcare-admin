@@ -110,13 +110,13 @@ export default function Dashboard() {
             <GridContainer>
                 <GridItem xs={12}>
                     <Card style={{ display: 'flex', width: '100%', float: 'left', marginRight: '50px' }}>
-                        <CardHeader color="success" icon>
-                            <CardIcon color="success">
+                        <CardHeader color="warning" icon>
+                            <CardIcon color="warning">
                                 <DashboardIcon />
                             </CardIcon>
                             <h4 className={classes.cardIconTitle}>
                                 Analytics Info
-                                            </h4>
+                            </h4>
                         </CardHeader>
                         <CardBody>
                             <GridContainer justify="space-between">

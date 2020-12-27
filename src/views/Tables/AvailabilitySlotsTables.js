@@ -198,8 +198,8 @@ export default function AvailabilitySlotsTables() {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <LibraryBooks />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Availability Slot</h4>
@@ -208,7 +208,7 @@ export default function AvailabilitySlotsTables() {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setUserNotification({
                                             day_id: '',
@@ -367,7 +367,7 @@ export default function AvailabilitySlotsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addAvailabilitySlot()} color="primary">
+                                <Button onClick={() => addAvailabilitySlot()} color="warning">
                                     Add
                 </Button>
                             </DialogActions>
@@ -444,7 +444,7 @@ export default function AvailabilitySlotsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateAvailabilitySlot()} color="primary">
+                                <Button onClick={() => updateAvailabilitySlot()} color="warning">
                                     Update
                 </Button>
                             </DialogActions>

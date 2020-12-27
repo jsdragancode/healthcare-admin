@@ -326,8 +326,8 @@ export default function PatientsTables() {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <AccountCircle />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Patients</h4>
@@ -336,7 +336,7 @@ export default function PatientsTables() {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setPatientParam({
                                             full_name: '',
@@ -772,7 +772,7 @@ export default function PatientsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addPatients()} color="primary">Add</Button>
+                                <Button onClick={() => addPatients()} color="warning">Add</Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -1103,7 +1103,7 @@ export default function PatientsTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updatePatient()} color="primary">
+                                <Button onClick={() => updatePatient()} color="warning">
                                     Update
                                 </Button>
                             </DialogActions>

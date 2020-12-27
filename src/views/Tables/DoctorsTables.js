@@ -325,8 +325,8 @@ export default function DoctorsTables() {
       <GridItem xs={12}>
         {/* {moment().format('HH:mm:ss.SSS')} */}
         <Card style={{ display: showCard }}>
-          <CardHeader color="primary" icon>
-            <CardIcon color="primary">
+          <CardHeader color="warning" icon>
+            <CardIcon color="warning">
               <LocalHospital />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Doctors</h4>
@@ -335,7 +335,7 @@ export default function DoctorsTables() {
             <GridContainer justify="flex-end">
               <GridItem>
                 <Button
-                  color="primary"
+                  color="warning"
                   onClick={() => {
                     setDoctorParam({
                       full_name_en: '',
@@ -620,7 +620,7 @@ export default function DoctorsTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                <Button onClick={() => addDoctor()} color="primary">
+                <Button onClick={() => addDoctor()} color="warning">
                   Add
                 </Button>
               </DialogActions>
@@ -798,7 +798,7 @@ export default function DoctorsTables() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                <Button onClick={() => updateDoctor()} color="primary">
+                <Button onClick={() => updateDoctor()} color="warning">
                   Update
                 </Button>
               </DialogActions>

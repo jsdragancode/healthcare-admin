@@ -215,8 +215,8 @@ export default function UserNotificationTables() {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <AddAlert />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>User Notification</h4>
@@ -225,7 +225,7 @@ export default function UserNotificationTables() {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setUserNotification({
                                             title: '',
@@ -411,7 +411,7 @@ export default function UserNotificationTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addUserNotification()} color="primary">
+                                <Button onClick={() => addUserNotification()} color="warning">
                                     Submit
                                 </Button>
                             </DialogActions>
@@ -560,7 +560,7 @@ export default function UserNotificationTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateUserNotification()} color="primary">
+                                <Button onClick={() => updateUserNotification()} color="warning">
                                     Update
                 </Button>
                             </DialogActions>

@@ -199,8 +199,8 @@ export default function LocationTrackingTables(props) {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <Place />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Location Track</h4>
@@ -209,7 +209,7 @@ export default function LocationTrackingTables(props) {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setLocationTrackParam({
                                             booking_id: '',
@@ -357,7 +357,7 @@ export default function LocationTrackingTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addLocation()} color="primary">
+                                <Button onClick={() => addLocation()} color="warning">
                                     Add
                 </Button>
                             </DialogActions>
@@ -424,7 +424,7 @@ export default function LocationTrackingTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateLocation()} color="primary">
+                                <Button onClick={() => updateLocation()} color="warning">
                                     Update
                 </Button>
                             </DialogActions>

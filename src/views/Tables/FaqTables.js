@@ -200,8 +200,8 @@ export default function FaqTables() {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <Info />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>FAQ</h4>
@@ -210,7 +210,7 @@ export default function FaqTables() {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setFaqParam({
                                             question_en: '',
@@ -390,7 +390,7 @@ export default function FaqTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addFaqs()} color="primary">Add</Button>
+                                <Button onClick={() => addFaqs()} color="warning">Add</Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog
@@ -481,7 +481,7 @@ export default function FaqTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateFaqs()} color="primary">Update</Button>
+                                <Button onClick={() => updateFaqs()} color="warning">Update</Button>
                             </DialogActions>
                         </Dialog>
                         <Snackbar

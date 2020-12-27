@@ -52,14 +52,14 @@ export default function ReactTables() {
                 let obj = data.find((o) => o.id === key);
                 alert(
                   "You've clicked LIKE button on \n{ \nName: " +
-                    obj.name +
-                    ', \nposition: ' +
-                    obj.position +
-                    ', \noffice: ' +
-                    obj.office +
-                    ', \nage: ' +
-                    obj.age +
-                    '\n}.'
+                  obj.name +
+                  ', \nposition: ' +
+                  obj.position +
+                  ', \noffice: ' +
+                  obj.office +
+                  ', \nage: ' +
+                  obj.age +
+                  '\n}.'
                 );
               }}
               color="info"
@@ -76,14 +76,14 @@ export default function ReactTables() {
                 let obj = data.find((o) => o.id === key);
                 alert(
                   "You've clicked EDIT button on \n{ \nName: " +
-                    obj.name +
-                    ', \nposition: ' +
-                    obj.position +
-                    ', \noffice: ' +
-                    obj.office +
-                    ', \nage: ' +
-                    obj.age +
-                    '\n}.'
+                  obj.name +
+                  ', \nposition: ' +
+                  obj.position +
+                  ', \noffice: ' +
+                  obj.office +
+                  ', \nage: ' +
+                  obj.age +
+                  '\n}.'
                 );
               }}
               color="warning"
@@ -124,8 +124,8 @@ export default function ReactTables() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          <CardHeader color="primary" icon>
-            <CardIcon color="primary">
+          <CardHeader color="warning" icon>
+            <CardIcon color="warning">
               <Assignment />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>React Table</h4>

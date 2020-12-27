@@ -234,8 +234,8 @@ export default function ConsoleUsersTables() {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <AssignmentInd />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Console users</h4>
@@ -244,7 +244,7 @@ export default function ConsoleUsersTables() {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setConsoleUsersParam({
                                             username: '',
@@ -482,7 +482,7 @@ export default function ConsoleUsersTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addConsoleUser()} color="primary">
+                                <Button onClick={() => addConsoleUser()} color="warning">
                                     Add
                 </Button>
                             </DialogActions>
@@ -619,7 +619,7 @@ export default function ConsoleUsersTables() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateConsoleUser()} color="primary">
+                                <Button onClick={() => updateConsoleUser()} color="warning">
                                     Update
                 </Button>
                             </DialogActions>

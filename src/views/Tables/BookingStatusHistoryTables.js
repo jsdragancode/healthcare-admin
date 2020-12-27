@@ -204,8 +204,8 @@ export default function BookingStatusHistoryTables(props) {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <Bookmarks />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Booking History</h4>
@@ -214,7 +214,7 @@ export default function BookingStatusHistoryTables(props) {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setLocationTrackParam({
                                             booking_id: '',
@@ -437,7 +437,7 @@ export default function BookingStatusHistoryTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addBookingHistory()} color="primary">
+                                <Button onClick={() => addBookingHistory()} color="warning">
                                     Add
                 </Button>
                             </DialogActions>
@@ -578,7 +578,7 @@ export default function BookingStatusHistoryTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateBookingHistory()} color="primary">
+                                <Button onClick={() => updateBookingHistory()} color="warning">
                                     Update
                                 </Button>
                             </DialogActions>

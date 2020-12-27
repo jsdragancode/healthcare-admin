@@ -203,8 +203,8 @@ export default function DriversTables(props) {
             <GridItem xs={12}>
                 {/* {moment().format('HH:mm:ss.SSS')} */}
                 <Card>
-                    <CardHeader color="primary" icon>
-                        <CardIcon color="primary">
+                    <CardHeader color="warning" icon>
+                        <CardIcon color="warning">
                             <DriveEta />
                         </CardIcon>
                         <h4 className={classes.cardIconTitle}>Drivers</h4>
@@ -213,7 +213,7 @@ export default function DriversTables(props) {
                         <GridContainer justify="flex-end">
                             <GridItem>
                                 <Button
-                                    color="primary"
+                                    color="warning"
                                     onClick={() => {
                                         setDriverParam({
                                             full_name_en: '',
@@ -409,7 +409,7 @@ export default function DriversTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setAddModal(false)}>Cancel</Button>
-                                <Button onClick={() => addDriver()} color="primary">
+                                <Button onClick={() => addDriver()} color="warning">
                                     Add
                 </Button>
                             </DialogActions>
@@ -519,7 +519,7 @@ export default function DriversTables(props) {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setEditModal(false)}>Cancel</Button>
-                                <Button onClick={() => updateDriver()} color="primary">
+                                <Button onClick={() => updateDriver()} color="warning">
                                     Update
                 </Button>
                             </DialogActions>
